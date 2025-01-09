@@ -52,7 +52,6 @@ const TopRated = () => {
 
   useEffect(() => {
     if (response?.data) {
-      console.log(response.data);
       // Sort by rating (highest to lowest)
       const sortedVenues = [...response.data].sort(
         (a, b) => b.rating - a.rating
