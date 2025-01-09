@@ -7,12 +7,12 @@ import Footer from "../components/shared/Footer";
 
 const RootLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen max-w-full">
       {/* Header */}
       <Header />
 
       {/* Main Section */}
-      <main className="flex-grow z-10 mt-14 lg:mt-14 relative">
+      <main className="flex-grow z-10 relative">
         <Outlet />
       </main>
 
