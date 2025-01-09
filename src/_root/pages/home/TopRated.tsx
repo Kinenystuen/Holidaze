@@ -51,7 +51,7 @@ const TopRated = () => {
       );
 
       const shuffledVenues = sortedVenues
-        .slice(0, 20)
+        .slice(0, 10)
         .sort(() => Math.random() - 0.5);
 
       setTopVenues(shuffledVenues);
