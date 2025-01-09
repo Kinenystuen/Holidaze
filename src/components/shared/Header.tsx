@@ -5,6 +5,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { headerNavLinks } from "../library/constants";
 import { INavLink } from "../library/types";
+import ThemeToggle from "./ThemeToggle";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4 mx-4">
           {/* Logo */}
           <div className="text-2xl font-bold text-gray-800">
-            <Link className="text-color1-600 hover:text-color1-600" to="/">
+            <Link className="text-color1-600 dark:text-color1-100" to="/">
               Holidaze
             </Link>
           </div>
@@ -33,7 +34,7 @@ const Header: React.FC = () => {
                   className={`transition flex items-center text-md ${
                     isActive
                       ? "text-color1-800 hover:text-inherit dark:text-whiteFont-400 cursor-default"
-                      : "text-gray-600 hover:text-color1-500"
+                      : "text-gray-600 dark:text-whiteFont-600 hover:text-color1-500"
                   }`}
                 >
                   <span className="sr-only">{link.title}</span>
@@ -42,6 +43,9 @@ const Header: React.FC = () => {
               );
             })}
           </nav>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
           {/* Login/Register */}
           <div className="hidden md:flex">
