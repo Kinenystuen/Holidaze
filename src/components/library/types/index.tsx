@@ -29,3 +29,13 @@ export interface LoaderProps {
   theme?: "light" | "dark";
   className?: string;
 }
+
+/* Venue props */
+export interface Venue {
+  id: string;
+  name: string;
+  description: string;
+  media: { url: string; alt: string }[];
+  price: number;
+  rating: number;
+}

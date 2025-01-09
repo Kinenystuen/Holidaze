@@ -12,15 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import ErrorMessage from "../../../components/shared/ErrorMessage";
 import Loader from "../../../components/ui/Loader";
-
-interface Venue {
-  id: string;
-  name: string;
-  description: string;
-  media: { url: string; alt: string }[];
-  price: number;
-  rating: number;
-}
+import { Venue } from "../../../components/library/types";
+import { apiHostUrl } from "../../../components/library/constants";
 
 const ArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
   <svg
@@ -41,7 +34,7 @@ const ArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
 
 const TopRated = () => {
   const { response, isLoading, isError, errorMessage } = useApi<Venue[]>(
-    "https://v2.api.noroff.dev/holidaze/venues"
+    `${apiHostUrl}/holidaze/venues`
   );
 
   const [topVenues, setTopVenues] = useState<Venue[]>([]);
