@@ -14,8 +14,7 @@ const SearchBarHome = () => {
   const handleBlur = () => setTimeout(() => setShowResults(false), 200);
 
   const handleSearch = () => {
-    setShowResults(false); // Hide results on search
-    // Add additional search logic here if needed
+    setShowResults(false);
   };
 
   return (
