@@ -1,0 +1,74 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Load environment variables
+      - name: Set up environment variables
+        run: |
+          echo "VITE_API_HOST_URL=${{ secrets.VITE_API_HOST_URL }}" >> .env
+          echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> .env
+        env:
+          VITE_API_HOST_URL: ${{ secrets.VITE_API_HOST_URL }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+
+      # Build the project
+      - name: Build project
+        run: npm run build
+
+      # Manually copy public folder content to dist
+      - name: Copy public files to dist
+        run: cp -r public/* dist/
+
+      # Verify dist folder contents
+      - name: Verify dist folder contents
+        run: ls -R dist
+
+      # Copy index.html to 404.html
+      - name: Create 404.html for SPA fallback
+        run: cp dist/index.html dist/404.html
+
+      # Upload the build output as an artifact for GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
