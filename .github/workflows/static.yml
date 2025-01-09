@@ -49,15 +49,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # Manually copy public folder content to dist
-      - name: Copy public files to dist
-        run: cp -r public/* dist/
-
-      # Verify dist folder contents
-      - name: Verify dist folder contents
-        run: ls -R dist
-
-      # Copy index.html to 404.html
+      # Copy index.html to 404.html for SPA fallback
       - name: Create 404.html for SPA fallback
         run: cp dist/index.html dist/404.html
 
