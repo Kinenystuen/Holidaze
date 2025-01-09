@@ -27,12 +27,12 @@ const SearchBarHome = () => {
           onChange={handleInputChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="w-full px-4 py-3 text-lg rounded-s-full border text-black border-gray-300 focus:ring-2 focus:ring-color2 focus:outline-none"
+          className="w-full px-4 py-3 text-lg rounded-s-full border text-black dark:placeholder-customBgDark-500 dark:bg-color2-600 border-gray-300 dark:border-color3-800 focus:ring-2 focus:ring-color2 focus:outline-none"
         />
         <button
           type="button"
           onClick={handleSearch}
-          className="px-6 py-3 bg-color1 text-white font-semibold rounded-r-full hover:bg-color3 transition duration-300"
+          className="px-6 py-3 bg-color1 text-white font-semibold rounded-r-full hover:bg-color3 dark:border-color3-800 transition duration-300"
         >
           Search
         </button>
