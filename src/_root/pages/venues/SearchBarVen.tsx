@@ -9,21 +9,31 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
 
   useEffect(() => {
     const initialSearch = searchParams.get("search") || "";
-    if (initialSearch) {
-      setSearchInput(initialSearch);
-      onSearch(initialSearch);
-    }
+    setSearchInput(initialSearch);
+    onSearch(initialSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchInput(query);
+
+    // Update query params
+    const updatedParams = new URLSearchParams(searchParams);
+    if (query) {
+      updatedParams.set("search", query);
+    } else {
+      updatedParams.delete("search");
+    }
+    setSearchParams(updatedParams, { replace: true });
+
     onSearch(query);
   };
 
   const clearSearch = () => {
     setSearchInput("");
     onSearch("");
+
     const updatedParams = new URLSearchParams(searchParams);
     updatedParams.delete("search");
     setSearchParams(updatedParams, { replace: true });
@@ -32,12 +42,12 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
   return (
     <div className="relative w-full max-w-md mx-auto mb-6">
       <div className="relative">
-        {/* Search-icon */}
+        {/* Search Icon */}
         <span className="absolute inset-y-0 left-3 flex items-center text-gray-500 pointer-events-none">
           <FontAwesomeIcon icon={faSearch} />
         </span>
 
-        {/* Search-input */}
+        {/* Search Input */}
         <input
           type="text"
           value={searchInput}
@@ -46,7 +56,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
           className="w-full pl-10 pr-10 py-2 border rounded-full text-black dark:placeholder-customBgDark-500 dark:bg-color2-600 border-gray-300 dark:border-color3-800 focus:ring-2 focus:outline-none focus:ring-color2"
         />
 
-        {/* Clear-button */}
+        {/* Clear Button */}
         {searchInput && (
           <button
             type="button"
