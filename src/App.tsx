@@ -4,6 +4,7 @@ import Home from "./_root/pages/home/Home";
 import ErrorMessage from "./components/shared/ErrorMessage";
 import Button from "./components/shared/Button/Button";
 import VenuePage from "./_root/pages/venues/VenuePage";
+import SelVenuePage from "./_root/pages/venues/SelVenuePage";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="venues" element={<VenuePage />} />
-          {/* <Route path="gallery/:id" element={<PageGallery />} />  */}
+          <Route path="venue/:id" element={<SelVenuePage />} />
           <Route
             path="*"
             element={
