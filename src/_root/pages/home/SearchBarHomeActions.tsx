@@ -20,11 +20,12 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
   setShowResults
 }) => {
   const [results, setResults] = useState<Venue[]>([]);
+  const [isFetching, setIsFetching] = useState(false); // Local loading state
   const navigate = useNavigate();
 
-  const { response, isLoading, isError, errorMessage, fetchData } = useApi<
-    Venue[]
-  >(`${apiHostUrl}/holidaze/venues/search?q=${query}`);
+  const { response, isError, errorMessage, fetchData } = useApi<Venue[]>(
+    `${apiHostUrl}/holidaze/venues/search?q=${query}`
+  );
 
   useEffect(() => {
     if (query.trim() === "") {
@@ -32,6 +33,7 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
       return;
     }
 
+    setIsFetching(true);
     const debounce = setTimeout(() => {
       fetchData();
     }, 300);
@@ -43,6 +45,7 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
     if (response?.data) {
       setResults(response.data.slice(0, 5));
     }
+    setIsFetching(false); // Reset fetching state after response
   }, [response]);
 
   const handleSearch = () => {
@@ -52,16 +55,18 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
     }
   };
 
-  if (!showResults) return null;
-
   return (
-    <div className="absolute top-16 left-0  sm:left-8 w-full max-w-md bg-white dark:bg-customBgDark-500 shadow-lg border border-gray-300 dark:border-customBgDark-600 rounded-lg overflow-hidden z-10">
-      {isLoading && (
+    <div
+      className={`absolute top-16 left-0 sm:left-8 w-full max-w-md bg-white dark:bg-customBgDark-500 shadow-lg border border-gray-300 dark:border-customBgDark-600 rounded-lg overflow-hidden z-10 ${
+        !showResults ? "hidden" : ""
+      }`}
+    >
+      {/* Show loader or content */}
+      {isFetching ? (
         <div className="p-4 flex items-center justify-center">
           <LoaderSmall />
         </div>
-      )}
-      {!isLoading && results.length > 0 && (
+      ) : results.length > 0 ? (
         <ul className="divide-y divide-gray-200 dark:divide-customBgDark-600">
           {results.map((venue, index) => (
             <Link to={`/venues/${venue.id}`} key={venue.id}>
@@ -94,18 +99,19 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
             </Link>
           ))}
         </ul>
-      )}
-      {!isLoading && results.length === 0 && (
+      ) : (
         <div className="p-4 text-sm text-gray-600">
           No results found for "{query}".
         </div>
       )}
+
+      {/* See all results button */}
       {results.length > 0 && (
         <div className="text-center p-4 dark:border-2 border-t border-gray-300 dark:border-customBgDark-700 bg-gray-50 dark:bg-customBgDark-600">
           {results.length === 5 && (
             <>
               <P className="text-sm text-gray-600 dark:text-whiteFont-500">
-                {results.length}/{response?.data.length}
+                {results.length}/{response?.data?.length || 0}
               </P>
               <P className="text-sm text-gray-600 dark:text-whiteFont-500">
                 More results available...
@@ -123,6 +129,8 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
           </div>
         </div>
       )}
+
+      {/* Error handling */}
       {isError && (
         <div className="p-4 text-sm text-red-600">Error: {errorMessage}</div>
       )}
