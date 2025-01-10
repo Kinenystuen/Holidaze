@@ -9,7 +9,7 @@ const HeroHome = () => {
         <div className="relative text-center max-w-lg">
           <H1 className="font-heading text-4xl md:text-6xl font-bold text-balance leading-tight text-gray-800">
             Book Your Next
-            <span className="text-color3-600 dark:text-color2-500">
+            <span className="mx-2 text-color3-600 dark:text-color2-500">
               Adventure
             </span>
           </H1>
