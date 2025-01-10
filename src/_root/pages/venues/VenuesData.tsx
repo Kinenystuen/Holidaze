@@ -10,6 +10,7 @@ import {
 import H2 from "../../../components/shared/Typography/H2";
 import P from "../../../components/shared/Typography/P";
 import { Venue } from "../../../components/library/types";
+import ErrorMessage from "../../../components/shared/ErrorMessage";
 
 interface VenuesDataProps {
   venues: Venue[];
@@ -34,15 +35,18 @@ const VenuesData: React.FC<VenuesDataProps> = ({
     <div>
       {/* No Results Message */}
       {venues.length === 0 && (
-        <div className="flex flex-col items-center justify-center my-8 ">
+        <ErrorMessage
+          className="min-h-20 text-xl font-semibold text-gray-800 dark:text-white text-n my-10"
+          icon={false}
+        >
           <H2 className="md:text-xl font-semibold text-gray-800 dark:text-white">
             No Matching Results
           </H2>
-          <P className="pt-1 pb-6 text-balance max-w-3xl text-center  ">
+          <P className="text-base font-normal pt-2 pb-6 text-balance max-w-3xl text-center  ">
             We couldn’t find any venues matching your search criteria. Try
             adjusting your search or browsing all available venues.
           </P>
-        </div>
+        </ErrorMessage>
       )}
 
       {/* Venues Grid */}
