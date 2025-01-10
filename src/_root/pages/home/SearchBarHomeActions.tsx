@@ -69,7 +69,7 @@ const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
       ) : results.length > 0 ? (
         <ul className="divide-y divide-gray-200 dark:divide-customBgDark-600">
           {results.map((venue, index) => (
-            <Link to={`/venues/${venue.id}`} key={venue.id}>
+            <Link to={`/venue/${venue.id}`} key={venue.id}>
               <li
                 key={index}
                 className="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-customBgDark-400 cursor-pointer"
