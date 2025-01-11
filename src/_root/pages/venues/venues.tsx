@@ -1,21 +1,29 @@
-import { useState, useEffect } from "react";
-import { useApi } from "../../../components/hooks/UseApi";
-import { apiHostUrl } from "../../../components/library/constants";
-import { Venue } from "../../../components/library/types";
+import { useEffect, useState } from "react";
 import ErrorMessage from "../../../components/shared/ErrorMessage";
+import P from "../../../components/shared/Typography/P";
 import Loader from "../../../components/ui/Loader";
 import VenuesData from "./VenuesData";
-import P from "../../../components/shared/Typography/P";
+import { apiHostUrl } from "../../../components/library/constants";
+import { Venue } from "../../../components/library/types";
+import { useApi } from "../../../components/hooks/UseApi";
 
-const Venues = ({ searchQuery }: { searchQuery: string }) => {
+const Venues = ({
+  searchQuery,
+  sortField,
+  sortOrder
+}: {
+  searchQuery: string;
+  sortField: string;
+  sortOrder: string;
+}) => {
   const [page, setPage] = useState(1);
 
   const apiUrl =
     searchQuery !== ""
       ? `${apiHostUrl}/holidaze/venues/search?q=${encodeURIComponent(
           searchQuery
-        )}&limit=30&page=${page}`
-      : `${apiHostUrl}/holidaze/venues?limit=30&page=${page}`;
+        )}&limit=30&page=${page}&sort=${sortField}&sortOrder=${sortOrder}`
+      : `${apiHostUrl}/holidaze/venues?limit=30&page=${page}&sort=${sortField}&sortOrder=${sortOrder}`;
 
   const { response, isLoading, isError, errorMessage } =
     useApi<Venue[]>(apiUrl);
@@ -25,7 +33,7 @@ const Venues = ({ searchQuery }: { searchQuery: string }) => {
 
   useEffect(() => {
     setPage(1);
-  }, [searchQuery]);
+  }, [searchQuery, sortField, sortOrder]);
 
   const goToNextPage = () => {
     if (meta?.nextPage) {
@@ -40,12 +48,10 @@ const Venues = ({ searchQuery }: { searchQuery: string }) => {
   };
 
   if (isLoading) {
-    console.log("Loading...");
     return <Loader />;
   }
 
   if (isError) {
-    console.log("Error:", errorMessage);
     return (
       <P>
         <ErrorMessage message={errorMessage} />
@@ -54,22 +60,20 @@ const Venues = ({ searchQuery }: { searchQuery: string }) => {
   }
 
   return (
-    <>
-      <VenuesData
-        venues={venues}
-        meta={
-          meta || {
-            currentPage: 0,
-            pageCount: 0,
-            totalCount: 0,
-            isFirstPage: true,
-            isLastPage: true
-          }
+    <VenuesData
+      venues={venues}
+      meta={
+        meta || {
+          currentPage: 0,
+          pageCount: 0,
+          totalCount: 0,
+          isFirstPage: true,
+          isLastPage: true
         }
-        goToNextPage={goToNextPage}
-        goToPreviousPage={goToPreviousPage}
-      />
-    </>
+      }
+      goToNextPage={goToNextPage}
+      goToPreviousPage={goToPreviousPage}
+    />
   );
 };
 
