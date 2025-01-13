@@ -36,7 +36,7 @@ const VenuePage = () => {
       <div className=" mx-auto">
         <div className="w-full md:flex">
           {/* Left-side menu */}
-          <div className="hidden md:flex flex-col gap-6 px-6 my-4 min-w-[250px] max-w-[270px] bg-dark-2 h-screen sticky top-0 overflow-y-auto custom-scrollbar">
+          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-screen sticky top-0 overflow-y-auto custom-scrollbar">
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
             <FilterMenu
               filters={filters}
@@ -54,7 +54,7 @@ const VenuePage = () => {
 
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
-            <div className="flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar">
+            <div className="flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl">
               <div className="flex justify-between items-center mb-4 gap-2">
                 <SearchBar onSearch={handleSearch} />
               </div>
