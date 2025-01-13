@@ -3,14 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCoffee,
   faDog,
+  faMapMarkerAlt,
   faParking,
   faStar,
+  faUserFriends,
   faWifi
 } from "@fortawesome/free-solid-svg-icons";
 import H2 from "../../../components/shared/Typography/H2";
 import P from "../../../components/shared/Typography/P";
 import { Venue } from "../../../components/library/types";
 import ErrorMessage from "../../../components/shared/ErrorMessage";
+import { Link } from "react-router-dom";
 
 interface VenuesDataProps {
   venues: Venue[];
@@ -51,88 +54,128 @@ const VenuesData: React.FC<VenuesDataProps> = ({
 
       {/* Venues Grid */}
       {venues.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 gap-5">
           {venues.map((venue) => (
-            <div
+            <Link
+              to={`/venue/${venue.id}`}
               key={venue.id}
-              className="bg-white shadow-md rounded-lg overflow-hidden group transform transition-transform"
+              className="hover:no-underline"
             >
-              <img
-                src={
-                  venue.media?.length > 0
-                    ? venue.media[0].url
-                    : "https://via.placeholder.com/300x200"
-                }
-                alt={venue.media?.[0]?.alt || "Venue Image"}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-4">
-                <div className="flex justify-between items-center">
-                  <H2 className="text-sm md:text-base font-semibold truncate">
-                    {venue.name}
-                  </H2>
-                  <div className="text-sm text-customBgDark-900 dark:text-whiteFont-500">
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      size="sm"
-                      className="mr-2 my-0"
-                    />
-                    {venue.rating}
+              <div
+                key={venue.id}
+                className="sm:flex bg-white dark:bg-customBgDark-500 shadow-sm rounded-lg overflow-hidden group transform transition-transform"
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={
+                      venue.media?.length > 0
+                        ? venue.media[0].url
+                        : "https://via.placeholder.com/300x200"
+                    }
+                    alt={venue.media?.[0]?.alt || "Venue Image"}
+                    className="w-full h-52 sm:w-72 lg:w-80 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4 w-full  flex flex-col justify-between">
+                  <div>
+                    {/* Venue Name and Rating */}
+                    <div className="flex justify-between items-center">
+                      <H2 className="text-sm md:text-base font-semibold truncate">
+                        {venue.name}
+                      </H2>
+                      <div className="ml-2 text-sm text-gray-700 dark:text-whiteFont-500 whitespace-nowrap flex items-center">
+                        <FontAwesomeIcon
+                          icon={faStar}
+                          size="sm"
+                          className="mr-2 my-0"
+                        />
+                        {venue.rating}
+                      </div>
+                    </div>
+
+                    {/* Location */}
+                    <div className="flex items-center text-sm text-gray-600 mt-[-4px]">
+                      {(venue.location.city || venue.location.country) && (
+                        <div className="flex items-center">
+                          <FontAwesomeIcon
+                            icon={faMapMarkerAlt}
+                            className="mr-2 text-gray-500 w-3 h-3 px-1"
+                          />
+                          <P className="text-gray-600 text-[10px]">
+                            {[venue.location.city, venue.location.country]
+                              .filter(Boolean)
+                              .join(", ")}
+                          </P>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Icons */}
+                    <ul className="flex flex-wrap gap-4 mt-2 mb-3">
+                      {venue.meta.wifi && (
+                        <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
+                          <FontAwesomeIcon
+                            icon={faWifi}
+                            size="xs"
+                            className="w-4 h-4 p-1"
+                          />
+                          <P className="text-xs">Wifi</P>
+                        </li>
+                      )}
+                      {venue.meta.parking && (
+                        <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
+                          <FontAwesomeIcon
+                            icon={faParking}
+                            size="xs"
+                            className="w-4 h-4 p-1"
+                          />
+                          <P className="text-xs">Parking</P>
+                        </li>
+                      )}
+                      {venue.meta.breakfast && (
+                        <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
+                          <FontAwesomeIcon
+                            icon={faCoffee}
+                            size="xs"
+                            className="w-4 h-4 p-1"
+                          />
+                          <P className="text-xs">Breakfast</P>
+                        </li>
+                      )}
+                      {venue.meta.pets && (
+                        <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
+                          <FontAwesomeIcon
+                            icon={faDog}
+                            size="xs"
+                            className="w-4 h-4 p-1"
+                          />
+                          <P className="text-xs">Pets</P>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Max Guests and Price at the Bottom */}
+                  <div className="md:mt-auto flex justify-between">
+                    <div className="flex items-center mt-2 text-sm text-gray-600">
+                      <FontAwesomeIcon
+                        icon={faUserFriends}
+                        className="mr-2 w-4 h-4 p-1 text-gray-500"
+                      />
+                      <P className="text-sm">Max Guests: {venue.maxGuests}</P>
+                    </div>
+                    <div className="flex justify-end text-lg">
+                      <P className="text-black dark:text-whiteFont-200">
+                        {venue.price} kr{" "}
+                        <span className="text-sm text-gray-800 dark:text-whiteFont-700">
+                          / night
+                        </span>
+                      </P>
+                    </div>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">
-                  {venue.location.city}, {venue.location.country}
-                </p>
-                <p className="text-gray-800 font-bold mb-2">
-                  Price: ${venue.price} / night
-                </p>
-                <p className="text-gray-700 mb-4">
-                  Max Guests: {venue.maxGuests}
-                </p>
-                <ul className="flex flex-wrap gap-4 mb-4">
-                  {venue.meta.wifi && (
-                    <li className="flex flex-col items-center text-gray-600">
-                      <FontAwesomeIcon
-                        icon={faWifi}
-                        size="1x"
-                        className="w-6 h-6 p-2"
-                      />
-                      <span className="text-xs">WiFi</span>
-                    </li>
-                  )}
-                  {venue.meta.parking && (
-                    <li className="flex flex-col items-center text-gray-600">
-                      <FontAwesomeIcon
-                        icon={faParking}
-                        size="lg"
-                        className="w-6 h-6 p-2"
-                      />
-                      <span className="text-xs">Parking</span>
-                    </li>
-                  )}
-                  {venue.meta.breakfast && (
-                    <li className="flex flex-col items-center text-gray-600">
-                      <FontAwesomeIcon
-                        icon={faCoffee}
-                        size="lg"
-                        className="w-6 h-6 p-2"
-                      />
-                      <span className="text-xs">Breakfast</span>
-                    </li>
-                  )}
-                  {venue.meta.pets && (
-                    <li className="flex flex-col items-center text-gray-600">
-                      <FontAwesomeIcon
-                        icon={faDog}
-                        size="lg"
-                        className="w-6 h-6 p-2"
-                      />
-                      <span className="text-xs">Pets</span>
-                    </li>
-                  )}
-                </ul>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
