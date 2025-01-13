@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
+import P from "../../../components/shared/Typography/P";
 
 interface SortMenuProps {
   sortField: string;
@@ -51,7 +52,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
       <button
         ref={buttonRef}
         onClick={toggleDropdown}
-        className="inline-flex flex-col text-sm md:flex-row bg-transparent text-black dark:text-whiteFont-500 justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg hover:border-color2-500 hover:bg-color2-300 focus:outline-none"
+        className="inline-flex flex-col text-sm md:flex-row bg-transparent text-black dark:text-whiteFont-500 justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg hover:border-color2-500 dark:hover:border-customBgDark-500 hover:bg-color2-300  dark:hover:bg-customBgDark-400 focus:outline-none"
       >
         <FontAwesomeIcon icon={faSort} className="sm:mr-2 " />
         Sort
@@ -65,9 +66,9 @@ const SortMenu: React.FC<SortMenuProps> = ({
         >
           <div className="p-4">
             <div className="mb-4">
-              <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
+              <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
                 Sort by:
-              </p>
+              </P>
               <div className="flex flex-col space-y-2">
                 <label className="flex items-center">
                   <input
@@ -111,9 +112,9 @@ const SortMenu: React.FC<SortMenuProps> = ({
               </div>
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
+              <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
                 Order:
-              </p>
+              </P>
               <div className="flex flex-col space-y-2">
                 <label className="flex items-center">
                   <input
