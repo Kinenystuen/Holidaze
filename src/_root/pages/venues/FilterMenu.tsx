@@ -5,7 +5,8 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const FilterMenu = ({
   filters,
-  onFilterChange
+  onFilterChange,
+  boxPosition = "left-0"
 }: {
   filters: {
     wifi: boolean;
@@ -13,6 +14,7 @@ const FilterMenu = ({
     breakfast: boolean;
     pets: boolean;
   };
+  boxPosition?: string;
   onFilterChange: (newFilters: typeof filters) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,11 +49,13 @@ const FilterMenu = ({
         onClick={toggleDropdown}
         className="inline-flex flex-col text-sm md:flex-row bg-transparent text-black dark:text-whiteFont-500 justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg hover:border-color2-500 dark:hover:border-customBgDark-500 hover:bg-color2-300  dark:hover:bg-customBgDark-400 focus:outline-none"
       >
-        <FontAwesomeIcon icon={faFilter} className="sm:mr-2 " />
+        <FontAwesomeIcon icon={faFilter} className="mr-0 md:mr-2" />
         Filter
       </Button>
       {isOpen && (
-        <div className="absolute top-full mt-2 w-56 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg p-4 z-10">
+        <div
+          className={`absolute top-full mt-2 w-56 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg p-4 z-10 ${boxPosition}`}
+        >
           <label className="flex items-center">
             <input
               type="checkbox"

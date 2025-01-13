@@ -7,12 +7,14 @@ interface SortMenuProps {
   sortField: string;
   sortOrder: string;
   onSortChange: (field: string, order: string) => void;
+  boxPosition?: string;
 }
 
 const SortMenu: React.FC<SortMenuProps> = ({
   sortField,
   sortOrder,
-  onSortChange
+  onSortChange,
+  boxPosition = "left-0"
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -54,7 +56,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
         onClick={toggleDropdown}
         className="inline-flex flex-col text-sm md:flex-row bg-transparent text-black dark:text-whiteFont-500 justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg hover:border-color2-500 dark:hover:border-customBgDark-500 hover:bg-color2-300  dark:hover:bg-customBgDark-400 focus:outline-none"
       >
-        <FontAwesomeIcon icon={faSort} className="sm:mr-2 " />
+        <FontAwesomeIcon icon={faSort} className="mr-0 md:mr-2" />
         Sort
       </button>
 
@@ -62,7 +64,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-full mt-2 right-0 w-56 bg-white dark:bg-customBgDark-500 border border-gray-200 dark:border-customBgDark-600 rounded-lg shadow-lg z-10"
+          className={`absolute top-full mt-2 w-56 bg-white dark:bg-customBgDark-500 border border-gray-200 dark:border-customBgDark-600 rounded-lg shadow-lg z-10 ${boxPosition}`}
         >
           <div className="p-4">
             <div className="mb-4">
