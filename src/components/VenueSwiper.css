@@ -1,0 +1,45 @@
+/* Navigation arrows */
+.venue-swiper .swiper-button-next,
+.venue-swiper .swiper-button-prev {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.venue-swiper .swiper-button-next:hover,
+.venue-swiper .swiper-button-prev:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.venue-swiper .swiper-button-next::after,
+.venue-swiper .swiper-button-prev::after {
+  font-size: 14px; /* Adjust arrow size */
+}
+
+/* For better accessibility */
+.venue-swiper .swiper-button-next:focus,
+.venue-swiper .swiper-button-prev:focus {
+  outline: 2px solid var(--color1);
+}
+
+/* Pagination dots */
+.venue-swiper .swiper-pagination-bullet {
+  background-color: gray;
+  width: 0.5rem;
+  height: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.venue-swiper .swiper-pagination-bullet-active {
+  background-color: white;
+  opacity: 0.8;
+}
