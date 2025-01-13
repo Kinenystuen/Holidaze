@@ -14,6 +14,7 @@ import P from "../../../components/shared/Typography/P";
 import { Venue } from "../../../components/library/types";
 import ErrorMessage from "../../../components/shared/ErrorMessage";
 import { Link } from "react-router-dom";
+import VenueSwiper from "../../../components/VenueSwiper";
 
 interface VenuesDataProps {
   venues: Venue[];
@@ -54,7 +55,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
 
       {/* Venues Grid */}
       {venues.length > 0 && (
-        <div className="grid grid-cols-1 gap-5">
+        <div className="grid grid-cols-1 mx-6 gap-5">
           {venues.map((venue) => (
             <Link
               to={`/venue/${venue.id}`}
@@ -65,18 +66,9 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                 key={venue.id}
                 className="sm:flex bg-white dark:bg-customBgDark-500 shadow-sm rounded-lg overflow-hidden group transform transition-transform"
               >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={
-                      venue.media?.length > 0
-                        ? venue.media[0].url
-                        : "https://via.placeholder.com/300x200"
-                    }
-                    alt={venue.media?.[0]?.alt || "Venue Image"}
-                    className="w-full h-52 sm:w-72 lg:w-80 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-4 w-full  flex flex-col justify-between">
+                <VenueSwiper media={venue.media} />
+
+                <div className="p-4 w-full flex flex-col justify-between">
                   <div>
                     {/* Venue Name and Rating */}
                     <div className="flex justify-between items-center">
