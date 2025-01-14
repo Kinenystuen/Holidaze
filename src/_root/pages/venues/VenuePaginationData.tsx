@@ -56,7 +56,7 @@ const VenuePagination: React.FC<PaginationProps> = ({
 
         {/* Page Buttons */}
         <div
-          className="flex w-full max-w-md items-center gap-2 overflow-x-auto scrollbar-hide"
+          className="flex w-full max-w-52 items-center gap-2 overflow-x-auto scrollbar-hide overflow-hidden"
           ref={containerRef}
         >
           {Array.from({ length: pageCount }).map((_, index) => (
