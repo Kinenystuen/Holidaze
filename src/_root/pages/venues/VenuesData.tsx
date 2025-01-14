@@ -1,4 +1,3 @@
-import Button from "../../../components/shared/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCoffee,
@@ -15,6 +14,8 @@ import { Venue } from "../../../components/library/types";
 import ErrorMessage from "../../../components/shared/ErrorMessage";
 import { Link } from "react-router-dom";
 import VenueSwiper from "../../../components/VenueSwiper";
+import "./VenuesData.css";
+import VenuePagination from "./VenuePaginationData";
 
 interface VenuesDataProps {
   venues: Venue[];
@@ -25,6 +26,7 @@ interface VenuesDataProps {
     isFirstPage: boolean;
     isLastPage: boolean;
   };
+  goToSelPage: (page: number) => void;
   goToNextPage: () => void;
   goToPreviousPage: () => void;
 }
@@ -32,11 +34,12 @@ interface VenuesDataProps {
 const VenuesData: React.FC<VenuesDataProps> = ({
   venues,
   meta,
+  goToSelPage,
   goToNextPage,
   goToPreviousPage
 }) => {
   return (
-    <div>
+    <div className="relative">
       {/* No Results Message */}
       {venues.length === 0 && (
         <ErrorMessage
@@ -171,34 +174,15 @@ const VenuesData: React.FC<VenuesDataProps> = ({
           ))}
         </div>
       )}
-
-      {/* Pagination Info */}
       {venues.length > 0 && meta && (
-        <div className="mt-4">
-          <P>
-            Page {meta.currentPage} of {meta.pageCount}
-          </P>
-          <P>Total venues: {meta.totalCount}</P>
-          <div className="flex justify-between items-center mt-8">
-            <Button
-              onClick={goToPreviousPage}
-              disabled={meta.isFirstPage}
-              className="px-4 py-2 bg-gray-300 text-black rounded-lg disabled:opacity-50"
-            >
-              Previous
-            </Button>
-            <p className="text-gray-600">
-              Page {meta.currentPage} of {meta.pageCount}
-            </p>
-            <Button
-              onClick={goToNextPage}
-              disabled={meta.isLastPage}
-              className="px-4 py-2 bg-gray-300 text-black rounded-lg disabled:opacity-50"
-            >
-              Next
-            </Button>
-          </div>
-        </div>
+        <VenuePagination
+          currentPage={meta.currentPage}
+          pageCount={meta.pageCount}
+          totalCount={meta.totalCount}
+          goToSelPage={goToSelPage}
+          goToNextPage={goToNextPage}
+          goToPreviousPage={goToPreviousPage}
+        />
       )}
     </div>
   );

@@ -1,0 +1,16 @@
+/* Hide scrollbars for pagination dots */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Dots hover transition */
+button {
+    transition: all 0.3s ease;
+}
