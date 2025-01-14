@@ -1,9 +1,10 @@
 import { Link, Route, Routes } from "react-router-dom";
 import RootLayout from "./_root/RootLayout";
 import Home from "./_root/pages/home/Home";
-import Venues from "./components/venues/venues";
 import ErrorMessage from "./components/shared/ErrorMessage";
 import Button from "./components/shared/Button/Button";
+import VenuePage from "./_root/pages/venues/VenuePage";
+import SelVenuePage from "./_root/pages/venues/SelVenuePage";
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
         {/* Public routes */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
-          <Route path="venues" element={<Venues />} />
-          {/* <Route path="gallery/:id" element={<PageGallery />} />  */}
+          <Route path="venues" element={<VenuePage />} />
+          <Route path="venue/:id" element={<SelVenuePage />} />
           <Route
             path="*"
             element={

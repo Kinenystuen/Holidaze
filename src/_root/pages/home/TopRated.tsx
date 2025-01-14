@@ -51,7 +51,7 @@ const TopRated = () => {
       );
 
       const shuffledVenues = sortedVenues
-        .slice(0, 20)
+        .slice(0, 10)
         .sort(() => Math.random() - 0.5);
 
       setTopVenues(shuffledVenues);
@@ -87,7 +87,10 @@ const TopRated = () => {
       >
         {topVenues.map((venue) => (
           <SwiperSlide key={venue.id}>
-            <Link to="/venues" className="w-full">
+            <Link
+              to={`/venue/${venue.id}`}
+              className="w-full hover:no-underline"
+            >
               <div className="w-full h-100 bg-white dark:bg-customBgDark-500 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-10">
                 {venue.media?.length > 0 ? (
                   <img

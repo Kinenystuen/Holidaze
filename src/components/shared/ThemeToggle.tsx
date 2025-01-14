@@ -9,14 +9,11 @@ const ThemeToggle = () => {
   return (
     <Button
       onClick={toggleTheme}
-      buttonType="transparent"
-      className={`text-lg p-2 m-0 md:mt-2 lg:m-0 rounded hover:border-transparent transition-colors duration-300 bg-transparent dark:hover:bg-transparent dark:text-whiteFont-600 dark:hover:text-whiteFont-500 text-gray-700 z-30 lg:mr-1 focus:ring-1 focus:ring-gray-500 dark:focus:ring-gray ${
-        darkMode ? "px-2" : "px-[0.7rem]"
-      }`}
+      className={`flex justify-center w-10 h-10 items-center p-2 rounded-full transition-colors duration-300 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-whiteFont-600 focus:ring-2 focus:ring-gray-500`}
       aria-label="Toggle Dark Mode"
-      title={`${darkMode ? "Light mode" : "Dark mode"}`}
+      title={darkMode ? "Light mode" : "Dark mode"}
     >
-      <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+      <FontAwesomeIcon icon={darkMode ? faSun : faMoon} className="text-lg" />
     </Button>
   );
 };
