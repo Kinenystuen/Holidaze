@@ -1,0 +1,6 @@
+@supports (-webkit-touch-callout: none) {
+    .ios-fix {
+        background-attachment: scroll !important;
+        /* Fallback for iOS */
+    }
+}

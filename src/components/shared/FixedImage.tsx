@@ -1,4 +1,5 @@
 import React from "react";
+import "./FixedImage.css";
 
 interface FixedImageProps {
   className?: string;
