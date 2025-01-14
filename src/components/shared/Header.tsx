@@ -46,7 +46,7 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Theme Toggle */}
-          <div className="hidden md:flex">
+          <div className="hidden md:flex mr-2">
             <ThemeToggle />
           </div>
 
@@ -67,7 +67,14 @@ const Header: React.FC = () => {
           </div>
 
           {/* Hamburger Menu (Mobile) */}
-          <div className=" md:hidden  z-50">
+          <div className="flex md:hidden  z-50">
+            <Link
+              to="/auth"
+              className="text-gray-800 focus:outline-none border-0 p-2 mr-2"
+            >
+              <FontAwesomeIcon className="h-4 w-4" icon={faUser} />
+            </Link>
+
             <Button
               buttonType="transparent"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -105,22 +112,8 @@ const Header: React.FC = () => {
               })}
             </nav>
             {/* Theme Toggle */}
-            <div className="flex md:hidden">
+            <div className="flex md:hidden my-3">
               <ThemeToggle />
-            </div>
-            <div className="flex">
-              <Link
-                to="/auth"
-                className="px-3 py-1 bg-color2 text-black rounded-none rounded-s-xl hover:bg-color2-400 hover:text-color1-700 transition flex items-center"
-              >
-                <FontAwesomeIcon icon={faUser} className="mr-2" /> Login
-              </Link>
-              <Link
-                to="/auth"
-                className="px-4 py-2 border bg-white border-color2-500 text-black rounded-none rounded-e-xl hover:bg-color3-400 hover:text-white transition flex items-center"
-              >
-                Register
-              </Link>
             </div>
           </div>
         )}
