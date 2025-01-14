@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Venue } from "../../../components/library/types";
 import { apiHostUrl } from "../../../components/library/constants";
 import { useApi } from "../../../components/hooks/UseApi";
@@ -36,36 +36,47 @@ const Venues = ({
   const { response, isLoading, isError, errorMessage } =
     useApi<Venue[]>(apiUrl);
 
-  const venues = response?.data || [];
+  const venues = useMemo(() => response?.data || [], [response]);
+
   const meta = response?.meta;
 
-  // Reset page to 1 when searchQuery or filters change
   useEffect(() => {
-    setPage(1);
+    if (page !== 1) {
+      setPage(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, filters]);
 
   // Filter and sort venues
   useEffect(() => {
-    let result = [...venues];
+    const filterAndSortVenues = () => {
+      let result = [...venues];
 
-    // Apply filters
-    if (filters.wifi) result = result.filter((v) => v.meta.wifi);
-    if (filters.parking) result = result.filter((v) => v.meta.parking);
-    if (filters.breakfast) result = result.filter((v) => v.meta.breakfast);
-    if (filters.pets) result = result.filter((v) => v.meta.pets);
+      // Apply filters
+      if (filters.wifi) result = result.filter((v) => v.meta.wifi);
+      if (filters.parking) result = result.filter((v) => v.meta.parking);
+      if (filters.breakfast) result = result.filter((v) => v.meta.breakfast);
+      if (filters.pets) result = result.filter((v) => v.meta.pets);
 
-    // Apply sorting
-    result.sort((a, b) => {
-      const valA = a[sortField as keyof Venue] as number | string | boolean;
-      const valB = b[sortField as keyof Venue] as number | string | boolean;
+      // Apply sorting
+      result.sort((a, b) => {
+        const valA = a[sortField as keyof Venue] as number | string | boolean;
+        const valB = b[sortField as keyof Venue] as number | string | boolean;
 
-      if (valA === valB) return 0;
-      if (sortOrder === "asc") return valA > valB ? 1 : -1;
-      return valA < valB ? 1 : -1;
-    });
+        if (valA === valB) return 0;
+        if (sortOrder === "asc") return valA > valB ? 1 : -1;
+        return valA < valB ? 1 : -1;
+      });
 
-    setFilteredVenues(result);
+      return result;
+    };
+
+    setFilteredVenues(filterAndSortVenues());
   }, [venues, filters, sortField, sortOrder]);
+
+  const goToSelPage = (page: number) => {
+    setPage(page);
+  };
 
   const goToNextPage = () => {
     if (meta?.nextPage) setPage(meta.nextPage);
@@ -95,6 +106,7 @@ const Venues = ({
           isLastPage: true
         }
       }
+      goToSelPage={goToSelPage}
       goToNextPage={goToNextPage}
       goToPreviousPage={goToPreviousPage}
     />
