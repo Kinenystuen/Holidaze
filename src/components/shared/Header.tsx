@@ -6,6 +6,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { headerNavLinks } from "../library/constants";
 import { INavLink } from "../library/types";
 import ThemeToggle from "./ThemeToggle";
+import Button from "./Button/Button";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
       <div className="lg:max-w-7xl w-full mx-auto ">
         <div className="flex justify-between items-center py-4 mx-4">
           {/* Logo */}
-          <div className="text-2xl font-bold text-gray-800">
+          <div className="text-2xl font-bold text-gray-800 z-30">
             <Link className="text-color1-600 dark:text-color1-100" to="/">
               Holidaze
             </Link>
@@ -45,7 +46,9 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Theme Toggle */}
-          <ThemeToggle />
+          <div className="hidden md:flex">
+            <ThemeToggle />
+          </div>
 
           {/* Login/Register */}
           <div className="hidden md:flex">
@@ -64,23 +67,24 @@ const Header: React.FC = () => {
           </div>
 
           {/* Hamburger Menu (Mobile) */}
-          <div className="md:hidden">
-            <button
+          <div className=" md:hidden  z-50">
+            <Button
+              buttonType="transparent"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-800 focus:outline-none"
+              className="text-gray-800 focus:outline-none border-0 p-2"
             >
               <FontAwesomeIcon
                 icon={isMenuOpen ? faXmark : faBars}
                 className="h-6 w-6"
               />
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <nav className="w-full mx-0 space-y-4 mt-4">
+          <div className="absolute top-0 w-full pt-16 p-4 border-b shadow-md bg-customBg dark:bg-customBgDark-500 z-20 md:hidden">
+            <nav className="w-full mx-0 space-y-4 px-2 my-4">
               {headerNavLinks.map((link: INavLink) => {
                 const isActive = pathname === link.route;
                 return (
@@ -90,8 +94,8 @@ const Header: React.FC = () => {
                     onClick={() => setIsMenuOpen(false)}
                     className={`transition flex items-center text-md ${
                       isActive
-                        ? "text-color1-800 hover:text-inherit dark:text-whiteFont-400 cursor-default"
-                        : "text-gray-600 hover:text-color1-500"
+                        ? "text-color1-800  hover:text-inherit dark:text-whiteFont-400 cursor-default"
+                        : "text-gray-600 dark:text-whiteFont-600 hover:text-color1-500 dark:hover:text-whiteFont-400"
                     }`}
                   >
                     <span className="sr-only">{link.title}</span>
@@ -100,6 +104,10 @@ const Header: React.FC = () => {
                 );
               })}
             </nav>
+            {/* Theme Toggle */}
+            <div className="flex md:hidden">
+              <ThemeToggle />
+            </div>
             <div className="flex">
               <Link
                 to="/auth"
