@@ -25,7 +25,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
         ) : (
           <SwiperSlide>
             <img
-              src="https://via.placeholder.com/300x200"
+              src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
               alt="Default Placeholder"
               className="w-full h-full object-cover venue-swiper"
             />
