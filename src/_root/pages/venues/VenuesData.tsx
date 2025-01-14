@@ -55,7 +55,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
 
       {/* Venues Grid */}
       {venues.length > 0 && (
-        <div className="grid grid-cols-1 mx-6 gap-5">
+        <div className="grid grid-cols-1 mx-2 md:mx-6 gap-5">
           {venues.map((venue) => (
             <Link
               to={`/venue/${venue.id}`}
