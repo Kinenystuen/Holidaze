@@ -1,10 +1,11 @@
 import React from "react";
-import { useUserContext } from "../context/AuthProvider";
+
 import Loader from "../ui/Loader";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import UserDropdown from "./UserDropdown";
+import { useUserContext } from "../context/useUserContext";
 
 const UserDropParent: React.FC = () => {
   const { isAuthenticated, isPending } = useUserContext();
@@ -18,13 +19,13 @@ const UserDropParent: React.FC = () => {
       <>
         <div className="hidden md:flex">
           <Link
-            to="/auth"
+            to="/auth?type=login"
             className="px-3 py-[0.4rem] text-sm bg-color2 text-black rounded-none rounded-s-xl hover:bg-color2-400 hover:text-color1-700 transition flex items-center"
           >
             <FontAwesomeIcon icon={faUser} className="mr-2 my-0" /> Login
           </Link>
           <Link
-            to="/auth"
+            to="/auth?type=register"
             className="px-3 py-[0.4rem] text-sm border bg-white border-color2-500 text-black rounded-none rounded-e-xl hover:bg-gray-100 hover:text-black transition flex items-center"
           >
             Register
