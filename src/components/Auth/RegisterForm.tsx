@@ -3,24 +3,25 @@ import { useForm } from "react-hook-form";
 import Input from "../ui/Input";
 import Button from "../shared/Button/Button";
 import { useAuth } from "../hooks/useAuth";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
-interface LoginFormData {
+interface RegisterFormData {
+  name: string;
   email: string;
   password: string;
 }
 
 /**
- * LoginForm Component
+ * RegisterForm Component
  *
- * This component provides a login form for users. It includes input fields
- * for the user's email, and password, and performs validation using `react-hook-form`.
- * The form interacts with the `useAuth` hook to send the user data to the API for account login.
+ * This component provides a registration form for new users. It includes input fields
+ * for the user's name, email, and password, and performs validation using `react-hook-form`.
+ * The form interacts with the `useAuth` hook to send the user data to the API for account creation.
  *
  * Features:
  * - Input validation:
+ *   - Username: Alphanumeric, 3-30 characters
  *   - Email: Must match Noroff email format (e.g., `name@noroff.no` or `name@stud.noroff.no`)
- *   - Password: Required
+ *   - Password: Minimum of 8 characters
  * - Error handling: Displays field-specific errors and API errors
  * - Button states: Disables the submit button while processing or submitting
  *
@@ -38,27 +39,50 @@ interface LoginFormData {
  *
  * @returns {JSX.Element} The rendered registration form component.
  */
-const LoginForm: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<LoginFormData>();
-  const { submitAuth, isLoading, error: authError } = useAuth();
+  } = useForm<RegisterFormData>();
 
-  const onSubmit = async (data: LoginFormData) => {
+  // Initialize useAuth with default values for registration
+  const {
+    submitAuth,
+    isLoading,
+    error: authError
+  } = useAuth("/auth/register", "/venues");
+
+  // Handle form submission
+  const onSubmit = async (data: RegisterFormData) => {
     try {
       await submitAuth(data);
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Registration failed:", err);
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white dark:bg-customBgDark-600 p-6 pt-2 rounded-b-xl rounded-e-xl w-full max-w-md mx-auto"
+      className="bg-white dark:bg-customBgDark-600 p-6 pt-2 rounded-b-xl rounded-s-xl w-full max-w-md mx-auto"
     >
+      {/* Username Input */}
+      <div className="mb-4">
+        <Input
+          InputId="name"
+          InputLabel="Username"
+          register={register}
+          errors={errors}
+          required
+          minLength={3}
+          maxLength={30}
+          pattern={{
+            value: /^[\w]+$/,
+            message: "Please provide a valid username."
+          }}
+        />
+      </div>
       {/* Email Input */}
       <div className="mb-4">
         <Input
@@ -72,7 +96,6 @@ const LoginForm: React.FC = () => {
             message:
               "Please enter a valid Noroff email (e.g., name@noroff.no or name@stud.noroff.no)."
           }}
-          icon={faEnvelope}
         />
       </div>
 
@@ -84,7 +107,7 @@ const LoginForm: React.FC = () => {
           register={register}
           errors={errors}
           required
-          icon={faLock}
+          minLength={8}
         />
       </div>
 
@@ -98,10 +121,10 @@ const LoginForm: React.FC = () => {
         disabled={isSubmitting || isLoading}
         className="w-full text-white py-2 rounded-md disabled:bg-gray-400"
       >
-        {isSubmitting || isLoading ? "Logging in..." : "Login"}
+        {isSubmitting || isLoading ? "Registering..." : "Register"}
       </Button>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
