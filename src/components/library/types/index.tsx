@@ -4,6 +4,57 @@ export type INavLink = {
   label: string;
 };
 
+/* Auth props */
+export type User = {
+  // id: string;
+  name: string;
+  email: string;
+  avatarUrl: string;
+  bannerUrl: string;
+  venueManager: boolean;
+  avatar?: {
+    url: string;
+    alt: string;
+  };
+
+  banner?: {
+    url: string;
+    alt: string;
+  };
+};
+
+export type INewUser = {
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+};
+
+export interface LoginProfile {
+  email: string;
+  password: string;
+}
+export interface RegisterProfile {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface UserResponse {
+  name: string;
+  email: string;
+  bio: string;
+  avatar: {
+    url: string;
+    alt: string;
+  };
+  banner: {
+    url: string;
+    alt: string;
+  };
+  venueManager: boolean;
+}
+
 /* Button props */
 export type ButtonProps = {
   ButtonType?: "primary" | "secondary";
