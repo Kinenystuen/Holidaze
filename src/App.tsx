@@ -5,7 +5,7 @@ import ErrorMessage from "./components/shared/ErrorMessage";
 import Button from "./components/shared/Button/Button";
 import VenuePage from "./_root/pages/venues/VenuePage";
 import SelVenuePage from "./_root/pages/venues/SelVenuePage";
-import AuthPage from "./_root/pages/auth/PageAuth";
+import AuthPage from "./_root/pages/auth/AuthPage";
 
 function App() {
   return (
