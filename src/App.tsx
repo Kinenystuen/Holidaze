@@ -5,21 +5,14 @@ import ErrorMessage from "./components/shared/ErrorMessage";
 import Button from "./components/shared/Button/Button";
 import VenuePage from "./_root/pages/venues/VenuePage";
 import SelVenuePage from "./_root/pages/venues/SelVenuePage";
+import PageAuth from "./_root/pages/auth/PageAuth";
 
 function App() {
   return (
     <>
       <Routes>
         {/* Auth routes */}
-        <Route
-          path="auth"
-          element={
-            <div className="bg-slate-700 text-white min-h-screen flex items-center justify-center">
-              Auth
-              <Link to="/">Home</Link>
-            </div>
-          }
-        />
+        <Route path="auth" element={<PageAuth />} />
         {/* Public routes */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
