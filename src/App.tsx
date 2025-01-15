@@ -5,14 +5,14 @@ import ErrorMessage from "./components/shared/ErrorMessage";
 import Button from "./components/shared/Button/Button";
 import VenuePage from "./_root/pages/venues/VenuePage";
 import SelVenuePage from "./_root/pages/venues/SelVenuePage";
-import PageAuth from "./_root/pages/auth/PageAuth";
+import AuthPage from "./_root/pages/auth/PageAuth";
 
 function App() {
   return (
     <>
       <Routes>
         {/* Auth routes */}
-        <Route path="auth" element={<PageAuth />} />
+        <Route path="auth" element={<AuthPage />} />
         {/* Public routes */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
