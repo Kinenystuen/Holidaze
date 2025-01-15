@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useUserContext } from "../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../shared/Button/Button";
+import Button from "./Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faSignOut,
   faUser
 } from "@fortawesome/free-solid-svg-icons";
-import P from "../shared/Typography/P";
+import P from "./Typography/P";
 
 const UserDropdown: React.FC = () => {
   const { user, isAuthenticated, setIsAuthenticated } = useUserContext();
