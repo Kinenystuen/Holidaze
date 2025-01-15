@@ -19,7 +19,7 @@ function Button({
       break;
     case "violet":
       buttonClass =
-        "bg-color1 text-white hover:bg-color3 dark:bg-color1 dark:hover:bg-color3 dark:text-whiteFont-500 dark:hover:border-color3 rounded-full";
+        "bg-color1  hover:bg-color3 dark:bg-color1 dark:hover:bg-color3 dark:hover:border-color3 rounded-full";
       break;
     case "transparent":
       buttonClass =
