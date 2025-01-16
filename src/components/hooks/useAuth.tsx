@@ -17,7 +17,7 @@ const saveToStorage = (key: string, value: unknown) => {
  */
 export const useAuth = (
   defaultAction: string = "/auth/login",
-  defaultRedirect: string = "/venues"
+  defaultRedirect: string = "/profile"
 ) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
