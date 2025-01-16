@@ -4,9 +4,6 @@ import { useUserContext } from "../context/useUserContext";
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated, isPending } = useUserContext();
 
-  console.log("ProtectedRoute - isPending:", isPending);
-  console.log("ProtectedRoute - isAuthenticated:", isAuthenticated);
-
   // Wait until authentication is checked before rendering
   if (isPending) {
     return (

@@ -67,13 +67,13 @@ export function AuthProvider({
    * @returns {Promise<boolean>} A promise that resolves to `true` if authenticated, `false` otherwise.
    */
   const checkAuthUser = useCallback(async (): Promise<boolean> => {
-    console.log("Checking authentication...");
+    // console.log("Checking authentication...");
     setIsPending(true);
 
     const token = getToken();
 
     if (!token) {
-      console.log("No token found - User not authenticated");
+      //   console.log("No token found - User not authenticated");
       setIsAuthenticated(false);
       setUser(INITIAL_USER);
       setIsPending(false);
@@ -83,11 +83,11 @@ export function AuthProvider({
     const userDetails = fetchUserDetails();
 
     if (userDetails) {
-      console.log("User found in localStorage - Authenticated", userDetails);
+      //   console.log("User found in localStorage - Authenticated", userDetails);
       setUser(userDetails);
       setIsAuthenticated(true);
     } else {
-      console.log("User not found - Setting auth to false");
+      //   console.log("User not found - Setting auth to false");
       setIsAuthenticated(false);
       setUser(INITIAL_USER);
     }
@@ -97,7 +97,7 @@ export function AuthProvider({
   }, []);
 
   useEffect(() => {
-    console.log("AuthProvider Mounted - Running `checkAuthUser()`...");
+    // console.log("AuthProvider Mounted - Running `checkAuthUser()`...");
     checkAuthUser();
   }, [checkAuthUser]);
 
