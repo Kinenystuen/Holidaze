@@ -8,6 +8,7 @@ import SelVenuePage from "./_root/pages/venues/SelVenuePage";
 import AuthPage from "./_root/pages/auth/AuthPage";
 import Profile from "./_root/pages/profile/profile";
 import PrivateProfile from "./_root/pages/profile/PrivateProfile";
+import ProtectedRoute from "./components/shared/ProtectedRoute";
 
 function App() {
   return (
@@ -22,7 +23,14 @@ function App() {
           <Route path="venue/:id" element={<SelVenuePage />} />
           <Route path="/profile/:name" element={<Profile />} />
           {/* Private user profile */}
-          <Route path="/profile" element={<PrivateProfile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <PrivateProfile />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="*"
             element={
