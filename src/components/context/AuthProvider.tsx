@@ -1,18 +1,42 @@
 import React, { useEffect, useState, useCallback } from "react";
-
 import { INITIAL_USER } from "../library/constants";
 import { User } from "../library/types";
 import { AuthContext } from "./useUserContext";
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+/**
+ * Provides authentication context for the application.
+ *
+ * - Manages user authentication state.
+ * - Retrieves user details from `localStorage`.
+ * - Checks for an authentication token to determine if the user is logged in.
+ * - Updates the authentication status accordingly.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {React.ReactNode} props.children - The child components wrapped by AuthProvider.
+ * @returns {JSX.Element} The AuthContext provider with authentication state.
+ */
+export function AuthProvider({
+  children
+}: {
+  children: React.ReactNode;
+}): JSX.Element {
   const [user, setUser] = useState<User>(INITIAL_USER);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isPending, setIsPending] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isPending, setIsPending] = useState<boolean>(true);
 
-  // Get the token from localStorage
-  const getToken = () => localStorage.getItem("token");
+  /**
+   * Retrieves the authentication token from `localStorage`.
+   *
+   * @returns {string | null} The authentication token, or `null` if not found.
+   */
+  const getToken = (): string | null => localStorage.getItem("token");
 
-  // Fetch user details from localStorage
+  /**
+   * Fetches and parses user details from `localStorage`.
+   *
+   * @returns {User | null} The user details if found, otherwise `null`.
+   */
   const fetchUserDetails = (): User | null => {
     try {
       const profile = localStorage.getItem("profile");
@@ -32,12 +56,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Check if the user is authenticated
-  const checkAuthUser = useCallback(async () => {
+  /**
+   * Checks whether the user is authenticated.
+   *
+   * - Retrieves the token from `localStorage`.
+   * - Fetches user details and updates authentication state accordingly.
+   *
+   * @async
+   * @function
+   * @returns {Promise<boolean>} A promise that resolves to `true` if authenticated, `false` otherwise.
+   */
+  const checkAuthUser = useCallback(async (): Promise<boolean> => {
+    console.log("Checking authentication...");
     setIsPending(true);
+
     const token = getToken();
 
     if (!token) {
+      console.log("No token found - User not authenticated");
       setIsAuthenticated(false);
       setUser(INITIAL_USER);
       setIsPending(false);
@@ -47,41 +83,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const userDetails = fetchUserDetails();
 
     if (userDetails) {
+      console.log("User found in localStorage - Authenticated", userDetails);
       setUser(userDetails);
       setIsAuthenticated(true);
-      setIsPending(false);
-      return true;
     } else {
+      console.log("User not found - Setting auth to false");
       setIsAuthenticated(false);
       setUser(INITIAL_USER);
-      setIsPending(false);
-      return false;
     }
+
+    setIsPending(false);
+    return !!userDetails;
   }, []);
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      const isAuthenticated = await checkAuthUser();
-      if (!isAuthenticated) {
-        console.log("User is not authenticated");
-      } else {
-        console.log("User is authenticated");
-      }
-    };
-
-    initializeAuth();
+    console.log("AuthProvider Mounted - Running `checkAuthUser()`...");
+    checkAuthUser();
   }, [checkAuthUser]);
 
-  const value = {
-    user,
-    setUser,
-    isPending,
-    isAuthenticated,
-    setIsAuthenticated,
-    checkAuthUser
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        isPending,
+        isAuthenticated,
+        setIsAuthenticated,
+        checkAuthUser
+      }}
+    >
+      {isPending ? (
+        <div className="flex justify-center items-center h-screen text-lg">
+          Loading authentication...
+        </div>
+      ) : (
+        children
+      )}
+    </AuthContext.Provider>
+  );
 }
 
 export default AuthProvider;
