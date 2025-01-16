@@ -6,6 +6,8 @@ import Button from "./components/shared/Button/Button";
 import VenuePage from "./_root/pages/venues/VenuePage";
 import SelVenuePage from "./_root/pages/venues/SelVenuePage";
 import AuthPage from "./_root/pages/auth/AuthPage";
+import Profile from "./_root/pages/profile/profile";
+import PrivateProfile from "./_root/pages/profile/PrivateProfile";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="venues" element={<VenuePage />} />
           <Route path="venue/:id" element={<SelVenuePage />} />
+          <Route path="/profile/:name" element={<Profile />} />
+          {/* Private user profile */}
+          <Route path="/profile" element={<PrivateProfile />} />
           <Route
             path="*"
             element={
