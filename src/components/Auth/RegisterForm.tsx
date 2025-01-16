@@ -3,6 +3,16 @@ import { useForm } from "react-hook-form";
 import Input from "../ui/Input";
 import Button from "../shared/Button/Button";
 import { useAuth } from "../hooks/useAuth";
+import H2 from "../shared/Typography/H2";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faLock,
+  faTimes,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
+import Tooltip from "../ui/ToolTip";
 
 interface RegisterFormData {
   name: string;
@@ -65,13 +75,29 @@ const RegisterForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white dark:bg-customBgDark-600 p-6 pt-2 rounded-b-xl rounded-s-xl w-full max-w-md mx-auto"
+      className="relative bg-white dark:bg-customBgDark-600 px-8 pt-2 rounded-t-xl w-full max-w-md mx-auto"
     >
+      {/* Back Button */}
+      <Link
+        to="/"
+        onClick={() => window.history.back()}
+        className="absolute top-4 right-4 text-whiteFont-600 dark:text-whiteFont-600"
+      >
+        <Tooltip text="Go back" position="bottom">
+          <FontAwesomeIcon icon={faTimes} className="w-6 h-6" />
+        </Tooltip>
+      </Link>
+
+      {/* Register Heading */}
+      <H2 className="mt-4 text-2xl font-semibold text-gray-800 dark:text-white">
+        Register
+      </H2>
       {/* Username Input */}
       <div className="mb-4">
         <Input
           InputId="name"
           InputLabel="Username"
+          icon={faUser}
           register={register}
           errors={errors}
           required
@@ -79,7 +105,8 @@ const RegisterForm: React.FC = () => {
           maxLength={30}
           pattern={{
             value: /^[\w]+$/,
-            message: "Please provide a valid username."
+            message:
+              "Please provide a valid username. It can only contain letters, numbers, and underscores."
           }}
         />
       </div>
@@ -88,13 +115,13 @@ const RegisterForm: React.FC = () => {
         <Input
           InputId="email"
           InputLabel="Email"
+          icon={faEnvelope}
           register={register}
           errors={errors}
           required
           pattern={{
-            value: /^[\w\-.]+@(stud\.)?noroff\.no$/,
-            message:
-              "Please enter a valid Noroff email (e.g., name@noroff.no or name@stud.noroff.no)."
+            value: /^[\w\-.]+@stud\.noroff\.no$/,
+            message: "Please enter a valid Noroff email (name@stud.noroff.no)."
           }}
         />
       </div>
@@ -104,6 +131,7 @@ const RegisterForm: React.FC = () => {
         <Input
           InputId="password"
           InputLabel="Password"
+          icon={faLock}
           register={register}
           errors={errors}
           required

@@ -3,7 +3,11 @@ import { useForm } from "react-hook-form";
 import Input from "../ui/Input";
 import Button from "../shared/Button/Button";
 import { useAuth } from "../hooks/useAuth";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLock, faTimes } from "@fortawesome/free-solid-svg-icons";
+import H2 from "../shared/Typography/H2";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Tooltip from "../ui/ToolTip";
 
 interface LoginFormData {
   email: string;
@@ -57,8 +61,22 @@ const LoginForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white dark:bg-customBgDark-600 p-6 pt-2 rounded-b-xl rounded-e-xl w-full max-w-md mx-auto"
+      className="relative bg-white dark:bg-customBgDark-600 px-8 pt-2 rounded-t-xl w-full max-w-md mx-auto"
     >
+      {/* Back Button */}
+      <Link
+        to="/"
+        onClick={() => window.history.back()}
+        className="absolute top-4 right-4 text-whiteFont-600 dark:text-whiteFont-600"
+      >
+        <Tooltip text="Go back" position="bottom">
+          <FontAwesomeIcon icon={faTimes} className="w-6 h-6" />
+        </Tooltip>
+      </Link>
+      <H2 className="mt-4 text-2xl font-semibold text-gray-800 dark:text-white">
+        Login
+      </H2>
+
       {/* Email Input */}
       <div className="mb-4">
         <Input
@@ -69,8 +87,7 @@ const LoginForm: React.FC = () => {
           required
           pattern={{
             value: /^[\w\-.]+@(stud\.)?noroff\.no$/,
-            message:
-              "Please enter a valid Noroff email (e.g., name@noroff.no or name@stud.noroff.no)."
+            message: "Please enter a valid Noroff email"
           }}
           icon={faEnvelope}
         />
