@@ -24,7 +24,7 @@ export interface ApiOptions {
 }
 
 export interface ApiResponse<T> {
-  data: T; // The main data (e.g., venues)
+  data: T;
   meta?: {
     isFirstPage: boolean;
     isLastPage: boolean;
@@ -33,22 +33,21 @@ export interface ApiResponse<T> {
     nextPage: number | null;
     pageCount: number;
     totalCount: number;
-  }; // The metadata about pagination
+  };
 }
 
 export function useApi<T>(
   url: string,
-  options: ApiOptions = { method: "GET", body: null }
+  options: ApiOptions = { method: "GET", body: null },
+  manual: boolean = false
 ) {
   const [response, setResponse] = useState<ApiResponse<T> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // Destructure options to separate dependencies
   const { method = "GET", body = null } = options;
 
-  // Memoize headers and fetch options
   const memoizedHeaders = useMemo(() => headers("application/json"), []);
   const memoizedFetchOptions = useMemo(
     () => ({
@@ -59,41 +58,50 @@ export function useApi<T>(
     [method, body, memoizedHeaders]
   );
 
-  const fetchData = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-      setErrorMessage("");
+  const fetchData = useCallback(
+    async (overrideOptions?: ApiOptions) => {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        setErrorMessage("");
 
-      const response = await fetch(url, memoizedFetchOptions);
-      const json = await response.json();
+        const finalOptions = {
+          ...memoizedFetchOptions,
+          ...overrideOptions,
+          body: overrideOptions?.body
+            ? JSON.stringify(overrideOptions.body)
+            : memoizedFetchOptions.body
+        };
 
-      if (!response.ok) {
-        throw new Error(json.errors?.[0]?.message || "Something went wrong.");
+        const response = await fetch(url, finalOptions);
+        const json = await response.json();
+
+        if (!response.ok) {
+          throw new Error(json.errors?.[0]?.message || "Something went wrong.");
+        }
+
+        setResponse({ data: json.data ?? json, meta: json.meta });
+        return json; // Return data for immediate processing
+      } catch (error: unknown) {
+        setIsError(true);
+        if (error instanceof Error) {
+          setErrorMessage(error.message || "An unexpected error occurred.");
+        } else {
+          setErrorMessage("An unexpected error occurred.");
+        }
+        return null; // Return null on error
+      } finally {
+        setIsLoading(false);
       }
-
-      // Assume API returns both `data` and `meta`
-      const responseData: ApiResponse<T> = {
-        data: json.data ?? json, // Handle cases where `data` is directly returned
-        meta: json.meta // Metadata about pagination
-      };
-
-      setResponse(responseData);
-    } catch (error: unknown) {
-      setIsError(true);
-      if (error instanceof Error) {
-        setErrorMessage(error.message || "An unexpected error occurred.");
-      } else {
-        setErrorMessage("An unexpected error occurred.");
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [url, memoizedFetchOptions]);
+    },
+    [url, memoizedFetchOptions]
+  );
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (!manual && method === "GET") {
+      fetchData();
+    }
+  }, [fetchData, manual, method]);
 
   return { response, isLoading, isError, errorMessage, fetchData };
 }
