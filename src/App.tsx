@@ -35,7 +35,7 @@ function App() {
             path="*"
             element={
               <ErrorMessage message="Page not found">
-                <Link to="/">
+                <Link to="/" onClick={() => window.history.back()}>
                   <Button buttonType="violet">Go Back</Button>
                 </Link>
               </ErrorMessage>
