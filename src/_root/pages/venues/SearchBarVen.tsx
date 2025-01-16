@@ -53,7 +53,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
           value={searchInput}
           onChange={handleInputChange}
           placeholder="Search for venues..."
-          className="w-full pl-10 pr-10 py-2 border rounded-full text-black dark:placeholder-customBgDark-500 dark:bg-color2-600 border-gray-300 dark:border-color3-800 focus:ring-2 focus:outline-none focus:ring-color2"
+          className="w-full pl-10 pr-10 py-2 border rounded-full text-black dark:text-whiteFont-500 dark:placeholder-whiteFont-600 dark:bg-customBgDark-500 dark:border-color3-800 ring-2 ring-color1-200 dark:ring-color1-500 focus:ring-3 focus:outline-none focus:ring-color2"
         />
 
         {/* Clear Button */}
@@ -61,7 +61,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
           <button
             type="button"
             onClick={clearSearch}
-            className="absolute rounded-3xl inset-y-0 right-0 flex items-center bg-transparent text-gray-500 hover:text-black"
+            className="absolute rounded-3xl inset-y-0 right-0 flex items-center bg-transparent text-gray-500 hover:text-black dark:hover:text-whiteFont-100"
           >
             <FontAwesomeIcon icon={faTimes} />
           </button>
