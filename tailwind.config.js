@@ -9,7 +9,7 @@ export default {
         body: ['"Roboto"', "sans-serif"] // For body text
       },
       colors: {
-        customBg: "#fef7ff",
+        customBg: "#FAF9F6",
         customBgDark: {
           DEFAULT: "#2c2c2c",
           100: "#d5d5d5",
