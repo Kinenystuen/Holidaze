@@ -10,6 +10,14 @@ const AuthPage: React.FC = () => {
   return (
     <div className="auth-container h-screen w-screen bg-slate-800 dark:bg-gray-900 relative">
       {/* Background Image with Overlay */}
+      <div className="absolute  p-2 z-20">
+        {/* Logo */}
+        <div className="text-2xl font-bold text-gray-800 z-30 ">
+          <Link className="p-4 text-color1-200 dark:text-whiteFont-600" to="/">
+            Holidaze
+          </Link>
+        </div>
+      </div>
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -20,7 +28,7 @@ const AuthPage: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 max-w-md mx-auto h-[90vh] flex flex-col justify-center items-center ">
+      <div className="relative px-5 md:px-0 z-20 max-w-md mx-auto h-[90vh] flex flex-col justify-center items-center ">
         {/* Forms */}
         {type === "login" ? <LoginForm /> : <RegisterForm />}
 
