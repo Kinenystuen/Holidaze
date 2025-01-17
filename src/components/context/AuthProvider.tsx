@@ -25,18 +25,8 @@ export function AuthProvider({
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isPending, setIsPending] = useState<boolean>(true);
 
-  /**
-   * Retrieves the authentication token from `localStorage`.
-   *
-   * @returns {string | null} The authentication token, or `null` if not found.
-   */
   const getToken = (): string | null => localStorage.getItem("token");
 
-  /**
-   * Fetches and parses user details from `localStorage`.
-   *
-   * @returns {User | null} The user details if found, otherwise `null`.
-   */
   const fetchUserDetails = (): User | null => {
     try {
       const profile = localStorage.getItem("profile");
@@ -44,11 +34,18 @@ export function AuthProvider({
 
       const data = JSON.parse(profile);
       return {
-        name: data.name || "",
-        email: data.email || "",
-        avatarUrl: data.avatar?.url || "",
-        bannerUrl: data.banner?.url || "",
-        venueManager: data.venueManager || false
+        name: data.name ?? "",
+        email: data.email ?? "",
+        bio: data.bio ?? "",
+        avatar: {
+          url: data.avatar?.url ?? "",
+          alt: data.avatar?.alt ?? "User avatar"
+        },
+        banner: {
+          url: data.banner?.url ?? "",
+          alt: data.banner?.alt ?? "User banner"
+        },
+        venueManager: data.venueManager ?? false
       };
     } catch (error) {
       console.error("Error parsing user profile from localStorage:", error);

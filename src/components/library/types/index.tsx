@@ -9,8 +9,9 @@ export type User = {
   // id: string;
   name: string;
   email: string;
-  avatarUrl: string;
-  bannerUrl: string;
+  bio: string;
+  // avatarUrl: string;
+  // bannerUrl: string;
   venueManager: boolean;
   avatar?: {
     url: string;
@@ -23,13 +24,6 @@ export type User = {
   };
 };
 
-export type INewUser = {
-  name: string;
-  email: string;
-  username: string;
-  password: string;
-};
-
 export interface LoginProfile {
   email: string;
   password: string;
@@ -40,10 +34,12 @@ export interface RegisterProfile {
   password: string;
 }
 
-export interface UserResponse {
+export interface UserProfile {
   name: string;
   email: string;
   bio: string;
+  // avatarUrl: string;
+  // bannerUrl: string;
   avatar: {
     url: string;
     alt: string;
@@ -53,6 +49,39 @@ export interface UserResponse {
     alt: string;
   };
   venueManager: boolean;
+  _count: {
+    venues: number;
+    bookings: number;
+  };
+}
+
+export interface ProfileResponse {
+  data: UserProfile;
+  meta: Record<string, unknown>;
+}
+
+export interface Booking {
+  id: string;
+  dateFrom: string;
+  dateTo: string;
+  guests: number;
+  created: string;
+  updated: string;
+}
+
+export interface MetaData {
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  previousPage: number | null;
+  nextPage: number | null;
+  pageCount: number;
+  totalCount: number;
+}
+
+export interface BookingsResponse {
+  data: Booking[];
+  meta: MetaData;
 }
 
 /* Button props */
@@ -154,4 +183,33 @@ export interface Venue {
   location: Location;
   owner: Owner;
   bookings: Booking[];
+}
+
+export interface VenueProfile {
+  id: string;
+  name: string;
+  description: string;
+  media: Media[];
+  price: number;
+  maxGuests: number;
+  rating: number;
+  created: string;
+  updated: string;
+  meta: Meta;
+  location: Location;
+}
+
+export interface MetaData {
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  previousPage: number | null;
+  nextPage: number | null;
+  pageCount: number;
+  totalCount: number;
+}
+
+export interface VenuesResponse {
+  data: Venue[];
+  meta: MetaData;
 }

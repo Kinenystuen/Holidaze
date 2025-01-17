@@ -61,7 +61,7 @@ const UserDropdown: React.FC = () => {
       >
         <div className="relative w-8 h-8 rounded-full">
           <img
-            src={user.avatarUrl}
+            src={user.avatar?.url}
             alt={user.avatar?.alt || "User avatar"}
             className=" w-8 h-8 rounded-full object-cover"
           />

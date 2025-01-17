@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiHostUrl } from "../library/constants";
 import { useUserContext } from "../context/useUserContext";
-import { RegisterProfile, LoginProfile, UserResponse } from "../library/types";
+import { RegisterProfile, LoginProfile, User } from "../library/types";
 
 const saveToStorage = (key: string, value: unknown) => {
   localStorage.setItem(key, JSON.stringify(value));
@@ -30,7 +30,7 @@ export const useAuth = (
    * @param {RegisterProfile | LoginProfile} profile - The user profile data to send.
    * @param {string} [action] - The API endpoint for the authentication action.
    * @param {string} [successRedirect] - The route to navigate to after a successful request.
-   * @returns {Promise<UserResponse | void>} - The user data on success or void on error.
+   * @returns {Promise<User | void>} - The user data on success or void on error.
    */
   const submitAuth = async (
     profile: RegisterProfile | LoginProfile,
@@ -69,8 +69,14 @@ export const useAuth = (
           name: user.name,
           email: user.email,
           bio: user.bio,
-          avatarUrl: user.avatar.url,
-          bannerUrl: user.banner.url,
+          avatar: {
+            url: user.avatar?.url ?? "",
+            alt: user.avatar?.alt ?? "User avatar"
+          },
+          banner: {
+            url: user.banner?.url ?? "",
+            alt: user.banner?.alt ?? "User banner"
+          },
           venueManager: user.venueManager
         });
         setIsAuthenticated(true);
@@ -78,7 +84,7 @@ export const useAuth = (
         // Navigate to the successRedirect route
         navigate(successRedirect || defaultRedirect);
 
-        return user as UserResponse;
+        return user as User;
       } else {
         const errorResponse = await response.json();
         errorMessage =
