@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "./Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,7 +16,6 @@ const UserDropdown: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   // Toggle dropdown state
   const toggleDropdown = () => {
@@ -28,7 +27,7 @@ const UserDropdown: React.FC = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("profile");
     setIsAuthenticated(false);
-    navigate(`/`);
+    window.location.href = "/";
   };
 
   // Close dropdown if clicked outside
