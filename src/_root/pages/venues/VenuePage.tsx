@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import SortMenu from "./SortMenu";
 import FilterMenu from "./FilterMenu";
 import "./VenuePage.css";
+import ScrollToTopBtn from "../../../components/ui/ScrollToTopBtn";
 
 const VenuePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -84,10 +85,10 @@ const VenuePage = () => {
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
             <div className="relative flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
-              {/* Spacer element to prevent jumping */}
+              {/* Spacer element to prevent "jumping" */}
               <div className={`${isScrolled ? "h-[56px]" : "h-auto"}`}></div>
 
-              {/* Sticky / Fixed Search Bar */}
+              {/* Fixed Search Bar */}
               <div
                 className={`transition-all duration-500 ease-in-out transform ${
                   isScrolled
@@ -118,6 +119,7 @@ const VenuePage = () => {
                 </div>
               </div>
 
+              <ScrollToTopBtn />
               {/* Venues Section */}
               <Venues
                 searchQuery={searchQuery}
