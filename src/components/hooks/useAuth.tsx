@@ -39,6 +39,7 @@ export const useAuth = (
   ) => {
     setIsLoading(true);
     setError(null);
+    let errorMessage = "";
 
     const authUrl = `${apiHostUrl}${action || defaultAction}?_holidaze=true`;
     console.log("Auth URL:", authUrl);
@@ -67,6 +68,7 @@ export const useAuth = (
         setUser({
           name: user.name,
           email: user.email,
+          bio: user.bio,
           avatarUrl: user.avatar.url,
           bannerUrl: user.banner.url,
           venueManager: user.venueManager
@@ -79,13 +81,13 @@ export const useAuth = (
         return user as UserResponse;
       } else {
         const errorResponse = await response.json();
-        const errorMessage =
+        errorMessage =
           errorResponse.errors?.[0]?.message || "Authentication failed";
         setError(errorMessage);
         throw new Error(`Server responded with status ${response.status}`);
       }
     } catch (err) {
-      setError("An error occurred during authentication. Please try again.");
+      setError(`${errorMessage}. Please try again. `);
       console.error(err);
     } finally {
       setIsLoading(false);
