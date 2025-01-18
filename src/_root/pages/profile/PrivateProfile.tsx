@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import CardBox from "../../../components/ui/CardBox";
 import Button from "../../../components/shared/Button/Button";
 import FetchProfileData from "../../../components/context/FetchProfileData";
+import LoaderSmall from "../../../components/ui/LoaderSmall";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();
@@ -93,7 +94,9 @@ const PrivateProfile = () => {
                     See and manage your venues.
                   </CardBox>
                 ) : (
-                  <p>Loading profile...</p>
+                  <P>
+                    Loading... <LoaderSmall />
+                  </P>
                 )
               }
             </FetchProfileData>
@@ -121,7 +124,9 @@ const PrivateProfile = () => {
                   View and manage your bookings.
                 </CardBox>
               ) : (
-                <p>Loading profile...</p>
+                <P>
+                  Loading... <LoaderSmall />
+                </P>
               )
             }
           </FetchProfileData>

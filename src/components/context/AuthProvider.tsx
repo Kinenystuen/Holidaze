@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { INITIAL_USER } from "../library/constants";
 import { User } from "../library/types";
 import { AuthContext } from "./useUserContext";
+import LoaderSmall from "../ui/LoaderSmall";
 
 /**
  * Provides authentication context for the application.
@@ -111,7 +112,7 @@ export function AuthProvider({
     >
       {isPending ? (
         <div className="flex justify-center items-center h-screen text-lg">
-          Loading authentication...
+          Loading authentication... <LoaderSmall />
         </div>
       ) : (
         children
