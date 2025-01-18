@@ -134,7 +134,7 @@ const PrivateProfile = () => {
               title="Ready to Host? Become a Venue Manager!"
               icon={faCalendar}
               textColor="group-hover:text-black"
-              className="bg-[#e8e2f3] text-[#322F57] hover:text-black p-6 rounded-lg shadow-md transition-all"
+              className="bg-color4 dark:bg-color1-700 text-color5 hover:text-black p-6 rounded-lg shadow-md transition-all"
             >
               Turn your property into a thriving venue. Sign up now to list your
               space and connect with guests.
