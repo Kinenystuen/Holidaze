@@ -8,7 +8,8 @@ import {
   faHeart,
   faCog,
   faPlus,
-  faChartBar
+  faChartBar,
+  faSignOut
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "./library/types";
@@ -148,10 +149,14 @@ const AdminSidebar = ({ user }: { user: User }) => {
         {/* Logout */}
         <hr className="border-gray-500 my-4 mx-6" />
         <div className="space-y-2 px-6">
-          <Link to="/" onClick={handleLogout} className="sidebar-link">
-            <FontAwesomeIcon icon={faCog} className="w-5 mr-2" />
-            Logout
-          </Link>
+          <Button
+            onClick={handleLogout}
+            buttonType="violet"
+            className="sidebar-link w-full bg-transparent"
+          >
+            <FontAwesomeIcon icon={faSignOut} className="w-5 mr-2" />
+            Sign out
+          </Button>
         </div>
       </div>
     </>
