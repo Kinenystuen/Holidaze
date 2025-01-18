@@ -12,7 +12,7 @@ interface CardProps {
   className?: string;
   textColor?: string;
   title: string;
-  children: string;
+  children: React.ReactNode;
 }
 
 const CardBox: React.FC<CardProps> = ({
@@ -28,7 +28,7 @@ const CardBox: React.FC<CardProps> = ({
     <div className={`col-span-3 sm:col-span-1 ${cols}`}>
       <Link
         to={link}
-        className={`group block mx-auto rounded-lg p-6 bg-white dark:bg-customBgDark-500 ring-1 ring-slate-900/5 shadow-sm space-y-3 hover:text-white hover:bg-color1-500 hover:ring-color1-600 ${className}`}
+        className={`group block mx-auto rounded-lg p-6 bg-white dark:bg-customBgDark-500 ring-1 ring-slate-900/5 shadow-sm space-y-3 hover:text-white hover:bg-color1-500 hover:ring-color1-600 transition duration-300 ease-in-out ${className}`}
       >
         <div
           className={`flex items-center space-x-3 hover:text-white ${textColor}`}
