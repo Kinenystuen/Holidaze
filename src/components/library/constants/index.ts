@@ -12,10 +12,16 @@ export const headerNavLinks = [
 ];
 
 export const INITIAL_USER: User = {
-  // id: "",
   name: "",
   email: "",
-  avatarUrl: "",
-  bannerUrl: "",
+  bio: "",
+  avatar: {
+    url: "",
+    alt: "Default avatar"
+  },
+  banner: {
+    url: "",
+    alt: "Default banner"
+  },
   venueManager: false
 };
