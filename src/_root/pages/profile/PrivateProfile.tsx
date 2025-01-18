@@ -12,9 +12,11 @@ import {
 import { Link } from "react-router-dom";
 import CardBox from "../../../components/ui/CardBox";
 import Button from "../../../components/shared/Button/Button";
+import FetchProfileData from "../../../components/context/FetchProfileData";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();
+
   return (
     <div className="flex flex-col mt-0">
       <div>
@@ -55,7 +57,6 @@ const PrivateProfile = () => {
             </div>
           </div>
 
-          {/* Right Section (Takes up 1/3 of the row) */}
           <div className="col-span-3 lg:col-span-1 flex flex-row lg:flex-col items-center justify-center gap-4">
             <Button className="px-4 py-2 text-white rounded-lg shadow-md bg-color1-400 dark:bg-color1-600 hover:bg-color1-500 dark:hover:bg-color1-500 transition">
               <FontAwesomeIcon icon={faEdit} className="mr-2" />
@@ -70,21 +71,62 @@ const PrivateProfile = () => {
             </Link>
           </div>
 
+          {/* Venue Manager Section */}
           {user.venueManager && (
-            <CardBox link="venues" title="Your Venues" icon={faBuilding}>
-              See and manage your venues.
-            </CardBox>
+            <FetchProfileData>
+              {(profile) =>
+                profile ? (
+                  <CardBox
+                    link="venues"
+                    title={`${
+                      profile._count.venues > 0
+                        ? `Your Venues • ${profile._count.venues}`
+                        : "Start Hosting Today!"
+                    }`}
+                    className={`${
+                      profile._count.venues > 0
+                        ? ""
+                        : "bg-color4 dark:bg-color1-700 text-color-5 hover:text-black p-6 rounded-lg shadow-md transition-all"
+                    } p-6 rounded-lg shadow-md transition-all`}
+                    icon={faBuilding}
+                  >
+                    See and manage your venues.
+                  </CardBox>
+                ) : (
+                  <p>Loading profile...</p>
+                )
+              }
+            </FetchProfileData>
           )}
+          {/* Create Venue Section */}
           {user.venueManager && (
             <CardBox link="create-venue" title="Create Venue" icon={faPlus}>
               Create a new venue to start accepting bookings today.
             </CardBox>
           )}
 
-          <CardBox link="bookings" title="Your Bookings" icon={faCalendar}>
-            View and manage your bookings.
-          </CardBox>
+          {/* Bookings Section */}
+          <FetchProfileData>
+            {(profile) =>
+              profile ? (
+                <CardBox
+                  link="bookings"
+                  title={`${
+                    profile._count.bookings > 0
+                      ? `Your Bookings • ${profile._count.bookings}`
+                      : "No Bookings Yet"
+                  }`}
+                  icon={faCalendar}
+                >
+                  View and manage your bookings.
+                </CardBox>
+              ) : (
+                <p>Loading profile...</p>
+              )
+            }
+          </FetchProfileData>
 
+          {/* Become a Venue Manager Section */}
           {!user.venueManager && (
             <CardBox
               link="settings"
@@ -92,7 +134,7 @@ const PrivateProfile = () => {
               title="Ready to Host? Become a Venue Manager!"
               icon={faCalendar}
               textColor="group-hover:text-black"
-              className="bg-[#e8e2f3] text-[#322F57] hover:text-black p-6 rounded-lg shadow-md hover:bg-[#dcd4ed] transition-all"
+              className="bg-[#e8e2f3] text-[#322F57] hover:text-black p-6 rounded-lg shadow-md transition-all"
             >
               Turn your property into a thriving venue. Sign up now to list your
               space and connect with guests.
