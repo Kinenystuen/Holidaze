@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import H1 from "../../../components/shared/Typography/H1";
 import SearchBar from "./SearchBarVen";
 import Venues from "./venues";
@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import SortMenu from "./SortMenu";
 import FilterMenu from "./FilterMenu";
 import "./VenuePage.css";
+import ScrollToTopBtn from "../../../components/ui/ScrollToTopBtn";
 
 const VenuePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,6 +20,35 @@ const VenuePage = () => {
     breakfast: false,
     pets: false
   });
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(window.scrollY);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY === 0) {
+        // Show the search bar if we're at the top
+        setIsHidden(false);
+        setIsScrolled(false);
+      } else if (currentScrollY > lastScrollY.current) {
+        // If scrolling down, hide the search bar
+        setIsHidden(true);
+        setIsScrolled(false);
+      } else if (currentScrollY < lastScrollY.current) {
+        // If scrolling up, bring back and set fixed
+        setIsHidden(false);
+        setIsScrolled(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -54,26 +84,43 @@ const VenuePage = () => {
 
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
-            <div className="flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
-              <div className="flex justify-between items-center mb-4 gap-2">
-                <SearchBar onSearch={handleSearch} />
-                <div className="flex md:hidden">
-                  <FilterMenu
-                    filters={filters}
-                    boxPosition="right-0"
-                    onFilterChange={(newFilters) => setFilters(newFilters)}
-                  />
-                  <SortMenu
-                    sortField={sortField}
-                    sortOrder={sortOrder}
-                    boxPosition="right-0"
-                    onSortChange={(field, order) => {
-                      setSortField(field);
-                      setSortOrder(order);
-                    }}
-                  />
+            <div className="relative flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
+              {/* Spacer element to prevent "jumping" */}
+              <div className={`${isScrolled ? "h-[2.8rem]" : "h-auto"}`}></div>
+
+              {/* Fixed Search Bar */}
+              <div
+                className={`transition-all duration-500 ease-in-out transform ${
+                  isScrolled
+                    ? "fixed top-0 right-0 bg-customBg md:bg-transparent shadow-sm md:shadow-none w-full py-2 px-4 z-50 translate-y-0 opacity-100"
+                    : isHidden
+                    ? "-translate-y-full opacity-0"
+                    : "relative py-2 px-4  opacity-100"
+                }`}
+              >
+                <div className="flex">
+                  <SearchBar onSearch={handleSearch} />
+                  <div className="flex md:hidden">
+                    <FilterMenu
+                      filters={filters}
+                      boxPosition="right-0"
+                      onFilterChange={(newFilters) => setFilters(newFilters)}
+                    />
+                    <SortMenu
+                      sortField={sortField}
+                      sortOrder={sortOrder}
+                      boxPosition="right-0"
+                      onSortChange={(field, order) => {
+                        setSortField(field);
+                        setSortOrder(order);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
+
+              <ScrollToTopBtn />
+              {/* Venues Section */}
               <Venues
                 searchQuery={searchQuery}
                 sortField={sortField}

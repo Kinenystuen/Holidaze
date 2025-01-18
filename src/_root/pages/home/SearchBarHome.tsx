@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDebounce } from "../../../components/hooks/useDebounce";
 import { useNavigate } from "react-router-dom";
 import SearchBarHomeActions from "./SearchBarHomeActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBarHome = () => {
   const [query, setQuery] = useState("");
@@ -34,6 +36,11 @@ const SearchBarHome = () => {
     <div className="relative mt-8 w-full flex justify-center">
       <div className="relative w-full max-w-md flex flex-col">
         <div className="flex">
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="absolute h-4 w-4 top-[1.16rem] left-4 transform text-gray-400 peer-focus:text-color4-700 dark:text-gray-500 dark:peer-focus:text-color4-600"
+          />
+
           <input
             type="text"
             placeholder="Search for venues..."
@@ -41,7 +48,7 @@ const SearchBarHome = () => {
             onChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 text-lg rounded-s-full border text-black dark:placeholder-customBgDark-500 dark:bg-color2-600 border-gray-300 dark:border-color3-800 focus:ring-2 focus:outline-none ${
+            className={`w-full px-4 py-3 pl-11 right-3  text-lg rounded-s-full border text-black dark:placeholder-customBgDark-500 dark:bg-color2-600 border-gray-300 dark:border-color3-800 focus:ring-2 focus:outline-none ${
               error ? "border-red-500 focus:ring-red-500" : "focus:ring-color2"
             }`}
           />

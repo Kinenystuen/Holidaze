@@ -30,11 +30,20 @@ const VenuePagination: React.FC<PaginationProps> = ({
     if (containerRef.current) {
       const activeButton = containerRef.current.querySelector(".active-page");
       if (activeButton) {
-        activeButton.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center"
-        });
+        const containerBounds = containerRef.current.getBoundingClientRect();
+        const buttonBounds = activeButton.getBoundingClientRect();
+
+        // Scroll only if the button is not fully visible
+        if (
+          buttonBounds.left < containerBounds.left ||
+          buttonBounds.right > containerBounds.right
+        ) {
+          activeButton.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center"
+          });
+        }
       }
     }
   }, [currentPage]);
@@ -58,6 +67,7 @@ const VenuePagination: React.FC<PaginationProps> = ({
         <div
           className="flex w-full max-w-52 items-center gap-2 overflow-x-auto scrollbar-hide overflow-hidden"
           ref={containerRef}
+          style={{ scrollBehavior: "smooth" }}
         >
           {Array.from({ length: pageCount }).map((_, index) => (
             <button

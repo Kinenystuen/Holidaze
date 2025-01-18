@@ -9,7 +9,7 @@ export default {
         body: ['"Roboto"', "sans-serif"] // For body text
       },
       colors: {
-        customBg: "#fef7ff",
+        customBg: "#FAF9F6",
         customBgDark: {
           DEFAULT: "#2c2c2c",
           100: "#d5d5d5",
@@ -69,6 +69,30 @@ export default {
           700: "#2f2153",
           800: "#201637",
           900: "#100b1c"
+        },
+        color4: {
+          DEFAULT: "#e8e2f3",
+          100: "#faf9fd",
+          200: "#f6f3fa",
+          300: "#f1eef8",
+          400: "#ede8f5",
+          500: "#e8e2f3",
+          600: "#bab5c2",
+          700: "#8b8892",
+          800: "#5d5a61",
+          900: "#2e2d31"
+        },
+        color5: {
+          DEFAULT: "#322f57",
+          100: "#d6d5dd",
+          200: "#adacbc",
+          300: "#84829a",
+          400: "#5b5979",
+          500: "#322f57",
+          600: "#282646",
+          700: "#1e1c34",
+          800: "#141323",
+          900: "#0a0911"
         }
       }
     }

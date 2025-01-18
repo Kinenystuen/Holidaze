@@ -4,6 +4,81 @@ export type INavLink = {
   label: string;
 };
 
+/* Auth props */
+export type User = {
+  name: string;
+  email: string;
+  bio: string;
+  venueManager: boolean;
+  avatar?: {
+    url: string;
+    alt: string;
+  };
+
+  banner?: {
+    url: string;
+    alt: string;
+  };
+};
+
+export interface LoginProfile {
+  email: string;
+  password: string;
+}
+export interface RegisterProfile {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  bio: string;
+  avatar: {
+    url: string;
+    alt: string;
+  };
+  banner: {
+    url: string;
+    alt: string;
+  };
+  venueManager: boolean;
+  _count: {
+    venues: number;
+    bookings: number;
+  };
+}
+
+export interface ProfileResponse {
+  data: UserProfile;
+  meta: Record<string, unknown>;
+}
+
+export interface Booking {
+  id: string;
+  dateFrom: string;
+  dateTo: string;
+  guests: number;
+  created: string;
+  updated: string;
+}
+
+export interface MetaData {
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  previousPage: number | null;
+  nextPage: number | null;
+  pageCount: number;
+  totalCount: number;
+}
+
+export interface BookingsResponse {
+  data: Booking[];
+  meta: MetaData;
+}
+
 /* Button props */
 export type ButtonProps = {
   ButtonType?: "primary" | "secondary";
@@ -103,4 +178,33 @@ export interface Venue {
   location: Location;
   owner: Owner;
   bookings: Booking[];
+}
+
+export interface VenueProfile {
+  id: string;
+  name: string;
+  description: string;
+  media: Media[];
+  price: number;
+  maxGuests: number;
+  rating: number;
+  created: string;
+  updated: string;
+  meta: Meta;
+  location: Location;
+}
+
+export interface MetaData {
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  previousPage: number | null;
+  nextPage: number | null;
+  pageCount: number;
+  totalCount: number;
+}
+
+export interface VenuesResponse {
+  data: Venue[];
+  meta: MetaData;
 }

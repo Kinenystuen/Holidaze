@@ -4,7 +4,7 @@
 
 /* Define CSS variables for theme colors */
 :root {
-  --background-color: #fef7ff;
+  --background-color: #FAF9F6;
   --text-color: #1a1a1a;
   --color1: #65558f;
 
@@ -25,11 +25,15 @@
 .light {
   --background-color: #fef7ff;
   --text-color: #1a1a1a;
+  --autofill-bg-color: var(--background-color);
+  --autofill-text-color: var(--text-color);
 }
 
 .dark {
-  --background-color: #242424;
+  --background-color: #232323;
   --text-color: rgba(255, 255, 255, 0.87);
+  --autofill-bg-color: var(--background-color);
+  --autofill-text-color: var(--text-color);
 }
 
 /* Base body styles */
@@ -66,10 +70,6 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 /* Button styles */
 button {
   border-radius: 8px;
@@ -84,11 +84,6 @@ button {
   transition: border-color 0.25s, background-color 0.25s, color 0.25s;
 }
 
-button:hover {
-  border-color: var(--color1);
-}
-
-button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
@@ -110,4 +105,17 @@ ol {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Change Autocomplete styles in Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--autofill-text-color) !important;
+  color: var(--autofill-text-color) !important;
+  background-color: var(--autofill-bg-color) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--autofill-bg-color) inset !important;
+  background-clip: padding-box !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
