@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "./context/useUserContext";
 import { apiHostUrl } from "./library/constants";
 import { useApi } from "./hooks/UseApi";
-import { UserResponse } from "./library/types";
+import { User } from "./library/types";
 import H2 from "./shared/Typography/H2";
 import P from "./shared/Typography/P";
 import Button from "./shared/Button/Button";
@@ -25,7 +25,7 @@ export function ProfileSettings() {
   const action = `/holidaze/profiles/${user.name}`;
   const apiUrl = `${apiHostUrl}${action}?_holidaze=true`;
 
-  const { isLoading, isError, errorMessage, fetchData } = useApi<UserResponse>(
+  const { isLoading, isError, errorMessage, fetchData } = useApi<User>(
     apiUrl,
     { method: "PUT" },
     true
@@ -34,7 +34,6 @@ export function ProfileSettings() {
   const handleRoleChange = async (newRole: boolean) => {
     setError("");
 
-    // Check email domain
     if (!user.email.endsWith("@stud.noroff.no")) {
       setError(
         "Only @stud.noroff.no email addresses can change venue manager status."
@@ -47,7 +46,12 @@ export function ProfileSettings() {
 
       if (result?.data) {
         setIsVenueManager(newRole);
-        setUser((prevUser) => ({ ...prevUser, venueManager: newRole }));
+
+        // Update user context and localStorage
+        const updatedUser = { ...user, venueManager: newRole };
+        setUser(updatedUser);
+        localStorage.setItem("profile", JSON.stringify(updatedUser));
+
         setError("");
       } else {
         setError("Failed to update venue manager status.");
@@ -57,6 +61,19 @@ export function ProfileSettings() {
       setError(errorMessage || "Failed to update profile. Please try again.");
     }
   };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("profile");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+
+      // Merge with current user state to prevent missing properties
+      setUser((prevUser) => ({
+        ...prevUser,
+        ...parsedUser
+      }));
+    }
+  }, [setUser]);
 
   return (
     <div>
