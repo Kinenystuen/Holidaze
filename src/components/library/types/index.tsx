@@ -6,12 +6,9 @@ export type INavLink = {
 
 /* Auth props */
 export type User = {
-  // id: string;
   name: string;
   email: string;
   bio: string;
-  // avatarUrl: string;
-  // bannerUrl: string;
   venueManager: boolean;
   avatar?: {
     url: string;
@@ -38,8 +35,6 @@ export interface UserProfile {
   name: string;
   email: string;
   bio: string;
-  // avatarUrl: string;
-  // bannerUrl: string;
   avatar: {
     url: string;
     alt: string;
