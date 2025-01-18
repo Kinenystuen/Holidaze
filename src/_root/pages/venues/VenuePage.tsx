@@ -66,7 +66,7 @@ const VenuePage = () => {
       <div className=" mx-auto max-w-7xl">
         <div className="w-full md:flex">
           {/* Left-side menu */}
-          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-screen sticky top-0  custom-scrollbar">
+          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-screen sticky top-0 custom-scrollbar">
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
             <FilterMenu
               filters={filters}
@@ -90,15 +90,15 @@ const VenuePage = () => {
 
               {/* Fixed Search Bar */}
               <div
-                className={`transition-all duration-500 ease-in-out transform ${
+                className={`transition-all duration-500 ease-in-out transform z-20 ${
                   isScrolled
-                    ? "fixed top-0 right-0 bg-customBg md:bg-transparent shadow-sm md:shadow-none w-full py-2 px-4 z-50 translate-y-0 opacity-100"
+                    ? "fixed top-0 right-0 bg-customBg dark:bg-customBgDark-500 md:bg-transparent shadow-sm md:shadow-none w-full py-2 px-4 z-50 translate-y-0 opacity-100"
                     : isHidden
                     ? "-translate-y-full opacity-0"
                     : "relative py-2 px-4  opacity-100"
                 }`}
               >
-                <div className="flex">
+                <div className="flex gap-2">
                   <SearchBar onSearch={handleSearch} />
                   <div className="flex md:hidden">
                     <FilterMenu

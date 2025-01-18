@@ -53,7 +53,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
           value={searchInput}
           onChange={handleInputChange}
           placeholder="Search for venues..."
-          className="w-full h-[2.8rem] pl-10 pr-10 py-2 border rounded-full text-black dark:text-whiteFont-500 dark:placeholder-whiteFont-600 dark:bg-customBgDark-500 dark:border-color3-800 ring-2 ring-color1-200 dark:ring-color1-500 focus:ring-3 focus:outline-none focus:ring-color2"
+          className="w-full h-[2.8rem] pl-10 pr-10 py-2 border bg-customBg rounded-full text-black dark:text-whiteFont-500 dark:placeholder-whiteFont-600 dark:bg-customBgDark-500 dark:border-color3-800 ring-2 ring-color1-200 dark:ring-color1-500 focus:ring-3 focus:outline-none focus:ring-color2"
         />
 
         {/* Clear Button */}
