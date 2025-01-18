@@ -4,7 +4,6 @@ import Home from "./_root/pages/home/Home";
 import VenuePage from "./_root/pages/venues/VenuePage";
 import SelVenuePage from "./_root/pages/venues/SelVenuePage";
 import AuthPage from "./_root/pages/auth/AuthPage";
-import Profile from "./_root/pages/profile/profile";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
 import ProfileLayout from "./_root/pages/profile/ProfileLayout";
 import MyBookings from "./_root/pages/profile/MyBookings";
@@ -14,6 +13,7 @@ import AdminCreateVenue from "./_root/pages/profile/AdminCreateVenue";
 import AdminBookings from "./_root/pages/profile/AdminBookings";
 import AdminSettings from "./_root/pages/profile/AdminSettings";
 import PageNotFound from "./_root/pages/PageNotFound";
+import UserProfile from "./_root/pages/profile/UserProfile";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="venues" element={<VenuePage />} />
         <Route path="venue/:id" element={<SelVenuePage />} />
-        <Route path="profile/:name" element={<Profile />} />
+        <Route path="profile/:name" element={<UserProfile />} />
       </Route>
 
       {/* Admin Routes (Requires Auth) */}
