@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "./library/types";
 import H2 from "./shared/Typography/H2";
 import P from "./shared/Typography/P";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AdminSideBar.css";
 import Button from "./shared/Button/Button";
 import { useUserContext } from "./context/useUserContext";
@@ -26,13 +26,14 @@ const AdminSidebar = ({ user }: { user: User }) => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+  const navigate = useNavigate();
 
   // Handle logout action
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("profile");
     setIsAuthenticated(false);
-    window.location.href = "/";
+    navigate("/");
   };
 
   // Disable body scrolling when sidebar is open
