@@ -208,3 +208,18 @@ export interface VenuesResponse {
   data: Venue[];
   meta: MetaData;
 }
+
+/* BreadCrumb props */
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  current?: boolean;
+  isDropdown?: boolean;
+  dropdownItems?: { label: string; href?: string }[];
+}
+
+export interface BreadcrumbProps {
+  items: BreadcrumbItem[];
+  goBack?: boolean;
+  className?: string;
+}
