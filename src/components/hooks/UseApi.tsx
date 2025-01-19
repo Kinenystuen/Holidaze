@@ -81,7 +81,7 @@ export function useApi<T>(
         }
 
         setResponse({ data: json.data ?? json, meta: json.meta });
-        return json; // Return data for immediate processing
+        return json;
       } catch (error: unknown) {
         setIsError(true);
         if (error instanceof Error) {
@@ -89,7 +89,7 @@ export function useApi<T>(
         } else {
           setErrorMessage("An unexpected error occurred.");
         }
-        return null; // Return null on error
+        return null;
       } finally {
         setIsLoading(false);
       }
