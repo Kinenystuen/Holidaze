@@ -117,7 +117,7 @@ const Input = <T extends FieldValues>({
             : undefined
         })}
         placeholder=" "
-        className={`peer w-full p-2 pl-12 pt-5 pb-2 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 focus:ring-color1-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700 focus:border-color4-600 ${
+        className={`peer w-full p-2 pl-12 pt-5 pb-2 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700 focus:border-color4-600 ${
           icon ? "pl-10" : "pl-[1.8rem]"
         }`}
       />
