@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { VenueProfile } from "../../../components/library/types";
+import { Venue } from "../../../components/library/types";
 import { apiHostUrl } from "../../../components/library/constants";
 import { useApi } from "../../../components/hooks/UseApi";
 
@@ -9,15 +9,15 @@ import ErrorMessage from "../../../components/shared/ErrorMessage";
 import P from "../../../components/shared/Typography/P";
 import Button from "../../../components/shared/Button/Button";
 import MetaTags from "../../../components/metaTags";
-import Breadcrumb from "../../../components/ui/BreadCrumItem";
+import Breadcrumb from "../../../components/ui/BreadCrumbItem";
 import SelVenue from "./SelVenue";
 
 const SelVenuePage = () => {
   const { id } = useParams<{ id: string }>();
-  const [venueData, setVenueData] = useState<VenueProfile | null>(null);
+  const [venueData, setVenueData] = useState<Venue | null>(null);
 
   // Fetch venue data
-  const { response, isLoading, isError, errorMessage } = useApi<VenueProfile>(
+  const { response, isLoading, isError, errorMessage } = useApi<Venue>(
     `${apiHostUrl}/holidaze/venues/${id}?_owner=true&_bookings=true`
   );
 
