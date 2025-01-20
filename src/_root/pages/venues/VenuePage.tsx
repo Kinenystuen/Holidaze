@@ -85,17 +85,15 @@ const VenuePage = () => {
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
             <div className="relative flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
-              {/* Spacer element to prevent "jumping" */}
-              <div className={`${isScrolled ? "h-[2.8rem]" : "h-auto"}`}></div>
-
               {/* Fixed Search Bar */}
               <div
-                className={`transition-all duration-500 ease-in-out transform z-20 ${
+                className={`transition-all duration-500 ease-in-out transform z-20 w-full py-0 px-4
+                ${
                   isScrolled
-                    ? "fixed top-0 right-0 bg-customBg dark:bg-customBgDark-500 md:bg-transparent shadow-sm md:shadow-none w-full py-2 px-4 z-50 translate-y-0 opacity-100"
+                    ? "fixed top-2 left-0 bg-customBg dark:bg-customBgDark-500 md:bg-transparent dark:md:bg-transparent shadow-sm md:shadow-none z-50 translate-y-0 opacity-100"
                     : isHidden
-                    ? "-translate-y-full opacity-0"
-                    : "relative py-2 px-4  opacity-100"
+                    ? " h-0 -translate-y-full opacity-0"
+                    : " relative opacity-100"
                 }`}
               >
                 <div className="flex gap-2">
