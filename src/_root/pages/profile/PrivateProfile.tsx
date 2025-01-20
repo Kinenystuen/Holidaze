@@ -97,7 +97,7 @@ const PrivateProfile = () => {
                     className={`${
                       profile._count.venues > 0
                         ? ""
-                        : "bg-color4 dark:bg-color1-700 text-color-5 hover:text-black p-6 rounded-lg shadow-md transition-all"
+                        : "bg-color4-500 dark:xs:bg-color1-600 text-color-5 hover:text-black p-6 rounded-lg shadow-md transition-all"
                     } p-6 rounded-lg shadow-md transition-all`}
                     icon={faBuilding}
                   >
@@ -149,7 +149,7 @@ const PrivateProfile = () => {
               title="Ready to Host? Become a Venue Manager!"
               icon={faCalendar}
               textColor="group-hover:text-black"
-              className="bg-color4 dark:bg-color1-700 text-color5 hover:text-black p-6 rounded-lg shadow-md transition-all"
+              className="bg-color4-500 dark:xs:bg-color1-600 text-color5 hover:text-black p-6 rounded-lg shadow-md transition-all"
             >
               Turn your property into a thriving venue. Sign up now to list your
               space and connect with guests.
