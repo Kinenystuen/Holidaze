@@ -180,20 +180,6 @@ export interface Venue {
   bookings: Booking[];
 }
 
-export interface VenueProfile {
-  id: string;
-  name: string;
-  description: string;
-  media: Media[];
-  price: number;
-  maxGuests: number;
-  rating: number;
-  created: string;
-  updated: string;
-  meta: Meta;
-  location: Location;
-}
-
 export interface MetaData {
   isFirstPage: boolean;
   isLastPage: boolean;
