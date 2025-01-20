@@ -19,11 +19,11 @@ const PrivateProfile = () => {
   const { user } = useUserContext();
 
   return (
-    <div className="flex flex-col mt-0">
+    <div className="flex flex-col mt-0 mb-20">
       <div>
-        <div className="grid grid-cols-3 grid-rows-1 gap-5 mx-5 mb-20 items-center">
-          {/* Left Section (Takes up 2/3 of the row) */}
-          <div className="col-span-3 lg:col-span-2 flex flex-col h-fit bg-white dark:bg-customBgDark-500 shadow-sm rounded-xl w-full items-center">
+        <div className="grid grid-cols-4 md:grid-cols-3  grid-rows-1 gap-5 mx-5 items-center">
+          {/* Profile card */}
+          <div className="col-span-4 md:col-span-3 lg:col-span-2  flex flex-col h-fit bg-white dark:bg-customBgDark-500 shadow-sm rounded-xl w-full items-center">
             {/* Banner area */}
             <div className="flex w-full">
               {/* Banner */}
@@ -42,7 +42,7 @@ const PrivateProfile = () => {
                 <img
                   src={user.avatar?.url}
                   alt="User Avatar"
-                  className="absolute top-[-8rem] sm:top-[-1.5rem] left-1/2 transform -translate-x-1/2 sm:left-6 sm:translate-x-0 w-80 h-60 sm:w-52 sm:h-52 rounded-xl object-cover border-10 border-white dark:border-gray-800"
+                  className="absolute top-[-8rem] sm:top-[-1.5rem] left-1/2 transform -translate-x-1/2 sm:left-6 sm:translate-x-0 w-64 xs:w-72 h-60 sm:w-52 sm:h-52 rounded-xl object-cover border-10 border-white dark:border-gray-800"
                 />
               </div>
               {/* User Info */}
@@ -66,7 +66,8 @@ const PrivateProfile = () => {
             </div>
           </div>
 
-          <div className="col-span-3 lg:col-span-1 flex flex-row lg:flex-col items-center justify-center gap-4">
+          {/* Edit Profile and Settings */}
+          <div className="col-span-4 md:col-span-1 flex flex-row md:flex-col items-center justify-center gap-4">
             <Button className="px-4 py-2 text-white rounded-lg shadow-md bg-color1-400 dark:bg-color1-600 hover:bg-color1-500 dark:hover:bg-color1-500 transition">
               <FontAwesomeIcon icon={faEdit} className="mr-2" />
               Edit Profile
@@ -79,7 +80,8 @@ const PrivateProfile = () => {
               Settings
             </Link>
           </div>
-
+        </div>
+        <div className="grid grid-cols-4 md:grid-cols-3 2xl:grid-cols-4 gap-5 my-5 mx-5 items-center">
           {/* Venue Manager Section */}
           {user.venueManager && (
             <FetchProfileData>
