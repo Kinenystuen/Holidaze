@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCoffee,
-  faDog,
   faMapMarkerAlt,
   faParking,
+  faPaw,
   faStar,
   faUserFriends,
   faWifi
@@ -140,7 +140,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       {venue.meta.pets && (
                         <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
                           <FontAwesomeIcon
-                            icon={faDog}
+                            icon={faPaw}
                             size="xs"
                             className="w-4 h-4 p-1"
                           />
