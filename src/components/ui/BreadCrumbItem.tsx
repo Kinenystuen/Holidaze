@@ -47,7 +47,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
   };
 
   return (
-    <div className={`my-2 px-1 py-1 gap-4 flex items-center ${className}`}>
+    <div className={`mb-2 px-1 py-1 pt-0 gap-4 flex items-center ${className}`}>
       {goBack && (
         <div className="flex items-center">
           <GoBackBtn />
