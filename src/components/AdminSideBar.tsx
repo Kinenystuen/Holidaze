@@ -52,7 +52,7 @@ const AdminSidebar = ({ user }: { user: User }) => {
       {/* Hamburger Button */}
       <div>
         <Button
-          className="md:hidden fixed top-[4.4rem] left-0 z-50 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
+          className="md:hidden fixed top-[4.4rem] left-0 z-10 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
           onClick={toggleMenu}
         >
           <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
@@ -69,11 +69,10 @@ const AdminSidebar = ({ user }: { user: User }) => {
 
       {/* Sidebar Navigation */}
       <div
-        className={`absolute md:flex top-0 pb-10 left-0 h-screen w-64 bg-color1-600 text-whiteFont-500 transform transition-transform duration-300 z-50
-    ${isOpen ? "translate-x-0" : "-translate-x-full"}
-    md:translate-x-0 md:flex md:flex-col md:min-w-[220px] max-w-[270px] 
-    sticky top-0 overflow-y-auto overflow-x-hidden custom-scrollbar`}
-        style={{ maxHeight: "100vh" }}
+        className={`fixed top-0 left-0 w-64 h-full max-h-screen bg-color1-600 text-whiteFont-500 transform transition-transform duration-300 z-50
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        md:translate-x-0 md:flex md:flex-col md:min-w-[220px] max-w-[270px] 
+        overflow-y-auto overflow-x-hidden custom-scrollbar`}
       >
         {/* Close Button */}
         <Button
