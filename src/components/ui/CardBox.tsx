@@ -25,10 +25,10 @@ const CardBox: React.FC<CardProps> = ({
   children
 }) => {
   return (
-    <div className={`col-span-3 sm:col-span-1 ${cols}`}>
+    <div className={`col-span-4 xs:col-span-2 md:col-span-1 h-full ${cols}`}>
       <Link
         to={link}
-        className={`group block mx-auto rounded-lg p-6 bg-white dark:bg-customBgDark-500 ring-1 ring-slate-900/5 shadow-sm space-y-3 hover:text-white hover:bg-color1-500 hover:ring-color1-600 transition duration-300 ease-in-out ${className}`}
+        className={`group block mx-auto rounded-lg p-6 h-full bg-white dark:bg-customBgDark-500 ring-1 ring-slate-900/5 shadow-sm space-y-3 hover:text-white hover:bg-color1-500 hover:ring-color1-600 transition duration-300 ease-in-out ${className}`}
       >
         <div
           className={`flex items-center space-x-3 hover:text-white ${textColor}`}
