@@ -81,7 +81,7 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
                 )}
               </div>
               <hr className="border-color2-500 dark:border-customBgDark-500 hidden md:block my-3" />
-              <div className="hidden md:flex flex-col gap-4 items-start justify-between p-1 mb-3 px-2">
+              <div className="hidden md:flex flex-col gap-4 items-start justify-between p-1 mb-3 mx-3 px-2">
                 <Feature
                   icon={faPerson}
                   text={`Max Guests: ${venue.maxGuests}`}
@@ -142,6 +142,13 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
               )}
               {venue?.meta.pets && <Feature icon={faPaw} text="Pets Allowed" />}
             </div>
+            <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-3" />
+            <div className="flex md:hidden flex-col gap-4 items-start justify-between p-1 mb-3 px-2">
+              <Feature
+                icon={faPerson}
+                text={`Max Guests: ${venue.maxGuests}`}
+              />
+            </div>
 
             {/* Rating Badge */}
             {venue.rating === 5 && (
@@ -193,6 +200,7 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
           </div>
 
           {/* Owner Details Section 2*/}
+          <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-3" />
           <div className="flex md:hidden flex-col gap-4 items-start justify-between p-1 my-6 mb-10 px-2">
             <Link
               to={`/profile/${encodeURIComponent(venue.owner.name)}`}
