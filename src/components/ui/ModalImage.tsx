@@ -6,11 +6,12 @@ import Button from "../shared/Button/Button";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  handlePrevious: () => void;
-  handleNext: () => void;
+  handlePrevious?: () => void;
+  handleNext?: () => void;
   children: React.ReactNode;
   opacity?: string;
   className?: string;
+  totalSlides?: number;
 }
 
 const ModalImage: React.FC<ModalProps> = ({
@@ -20,7 +21,8 @@ const ModalImage: React.FC<ModalProps> = ({
   handleNext,
   opacity = "bg-opacity-90",
   className = "",
-  children
+  children,
+  totalSlides = 1
 }) => {
   const [showCloseModal, setShowCloseModal] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -35,10 +37,10 @@ const ModalImage: React.FC<ModalProps> = ({
           onClose();
           break;
         case "ArrowRight":
-          handleNext();
+          if (totalSlides > 1) handleNext?.();
           break;
         case "ArrowLeft":
-          handlePrevious();
+          if (totalSlides > 1) handlePrevious?.();
           break;
       }
     };
@@ -62,12 +64,12 @@ const ModalImage: React.FC<ModalProps> = ({
       enableScroll();
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, onClose, handleNext, handlePrevious]);
+  }, [isOpen, onClose, handleNext, handlePrevious, totalSlides]);
 
   // Swipeable handlers
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => isOpen && handleNext(),
-    onSwipedRight: () => isOpen && handlePrevious(),
+    onSwipedLeft: () => isOpen && totalSlides > 1 && handleNext?.(),
+    onSwipedRight: () => isOpen && totalSlides > 1 && handlePrevious?.(),
     onSwiping: (eventData) => {
       if (eventData.dir === "Up") {
         setSwipeY(eventData.absY);
@@ -115,28 +117,34 @@ const ModalImage: React.FC<ModalProps> = ({
       >
         ✕
       </Button>
-      {/* Navigation Buttons */}
-      <button
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-transparent text-white px-4 py-2 rounded-r-lg hover:bg-gray-700 focus:outline-none z-[110]"
-        onClick={(e) => {
-          e.stopPropagation();
-          handlePrevious();
-        }}
-        aria-label="Previous image"
-      >
-        &#10094;
-      </button>
-      <button
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-transparent text-white px-4 py-2 rounded-l-lg hover:bg-gray-700 focus:outline-none z-[110]"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleNext();
-        }}
-        aria-label="Next image"
-      >
-        &#10095;
-      </button>
-      {/* Close Modal */}
+
+      {totalSlides > 1 && handlePrevious && (
+        <button
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-transparent text-white px-4 py-2 rounded-r-lg hover:bg-gray-700 focus:outline-none z-[110]"
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrevious();
+          }}
+          aria-label="Previous image"
+        >
+          &#10094;
+        </button>
+      )}
+
+      {totalSlides > 1 && handleNext && (
+        <button
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-transparent text-white px-4 py-2 rounded-l-lg hover:bg-gray-700 focus:outline-none z-[110]"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNext();
+          }}
+          aria-label="Next image"
+        >
+          &#10095;
+        </button>
+      )}
+
+      {/* Close Modal Prompt */}
       {showCloseModal && (
         <div
           className={`absolute bottom-[10%] motion-translate-y-in-[100%] flex items-center justify-center text-white text-xl font-semibold z-[125] bg-black px-4 py-2 rounded-lg transition-all duration-700 ease-out transform translate-y-full ${
@@ -146,6 +154,7 @@ const ModalImage: React.FC<ModalProps> = ({
           Close Image
         </div>
       )}
+
       {/* Modal Content */}
       <div
         className={`relative rounded-lg shadow-lg z-[100] ${className} `}
@@ -153,6 +162,7 @@ const ModalImage: React.FC<ModalProps> = ({
       >
         {children}
       </div>
+
       {isFocused && (
         <div className="absolute inset-0 bg-black bg-opacity-30 animate motion-preset-slide-up-sm z-[120]"></div>
       )}
