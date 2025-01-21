@@ -97,6 +97,7 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
           className="max-w-screen-2xl z-30"
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          totalSlides={venue.media.length}
         >
           <div className="relative">
             <div className="flex flex-col items-center justify-center mx-10 max-w-full h-[90vh]">
