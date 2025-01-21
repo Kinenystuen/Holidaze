@@ -11,6 +11,7 @@ import Button from "../../../components/shared/Button/Button";
 import MetaTags from "../../../components/metaTags";
 import Breadcrumb from "../../../components/ui/BreadCrumbItem";
 import SelVenue from "./SelVenue";
+import SelVenueBooking from "../../../components/SelVenueBooking";
 
 const SelVenuePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -62,6 +63,7 @@ const SelVenuePage = () => {
       <div className="max-w-screen-xl mx-auto px-10">
         <Breadcrumb items={breadcrumbItems} />
         <SelVenue venue={venueData} />
+        <SelVenueBooking venue={venueData} />
       </div>
     </div>
   );
