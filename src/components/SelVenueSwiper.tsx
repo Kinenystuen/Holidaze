@@ -54,7 +54,7 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
             <img
               src={image.url}
               alt={image.alt || "Venue image"}
-              className="w-full h-[30vh] lg:h-[56vh] max-h-[30rem] object-cover rounded-md shadow-md"
+              className="w-full h-[30vh] md:h-[56vh] max-h-[30rem] object-cover rounded-md shadow-md"
               onClick={() => handleImageClick(id)} // Click to open modal
             />
           </SwiperSlide>
