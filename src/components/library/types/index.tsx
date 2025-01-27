@@ -64,6 +64,16 @@ export interface Booking {
   updated: string;
 }
 
+export interface BookingData {
+  id: string;
+  created: string;
+  updated: string;
+  dateFrom: string;
+  dateTo: string;
+  guests: number;
+  venue: Venue;
+}
+
 export interface MetaData {
   isFirstPage: boolean;
   isLastPage: boolean;
@@ -88,7 +98,7 @@ export type ButtonProps = {
   title?: string;
   ariaLabel?: string;
   disabled?: boolean;
-  buttonType?: "violet" | "blue" | "transparent";
+  buttonType?: "violet" | "violetSecondary" | "blue" | "transparent";
   type?: "button" | "submit" | "reset";
 };
 
