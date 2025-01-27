@@ -21,6 +21,10 @@ function Button({
       buttonClass =
         "bg-color1  hover:bg-color3 dark:bg-color1 dark:hover:bg-color3 dark:text-whiteFont-500 dark:hover:border-color3 rounded-full";
       break;
+    case "violetSecondary":
+      buttonClass =
+        "bg-transparent dark:bg-transparent hover:bg-color2-200 dark:hover:bg-color2-500 border-color2-500 dark:border-color1-300 border-2 text-color1-500 dark:text-color2-600 dark:hover:text-black rounded-full";
+      break;
     case "transparent":
       buttonClass =
         "bg-transparent text-gray-600 hover:text-black hover:bg-transparent dark:hover:bg-transparent  dark:text-whiteFont-500 dark:hover:text-white ";
