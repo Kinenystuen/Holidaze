@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBuilding,
+  faCalendar,
   faChevronDown,
   faSignOut,
   faUser
@@ -58,13 +60,14 @@ const UserDropdown: React.FC = () => {
       <button
         ref={buttonRef}
         onClick={toggleDropdown}
-        className="flex justify-center items-center px-1 py-0 bg-transparent text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-whiteFont-100 border-none"
+        className="flex justify-center items-center gap-2 w-fit p-[0.2rem] px-1 bg-transparent text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-whiteFont-100 rounded-full border-2 border-color2-500 dark:border-color1-600"
       >
-        <div className="relative w-8 h-8 rounded-full">
+        <P className="ms-3">{user.name}</P>
+        <div className="relative flex justify-end items-center w-7 h-7 rounded-full ">
           <img
             src={user.avatar?.url}
             alt={user.avatar?.alt || "User avatar"}
-            className=" w-8 h-8 rounded-full object-cover"
+            className=" w-7 h-7 rounded-full object-cover"
           />
           <div className="absolute bottom-0 right-0 bg-color2 dark:bg-color1-400 shadow-lg rounded-full w-3 h-3 flex justify-center items-center">
             <FontAwesomeIcon
@@ -81,13 +84,6 @@ const UserDropdown: React.FC = () => {
           ref={dropdownRef}
           className="absolute right-0 mt-2 w-48 divide-y dark:divide-customBgDark-600 bg-white dark:bg-customBgDark-500 border dark:border-customBgDark-600 rounded-md shadow-lg z-20"
         >
-          <div className="flex items-center p-4 ">
-            <P className="mr-1">Hello </P>
-            <P className="font-extrabold text-color3-600 dark:text-color2-500">
-              {user.name}!
-            </P>
-            <strong className="ml-2"></strong>
-          </div>
           <ul className="text-sm text-gray-700 dark:text-whiteFont-500 divide-y divide-gray-200 dark:divide-customBgDark-600">
             <li>
               <Link
@@ -101,6 +97,32 @@ const UserDropdown: React.FC = () => {
                 Profile
               </Link>
             </li>
+            <li>
+              <Link
+                to="/profile/bookings"
+                className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-customBgDark-400 dark:text-whiteFont-600 dark:hover:text-whiteFont-500"
+              >
+                <FontAwesomeIcon
+                  icon={faCalendar}
+                  className="w-[14px] h-[14px] mr-2"
+                />
+                Your Bookings
+              </Link>
+            </li>
+            {user.venueManager && (
+              <li>
+                <Link
+                  to="/profile/bookings"
+                  className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-customBgDark-400 dark:text-whiteFont-600 dark:hover:text-whiteFont-500"
+                >
+                  <FontAwesomeIcon
+                    icon={faBuilding}
+                    className="w-[14px] h-[14px] mr-2"
+                  />
+                  Your Venues
+                </Link>
+              </li>
+            )}
             <li>
               <Button
                 onClick={handleLogout}
