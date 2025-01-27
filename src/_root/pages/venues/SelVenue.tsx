@@ -8,16 +8,17 @@ import {
   faPaw,
   faPerson,
   faStar,
+  faUsers,
   faWifi,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
 import P from "../../../components/shared/Typography/P";
-import Button from "../../../components/shared/Button/Button";
 import "swiper/swiper-bundle.css";
-
 import "./SelVenue.css";
 import SelVenueSwiper from "../../../components/SelVenueSwiper";
 import { Link } from "react-router-dom";
+import React from "react";
+import SelVenueBooking from "../../../components/SelVenueBooking";
 
 /** Small Feature Box */
 const Feature = ({ icon, text }: { icon: IconDefinition; text: string }) => (
@@ -27,14 +28,22 @@ const Feature = ({ icon, text }: { icon: IconDefinition; text: string }) => (
   </div>
 );
 
-const SelVenue = ({ venue }: { venue: Venue }) => {
+interface SelVenueProps {
+  venue: Venue;
+  refetchVenue: () => void;
+}
+
+const SelVenue: React.FC<SelVenueProps> = ({
+  venue,
+  refetchVenue: fetchData
+}) => {
   return (
     <div className="flex-1">
       <div className="">
         {/* Image Gallery */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Swiper Container */}
-          <SelVenueSwiper venue={venue} />
+          <SelVenueSwiper venue={venue.media} />
 
           {/* Right Column: Booking Details */}
           <div className="md:col-span-1 flex flex-col gap-1 ">
@@ -48,12 +57,12 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
                   />
                   <P className="text-gray-600 text-sm">
                     {[
-                      venue.location.address, // Street Address
-                      venue.location.zip, // Zip Code
-                      venue.location.city, // City
-                      venue.location.country // Country
+                      venue.location.address,
+                      venue.location.zip,
+                      venue.location.city,
+                      venue.location.country
                     ]
-                      .filter(Boolean) // Remove empty values
+                      .filter(Boolean)
                       .join(", ") || "Location not available"}
                   </P>
                 </div>
@@ -83,7 +92,7 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
               <hr className="border-color2-500 dark:border-customBgDark-500 hidden md:block my-3" />
               <div className="hidden md:flex flex-col gap-4 items-start justify-between p-1 mb-3 mx-3 px-2">
                 <Feature
-                  icon={faPerson}
+                  icon={faUsers}
                   text={`Max Guests: ${venue.maxGuests}`}
                 />
               </div>
@@ -133,7 +142,6 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
 
             <P className="text-lg text-gray-600">{venue?.description}</P>
 
-            {/* Amenities */}
             <div className="mt-6 grid md:hidden grid-cols-2 gap-4 mx-2 mb-6 text-gray-700">
               {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
               {venue?.meta.parking && <Feature icon={faCar} text="Parking" />}
@@ -189,15 +197,7 @@ const SelVenue = ({ venue }: { venue: Venue }) => {
             )}
           </div>
           {/* Right Column: Booking Details */}
-          <div className="grid md:col-span-1 h-fit my-10 bg-white dark:bg-customBgDark-500 p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
-            <H1 className="text-2xl font-semibold">
-              {venue?.price} kr / night
-            </H1>
-
-            <Button className="mt-4 w-full" buttonType="violet">
-              Book Now
-            </Button>
-          </div>
+          <SelVenueBooking venue={venue} refetchVenue={fetchData} />
 
           {/* Owner Details Section 2*/}
           <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-3" />
