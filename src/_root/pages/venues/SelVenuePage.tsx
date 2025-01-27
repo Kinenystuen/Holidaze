@@ -11,16 +11,16 @@ import Button from "../../../components/shared/Button/Button";
 import MetaTags from "../../../components/metaTags";
 import Breadcrumb from "../../../components/ui/BreadCrumbItem";
 import SelVenue from "./SelVenue";
-import SelVenueBooking from "../../../components/SelVenueBooking";
 
 const SelVenuePage = () => {
   const { id } = useParams<{ id: string }>();
   const [venueData, setVenueData] = useState<Venue | null>(null);
 
   // Fetch venue data
-  const { response, isLoading, isError, errorMessage } = useApi<Venue>(
-    `${apiHostUrl}/holidaze/venues/${id}?_owner=true&_bookings=true`
-  );
+  const { response, isLoading, isError, errorMessage, fetchData } =
+    useApi<Venue>(
+      `${apiHostUrl}/holidaze/venues/${id}?_owner=true&_bookings=true`
+    );
 
   // Update state when response is available
   useEffect(() => {
@@ -54,16 +54,15 @@ const SelVenuePage = () => {
   ];
 
   return (
-    <div className="container mx-auto">
+    <div>
       <MetaTags
         title={`${venueData.name} - Holidaze`}
         keywords="holidaze, venue, hotel, booking, holiday, vacation"
         description={`Book your stay at ${venueData.name}. Enjoy great amenities and a wonderful experience!`}
       />
-      <div className="max-w-screen-xl mx-auto px-10">
+      <div className="container max-w-screen-xl mx-auto px-2 md:px-10">
         <Breadcrumb items={breadcrumbItems} />
-        <SelVenue venue={venueData} />
-        <SelVenueBooking venue={venueData} />
+        <SelVenue venue={venueData} refetchVenue={fetchData} />
       </div>
     </div>
   );
