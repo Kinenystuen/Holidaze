@@ -61,7 +61,7 @@ const AdminSidebar = ({ user }: { user: User }) => {
         {/* Sidebar Overlay (For closing when clicking outside) */}
         {isOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 bg-black bg-opacity-50 z-0"
             onClick={closeMenu}
           ></div>
         )}
@@ -82,6 +82,13 @@ const AdminSidebar = ({ user }: { user: User }) => {
         >
           <FontAwesomeIcon icon={faTimes} className="w-6 h-6" />
         </Button>
+
+        {/* Logo */}
+        <div className="text-2xl font-bold text-gray-800 mx-6 mt-3">
+          <Link className="text-whiteFont-500 dark:text-whiteFont-600" to="/">
+            Holidaze
+          </Link>
+        </div>
 
         {/* Profile Section */}
         <div className="flex items-center space-x-3 p-6">
