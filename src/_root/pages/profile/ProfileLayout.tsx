@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useUserContext } from "../../../components/context/useUserContext";
 import AdminSidebar from "../../../components/AdminSideBar";
-import Header from "../../../components/shared/Header";
 import H1 from "../../../components/shared/Typography/H1";
 
 const ProfileLayout = () => {
@@ -18,8 +17,7 @@ const ProfileLayout = () => {
 
           {/* Right-side content - Changes based on route */}
           <div className="flex flex-col flex-1 overflow-auto w-full">
-            <Header />
-            <div className=" border-b-2 dark:border-customBgDark-500 w-full pt-1 pb-3 mb-6 flex items-center justify-start">
+            <div className=" border-b-2 dark:border-customBgDark-500 w-full mt-3 pb-3 mb-6 flex items-center justify-start">
               <H1 className="mx-6 ml-12 text-customBgDark-500 dark:text-whiteFont-600 font-extrabold">
                 Dashboard
               </H1>
