@@ -1,11 +1,11 @@
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { Venue } from "./library/types";
+import { Media } from "./library/types";
 import { FreeMode, Navigation, Pagination, Thumbs, Zoom } from "swiper/modules";
 import { useState, useRef } from "react";
 import ModalImage from "./ui/ModalImage";
 import P from "./shared/Typography/P";
 
-const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
+const SelVenueSwiper = ({ venue }: { venue: Media[] }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageId, setCurrentImageId] = useState<number | null>(null);
@@ -20,16 +20,14 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
   /* Handle Previous Image */
   const handlePrevious = () => {
     if (currentImageId !== null) {
-      setCurrentImageId(
-        (currentImageId - 1 + venue.media.length) % venue.media.length
-      );
+      setCurrentImageId((currentImageId - 1 + venue.length) % venue.length);
     }
   };
 
   /* Handle Next Image */
   const handleNext = () => {
     if (currentImageId !== null) {
-      setCurrentImageId((currentImageId + 1) % venue.media.length);
+      setCurrentImageId((currentImageId + 1) % venue.length);
     }
   };
 
@@ -39,9 +37,9 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
       <Swiper
         spaceBetween={20}
         slidesPerView={1}
-        loop={venue.media.length > 1}
-        navigation={venue.media.length > 1}
-        pagination={venue.media.length > 1 ? { clickable: true } : false}
+        loop={venue.length > 1}
+        navigation={venue.length > 1}
+        pagination={venue.length > 1 ? { clickable: true } : false}
         zoom={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         modules={[Navigation, Pagination, Thumbs, FreeMode, Zoom]}
@@ -49,7 +47,7 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
         className="rounded-lg shadow-md venue-swiper"
         onSwiper={(swiper) => (mainSwiperRef.current = swiper)} // Save Swiper instance
       >
-        {venue?.media?.map((image, id) => (
+        {venue?.map((image, id) => (
           <SwiperSlide key={id} className="cursor-pointer">
             <img
               src={image.url}
@@ -62,7 +60,7 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
       </Swiper>
 
       {/* Thumbnails */}
-      {venue.media.length > 1 && (
+      {venue?.length > 1 && (
         <Swiper
           onSwiper={setThumbsSwiper}
           spaceBetween={10}
@@ -72,7 +70,7 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
           modules={[Thumbs, FreeMode]}
           className="mt-4"
         >
-          {venue?.media?.map((image, id) => (
+          {venue?.map((image, id) => (
             <SwiperSlide
               key={id}
               className="cursor-pointer"
@@ -97,18 +95,18 @@ const SelVenueSwiper = ({ venue }: { venue: Venue }) => {
           className="max-w-screen-2xl z-30"
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          totalSlides={venue.media.length}
+          totalSlides={venue.length}
         >
           <div className="relative">
             <div className="flex flex-col items-center justify-center mx-10 max-w-full h-[90vh]">
               <img
-                src={venue.media[currentImageId].url}
-                alt={venue.media[currentImageId].alt}
+                src={venue[currentImageId].url}
+                alt={venue[currentImageId].alt}
                 className="h-full rounded-sm shadow-md object-contain"
               />
-              {venue.media[currentImageId].alt && (
+              {venue[currentImageId].alt && (
                 <P className="text-white bg-black bg-opacity-60 p-2 mt-1 rounded-sm">
-                  {venue.media[currentImageId].alt}
+                  {venue[currentImageId].alt}
                 </P>
               )}
             </div>
