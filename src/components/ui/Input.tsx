@@ -18,6 +18,7 @@ interface InputProps<T extends FieldValues> {
   required?: boolean; // Optional: Required field validation
   pattern?: { value: RegExp; message: string }; // Optional: Pattern validation
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // Optional: OnChange event
+  type?: string; // Optional: Input type
 }
 /**
  * Input Component
