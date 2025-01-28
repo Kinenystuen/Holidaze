@@ -167,8 +167,8 @@ const SelVenue: React.FC<SelVenueProps> = ({
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-row items-center gap-4">
-                  <div className="flex items-center gap-4 border-r border-color1-200 pr-4">
+                <div className="flex flex-row items-center md:gap-4">
+                  <div className="flex flex-col md:flex-row items-center gap-4 border-r border-color1-200 pr-4">
                     <FontAwesomeIcon
                       icon={faStar}
                       className="text-gray-800 dark:text-whiteFont-500 w-8 h-8"
