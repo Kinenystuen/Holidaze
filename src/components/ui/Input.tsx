@@ -17,6 +17,7 @@ interface InputProps<T extends FieldValues> {
   maxLength?: number; // Optional: Maximum length validation
   required?: boolean; // Optional: Required field validation
   pattern?: { value: RegExp; message: string }; // Optional: Pattern validation
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // Optional: OnChange event
 }
 /**
  * Input Component
@@ -49,6 +50,7 @@ interface InputProps<T extends FieldValues> {
  * @param {number} [props.maxLength] - Optional maximum length validation rule.
  * @param {boolean} [props.required] - Optional flag to mark the input as required.
  * @param {{ value: RegExp; message: string }} [props.pattern] - Optional pattern validation rule with a custom message.
+ * @param {(e: React.ChangeEvent<HTMLInputElement>) => void} [props.onChange] - Optional onChange event handler.
  *
  * @returns {JSX.Element} The rendered input component.
  *
@@ -77,7 +79,8 @@ const Input = <T extends FieldValues>({
   minLength,
   maxLength,
   required,
-  pattern
+  pattern,
+  onChange
 }: InputProps<T>) => {
   // Get the error message for this field
   const errorMessage = errors[InputId]?.message as string;
@@ -116,6 +119,7 @@ const Input = <T extends FieldValues>({
               }
             : undefined
         })}
+        {...(onChange && { onChange })}
         placeholder=" "
         className={`peer w-full p-2 pl-12 pt-5 pb-2 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700 focus:border-color4-600 ${
           icon ? "pl-10" : "pl-[1.8rem]"
