@@ -8,7 +8,7 @@ function Button({
   ariaLabel,
   buttonType,
   disabled,
-  type
+  type = "button" // Default to "button" to prevent unintended form submissions
 }: ButtonProps) {
   let buttonClass = "";
 
@@ -19,7 +19,7 @@ function Button({
       break;
     case "violet":
       buttonClass =
-        "bg-color1  hover:bg-color3 dark:bg-color1 dark:hover:bg-color3 dark:text-whiteFont-500 dark:hover:border-color3 rounded-full";
+        "bg-color1 hover:bg-color3 dark:bg-color1 dark:hover:bg-color3 dark:text-whiteFont-500 dark:hover:border-color3 rounded-full";
       break;
     case "violetSecondary":
       buttonClass =
@@ -27,16 +27,20 @@ function Button({
       break;
     case "transparent":
       buttonClass =
-        "bg-transparent text-gray-600 hover:text-black hover:bg-transparent dark:hover:bg-transparent  dark:text-whiteFont-500 dark:hover:text-white ";
+        "bg-transparent text-gray-600 hover:text-black hover:bg-transparent dark:hover:bg-transparent dark:text-whiteFont-500 dark:hover:text-white ";
       break;
     default:
       buttonClass =
-        "bg-gray-500 text-black dark:bg-BtnColor dark:hover:bg-BtnColor-400";
+        "bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-whiteFont-500 dark:hover:border-gray-600 rounded-full";
   }
 
   return (
     <button
-      onClick={onClick}
+      onClick={(event) => {
+        if (onClick) {
+          onClick(event);
+        }
+      }}
       title={title}
       aria-label={ariaLabel}
       type={type}
