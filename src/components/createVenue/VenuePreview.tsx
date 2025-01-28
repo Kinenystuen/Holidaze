@@ -5,12 +5,12 @@ import P from "../shared/Typography/P";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCar,
-  faCoffee,
   faMapMarkerAlt,
   faPaw,
   faPerson,
   faStar,
   faUsers,
+  faUtensils,
   faWifi,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
@@ -77,7 +77,7 @@ const VenuePreview = () => {
                 {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
                 {venue?.meta.parking && <Feature icon={faCar} text="Parking" />}
                 {venue?.meta.breakfast && (
-                  <Feature icon={faCoffee} text="Breakfast" />
+                  <Feature icon={faUtensils} text="Breakfast" />
                 )}
                 {venue?.meta.pets && (
                   <Feature icon={faPaw} text="Pets Allowed" />
@@ -136,7 +136,7 @@ const VenuePreview = () => {
               {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
               {venue?.meta.parking && <Feature icon={faCar} text="Parking" />}
               {venue?.meta.breakfast && (
-                <Feature icon={faCoffee} text="Breakfast" />
+                <Feature icon={faUtensils} text="Breakfast" />
               )}
               {venue?.meta.pets && <Feature icon={faPaw} text="Pets Allowed" />}
             </div>

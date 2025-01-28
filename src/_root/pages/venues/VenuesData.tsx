@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
   faMapMarkerAlt,
   faCar,
   faPaw,
   faStar,
   faWifi,
-  faUserFriends
+  faUserFriends,
+  faUtensils
 } from "@fortawesome/free-solid-svg-icons";
 import H2 from "../../../components/shared/Typography/H2";
 import P from "../../../components/shared/Typography/P";
@@ -143,7 +143,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       {venue.meta.breakfast && (
                         <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
                           <FontAwesomeIcon
-                            icon={faCoffee}
+                            icon={faUtensils}
                             size="xs"
                             className="w-4 h-4 p-1"
                           />

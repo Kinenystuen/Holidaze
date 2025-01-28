@@ -3,12 +3,12 @@ import { Venue } from "../../../components/library/types";
 import H1 from "../../../components/shared/Typography/H1";
 import {
   faCar,
-  faCoffee,
   faMapMarkerAlt,
   faPaw,
   faPerson,
   faStar,
   faUsers,
+  faUtensils,
   faWifi,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
@@ -83,7 +83,7 @@ const SelVenue: React.FC<SelVenueProps> = ({
                 {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
                 {venue?.meta.parking && <Feature icon={faCar} text="Parking" />}
                 {venue?.meta.breakfast && (
-                  <Feature icon={faCoffee} text="Breakfast" />
+                  <Feature icon={faUtensils} text="Breakfast" />
                 )}
                 {venue?.meta.pets && (
                   <Feature icon={faPaw} text="Pets Allowed" />
@@ -146,7 +146,7 @@ const SelVenue: React.FC<SelVenueProps> = ({
               {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
               {venue?.meta.parking && <Feature icon={faCar} text="Parking" />}
               {venue?.meta.breakfast && (
-                <Feature icon={faCoffee} text="Breakfast" />
+                <Feature icon={faUtensils} text="Breakfast" />
               )}
               {venue?.meta.pets && <Feature icon={faPaw} text="Pets Allowed" />}
             </div>
