@@ -92,7 +92,7 @@ export interface BookingsResponse {
 /* Button props */
 export type ButtonProps = {
   ButtonType?: "primary" | "secondary";
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
   className?: string;
   title?: string;
