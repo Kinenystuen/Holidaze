@@ -81,7 +81,7 @@ const Input = <T extends FieldValues>({
   required,
   pattern,
   onChange
-}: InputProps<T>) => {
+}: InputProps<T>): JSX.Element => {
   // Get the error message for this field
   const errorMessage = errors[InputId]?.message as string;
 
