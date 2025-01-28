@@ -34,7 +34,7 @@ const VenuePreview = ({ onClose }: { onClose: () => void }) => {
   console.log(venue);
 
   return (
-    <Modal isOpen={true} onClose={onClose}>
+    <Modal isOpen={true} onClose={onClose} className="max-w-7xl">
       <div className="flex-1">
         <H2>Venue Preview</H2>
         <div className="">
@@ -169,8 +169,8 @@ const VenuePreview = ({ onClose }: { onClose: () => void }) => {
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-row items-center gap-4">
-                    <div className="flex items-center gap-4 border-r border-color1-200 pr-4">
+                  <div className="flex flex-row items-center md:gap-4">
+                    <div className="flex flex-col md:flex-row items-center gap-4 border-r border-color1-200 pr-4">
                       <FontAwesomeIcon
                         icon={faStar}
                         className="text-gray-800 dark:text-whiteFont-500 w-8 h-8"
