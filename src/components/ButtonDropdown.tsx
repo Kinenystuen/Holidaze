@@ -34,7 +34,7 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ label, options }) => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div className="relative  inline-block text-left" ref={dropdownRef}>
       <Button
         buttonType="violetSecondary"
         onClick={() => setIsOpen(!isOpen)}
