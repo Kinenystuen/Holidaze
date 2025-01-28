@@ -112,7 +112,7 @@ const UserDropdown: React.FC = () => {
             {user.venueManager && (
               <li>
                 <Link
-                  to="/profile/bookings"
+                  to="/profile/venues"
                   className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-customBgDark-400 dark:text-whiteFont-600 dark:hover:text-whiteFont-500"
                 >
                   <FontAwesomeIcon
