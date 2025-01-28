@@ -45,16 +45,23 @@ const ImageUploader: React.FC = () => {
   };
 
   return (
-    <div className="p-4 border border-gray-300 rounded-md">
+    <>
       {/* Image Input Field */}
-      <div className="flex gap-2 mb-4">
+      <div className="relative flex gap-2 mb-4">
         <input
+          id="ImageUploader"
           type="text"
-          placeholder="Enter image URL"
+          placeholder=" "
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
-          className="border p-2 w-full"
+          className="peer cursor-pointer w-full p-2 px-3 pt-5 pb-2 border bg-white focus:bg-white border-gray-300 dark:border-customBgDark-600 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700 focus:border-color4-600 dark:bg-customBgDark-500 dark:text-whiteFont-600 resize-none overflow-hidden"
         />
+        <label
+          htmlFor="ImageUploader"
+          className="absolute left-3 top-2 text-gray-500 dark:text-whiteFont-700 bg-white dark:bg-customBgDark-500 px-1 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm peer-focus:text-color4-800 dark:peer-focus:text-whiteFont-600"
+        >
+          Enter image URL
+        </label>
         <button
           onClick={(event) => addImage(event)}
           className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -107,7 +114,7 @@ const ImageUploader: React.FC = () => {
           )}
         </Droppable>
       </DragDropContext>
-    </div>
+    </>
   );
 };
 
