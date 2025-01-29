@@ -15,6 +15,7 @@ import H3 from "../../../components/shared/Typography/H3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { AnimatePresence, motion } from "framer-motion";
+import H2 from "../../../components/shared/Typography/H2";
 
 const MyBookings = () => {
   const { user } = useUserContext();
@@ -55,7 +56,7 @@ const MyBookings = () => {
     return (
       <div className="container mx-auto">
         <div className="max-w-screen-xl mx-auto px-10">
-          <h2 className="text-2xl font-semibold mt-8">My Bookings</h2>
+          <H2 className="text-2xl font-semibold mt-8">My Bookings</H2>
           <P className="mt-4">You have no bookings yet.</P>
         </div>
       </div>
