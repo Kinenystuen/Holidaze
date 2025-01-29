@@ -55,11 +55,11 @@ const VenuePage = () => {
 
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
-            <div className="relative flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
+            <div className="relative flex flex-col flex-1 gap-2 my-1 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
               {/* Search Bar */}
 
               <div
-                className={`bg-customBg dark:bg-customBgDark-500 md:bg-transparent dark:md:bg-transparent shadow-sm md:shadow-none z-50 translate-y-0 duration-500 opacity-100 transition-all duration-300 ease-in-out transform z-20 w-full py-0 px-4`}
+                className={`bg-customBg dark:bg-customBgDark-500 md:bg-transparent dark:md:bg-transparent shadow-sm md:shadow-none z-20 w-full py-0 px-4`}
               >
                 <div className="flex gap-2 py-2">
                   <SearchBar onSearch={handleSearch} />
