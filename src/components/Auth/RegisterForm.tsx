@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../ui/Input";
 import Button from "../shared/Button/Button";
@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
+  faEye,
+  faEyeSlash,
   faLock,
   faTimes,
   faUser
@@ -50,6 +52,7 @@ interface RegisterFormData {
  * @returns {JSX.Element} The rendered registration form component.
  */
 const RegisterForm: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -134,16 +137,31 @@ const RegisterForm: React.FC = () => {
       </div>
 
       {/* Password Input */}
-      <div className="mb-4">
+      <div className="relative mb-4">
         <Input
           InputId="password"
           InputLabel="Password"
-          icon={faLock}
           register={register}
           errors={errors}
           required
           minLength={8}
+          icon={faLock}
+          type={showPassword ? "text" : "password"}
+          autoComplete="new-password"
         />
+        {/* Eye Icon Button */}
+        <Button
+          type="button"
+          buttonType="transparent"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-0 top-1 hover:text-black"
+          aria-label={showPassword ? "Hide password" : "Show password"}
+        >
+          <FontAwesomeIcon
+            className=" text-gray-400 dark:text-gray-400"
+            icon={showPassword ? faEyeSlash : faEye}
+          />
+        </Button>
       </div>
 
       {/* Error Message */}
