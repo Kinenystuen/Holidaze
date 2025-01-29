@@ -42,7 +42,6 @@ export const useAuth = (
     let errorMessage = "";
 
     const authUrl = `${apiHostUrl}${action || defaultAction}?_holidaze=true`;
-    console.log("Auth URL:", authUrl);
 
     const body = JSON.stringify(profile);
 
@@ -58,8 +57,6 @@ export const useAuth = (
       if (response.ok) {
         const data = await response.json();
         const { accessToken, ...user } = data.data;
-        console.log("User Data:", user);
-        console.log("Access Token:", accessToken);
 
         // Save token and user profile to localStorage
         saveToStorage("token", accessToken);
