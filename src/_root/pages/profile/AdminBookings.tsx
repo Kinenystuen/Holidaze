@@ -1,5 +1,4 @@
 import H1 from "../../../components/shared/Typography/H1";
-import MyBookings from "./MyBookings";
 
 const AdminBookings = () => {
   return (
