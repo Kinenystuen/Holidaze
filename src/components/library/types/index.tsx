@@ -50,6 +50,19 @@ export interface UserProfile {
   };
 }
 
+export interface EditUserProfile {
+  bio: string;
+  avatar: {
+    url: string;
+    alt: string;
+  };
+  banner: {
+    url: string;
+    alt: string;
+  };
+  venueManager: boolean;
+}
+
 export interface ProfileResponse {
   data: UserProfile;
   meta: Record<string, unknown>;
