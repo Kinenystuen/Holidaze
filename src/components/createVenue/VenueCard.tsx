@@ -49,7 +49,7 @@ const VenueCard = ({
   };
 
   return (
-    <div className="p-4 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg flex gap-3 h-fit">
+    <div className=" flex flex-col md:flex-row gap-3 p-4 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg h-fit">
       {/* Show Loader if deleting */}
       {isLoading ? (
         <div className="flex justify-center items-center w-full h-40">
