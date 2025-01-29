@@ -40,7 +40,7 @@ const BookingCard = ({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-full lg:max-h-[18rem] bg-white col-span-1 lg:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600">
+    <div className="flex flex-col md:flex-row h-full md:max-h-[18rem] bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600">
       {/* Show Loader if deleting */}
       {isLoading ? (
         <div className="flex justify-center items-center w-full h-40">
@@ -49,7 +49,7 @@ const BookingCard = ({
       ) : (
         <>
           {/* Image */}
-          <div className="w-full min-h-52 lg:w-[30vw] max-h-fit rounded-t-lg lg:rounded-none lg:rounded-s-lg overflow-hidden">
+          <div className="w-full min-h-52 md:w-[30vw] max-h-72 rounded-t-lg md:rounded-none md:rounded-s-lg overflow-hidden">
             <img
               className="object-cover w-full h-full"
               src={booking.venue.media[0].url}
