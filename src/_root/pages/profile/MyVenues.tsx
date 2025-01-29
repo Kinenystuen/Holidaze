@@ -56,9 +56,9 @@ const MyVenues = () => {
     );
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto max-w-4xl">
       <div className=" px-10 mb-20">
-        <div className="max-w-screen-lg mx-auto mt-4 grid grid-cols-1 gap-6">
+        <div className=" mx-auto mt-4 grid grid-cols-1 gap-6">
           <div className="flex gap-4 justify-between items-center">
             Venues: {response.data.venues.length}
             <Link to="/profile/create-venue">
