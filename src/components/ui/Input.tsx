@@ -87,7 +87,7 @@ const Input = <T extends FieldValues>({
   const errorMessage = errors[InputId]?.message as string;
 
   return (
-    <div className="relative w-full mt-4">
+    <div className="relative w-full">
       {/* Icon Container */}
       {icon && (
         <FontAwesomeIcon
