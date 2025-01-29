@@ -59,6 +59,14 @@ const MyVenues = () => {
     <div className="container mx-auto">
       <div className=" px-10 mb-20">
         <div className="max-w-screen-lg mx-auto mt-4 grid grid-cols-1 gap-6">
+          <div className="flex gap-4 justify-between items-center">
+            Venues: {response.data.venues.length}
+            <Link to="/profile/create-venue">
+              <Button buttonType="violet" className=" px-4 inline-block">
+                Create New Venue
+              </Button>
+            </Link>
+          </div>
           {response.data.venues.map((venue, index) => (
             <motion.div
               key={venue.id}
