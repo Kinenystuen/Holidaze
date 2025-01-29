@@ -59,6 +59,7 @@ export const useAuth = (
         const data = await response.json();
         const { accessToken, ...user } = data.data;
         console.log("User Data:", user);
+        console.log("Access Token:", accessToken);
 
         // Save token and user profile to localStorage
         saveToStorage("token", accessToken);
