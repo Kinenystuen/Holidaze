@@ -27,6 +27,7 @@ import MetaCheckbox from "./MetaCheckbox";
 import LoaderSmall from "../ui/LoaderSmall";
 import { useState } from "react";
 import VenuePreview from "./VenuePreview";
+import H3 from "../shared/Typography/H3";
 
 const VenueForm = () => {
   const { venue, updateVenue } = useVenue();
@@ -85,7 +86,11 @@ const VenueForm = () => {
   ];
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit(submitHandler)}>
+    <form
+      className="flex flex-col gap-3"
+      onSubmit={handleSubmit(submitHandler)}
+    >
+      <H3 className="mt-3">Venue details</H3>
       {/* Venue Name */}
       <Input
         InputId="name"
@@ -132,38 +137,41 @@ const VenueForm = () => {
         />
       </div>
 
-      {/* Price */}
-      <Input
-        InputId="price"
-        InputLabel="Price"
-        icon={faMoneyCheckDollar}
-        register={register}
-        errors={errors}
-        required
-        pattern={{ value: /^[0-9]+$/, message: "Only numbers allowed." }}
-        onChange={(e) => {
-          updateVenue({ price: Number(e.target.value) });
-          clearErrors("price");
-        }}
-      />
+      <div className="flex flex-row w-full gap-3 mt-0">
+        {/* Price */}
+        <Input
+          InputId="price"
+          InputLabel="Price"
+          icon={faMoneyCheckDollar}
+          register={register}
+          errors={errors}
+          required
+          pattern={{ value: /^[0-9]+$/, message: "Only numbers allowed." }}
+          onChange={(e) => {
+            updateVenue({ price: Number(e.target.value) });
+            clearErrors("price");
+          }}
+        />
 
-      {/* Max Guests */}
-      <Input
-        InputId="maxGuests"
-        InputLabel="Max Guests"
-        icon={faUsers}
-        register={register}
-        errors={errors}
-        required
-        pattern={{ value: /^[0-9]+$/, message: "Only numbers allowed." }}
-        onChange={(e) => {
-          updateVenue({ maxGuests: Number(e.target.value) });
-          clearErrors("maxGuests");
-        }}
-      />
+        {/* Max Guests */}
+        <Input
+          InputId="maxGuests"
+          InputLabel="Max Guests"
+          icon={faUsers}
+          register={register}
+          errors={errors}
+          required
+          pattern={{ value: /^[0-9]+$/, message: "Only numbers allowed." }}
+          onChange={(e) => {
+            updateVenue({ maxGuests: Number(e.target.value) });
+            clearErrors("maxGuests");
+          }}
+        />
+      </div>
 
       {/* Meta checkboxes */}
-      <div className="flex flex-row flex-wrap gap-3 w-fit">
+      <H3 className="mt-3">Facilities</H3>
+      <div className="grid grid-cols-2 gap-3">
         {metaKeys.map((key) => (
           <MetaCheckbox
             key={key}
@@ -177,8 +185,9 @@ const VenueForm = () => {
           />
         ))}
       </div>
+      <H3 className="mt-3">Rating</H3>
       {/* Rating */}
-      <label className="flex flex-col gap-2 w-full p-3 rounded-md border border-gray-300 dark:border-customBgDark-500 bg-white dark:bg-customBgDark-500 text-black dark:text-whiteFont-500 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+      <label className="flex flex-col gap-2 w-full max-w-72 p-3 rounded-md border border-gray-300 dark:border-customBgDark-500 bg-white dark:bg-customBgDark-500 text-black dark:text-whiteFont-500 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700">
         <div className="flex items-center gap-3">
           <FontAwesomeIcon
             icon={faStar}
@@ -211,32 +220,37 @@ const VenueForm = () => {
         </div>
       </label>
 
+      <H3 className="mt-3">Location</H3>
       {/* Location inputs */}
-      {locationFields.map(({ id, label, icon, type }) => (
-        <Input
-          key={id}
-          InputId={`location.${id}`}
-          InputLabel={label}
-          icon={icon}
-          type={type}
-          register={register}
-          errors={errors}
-          onChange={(e) =>
-            updateVenue({
-              location: {
-                ...venue.location,
-                [id]:
-                  type === "number" ? Number(e.target.value) : e.target.value
-              }
-            })
-          }
-        />
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* Location inputs */}
+        {locationFields.map(({ id, label, icon, type }) => (
+          <Input
+            key={id}
+            InputId={`location.${id}`}
+            InputLabel={label}
+            icon={icon}
+            type={type}
+            register={register}
+            errors={errors}
+            onChange={(e) =>
+              updateVenue({
+                location: {
+                  ...venue.location,
+                  [id]:
+                    type === "number" ? Number(e.target.value) : e.target.value
+                }
+              })
+            }
+          />
+        ))}
+      </div>
 
+      <H3 className="mt-3">Add images</H3>
       {/* Image uploader */}
       <ImageUploader />
 
-      <div className="flex justify-center gap-2 my-10">
+      <div className="flex justify-center gap-2 mb-20">
         <Button
           buttonType="violetSecondary"
           className="mt-4"
