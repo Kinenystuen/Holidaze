@@ -58,6 +58,14 @@ const MyBookings = () => {
         <div className="max-w-screen-xl mx-auto px-10">
           <H2 className="text-2xl font-semibold mt-8">My Bookings</H2>
           <P className="mt-4">You have no bookings yet.</P>
+          <Link to="/venues">
+            <Button
+              buttonType="violetSecondary"
+              className="my-5 px-4 inline-block"
+            >
+              Make a booking
+            </Button>
+          </Link>
         </div>
       </div>
     );
