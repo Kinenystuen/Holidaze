@@ -50,7 +50,7 @@ const MyBookings = () => {
 
   if (
     !response ||
-    !response.data?.bookings ||
+    !response.data.bookings ||
     response.data.bookings.length === 0
   )
     return (
@@ -62,34 +62,46 @@ const MyBookings = () => {
       </div>
     );
 
-  const bookings = response.data.bookings;
+  const bookings = response?.data?.bookings || [];
 
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  // Separate upcoming and past bookings
   const upcomingBookings = bookings
-    .filter((booking) => new Date(booking.dateFrom) >= today)
+    .filter((booking) => {
+      const bookingDate = new Date(booking.dateFrom);
+      return bookingDate.getTime() >= today.getTime();
+    })
     .sort(
       (a, b) => new Date(a.dateFrom).getTime() - new Date(b.dateFrom).getTime()
     );
 
   const pastBookings = bookings
-    .filter((booking) => new Date(booking.dateTo) < today)
+    .filter((booking) => {
+      const bookingEndDate = new Date(booking.dateTo);
+      return bookingEndDate.getTime() < today.getTime();
+    })
     .sort(
       (a, b) => new Date(b.dateFrom).getTime() - new Date(a.dateFrom).getTime()
     );
 
   const handleShowPastBookings = () => {
-    setShowPastBookings(!showPastBookings);
+    setShowPastBookings((prev) => {
+      console.log("Toggling past bookings:", !prev);
+      return !prev;
+    });
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto max-w-4xl">
+      <div className="max-w-screen-xl mx-auto px-10">
+        <H2 className="text-2xl font-semibold mt-8">My Bookings</H2>
+      </div>
       {/* Upcoming Bookings */}
       {upcomingBookings.length > 0 && (
         <div className=" px-10 mb-20">
           <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-4">
-            Upcoming Bookings
+            Upcoming Bookings ({upcomingBookings.length})
           </H3>
 
           <div className="max-w-screen-lg mx-auto mt-4 grid grid-cols-1 gap-6">
@@ -110,7 +122,7 @@ const MyBookings = () => {
       {pastBookings.length > 0 && (
         <div className="bg-gray-200 dark:bg-customBgDark-700 mx-auto px-10 py-2 pb-[40vh]">
           <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-6">
-            Past Bookings
+            Past Bookings ({pastBookings.length})
           </H3>
           <div className="flex justify-center">
             <Button
