@@ -53,7 +53,7 @@ const ImageUploader: React.FC = () => {
   return (
     <>
       {/* Image Input Fields */}
-      <div className="relative flex flex-col lg:flex-row gap-2 pt-2 mb-4 border-2 p-2 rounded-lg border-dotted border-gray-300 dark:border-customBgDark-500">
+      <div className="relative flex flex-col gap-2 pt-2 mb-4 border-2 p-2 rounded-lg border-dotted border-gray-300 dark:border-customBgDark-500">
         <div className="relative flex-1">
           <FontAwesomeIcon
             icon={faImage}
