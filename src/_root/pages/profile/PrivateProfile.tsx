@@ -11,9 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import CardBox from "../../../components/ui/CardBox";
-import Button from "../../../components/shared/Button/Button";
 import FetchProfileData from "../../../components/context/FetchProfileData";
 import LoaderSmall from "../../../components/ui/LoaderSmall";
+import EditProfile from "./EditProfile";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();
@@ -67,11 +67,8 @@ const PrivateProfile = () => {
           </div>
 
           {/* Edit Profile and Settings */}
-          <div className="col-span-4 md:col-span-1 flex flex-row md:flex-col items-center justify-center gap-4">
-            <Button className="px-4 py-2 text-white rounded-lg shadow-md bg-color1-400 dark:bg-color1-600 hover:bg-color1-500 dark:hover:bg-color1-500 transition">
-              <FontAwesomeIcon icon={faEdit} className="mr-2" />
-              Edit Profile
-            </Button>
+          <div className="col-span-4 md:col-span-1 flex flex-row lg:flex-col items-center justify-center gap-4">
+            <EditProfile />
             <Link
               to={"settings"}
               className="px-6 py-2 bg-gray-200 dark:bg-customBgDark-200 text-gray-700 dark:text-customBgDark-700 rounded-lg shadow-md hover:bg-gray-300 dark:hover:bg-customBgDark-100 transition duration-300 ease-in-out "
