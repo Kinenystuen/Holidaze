@@ -8,6 +8,9 @@ export default {
         heading: ['"Playfair Display"', "serif"], // For headings
         body: ['"Roboto"', "sans-serif"] // For body text
       },
+      screens: {
+        xs: "420px"
+      },
       colors: {
         customBg: "#FAF9F6",
         customBgDark: {

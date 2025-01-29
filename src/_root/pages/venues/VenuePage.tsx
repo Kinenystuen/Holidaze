@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import H1 from "../../../components/shared/Typography/H1";
 import SearchBar from "./SearchBarVen";
 import Venues from "./venues";
@@ -21,35 +21,6 @@ const VenuePage = () => {
     pets: false
   });
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-  const lastScrollY = useRef(window.scrollY);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY === 0) {
-        // Show the search bar if we're at the top
-        setIsHidden(false);
-        setIsScrolled(false);
-      } else if (currentScrollY > lastScrollY.current) {
-        // If scrolling down, hide the search bar
-        setIsHidden(true);
-        setIsScrolled(false);
-      } else if (currentScrollY < lastScrollY.current) {
-        // If scrolling up, bring back and set fixed
-        setIsHidden(false);
-        setIsScrolled(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.trim() === "") {
@@ -66,7 +37,7 @@ const VenuePage = () => {
       <div className=" mx-auto max-w-7xl">
         <div className="w-full md:flex">
           {/* Left-side menu */}
-          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-screen sticky top-0  custom-scrollbar">
+          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-screen sticky top-0 custom-scrollbar">
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
             <FilterMenu
               filters={filters}
@@ -84,21 +55,13 @@ const VenuePage = () => {
 
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
-            <div className="relative flex flex-col flex-1 gap-2 my-4 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
-              {/* Spacer element to prevent "jumping" */}
-              <div className={`${isScrolled ? "h-[2.8rem]" : "h-auto"}`}></div>
+            <div className="relative flex flex-col flex-1 gap-2 my-1 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
+              {/* Search Bar */}
 
-              {/* Fixed Search Bar */}
               <div
-                className={`transition-all duration-500 ease-in-out transform ${
-                  isScrolled
-                    ? "fixed top-0 right-0 bg-customBg md:bg-transparent shadow-sm md:shadow-none w-full py-2 px-4 z-50 translate-y-0 opacity-100"
-                    : isHidden
-                    ? "-translate-y-full opacity-0"
-                    : "relative py-2 px-4  opacity-100"
-                }`}
+                className={`bg-customBg dark:bg-customBgDark-500 md:bg-transparent dark:md:bg-transparent shadow-sm md:shadow-none z-20 w-full py-0 px-4`}
               >
-                <div className="flex">
+                <div className="flex gap-2 py-2">
                   <SearchBar onSearch={handleSearch} />
                   <div className="flex md:hidden">
                     <FilterMenu

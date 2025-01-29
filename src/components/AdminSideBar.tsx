@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import {
   faBars,
-  faTimes,
   faUser,
   faBuilding,
   faCalendar,
@@ -9,30 +8,44 @@ import {
   faCog,
   faPlus,
   faChartBar,
-  faSignOut
+  faSignOut,
+  faAngleLeft,
+  faAngleRight
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "./library/types";
 import H2 from "./shared/Typography/H2";
-import P from "./shared/Typography/P";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AdminSideBar.css";
 import Button from "./shared/Button/Button";
 import { useUserContext } from "./context/useUserContext";
+import Tooltip from "./ui/ToolTip";
 
-const AdminSidebar = ({ user }: { user: User }) => {
+interface AdminSidebarProps {
+  user: User;
+  isCollapsed: boolean;
+  setIsCollapsed: (collapsed: boolean) => void;
+}
+
+const AdminSidebar: React.FC<AdminSidebarProps> = ({
+  user,
+  isCollapsed,
+  setIsCollapsed
+}) => {
   const { setIsAuthenticated } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
   const closeMenu = () => setIsOpen(false);
+  const navigate = useNavigate();
 
   // Handle logout action
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("profile");
     setIsAuthenticated(false);
-    window.location.href = "/";
+    navigate("/");
   };
 
   // Disable body scrolling when sidebar is open
@@ -48,10 +61,10 @@ const AdminSidebar = ({ user }: { user: User }) => {
 
   return (
     <>
-      {/* Hamburger Button */}
+      {/* Hamburger Button for Mobile Screens */}
       <div>
         <Button
-          className="md:hidden fixed top-[4.4rem] left-0 z-50 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
+          className="md:hidden fixed top-[4.4rem] left-0 z-10 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
           onClick={toggleMenu}
         >
           <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
@@ -60,7 +73,7 @@ const AdminSidebar = ({ user }: { user: User }) => {
         {/* Sidebar Overlay (For closing when clicking outside) */}
         {isOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 bg-black bg-opacity-50 z-0"
             onClick={closeMenu}
           ></div>
         )}
@@ -68,95 +81,178 @@ const AdminSidebar = ({ user }: { user: User }) => {
 
       {/* Sidebar Navigation */}
       <div
-        className={`absolute md:flex top-0 pb-10 left-0 h-screen w-64 bg-color1-600 text-whiteFont-500 transform transition-transform duration-300 z-50
-    ${isOpen ? "translate-x-0" : "-translate-x-full"}
-    md:translate-x-0 md:flex md:flex-col md:min-w-[220px] max-w-[270px] 
-    sticky top-0 overflow-y-auto overflow-x-hidden custom-scrollbar`}
-        style={{ maxHeight: "100vh" }}
+        className={`fixed top-0 left-0 ${
+          isCollapsed ? "w-16" : "w-64"
+        } h-full max-h-screen bg-color1-600 text-whiteFont-500 transform transition-all duration-300 z-50
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        md:translate-x-0 md:flex md:flex-col max-w-[270px] 
+        overflow-visible custom-scrollbar`}
       >
-        {/* Close Button */}
+        {/* Collapse Button (Only for md screens and larger) */}
         <Button
           buttonType="transparent"
-          className="md:hidden absolute top-1 right-1 text-white"
-          onClick={toggleMenu}
+          className={`hidden md:flex absolute top-2 right-1 text-white ${
+            isCollapsed ? "top-14" : ""
+          }`}
+          onClick={toggleCollapse}
         >
-          <FontAwesomeIcon icon={faTimes} className="w-6 h-6" />
+          <Tooltip
+            text={isCollapsed ? "Open Sidebar" : "Collapse Sidebar"}
+            position="right"
+          >
+            <FontAwesomeIcon
+              icon={isCollapsed ? faAngleRight : faAngleLeft}
+              className="w-5 h-5"
+            />
+          </Tooltip>
         </Button>
 
-        {/* Profile Section */}
-        <div className="flex items-center space-x-3 p-6">
+        {/* Logo */}
+        <div
+          className={`flex items-center justify-start text-2xl font-bold text-gray-800 transition-all duration-300 ${
+            isCollapsed ? "text-4xl mx-[1.1rem] mb-10 h-16 w-16" : "mx-6 mt-3"
+          }`}
+        >
+          <Tooltip
+            text="Back to homepage"
+            position={isCollapsed ? "right" : "bottom"}
+          >
+            <Link className="text-whiteFont-500 dark:text-whiteFont-600" to="/">
+              {!isCollapsed ? "Holidaze" : "H"}
+            </Link>
+          </Tooltip>
+        </div>
+        {/* Profile Section (Hidden when collapsed) */}
+        <div
+          className={`flex items-center space-x-3 ${
+            isCollapsed ? "p-1 mb-3 w-16 justify-center" : "p-6"
+          }`}
+        >
           <img
             src={user.avatar?.url}
             alt={user.avatar?.alt || "User avatar"}
-            className="w-12 h-12 rounded-full object-cover shadow-sm"
+            className={`rounded-full object-cover shadow-sm transition-all duration-300 ${
+              isCollapsed ? "w-7 h-7" : "w-12 h-12"
+            }`}
           />
-          <div>
-            <H2 className="md:text-xl text-whiteFont-500">{user.name}</H2>
-            <P className="text-sm text-gray-300">{user.email}</P>
-          </div>
+          {!isCollapsed && (
+            <div>
+              <H2 className="md:text-xl text-whiteFont-500">{user.name}</H2>
+            </div>
+          )}
         </div>
 
-        {/* Common User Links */}
-        <nav className="space-y-2 px-6">
-          <Link to="/profile" className="sidebar-link">
-            <FontAwesomeIcon icon={faUser} className="w-5 mr-2" />
-            My Profile
-          </Link>
-          <Link to="bookings" className="sidebar-link">
-            <FontAwesomeIcon icon={faCalendar} className="w-5 mr-2" />
-            My Bookings
-          </Link>
-          <Link to="#" className="sidebar-link">
-            <FontAwesomeIcon icon={faHeart} className="w-5 mr-2" />
-            Saved Venues
-          </Link>
+        {/* Sidebar Links */}
+        <nav className="space-y-2 px-3">
+          <Tooltip
+            text="My Profile"
+            position={isCollapsed ? "right" : "bottom"}
+            className="w-full"
+          >
+            <Link to="/profile" className="sidebar-link gap-2">
+              <FontAwesomeIcon icon={faUser} className="w-5" />
+              {!isCollapsed && "My Profile"}
+            </Link>
+          </Tooltip>
+          <Tooltip
+            text="My Bookings"
+            position={isCollapsed ? "right" : "bottom"}
+            className="w-full"
+          >
+            <Link to="bookings" className="sidebar-link gap-2">
+              <FontAwesomeIcon icon={faCalendar} className="w-5" />
+              {!isCollapsed && "My Bookings"}
+            </Link>
+          </Tooltip>
+          <Tooltip
+            text="Saved Venues"
+            position={isCollapsed ? "right" : "bottom"}
+            className="w-full"
+          >
+            <Link to="#" className="sidebar-link gap-2">
+              <FontAwesomeIcon icon={faHeart} className="w-5" />
+              {!isCollapsed && "Saved Venues"}
+            </Link>
+          </Tooltip>
         </nav>
 
-        {/* Venue Manager Links */}
+        {/* Venue Manager Links (Only if venueManager is true) */}
         {user.venueManager && (
           <>
             <hr className="border-gray-500 my-4 mx-6" />
-            <nav className="space-y-2 px-6">
-              <Link to="venues" className="sidebar-link">
-                <FontAwesomeIcon icon={faBuilding} className="w-5 mr-2" />
-                My Venues
-              </Link>
-              <Link to="create-venue" className="sidebar-link">
-                <FontAwesomeIcon icon={faPlus} className="w-5 mr-2" />
-                Create Venue
-              </Link>
-              <Link to="venue-bookings" className="sidebar-link">
-                <FontAwesomeIcon icon={faCalendar} className="w-5 mr-2" />
-                Venue Bookings
-              </Link>
-              <Link to="#" className="sidebar-link">
-                <FontAwesomeIcon icon={faChartBar} className="w-5 mr-2" />
-                Earnings Report
-              </Link>
+            <nav className="space-y-2 px-3">
+              <Tooltip
+                text="My Venues"
+                position={isCollapsed ? "right" : "bottom"}
+                className="w-full"
+              >
+                <Link to="venues" className="sidebar-link gap-2">
+                  <FontAwesomeIcon icon={faBuilding} className="w-5" />
+                  {!isCollapsed && "My Venues"}
+                </Link>
+              </Tooltip>
+              <Tooltip
+                text="Create Venue"
+                position={isCollapsed ? "right" : "bottom"}
+                className="w-full"
+              >
+                <Link to="create-venue" className="sidebar-link gap-2">
+                  <FontAwesomeIcon icon={faPlus} className="w-5" />
+                  {!isCollapsed && "Create Venue"}
+                </Link>
+              </Tooltip>
+              <Tooltip
+                text="Venue Bookings"
+                position={isCollapsed ? "right" : "bottom"}
+                className="w-full"
+              >
+                <Link to="venue-bookings" className="sidebar-link gap-2">
+                  <FontAwesomeIcon icon={faCalendar} className="w-5" />
+                  {!isCollapsed && "Venue Bookings"}
+                </Link>
+              </Tooltip>
+              <Tooltip
+                text="Earnings Report"
+                position={isCollapsed ? "right" : "bottom"}
+                className="w-full"
+              >
+                <Link to="#" className="sidebar-link gap-2">
+                  <FontAwesomeIcon icon={faChartBar} className="w-5" />
+                  {!isCollapsed && "Earnings Report"}
+                </Link>
+              </Tooltip>
             </nav>
           </>
         )}
 
         {/* Settings */}
         <hr className="border-gray-500 my-4 mx-6" />
-        <div className="space-y-2 px-6">
-          <Link to="settings" className="sidebar-link px-6">
-            <FontAwesomeIcon icon={faCog} className="w-5  mr-2" />
-            Account Settings
-          </Link>
+        <div className="space-y-2 px-3">
+          <Tooltip
+            text="Account Settings"
+            position={isCollapsed ? "right" : "bottom"}
+            className="w-full"
+          >
+            <Link to="settings" className="sidebar-link gap-2">
+              <FontAwesomeIcon icon={faCog} className="w-5" />
+              {!isCollapsed && "Account Settings"}
+            </Link>
+          </Tooltip>
         </div>
 
         {/* Logout */}
         <hr className="border-gray-500 my-4 mx-6" />
-        <div className="space-y-2 px-6">
-          <Button
-            onClick={handleLogout}
-            buttonType="violet"
-            className="sidebar-link w-full bg-transparent"
-          >
-            <FontAwesomeIcon icon={faSignOut} className="w-5 mr-2" />
-            Sign out
-          </Button>
+        <div className="space-y-2 px-3">
+          <Tooltip text="Sign out" position="right" className="w-full">
+            <Button
+              onClick={handleLogout}
+              buttonType="violet"
+              className="sidebar-link w-full bg-transparent gap-2"
+            >
+              <FontAwesomeIcon icon={faSignOut} className="w-5" />
+              {!isCollapsed && "Sign out"}
+            </Button>
+          </Tooltip>
         </div>
       </div>
     </>

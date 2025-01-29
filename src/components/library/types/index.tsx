@@ -50,6 +50,19 @@ export interface UserProfile {
   };
 }
 
+export interface EditUserProfile {
+  bio: string;
+  avatar: {
+    url: string;
+    alt: string;
+  };
+  banner: {
+    url: string;
+    alt: string;
+  };
+  venueManager: boolean;
+}
+
 export interface ProfileResponse {
   data: UserProfile;
   meta: Record<string, unknown>;
@@ -62,6 +75,16 @@ export interface Booking {
   guests: number;
   created: string;
   updated: string;
+}
+
+export interface BookingData {
+  id: string;
+  created: string;
+  updated: string;
+  dateFrom: string;
+  dateTo: string;
+  guests: number;
+  venue: Venue;
 }
 
 export interface MetaData {
@@ -82,13 +105,13 @@ export interface BookingsResponse {
 /* Button props */
 export type ButtonProps = {
   ButtonType?: "primary" | "secondary";
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
   className?: string;
   title?: string;
   ariaLabel?: string;
   disabled?: boolean;
-  buttonType?: "violet" | "blue" | "transparent";
+  buttonType?: "violet" | "violetSecondary" | "blue" | "transparent";
   type?: "button" | "submit" | "reset";
 };
 
@@ -180,20 +203,6 @@ export interface Venue {
   bookings: Booking[];
 }
 
-export interface VenueProfile {
-  id: string;
-  name: string;
-  description: string;
-  media: Media[];
-  price: number;
-  maxGuests: number;
-  rating: number;
-  created: string;
-  updated: string;
-  meta: Meta;
-  location: Location;
-}
-
 export interface MetaData {
   isFirstPage: boolean;
   isLastPage: boolean;
@@ -207,4 +216,19 @@ export interface MetaData {
 export interface VenuesResponse {
   data: Venue[];
   meta: MetaData;
+}
+
+/* BreadCrumb props */
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  current?: boolean;
+  isDropdown?: boolean;
+  dropdownItems?: { label: string; href?: string }[];
+}
+
+export interface BreadcrumbProps {
+  items: BreadcrumbItem[];
+  goBack?: boolean;
+  className?: string;
 }

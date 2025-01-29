@@ -35,7 +35,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
             ) : (
               <FontAwesomeIcon
                 icon={faExclamationCircle}
-                className="text-color2-900 text-5xl p-4"
+                className="text-color2-900 dark:text-color1-200 text-5xl p-4"
               />
             )}
           </div>

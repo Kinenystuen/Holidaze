@@ -10,13 +10,17 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 interface InputProps<T extends FieldValues> {
   errors: FieldErrors<T>;
   register: UseFormRegister<T>;
-  InputId: Path<T>; // Input ID must be a valid path within T
-  InputLabel: string; // Label for the input
-  icon?: IconDefinition; // Optional: FontAwesome icon
-  minLength?: number; // Optional: Minimum length validation
-  maxLength?: number; // Optional: Maximum length validation
-  required?: boolean; // Optional: Required field validation
-  pattern?: { value: RegExp; message: string }; // Optional: Pattern validation
+  InputId: Path<T>;
+  InputLabel: string;
+  icon?: IconDefinition;
+  minLength?: number;
+  maxLength?: number;
+  required?: boolean;
+  pattern?: { value: RegExp; message: string };
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  autoComplete?: string;
+  checked?: boolean;
 }
 /**
  * Input Component
@@ -49,6 +53,7 @@ interface InputProps<T extends FieldValues> {
  * @param {number} [props.maxLength] - Optional maximum length validation rule.
  * @param {boolean} [props.required] - Optional flag to mark the input as required.
  * @param {{ value: RegExp; message: string }} [props.pattern] - Optional pattern validation rule with a custom message.
+ * @param {(e: React.ChangeEvent<HTMLInputElement>) => void} [props.onChange] - Optional onChange event handler.
  *
  * @returns {JSX.Element} The rendered input component.
  *
@@ -77,18 +82,22 @@ const Input = <T extends FieldValues>({
   minLength,
   maxLength,
   required,
-  pattern
-}: InputProps<T>) => {
+  pattern,
+  onChange,
+  type = "text",
+  autoComplete = "on",
+  checked
+}: InputProps<T>): JSX.Element => {
   // Get the error message for this field
-  const errorMessage = errors[InputId]?.message as string;
+  const errorMessage = (errors[InputId]?.message as string) || "";
 
   return (
-    <div className="relative w-full mt-4">
+    <div className="relative w-full">
       {/* Icon Container */}
       {icon && (
         <FontAwesomeIcon
           icon={icon}
-          className="absolute h-4 w-4 top-5 left-4 transform text-gray-400 peer-focus:text-color4-700 dark:text-gray-500 dark:peer-focus:text-color4-600"
+          className="absolute h-4 w-4 top-5 left-4 text-gray-400 peer-focus:text-color4-700 dark:text-gray-500 dark:peer-focus:text-color4-600"
         />
       )}
 
@@ -116,10 +125,15 @@ const Input = <T extends FieldValues>({
               }
             : undefined
         })}
+        onChange={onChange} // Ensures manual updates work with react-hook-form
         placeholder=" "
-        className={`peer w-full p-2 pl-12 pt-5 pb-2 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 focus:ring-color1-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700 focus:border-color4-600 ${
+        className={`peer w-full p-2 pl-12 pt-5 pb-2 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700 focus:border-color4-600 ${
           icon ? "pl-10" : "pl-[1.8rem]"
         }`}
+        type={type}
+        autoComplete={autoComplete}
+        checked={type === "checkbox" ? checked : undefined}
+        aria-invalid={!!errorMessage}
       />
 
       {/* Input Label */}

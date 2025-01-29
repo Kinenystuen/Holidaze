@@ -17,16 +17,14 @@ const Header: React.FC = () => {
       <div className="lg:max-w-7xl w-full mx-auto  ">
         <div className="flex justify-between items-center py-4 mx-4">
           {/* Logo */}
-          <div className="text-2xl font-bold text-gray-800 z-30 ">
+          <div className="flex-1 text-2xl font-bold text-gray-800 z-30 ">
             <Link className="text-color1-600 dark:text-whiteFont-600" to="/">
               Holidaze
             </Link>
           </div>
-
-          {/* Right side header */}
-          <div className="flex items-center md:mx-4 space-x-4">
+          <div className="flex-1">
             {/* Navigation Links */}
-            <nav className="hidden w-full md:flex  justify-end content-end">
+            <nav className="hidden w-full md:flex  justify-center content-end">
               {headerNavLinks.map((link: INavLink) => {
                 const isActive = pathname === link.route;
                 return (
@@ -46,7 +44,10 @@ const Header: React.FC = () => {
                 );
               })}
             </nav>
+          </div>
 
+          {/* Right side header */}
+          <div className="flex flex-1 justify-end items-center md:mx-4 space-x-4">
             {/* Theme Toggle */}
             <div className="hidden md:flex">
               <ThemeToggle />

@@ -1,0 +1,192 @@
+/* Navigation arrows */
+.venue-swiper .swiper-button-next,
+.venue-swiper .swiper-button-prev {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.venue-swiper .swiper-button-next:hover,
+.venue-swiper .swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+.venue-swiper .swiper-button-next::after,
+.venue-swiper .swiper-button-prev::after {
+    font-size: 14px;
+    /* Adjust arrow size */
+}
+
+/* For better accessibility */
+.venue-swiper .swiper-button-next:focus,
+.venue-swiper .swiper-button-prev:focus {
+    outline: 2px solid var(--color1);
+}
+
+/* Pagination dots */
+.venue-swiper .swiper-pagination-bullet {
+    background-color: gray;
+    width: 0.5rem;
+    height: 0.5rem;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.venue-swiper .swiper-pagination-bullet-active {
+    background-color: white;
+    opacity: 0.8;
+}
+
+
+/* Dark Mode Fixes for Date Picker */
+.dark .rdrCalendarWrapper {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+
+}
+
+.dark .rdrDayNumber span {
+    color: var(--text-color);
+}
+
+.dark .rdrDayToday span::after {
+    background-color: #8b5cf6;
+}
+
+.dark .rdrDayDisabled {
+    background-color: #3a3a3a;
+    opacity: 0.6;
+}
+
+.dark .rdrMonth {
+    border-color: #374151;
+}
+
+
+.dark .rdrMonthAndYearWrapper {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+    border-bottom: 1px solid #374151;
+}
+
+.dark .rdrDateDisplayWrapper {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+    border-bottom: 1px solid #374151;
+}
+
+.dark .rdrDateInput {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border: 1px solid #4b5563;
+}
+
+.dark .rdrDateInput input,
+.dark .rdrMonthName {
+    color: var(--text-color);
+}
+
+/* Change arrow buttons */
+.dark .rdrNextPrevButton {
+    background-color: #3a3a3a;
+    color: var(--text-color);
+    border-radius: 6px;
+}
+
+
+
+.dark .rdrNextPrevButton:hover {
+    background-color: #4b5563;
+}
+
+/* Change dropdown year/month selectors */
+.dark .rdrMonthPicker,
+.dark .rdrYearPicker {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+}
+
+.dark .rdrMonthPicker select,
+.dark .rdrYearPicker select {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border: 1px solid #4b5563;
+}
+
+/* Date Picker - Mobile Styles */
+@media (max-width: 768px) {
+    .rdrCalendarWrapper {
+        width: 100% !important;
+        /* Make sure calendar takes full width */
+    }
+
+    .rdrMonth {
+        width: 100% !important;
+        /* Ensure month layout is responsive */
+    }
+}
+
+/* Dark Mode Fixes for Date Picker */
+.dark .rdrCalendarWrapper {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+}
+
+.dark .rdrDayNumber span {
+    color: var(--text-color);
+}
+
+.dark .rdrDayToday span::after {
+    background-color: #8b5cf6;
+}
+
+.dark .rdrDayDisabled {
+    background-color: #3a3a3a;
+    opacity: 0.6;
+}
+
+.dark .rdrMonth {
+    border-color: #374151;
+}
+
+.dark .rdrMonthAndYearWrapper {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+    border-bottom: 1px solid #374151;
+}
+
+.dark .rdrDateDisplayWrapper {
+    background-color: #1e1e1e;
+    color: var(--text-color);
+    border-bottom: 1px solid #374151;
+}
+
+.dark .rdrDateInput {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border: 1px solid #4b5563;
+}
+
+.dark .rdrDateInput input,
+.dark .rdrMonthName {
+    color: var(--text-color);
+}
+
+/* Change arrow buttons */
+.dark .rdrNextPrevButton {
+    background-color: #3a3a3a;
+    color: var(--text-color);
+    border-radius: 6px;
+}
+
+.dark .rdrNextPrevButton:hover {
+    background-color: #4b5563;
+}

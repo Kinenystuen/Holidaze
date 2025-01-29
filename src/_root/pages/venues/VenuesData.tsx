@@ -1,12 +1,13 @@
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCoffee,
-  faDog,
   faMapMarkerAlt,
-  faParking,
+  faCar,
+  faPaw,
   faStar,
+  faWifi,
   faUserFriends,
-  faWifi
+  faUtensils
 } from "@fortawesome/free-solid-svg-icons";
 import H2 from "../../../components/shared/Typography/H2";
 import P from "../../../components/shared/Typography/P";
@@ -38,18 +39,27 @@ const VenuesData: React.FC<VenuesDataProps> = ({
   goToNextPage,
   goToPreviousPage
 }) => {
+  // Add state for visible venues and fade in/out effect
+  const [visibleVenues, setVisibleVenues] = useState<Venue[]>([]);
+  const [fade, setFade] = useState(false);
+
+  useEffect(() => {
+    setFade(true);
+    setTimeout(() => {
+      setVisibleVenues(venues);
+      setFade(false);
+    }, 300);
+  }, [venues]);
+
   return (
     <div className="relative">
       {/* No Results Message */}
       {venues.length === 0 && (
-        <ErrorMessage
-          className="min-h-20 text-xl font-semibold text-gray-800 dark:text-white text-n my-10"
-          icon={false}
-        >
+        <ErrorMessage className="min-h-20 text-xl font-semibold text-gray-800 dark:text-white my-10">
           <H2 className="md:text-xl font-semibold text-gray-800 dark:text-white">
             No Matching Results
           </H2>
-          <P className="text-base font-normal pt-2 pb-6 text-balance max-w-3xl text-center  ">
+          <P className="text-base font-normal pt-2 pb-6 text-balance max-w-3xl text-center">
             We couldn’t find any venues matching your search criteria. Try
             adjusting your search or browsing all available venues.
           </P>
@@ -58,8 +68,12 @@ const VenuesData: React.FC<VenuesDataProps> = ({
 
       {/* Venues Grid */}
       {venues.length > 0 && (
-        <div className="grid grid-cols-1 mx-2 md:mx-6 gap-5">
-          {venues.map((venue) => (
+        <div
+          className={`grid grid-cols-1 mx-2 md:mx-6 gap-5 ${
+            fade ? "fade-out" : "fade-in"
+          }`}
+        >
+          {visibleVenues.map((venue) => (
             <Link
               to={`/venue/${venue.id}`}
               key={venue.id}
@@ -67,10 +81,9 @@ const VenuesData: React.FC<VenuesDataProps> = ({
             >
               <div
                 key={venue.id}
-                className="sm:flex bg-white dark:bg-customBgDark-500 shadow-sm rounded-lg overflow-hidden group transform transition-transform"
+                className="sm:flex bg-white dark:bg-customBgDark-500 shadow-sm rounded-lg overflow-hidden group transition-transform transform scale-95 hover:scale-100 fade-in-up"
               >
                 <VenueSwiper media={venue.media} />
-
                 <div className="p-4 w-full flex flex-col justify-between">
                   <div>
                     {/* Venue Name and Rating */}
@@ -120,7 +133,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       {venue.meta.parking && (
                         <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
                           <FontAwesomeIcon
-                            icon={faParking}
+                            icon={faCar}
                             size="xs"
                             className="w-4 h-4 p-1"
                           />
@@ -130,7 +143,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       {venue.meta.breakfast && (
                         <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
                           <FontAwesomeIcon
-                            icon={faCoffee}
+                            icon={faUtensils}
                             size="xs"
                             className="w-4 h-4 p-1"
                           />
@@ -140,7 +153,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       {venue.meta.pets && (
                         <li className="flex flex-col items-center text-gray-800 dark:text-whiteFont-700">
                           <FontAwesomeIcon
-                            icon={faDog}
+                            icon={faPaw}
                             size="xs"
                             className="w-4 h-4 p-1"
                           />
@@ -149,7 +162,6 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       )}
                     </ul>
                   </div>
-
                   {/* Max Guests and Price at the Bottom */}
                   <div className="md:mt-auto flex justify-between">
                     <div className="flex items-center mt-2 text-sm text-gray-600">
@@ -174,6 +186,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
           ))}
         </div>
       )}
+
       {venues.length > 0 && meta && (
         <VenuePagination
           currentPage={meta.currentPage}

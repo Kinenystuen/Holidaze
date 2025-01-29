@@ -11,58 +11,64 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import CardBox from "../../../components/ui/CardBox";
-import Button from "../../../components/shared/Button/Button";
 import FetchProfileData from "../../../components/context/FetchProfileData";
 import LoaderSmall from "../../../components/ui/LoaderSmall";
+import EditProfile from "./EditProfile";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();
 
   return (
-    <div className="flex flex-col mt-0">
+    <div className="flex flex-col mt-0 mb-20">
       <div>
-        {/* <div className="h-[50vh] max-h-80 bg-gray-200 dark:bg-gray-800 rounded-xl overflow-hidden">
-          <img
-            src={user.bannerUrl}
-            alt={`${user.name} profile banner`}
-            className="object-cover w-full h-full"
-          />
-        </div> */}
-
-        <div className="grid grid-cols-3 grid-rows-1 gap-5 mx-5 mb-20 items-center">
-          {/* Left Section (Takes up 2/3 of the row) */}
-          <div className="col-span-3 lg:col-span-2 flex flex-col sm:flex-row h-fit bg-white dark:bg-customBgDark-500 shadow-sm rounded-xl w-full items-center">
-            <div className="w-full sm:w-fit p-2 max-w-72 rounded-xl overflow-hidden">
-              <img
-                src={user.avatar?.url}
-                alt="User Avatar"
-                className="w-full h-40 sm:w-60 sm:h-60 rounded-xl overflow-hidden object-cover"
-              />
+        <div className="grid grid-cols-4 md:grid-cols-3  grid-rows-1 gap-5 mx-5 items-center">
+          {/* Profile card */}
+          <div className="col-span-4 md:col-span-3 lg:col-span-2  flex flex-col h-fit bg-white dark:bg-customBgDark-500 shadow-sm rounded-xl w-full items-center">
+            {/* Banner area */}
+            <div className="flex w-full">
+              {/* Banner */}
+              <div className="h-44 sm:h-16 w-full bg-gray-200 dark:bg-gray-800 rounded-t-xl overflow-hidden">
+                <img
+                  src={user.banner?.url}
+                  alt={`${user.name} profile banner`}
+                  className="object-cover w-full h-full"
+                />
+              </div>
             </div>
-            <div className="flex mx-2 flex-col justify-center items-start sm:items-start text-start sm:text-start x-2 mb-4 sm:ml-6">
-              <H1 className="font-heading">{user.name}</H1>
-              <span className="text-sm font-thin">{user.email}</span>
-              <P className="mt-4 max-w-72">{user.bio}</P>
-              {user.venueManager && (
-                <Link
-                  to={"settings"}
-                  className="my-4 group sm:mb-0 px-3 py-1 w-fit flex items-center cursor-pointer bg-color1 dark:bg-color1-600 text-white dark:text-whiteFont-500 text-sm font-semibold rounded-full whitespace-nowrap transition-all duration-300 ease-in-out"
-                >
-                  <FontAwesomeIcon
-                    icon={faEdit}
-                    className="opacity-0 w-[1px] h-4 p-0 m-0 group-hover:w-4 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-300 ease-in-out group-hover:mr-2"
-                  />
-                  Venue Manager
-                </Link>
-              )}
+            {/* Avatar and description area */}
+            <div className="relative flex flex-col sm:flex-row items-center justify-center w-full">
+              {/* Avatar */}
+              <div className=" min-h-[8rem] sm:h-full sm:min-w-60 sm:min-h-40 flex-1 px-6 sm:w-fit p-2 sm:my-4 max-w-72 rounded-xl overflow-hidden">
+                <img
+                  src={user.avatar?.url}
+                  alt="User Avatar"
+                  className="absolute top-[-8rem] sm:top-[-1.5rem] left-1/2 transform -translate-x-1/2 sm:left-6 sm:translate-x-0 w-64 xs:w-72 h-60 sm:w-52 sm:h-52 rounded-xl object-cover border-10 border-white dark:border-gray-800"
+                />
+              </div>
+              {/* User Info */}
+              <div className="flex flex-grow flex-col justify-center items-center sm:items-start text-center sm:text-start mb-4 sm:ml-1">
+                <H1 className="font-heading">{user.name}</H1>
+                <span className="text-sm font-thin">{user.email}</span>
+                <P className="mt-4 max-w-72">{user.bio}</P>
+                {user.venueManager && (
+                  <Link
+                    to={"settings"}
+                    className="my-4 group sm:mb-0 px-3 py-1 w-fit flex items-center cursor-pointer bg-color1 dark:bg-color1-600 text-white dark:text-whiteFont-500 text-sm font-semibold rounded-full whitespace-nowrap transition-all duration-300 ease-in-out"
+                  >
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      className="opacity-0 w-[1px] h-4 p-0 m-0 group-hover:w-4 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-300 ease-in-out group-hover:mr-2"
+                    />
+                    Venue Manager
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
 
-          <div className="col-span-3 lg:col-span-1 flex flex-row lg:flex-col items-center justify-center gap-4">
-            <Button className="px-4 py-2 text-white rounded-lg shadow-md bg-color1-400 dark:bg-color1-600 hover:bg-color1-500 dark:hover:bg-color1-500 transition">
-              <FontAwesomeIcon icon={faEdit} className="mr-2" />
-              Edit Profile
-            </Button>
+          {/* Edit Profile and Settings */}
+          <div className="col-span-4 md:col-span-1 flex flex-row lg:flex-col items-center justify-center gap-4">
+            <EditProfile />
             <Link
               to={"settings"}
               className="px-6 py-2 bg-gray-200 dark:bg-customBgDark-200 text-gray-700 dark:text-customBgDark-700 rounded-lg shadow-md hover:bg-gray-300 dark:hover:bg-customBgDark-100 transition duration-300 ease-in-out "
@@ -71,7 +77,8 @@ const PrivateProfile = () => {
               Settings
             </Link>
           </div>
-
+        </div>
+        <div className="grid grid-cols-4 md:grid-cols-3 2xl:grid-cols-4 gap-5 my-5 mx-5 items-center">
           {/* Venue Manager Section */}
           {user.venueManager && (
             <FetchProfileData>
@@ -87,7 +94,7 @@ const PrivateProfile = () => {
                     className={`${
                       profile._count.venues > 0
                         ? ""
-                        : "bg-color4 dark:bg-color1-700 text-color-5 hover:text-black p-6 rounded-lg shadow-md transition-all"
+                        : "bg-color4-500 dark:xs:bg-color1-600 text-color-5 hover:text-black p-6 rounded-lg shadow-md transition-all"
                     } p-6 rounded-lg shadow-md transition-all`}
                     icon={faBuilding}
                   >
@@ -139,7 +146,7 @@ const PrivateProfile = () => {
               title="Ready to Host? Become a Venue Manager!"
               icon={faCalendar}
               textColor="group-hover:text-black"
-              className="bg-color4 dark:bg-color1-700 text-color5 hover:text-black p-6 rounded-lg shadow-md transition-all"
+              className="bg-color4-500 dark:xs:bg-color1-600 text-color5 hover:text-black p-6 rounded-lg shadow-md transition-all"
             >
               Turn your property into a thriving venue. Sign up now to list your
               space and connect with guests.

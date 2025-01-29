@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Venue } from "../../../components/library/types";
 import { apiHostUrl } from "../../../components/library/constants";
-import { useApi } from "../../../components/hooks/UseApi";
 import Loader from "../../../components/ui/Loader";
-import P from "../../../components/shared/Typography/P";
-import ErrorMessage from "../../../components/shared/ErrorMessage";
 import VenuesData from "./VenuesData";
+import ErrorMessage from "../../../components/shared/ErrorMessage";
+import P from "../../../components/shared/Typography/P";
 
 const Venues = ({
   searchQuery,
@@ -24,33 +23,62 @@ const Venues = ({
   };
 }) => {
   const [page, setPage] = useState(1);
+  const [allVenues, setAllVenues] = useState<Venue[]>([]);
   const [filteredVenues, setFilteredVenues] = useState<Venue[]>([]);
+  const [isFetchingAll, setIsFetchingAll] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
-  const apiUrl =
-    searchQuery !== ""
-      ? `${apiHostUrl}/holidaze/venues/search?q=${encodeURIComponent(
-          searchQuery
-        )}&limit=30&page=${page}`
-      : `${apiHostUrl}/holidaze/venues?limit=30&page=${page}`;
+  // Function to fetch all pages of venues using while loop
+  const fetchAllVenues = async () => {
+    let allData: Venue[] = [];
+    let currentPage = 1;
+    let hasMore = true;
 
-  const { response, isLoading, isError, errorMessage } =
-    useApi<Venue[]>(apiUrl);
+    try {
+      while (hasMore) {
+        const response = await fetch(
+          `${apiHostUrl}/holidaze/venues?limit=100&page=${currentPage}`
+        );
 
-  const venues = useMemo(() => response?.data || [], [response]);
+        const data = await response.json();
 
-  const meta = response?.meta;
+        if (!response.ok) {
+          throw new Error(
+            data.errors?.[0]?.message || "Failed to fetch venues"
+          );
+        }
+
+        allData = [...allData, ...data.data]; // Merge new data
+        hasMore = data.meta?.nextPage ? true : false;
+        currentPage++;
+      }
+
+      setAllVenues(allData);
+      setIsFetchingAll(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setFetchError(error.message);
+      } else {
+        setFetchError("An unknown error occurred");
+      }
+      setIsFetchingAll(false);
+    }
+  };
 
   useEffect(() => {
-    if (page !== 1) {
-      setPage(1);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, filters]);
+    fetchAllVenues();
+  }, []);
 
-  // Filter and sort venues
   useEffect(() => {
     const filterAndSortVenues = () => {
-      let result = [...venues];
+      let result = [...allVenues];
+
+      // Apply search filter
+      if (searchQuery.trim() !== "") {
+        result = result.filter((venue) =>
+          venue.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
 
       // Apply filters
       if (filters.wifi) result = result.filter((v) => v.meta.wifi);
@@ -71,41 +99,48 @@ const Venues = ({
       return result;
     };
 
-    setFilteredVenues(filterAndSortVenues());
-  }, [venues, filters, sortField, sortOrder]);
+    const filteredResults = filterAndSortVenues();
+    setFilteredVenues(filteredResults);
+  }, [allVenues, searchQuery, filters, sortField, sortOrder]);
+
+  // Handle Pagination
+  const itemsPerPage = 30;
+  const totalPages = Math.ceil(filteredVenues.length / itemsPerPage);
+  const paginatedVenues = filteredVenues.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
 
   const goToSelPage = (page: number) => {
     setPage(page);
   };
 
   const goToNextPage = () => {
-    if (meta?.nextPage) setPage(meta.nextPage);
+    if (page < totalPages) setPage(page + 1);
   };
 
   const goToPreviousPage = () => {
-    if (meta?.previousPage) setPage(meta.previousPage);
+    if (page > 1) setPage(page - 1);
   };
 
-  if (isLoading) return <Loader />;
-  if (isError)
+  if (isFetchingAll) return <Loader />;
+  if (fetchError)
     return (
       <P>
-        <ErrorMessage message={errorMessage} />
+        <ErrorMessage message={fetchError} />
       </P>
     );
 
   return (
     <VenuesData
-      venues={filteredVenues}
-      meta={
-        meta || {
-          currentPage: 0,
-          pageCount: 0,
-          totalCount: 0,
-          isFirstPage: true,
-          isLastPage: true
-        }
-      }
+      venues={paginatedVenues}
+      meta={{
+        currentPage: page,
+        pageCount: totalPages,
+        totalCount: filteredVenues.length,
+        isFirstPage: page === 1,
+        isLastPage: page === totalPages
+      }}
       goToSelPage={goToSelPage}
       goToNextPage={goToNextPage}
       goToPreviousPage={goToPreviousPage}

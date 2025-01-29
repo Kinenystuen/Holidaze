@@ -6,6 +6,7 @@ interface TooltipProps {
   position?: "top" | "right" | "bottom" | "left";
   color?: string;
   textColor?: string;
+  className?: string;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -13,7 +14,8 @@ const Tooltip: React.FC<TooltipProps> = ({
   text,
   position = "top",
   color = "#1f2937",
-  textColor = "#ffffff"
+  textColor = "#ffffff",
+  className
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -81,7 +83,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   return (
     <div
-      className="relative inline-block"
+      className={`relative inline-block ${className}`}
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
     >
