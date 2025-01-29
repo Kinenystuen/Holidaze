@@ -4,9 +4,7 @@ import MyVenues from "./MyVenues";
 const ManageVenues = () => {
   return (
     <div>
-      <H1 className="max-w-screen-lg mx-auto font-semibold px-10 mt-4">
-        My Venues
-      </H1>
+      <H1 className="max-w-4xl mx-auto font-semibold px-10 mt-4">My Venues</H1>
       <MyVenues />
     </div>
   );
