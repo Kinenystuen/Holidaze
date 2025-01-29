@@ -49,7 +49,7 @@ const VenueCard = ({
   };
 
   return (
-    <div className=" flex flex-col md:flex-row gap-3 p-4 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg h-fit">
+    <div className=" flex flex-col lg:flex-row gap-3 p-4 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg h-fit">
       {/* Show Loader if deleting */}
       {isLoading ? (
         <div className="flex justify-center items-center w-full h-40">
@@ -61,7 +61,7 @@ const VenueCard = ({
             <img
               src={venue.media[0]?.url}
               alt={venue.media[0]?.alt}
-              className="w-80 h-full object-cover rounded-lg"
+              className="w-full h-72 lg:w-80 lg:h-full object-cover rounded-lg"
             />
           </div>
           <div className="w-full h-full p-1">
@@ -93,7 +93,7 @@ const VenueCard = ({
               {venue?.meta.pets && <Feature icon={faPaw} text="Pets Allowed" />}
             </div>
             <P className="text-md mt-2">{venue.price} kr / night</P>
-            <div className="flex gap-2 justify-end mt-2">
+            <div className="flex gap-2 justify-center lg:justify-end mt-2">
               <ButtonDropdown
                 label="Edit Venue"
                 options={[
