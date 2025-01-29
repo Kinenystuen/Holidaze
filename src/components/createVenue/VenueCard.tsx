@@ -41,7 +41,6 @@ const VenueCard = ({
   };
 
   return (
-    // <div className=" flex flex-col lg:flex-row gap-3 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg h-fit">
     <>
       {/* Show Loader if deleting */}
       {isLoading ? (
@@ -180,70 +179,8 @@ const VenueCard = ({
               </Link>
             </div>
           </div>
-
-          {/* <div>
-            <img
-              src={venue.media[0]?.url}
-              alt={venue.media[0]?.alt}
-              className="w-full h-72 lg:w-80 lg:h-full object-cover rounded-lg"
-            />
-          </div>
-          <div className="w-full h-full p-1">
-            <div className="flex justify-between items-center">
-              <H2 className="md:text-2xl font-semibold truncate">
-                {venue.name}
-              </H2>
-              <div className="text-sm text-customBgDark-900 dark:text-whiteFont-500">
-                <FontAwesomeIcon
-                  icon={faStar}
-                  size="sm"
-                  className="mr-2 my-0"
-                />
-                {venue.rating}
-              </div>
-            </div>
-            <P className="text-sm text-gray-700 dark:text-gray-300 mb-1">
-              {venue.description}
-            </P>
-            <div className="items-start justify-between">
-              <Feature icon={faUsers} text={`Max Guests: ${venue.maxGuests}`} />
-            </div>
-            <div className=" flex gap-6 text-gray-700">
-              {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
-              {venue?.meta.parking && <Feature icon={faCar} text="Parking" />}
-              {venue?.meta.breakfast && (
-                <Feature icon={faUtensils} text="Breakfast" />
-              )}
-              {venue?.meta.pets && <Feature icon={faPaw} text="Pets Allowed" />}
-            </div>
-            <P className="text-md mt-2">{venue.price} kr / night</P>
-            <div className="flex gap-2 justify-center lg:justify-end mt-2">
-              <ButtonDropdown
-                label="Edit Venue"
-                options={[
-                  {
-                    label: "Edit Venue",
-                    action: handleEditVenue,
-                    icon: faEdit
-                  },
-                  {
-                    label: "Delete Venue",
-                    action: handleDeleteVenue,
-                    icon: faTrash,
-                    danger: true
-                  }
-                ]}
-              />
-              <Link to={`/venue/${venue.id}`}>
-                <Button buttonType="violet" className="">
-                  View Venue
-                </Button>
-              </Link>
-            </div>
-          </div> */}
         </div>
       )}
-      {/* </div> */}
     </>
   );
 };
