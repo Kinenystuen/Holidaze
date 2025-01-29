@@ -66,9 +66,16 @@ const RegisterForm: React.FC = () => {
   // Handle form submission
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      await submitAuth(data);
-    } catch (err) {
-      console.error("Registration failed:", err);
+      // 1. Register the User
+      await submitAuth(data, "/auth/register");
+
+      // 2. Then, Automatically Log In
+      await submitAuth(
+        { email: data.email, password: data.password },
+        "/auth/login"
+      );
+    } catch (error) {
+      console.error("Registration failed:", error);
     }
   };
 
