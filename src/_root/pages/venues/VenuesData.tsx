@@ -74,11 +74,7 @@ const VenuesData: React.FC<VenuesDataProps> = ({
           }`}
         >
           {visibleVenues.map((venue) => (
-            <Link
-              to={`/venue/${venue.id}`}
-              key={venue.id}
-              className="hover:no-underline"
-            >
+            <Link to={`/venue/${venue.id}`} key={venue.id} className="">
               <div
                 key={venue.id}
                 className="sm:flex bg-white dark:bg-customBgDark-500 shadow-sm rounded-lg overflow-hidden group transition-transform transform scale-95 hover:scale-100 fade-in-up"

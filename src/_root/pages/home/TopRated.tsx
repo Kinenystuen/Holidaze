@@ -87,10 +87,7 @@ const TopRated = () => {
       >
         {topVenues.map((venue) => (
           <SwiperSlide key={venue.id}>
-            <Link
-              to={`/venue/${venue.id}`}
-              className="w-full hover:no-underline"
-            >
+            <Link to={`/venue/${venue.id}`} className="w-full">
               <div className="w-full h-100 bg-white dark:bg-customBgDark-500 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-10">
                 {venue.media?.length > 0 ? (
                   <img
