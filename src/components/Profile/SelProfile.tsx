@@ -1,5 +1,4 @@
 import { UserProfile } from "../library/types";
-import VenuesData from "../../_root/pages/venues/VenuesData";
 import H2 from "../shared/Typography/H2";
 import ProfileCard from "../ui/ProfileCard";
 import UserVenues from "./UserVenues";
