@@ -67,7 +67,7 @@ const PrivateProfile = () => {
           </div>
 
           {/* Edit Profile and Settings */}
-          <div className="col-span-4 md:col-span-1 flex flex-row lg:flex-col items-center justify-center gap-4">
+          <div className="col-span-4 md:col-span-3 lg:col-span-1 flex flex-col xs:flex-row lg:flex-col items-center justify-center gap-4">
             <EditProfile />
             <Link
               to={"settings"}
