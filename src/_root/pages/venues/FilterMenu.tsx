@@ -8,7 +8,7 @@ import {
   faUtensils,
   faWifi
 } from "@fortawesome/free-solid-svg-icons";
-import MetaCheckbox from "../../../components/createVenue/MetaCheckbox";
+import MetaCheckbox from "../../../components/ui/MetaCheckbox";
 
 const FilterMenu = ({
   filters,
@@ -62,7 +62,7 @@ const FilterMenu = ({
       </Button>
       {isOpen && (
         <div
-          className={`absolute top-full flex flex-col gap-1 mt-2 w-56 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg p-4 z-10 ${boxPosition}`}
+          className={`absolute top-full space-y-1 mt-2 w-56 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg p-4 z-10 ${boxPosition}`}
         >
           <MetaCheckbox
             key={"wifi"}
