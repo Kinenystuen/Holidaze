@@ -34,7 +34,7 @@ const ProfileLayout = () => {
               </H1>
               <ThemeToggle />
             </div>
-            <div className="relative flex flex-col w-full md:flex 2xl:max-w-7xl flex-1 gap-2 custom-scrollbar mx-auto">
+            <div className="relative flex flex-col w-full flex-1 gap-2 custom-scrollbar mx-auto">
               <Outlet />
             </div>
           </div>
