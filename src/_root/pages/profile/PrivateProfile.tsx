@@ -14,12 +14,13 @@ import CardBox from "../../../components/ui/CardBox";
 import FetchProfileData from "../../../components/context/FetchProfileData";
 import LoaderSmall from "../../../components/ui/LoaderSmall";
 import EditProfile from "./EditProfile";
+import Button from "../../../components/shared/Button/Button";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();
 
   return (
-    <div className="flex flex-col mt-0 mb-20">
+    <div className="flex md:flex 2xl:max-w-7xl mx-auto flex-col mt-0 mb-20">
       <div>
         <div className="grid grid-cols-4 md:grid-cols-3  grid-rows-1 gap-5 mx-5 items-center">
           {/* Profile card */}
@@ -67,15 +68,16 @@ const PrivateProfile = () => {
           </div>
 
           {/* Edit Profile and Settings */}
-          <div className="col-span-4 md:col-span-3 lg:col-span-1 flex flex-col xs:flex-row lg:flex-col items-center justify-center gap-4">
-            <EditProfile />
-            <Link
-              to={"settings"}
-              className="px-6 py-2 bg-gray-200 dark:bg-customBgDark-200 text-gray-700 dark:text-customBgDark-700 rounded-lg shadow-md hover:bg-gray-300 dark:hover:bg-customBgDark-100 transition duration-300 ease-in-out "
-            >
-              <FontAwesomeIcon icon={faCog} className="mr-2" />
-              Settings
-            </Link>
+          <div className="col-span-4 md:col-span-3 lg:col-span-1 flex whitespace-nowrap items-center justify-center">
+            <div className="w-fit flex flex-col xs:flex-row lg:flex-col items-center gap-2">
+              <EditProfile />
+              <Link to={"settings"} className="w-full">
+                <Button className="rounded-lg w-full">
+                  <FontAwesomeIcon icon={faCog} className="mr-2" />
+                  Settings
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-4 md:grid-cols-3 2xl:grid-cols-4 gap-5 my-5 mx-5 items-center">
