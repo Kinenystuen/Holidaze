@@ -11,7 +11,6 @@ import Button from "../../../components/shared/Button/Button";
 import { useUserContext } from "../../../components/context/useUserContext";
 import { motion } from "framer-motion";
 import { Venue } from "../../../components/library/types";
-import H2 from "../../../components/shared/Typography/H2";
 import VenueCard from "../../../components/createVenue/VenueCard";
 
 const MyVenues = () => {
