@@ -20,16 +20,16 @@ import VenuePagination from "./VenuePaginationData";
 
 interface VenuesDataProps {
   venues: Venue[];
-  meta: {
+  meta?: {
     currentPage: number;
     pageCount: number;
     totalCount: number;
     isFirstPage: boolean;
     isLastPage: boolean;
   };
-  goToSelPage: (page: number) => void;
-  goToNextPage: () => void;
-  goToPreviousPage: () => void;
+  goToSelPage?: (page: number) => void;
+  goToNextPage?: () => void;
+  goToPreviousPage?: () => void;
 }
 
 const VenuesData: React.FC<VenuesDataProps> = ({
