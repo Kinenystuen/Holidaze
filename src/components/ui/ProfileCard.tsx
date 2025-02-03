@@ -4,7 +4,7 @@ import H1 from "../shared/Typography/H1";
 import P from "../shared/Typography/P";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faCertificate, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../context/useUserContext";
 
 interface SelUserProps {
@@ -38,7 +38,20 @@ const ProfileCard: React.FC<SelUserProps> = ({ userData }) => {
         </div>
         {/* User Info */}
         <div className="flex flex-grow flex-col justify-center items-center sm:items-start text-center sm:text-start mb-4 sm:ml-1">
-          <H1 className="font-heading capitalize">{userData.name}</H1>
+          <div className="relative">
+            <H1 className="font-heading capitalize">{userData.name}</H1>
+            {userData.venueManager && user.name != userData.name && (
+              <div className="absolute -top-[0.05rem] -right-5">
+                <FontAwesomeIcon
+                  icon={faCertificate}
+                  className="w-5 h-5 p-0 m-0 text-color1"
+                />
+                <span className="absolute top-[0.12rem] left-[0.37rem] text-xs font-medium text-white">
+                  V
+                </span>
+              </div>
+            )}
+          </div>
           <span className="text-sm font-thin">{userData.email}</span>
           <P className="mt-4 max-w-72">{userData.bio}</P>
           {userData.venueManager && user.name === userData.name && (
