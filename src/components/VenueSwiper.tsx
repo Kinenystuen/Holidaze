@@ -4,7 +4,7 @@ import "./VenueSwiper.css";
 
 const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
   return (
-    <div className="relative venue-swiper w-full lg:w-80">
+    <div className="relative venue-swiper w-full h-full object-cover">
       <Swiper
         modules={[Navigation, Pagination]}
         navigation={media.length > 1}
@@ -12,7 +12,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
         loop={media.length > 1}
         slidesPerView={1}
         centeredSlides={false}
-        className="w-full h-52 md:max-w-64 lg:w-80 sm:h-48"
+        className="w-full h-full object-cover"
       >
         {media.length > 0 ? (
           media.map((image, index) => (
