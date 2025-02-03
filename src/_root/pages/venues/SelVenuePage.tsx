@@ -60,7 +60,7 @@ const SelVenuePage = () => {
         keywords="holidaze, venue, hotel, booking, holiday, vacation"
         description={`Book your stay at ${venueData.name}. Enjoy great amenities and a wonderful experience!`}
       />
-      <div className="container max-w-screen-xl mx-auto px-2 md:px-10">
+      <div className="container max-w-screen-xl mx-auto px-5 md:px-10">
         <Breadcrumb items={breadcrumbItems} />
         <SelVenue venue={venueData} refetchVenue={fetchData} />
       </div>
