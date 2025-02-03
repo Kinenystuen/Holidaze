@@ -49,7 +49,6 @@ const MyVenues = () => {
     return (
       <div className="container mx-auto">
         <div className="max-w-screen-xl mx-auto px-10">
-          <H2 className="text-2xl font-semibold mt-8">My Venues</H2>
           <P className="mt-4">You have no venues yet.</P>
         </div>
       </div>
