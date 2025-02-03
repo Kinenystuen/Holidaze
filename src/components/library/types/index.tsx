@@ -31,24 +31,20 @@ export interface RegisterProfile {
   password: string;
 }
 
-export interface UserProfile {
+export type UserProfile = {
   name: string;
   email: string;
   bio: string;
-  avatar: {
-    url: string;
-    alt: string;
-  };
-  banner: {
-    url: string;
-    alt: string;
-  };
+  avatar: Avatar;
+  banner: Banner;
   venueManager: boolean;
+  venues: Venue[];
+  bookings: Booking[];
   _count: {
     venues: number;
     bookings: number;
   };
-}
+};
 
 export interface EditUserProfile {
   bio: string;
