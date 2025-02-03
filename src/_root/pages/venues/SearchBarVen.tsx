@@ -40,7 +40,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto flex-1">
+    <div className="relative w-full max-w-md mx-auto flex-1 md:flex-none">
       <div className="relative">
         {/* Search Icon */}
         <span className="absolute inset-y-0 left-3 flex items-center text-gray-500 pointer-events-none">
