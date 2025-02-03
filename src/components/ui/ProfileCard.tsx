@@ -38,7 +38,7 @@ const ProfileCard: React.FC<SelUserProps> = ({ userData }) => {
         </div>
         {/* User Info */}
         <div className="flex flex-grow flex-col justify-center items-center sm:items-start text-center sm:text-start mb-4 sm:ml-1">
-          <H1 className="font-heading">{userData.name}</H1>
+          <H1 className="font-heading capitalize">{userData.name}</H1>
           <span className="text-sm font-thin">{userData.email}</span>
           <P className="mt-4 max-w-72">{userData.bio}</P>
           {userData.venueManager && user.name === userData.name && (
