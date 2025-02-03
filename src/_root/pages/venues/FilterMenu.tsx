@@ -55,7 +55,7 @@ const FilterMenu = ({
       <Button
         buttonType="transparent"
         onClick={toggleDropdown}
-        className="inline-flex flex-col text-sm md:flex-row justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg  focus:outline-none"
+        className="inline-flex flex-col text-sm md:flex-row justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg "
       >
         <FontAwesomeIcon icon={faFilter} className="mr-0 md:mr-2" />
         Filter
