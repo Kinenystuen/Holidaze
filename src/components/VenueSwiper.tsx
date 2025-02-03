@@ -10,7 +10,9 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
         navigation={media.length > 1}
         pagination={media.length > 1 ? { clickable: true } : false}
         loop={media.length > 1}
-        className="w-full h-52 sm:w-60 lg:w-80 sm:h-48  "
+        slidesPerView={1}
+        centeredSlides={false}
+        className="w-full h-52 md:max-w-64 lg:w-80 sm:h-48"
       >
         {media.length > 0 ? (
           media.map((image, index) => (
@@ -18,7 +20,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
               <img
                 src={image.url}
                 alt={image.alt || "Venue Image"}
-                className="w-full h-full object-cover venue-swiper group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </SwiperSlide>
           ))
@@ -27,7 +29,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
             <img
               src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
               alt="Default Placeholder"
-              className="w-full h-full object-cover venue-swiper"
+              className="w-full h-full object-cover"
             />
           </SwiperSlide>
         )}
