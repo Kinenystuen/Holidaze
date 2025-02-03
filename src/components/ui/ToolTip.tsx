@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 interface TooltipProps {
   children: React.ReactNode;
@@ -18,93 +19,140 @@ const Tooltip: React.FC<TooltipProps> = ({
   className
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [coords, setCoords] = useState({ top: 0, left: 0 });
+  const triggerRef = useRef<HTMLDivElement>(null);
 
-  const getTooltipPosition = () => {
+  // When the tooltip becomes visible, calculate the trigger element's position.
+  useEffect(() => {
+    if (isVisible && triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      const offset = 8;
+      let top = 0;
+      let left = 0;
+      switch (position) {
+        case "top":
+          top = rect.top - offset;
+          left = rect.left + rect.width / 2;
+          break;
+        case "right":
+          top = rect.top + rect.height / 2;
+          left = rect.right + offset;
+          break;
+        case "bottom":
+          top = rect.bottom + offset;
+          left = rect.left + rect.width / 2;
+          break;
+        case "left":
+          top = rect.top + rect.height / 2;
+          left = rect.left - offset;
+          break;
+        default:
+          break;
+      }
+      setCoords({ top, left });
+    }
+  }, [isVisible, position]);
+
+  // Determine the tooltip's transform so that it appears correctly relative to the trigger.
+  const getTransform = () => {
     switch (position) {
       case "top":
-        return "bottom-full left-1/2 transform -translate-x-1/2 mb-2";
+        return "translate(-50%, -100%)";
       case "right":
-        return "left-full top-1/2 transform -translate-y-1/2 ml-2";
+        return "translate(0, -50%)";
       case "bottom":
-        return "top-full left-1/2 transform -translate-x-1/2 mt-2";
+        return "translate(-50%, 0)";
       case "left":
-        return "right-full top-1/2 transform -translate-y-1/2 mr-2";
+        return "translate(-100%, -50%)";
       default:
         return "";
     }
   };
 
-  const getArrowStyles = () => {
-    const size = 6;
-    const halfSize = size / 1.4;
+  const tooltipStyle: React.CSSProperties = {
+    position: "fixed",
+    top: coords.top,
+    left: coords.left,
+    transform: getTransform(),
+    backgroundColor: color,
+    color: textColor,
+    padding: "0.5rem 0.75rem",
+    borderRadius: "0.25rem",
+    boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.2)",
+    whiteSpace: "nowrap",
+    zIndex: 9999
+  };
 
+  // Compute arrow styles based on the tooltip position.
+  const getArrowStyles = (): React.CSSProperties => {
+    const arrowSize = 6;
+    const halfArrow = arrowSize / 2;
     switch (position) {
       case "top":
         return {
-          borderLeft: `${halfSize}px solid transparent`,
-          borderRight: `${halfSize}px solid transparent`,
-          borderTop: `${size}px solid ${color}`,
-          bottom: -size,
+          position: "absolute",
+          bottom: -arrowSize,
           left: "50%",
-          transform: "translateX(-50%)"
+          transform: "translateX(-50%)",
+          borderLeft: `${halfArrow}px solid transparent`,
+          borderRight: `${halfArrow}px solid transparent`,
+          borderTop: `${arrowSize}px solid ${color}`
         };
       case "right":
         return {
-          borderTop: `${halfSize}px solid transparent`,
-          borderBottom: `${halfSize}px solid transparent`,
-          borderRight: `${size}px solid ${color}`,
-          left: -size,
+          position: "absolute",
+          left: -arrowSize,
           top: "50%",
-          transform: "translateY(-50%)"
+          transform: "translateY(-50%)",
+          borderTop: `${halfArrow}px solid transparent`,
+          borderBottom: `${halfArrow}px solid transparent`,
+          borderRight: `${arrowSize}px solid ${color}`
         };
       case "bottom":
         return {
-          borderLeft: `${halfSize}px solid transparent`,
-          borderRight: `${halfSize}px solid transparent`,
-          borderBottom: `${size}px solid ${color}`,
-
-          top: -size,
+          position: "absolute",
+          top: -arrowSize,
           left: "50%",
-          transform: "translateX(-50%)"
+          transform: "translateX(-50%)",
+          borderLeft: `${halfArrow}px solid transparent`,
+          borderRight: `${halfArrow}px solid transparent`,
+          borderBottom: `${arrowSize}px solid ${color}`
         };
       case "left":
         return {
-          borderTop: `${halfSize}px solid transparent`,
-          borderBottom: `${halfSize}px solid transparent`,
-          borderLeft: `${size}px solid ${color}`,
-          right: -size,
+          position: "absolute",
+          right: -arrowSize,
           top: "50%",
-          transform: "translateY(-50%)"
+          transform: "translateY(-50%)",
+          borderTop: `${halfArrow}px solid transparent`,
+          borderBottom: `${halfArrow}px solid transparent`,
+          borderLeft: `${arrowSize}px solid ${color}`
         };
       default:
         return {};
     }
   };
 
-  return (
-    <div
-      className={`relative inline-block ${className}`}
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
-    >
-      {children}
-      {isVisible && (
-        <div
-          role="tooltip"
-          aria-hidden={!isVisible}
-          className={`absolute z-10 px-3 py-2 whitespace-nowrap text-sm rounded shadow-lg ${getTooltipPosition()}`}
-          style={{
-            backgroundColor: color,
-            color: textColor
-          }}
-        >
-          {/* Tooltip text */}
-          {text}
-          {/* Arrow */}
-          <div className="w-0 h-0 absolute" style={getArrowStyles()} />
-        </div>
-      )}
+  // Render the tooltip (with its arrow) into document.body via a portal.
+  const tooltipContent = isVisible ? (
+    <div role="tooltip" aria-hidden={!isVisible} style={tooltipStyle}>
+      {text}
+      <div style={getArrowStyles()} />
     </div>
+  ) : null;
+
+  return (
+    <>
+      <div
+        ref={triggerRef}
+        className={`relative inline-block ${className}`}
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        {children}
+      </div>
+      {ReactDOM.createPortal(tooltipContent, document.body)}
+    </>
   );
 };
 
