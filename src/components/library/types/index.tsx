@@ -59,10 +59,25 @@ export interface EditUserProfile {
   venueManager: boolean;
 }
 
+export type PaginationMeta = {
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  previousPage: number | null;
+  nextPage: number | null;
+  pageCount: number;
+  totalCount: number;
+};
+
 export interface ProfileResponse {
   data: UserProfile;
   meta: Record<string, unknown>;
 }
+
+export type UsersResponse = {
+  data: User[];
+  meta: PaginationMeta;
+};
 
 export interface Booking {
   id: string;
