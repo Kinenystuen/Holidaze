@@ -36,7 +36,7 @@ const ProfilesPage = () => {
     return (
       <ErrorMessage message="Log in to view profile">
         <P>If you don't have an account, you can create one for free.</P>
-        <Link to="/login" className="w-60">
+        <Link to="/auth" className="w-60">
           <Button buttonType="violet" className="my-5 px-4 inline-block w-full">
             Log in
           </Button>
