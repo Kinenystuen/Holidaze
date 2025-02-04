@@ -17,19 +17,6 @@ const UserProfileData = () => {
   const [userData, setUserData] = useState<UserProfile | null>(null);
   const { isAuthenticated } = useUserContext();
 
-  if (!isAuthenticated) {
-    return (
-      <ErrorMessage message="Log in to view profiles">
-        <P>If you don't have an account, you can create one for free.</P>
-        <Link to="/login" className="w-60">
-          <Button buttonType="violet" className="my-5 px-4 inline-block w-full">
-            Log in
-          </Button>
-        </Link>
-      </ErrorMessage>
-    );
-  }
-
   // Fetch venue data
   const { response, isLoading, isError, errorMessage } = useApi<UserProfile>(
     `${apiHostUrl}/holidaze/profiles/${name}?_bookings=true&_venues=true`
@@ -42,6 +29,18 @@ const UserProfileData = () => {
     }
   }, [response]);
 
+  if (!isAuthenticated) {
+    return (
+      <ErrorMessage message="Log in to view profile">
+        <P>If you don't have an account, you can create one for free.</P>
+        <Link to="/login" className="w-60">
+          <Button buttonType="violet" className="my-5 px-4 inline-block w-full">
+            Log in
+          </Button>
+        </Link>
+      </ErrorMessage>
+    );
+  }
   if (isLoading) return <Loader />;
   if (isError)
     return (
