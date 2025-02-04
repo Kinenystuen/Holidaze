@@ -1,4 +1,3 @@
-import { div } from "framer-motion/client";
 import { UserProfile } from "../library/types";
 import H2 from "../shared/Typography/H2";
 import ProfileCard from "../ui/ProfileCard";
