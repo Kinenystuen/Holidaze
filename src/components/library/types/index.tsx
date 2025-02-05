@@ -12,7 +12,7 @@ export type User = {
   venueManager: boolean;
   avatar?: Media;
   banner?: Media;
-  _count: {
+  _count?: {
     venues: number;
     bookings: number;
   };
