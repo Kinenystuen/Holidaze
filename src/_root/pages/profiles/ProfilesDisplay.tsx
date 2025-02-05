@@ -1,5 +1,5 @@
 import React from "react";
-import { User, UsersResponse } from "../../../components/library/types";
+import { UserProfile } from "../../../components/library/types";
 import H2 from "../../../components/shared/Typography/H2";
 import P from "../../../components/shared/Typography/P";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,20 +7,26 @@ import { faCertificate } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 interface SelUserProps {
-  data: UsersResponse[];
+  profiles: UserProfile[];
 }
 
-const ProfilesDisplay: React.FC<SelUserProps> = ({ data }) => {
-  const profiles = data[0].data;
+const ProfilesDisplay: React.FC<SelUserProps> = ({ profiles }) => {
+  if (!profiles.length) {
+    return (
+      <div className="text-center p-8">
+        <p>No profiles found.</p>
+      </div>
+    );
+  }
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 m-2">
-      {profiles.map((profile: User) => (
+      {profiles.map((profile) => (
         <Link
           to={`/profile/${encodeURIComponent(profile.name)}`}
           key={profile.name}
         >
           <div className="w-full">
-            <div className="flex bg-white dark:bg-customBgDark-500 rounded-lg shadow-sm ">
+            <div className="flex bg-white dark:bg-customBgDark-500 rounded-lg shadow-sm">
               <div className="w-14 h-14 m-3 my-4 rounded-full overflow-hidden">
                 <img
                   src={profile.avatar?.url}
