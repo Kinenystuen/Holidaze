@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import P from "./Typography/P";
 
 const Footer = () => {
   return (
@@ -139,6 +140,10 @@ const Footer = () => {
           © {new Date().getFullYear()} Holidaze. All rights reserved.
         </div>
       </div>
+      <P className="text-center text-gray-400 text-sm mt-4">
+        Holidaze is a fictional company. This website and it’s content is
+        created as a project for Noroff.
+      </P>
     </footer>
   );
 };

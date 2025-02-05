@@ -1,7 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import Button from "../../../components/shared/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCar,
+  faFilter,
+  faPaw,
+  faUtensils,
+  faWifi
+} from "@fortawesome/free-solid-svg-icons";
+import MetaCheckbox from "../../../components/ui/MetaCheckbox";
 
 const FilterMenu = ({
   filters,
@@ -46,52 +53,49 @@ const FilterMenu = ({
   return (
     <div className="relative" ref={dropdownRef}>
       <Button
+        buttonType="transparent"
         onClick={toggleDropdown}
-        className="inline-flex flex-col text-sm md:flex-row bg-transparent text-black dark:text-whiteFont-500 justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg hover:border-color2-500 dark:hover:border-customBgDark-500 hover:bg-color2-300  dark:hover:bg-customBgDark-400 focus:outline-none"
+        className="inline-flex flex-col text-sm md:flex-row justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg "
       >
         <FontAwesomeIcon icon={faFilter} className="mr-0 md:mr-2" />
         Filter
       </Button>
       {isOpen && (
         <div
-          className={`absolute top-full mt-2 w-56 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg p-4 z-10 ${boxPosition}`}
+          className={`absolute top-full space-y-1 mt-2 w-56 bg-white dark:bg-customBgDark-500 shadow-md rounded-lg p-4 z-10 ${boxPosition}`}
         >
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={filters.wifi}
-              onChange={() => handleChange("wifi")}
-              className="mr-2"
-            />
-            WiFi
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={filters.parking}
-              onChange={() => handleChange("parking")}
-              className="mr-2"
-            />
-            Parking
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={filters.breakfast}
-              onChange={() => handleChange("breakfast")}
-              className="mr-2"
-            />
-            Breakfast
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={filters.pets}
-              onChange={() => handleChange("pets")}
-              className="mr-2"
-            />
-            Pets
-          </label>
+          <MetaCheckbox
+            key={"wifi"}
+            id={"wifi"}
+            label={"wifi"}
+            icon={faWifi}
+            checked={filters.wifi}
+            onChange={() => handleChange("wifi")}
+          />
+          <MetaCheckbox
+            key={"parking"}
+            id={"parking"}
+            label={"parking"}
+            icon={faCar}
+            checked={filters.parking}
+            onChange={() => handleChange("parking")}
+          />
+          <MetaCheckbox
+            key={"breakfast"}
+            id={"breakfast"}
+            label={"breakfast"}
+            icon={faUtensils}
+            checked={filters.breakfast}
+            onChange={() => handleChange("breakfast")}
+          />
+          <MetaCheckbox
+            key={"pets"}
+            id={"pets"}
+            label={"pets"}
+            icon={faPaw}
+            checked={filters.pets}
+            onChange={() => handleChange("pets")}
+          />
         </div>
       )}
     </div>

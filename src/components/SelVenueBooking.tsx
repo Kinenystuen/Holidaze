@@ -17,6 +17,8 @@ import H2 from "./shared/Typography/H2";
 import P from "./shared/Typography/P";
 import Button from "./shared/Button/Button";
 import LoaderSmall from "./ui/LoaderSmall";
+import { useUserContext } from "./context/useUserContext";
+import { Link } from "react-router-dom";
 
 interface SelVenueBookingProps {
   venue: Venue;
@@ -27,6 +29,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   venue,
   refetchVenue
 }) => {
+  const { isAuthenticated } = useUserContext();
   const bookedDates = useCallback(
     () =>
       venue.bookings.map((booking) => ({
@@ -193,8 +196,8 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-fit h-fit my-10 bg-white dark:bg-customBgDark-500 p-2 md:p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
+    <div className="w-full flex justify-center md:col-span-2 lg:col-span-1 mx-0 px-0">
+      <div className="w-full xs:w-fit mx-4 h-fit my-10 bg-white dark:bg-customBgDark-500 p-2 md:p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
         <div className="flex content-center w-full flex-col my-4 max-w-sm gap-4 justify-center items-start">
           <H2 className="text-2xl font-semibold">{venue?.price} kr / night</H2>
           <div className="w-full">
@@ -211,13 +214,26 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
               onChange={handleGuestChange}
             />
           </div>
-          <Button
-            buttonType={isSummaryOpen ? "violetSecondary" : "violet"}
-            className="w-full"
-            onClick={openBookNowSummery}
-          >
-            Book now
-          </Button>
+          {isAuthenticated ? (
+            <Button
+              buttonType={isSummaryOpen ? "violetSecondary" : "violet"}
+              className="w-full"
+              onClick={openBookNowSummery}
+            >
+              Book now
+            </Button>
+          ) : (
+            <>
+              <P className="text-sm text-gray-500">
+                Log in to book this venue.
+              </P>
+              <Link to="/auth" className="w-full">
+                <Button buttonType="violet" className="w-full">
+                  Log in
+                </Button>
+              </Link>
+            </>
+          )}
           {isSummaryOpen && (
             <>
               <BookingSummary

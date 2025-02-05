@@ -13,7 +13,8 @@ import AdminCreateVenue from "./_root/pages/profile/AdminCreateVenue";
 import AdminBookings from "./_root/pages/profile/AdminBookings";
 import AdminSettings from "./_root/pages/profile/AdminSettings";
 import PageNotFound from "./_root/pages/PageNotFound";
-import UserProfile from "./_root/pages/profile/UserProfile";
+import UserProfileData from "./_root/pages/profile/UserProfileData";
+import ProfilesPage from "./_root/pages/profiles/ProfilesPage";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
         <Route index element={<Home />} />
         <Route path="venues" element={<VenuePage />} />
         <Route path="venue/:id" element={<SelVenuePage />} />
-        <Route path="profile/:name" element={<UserProfile />} />
+        <Route path="profile/:name" element={<UserProfileData />} />
+        <Route path="profiles" element={<ProfilesPage />} />
       </Route>
 
       {/* Admin Routes (Requires Auth) */}

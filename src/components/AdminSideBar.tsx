@@ -73,7 +73,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         {/* Sidebar Overlay (For closing when clicking outside) */}
         {isOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-0"
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
             onClick={closeMenu}
           ></div>
         )}
@@ -83,16 +83,16 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <div
         className={`fixed top-0 left-0 ${
           isCollapsed ? "w-16" : "w-64"
-        } h-full max-h-screen bg-color1-600 text-whiteFont-500 transform transition-all duration-300 z-50
+        } h-screen bg-color1-600 text-whiteFont-500 transform transition-all duration-300 z-50
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         md:translate-x-0 md:flex md:flex-col max-w-[270px] 
-        overflow-visible custom-scrollbar`}
+        overflow-visible overflow-x-visible overflow-y-auto custom-scrollbar`}
       >
         {/* Collapse Button (Only for md screens and larger) */}
         <Button
           buttonType="transparent"
           className={`hidden md:flex absolute top-2 right-1 text-white ${
-            isCollapsed ? "top-14" : ""
+            isCollapsed ? "top-14 mt-12" : ""
           }`}
           onClick={toggleCollapse}
         >
@@ -242,7 +242,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
 
         {/* Logout */}
         <hr className="border-gray-500 my-4 mx-6" />
-        <div className="space-y-2 px-3">
+        <div className="space-y-2 px-3  mb-20">
           <Tooltip text="Sign out" position="right" className="w-full">
             <Button
               onClick={handleLogout}

@@ -85,7 +85,8 @@ const EditProfile = () => {
     <div>
       {/* Open Modal Button */}
       <Button
-        className="px-4 py-2 text-white rounded-lg shadow-md bg-color1-400 dark:bg-color1-600 hover:bg-color1-500 dark:hover:bg-color1-500 transition"
+        buttonType="violet"
+        className="px-4 py-2 rounded-lg shadow-md"
         onClick={() => setIsOpen(true)}
       >
         <FontAwesomeIcon icon={faEdit} className="mr-2" />

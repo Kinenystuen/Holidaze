@@ -11,8 +11,8 @@ import Button from "../../../components/shared/Button/Button";
 import { useUserContext } from "../../../components/context/useUserContext";
 import { motion } from "framer-motion";
 import { Venue } from "../../../components/library/types";
-import H2 from "../../../components/shared/Typography/H2";
 import VenueCard from "../../../components/createVenue/VenueCard";
+import H1 from "../../../components/shared/Typography/H1";
 
 const MyVenues = () => {
   const { user } = useUserContext();
@@ -48,15 +48,25 @@ const MyVenues = () => {
   if (!response || !response.data?.venues || response.data.venues.length === 0)
     return (
       <div className="container mx-auto">
-        <div className="max-w-screen-xl mx-auto px-10">
-          <H2 className="text-2xl font-semibold mt-8">My Venues</H2>
-          <P className="mt-4">You have no venues yet.</P>
+        <div className="max-w-4xl  px-6 py-6">
+          <H1 className=" mx-auto font-semibold my-2">No Venues Found</H1>
+          <P className="text-lg text-gray-600 mb-4 text-balance">
+            It looks like you haven’t added any venues yet. Start by creating a
+            venue so that your customers can easily book your services, events,
+            or experiences.
+          </P>
+          <Link to={"/profile/create-venue"}>
+            <Button buttonType="violet" className="px-4 mt-3 inline-block">
+              Create Your Venue
+            </Button>
+          </Link>
         </div>
       </div>
     );
 
   return (
     <div className="container mx-auto max-w-4xl">
+      <H1 className="max-w-4xl mx-auto font-semibold px-10 mt-4">My Venues</H1>
       <div className=" px-10 mb-20">
         <div className=" mx-auto mt-4 grid grid-cols-1 gap-6">
           <div className="flex gap-4 justify-between items-center">

@@ -74,17 +74,15 @@ const VenuesData: React.FC<VenuesDataProps> = ({
           }`}
         >
           {visibleVenues.map((venue) => (
-            <Link
-              to={`/venue/${venue.id}`}
-              key={venue.id}
-              className="hover:no-underline"
-            >
+            <Link to={`/venue/${venue.id}`} key={venue.id} className="">
               <div
                 key={venue.id}
                 className="sm:flex bg-white dark:bg-customBgDark-500 shadow-sm rounded-lg overflow-hidden group transition-transform transform scale-95 hover:scale-100 fade-in-up"
               >
-                <VenueSwiper media={venue.media} />
-                <div className="p-4 w-full flex flex-col justify-between">
+                <div className="w-full h-52 sm:h-60 sm:w-[24vw]">
+                  <VenueSwiper media={venue.media} />
+                </div>
+                <div className="p-4 w-full flex flex-1 flex-col justify-between">
                   <div>
                     {/* Venue Name and Rating */}
                     <div className="flex justify-between items-center">
@@ -162,6 +160,12 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                       )}
                     </ul>
                   </div>
+                  {/* Description */}
+                  <P className="text-gray-700 dark:text-whiteFont-500 text-sm text-balance my-2">
+                    {venue.description.length > 100
+                      ? venue.description.substring(0, 90) + "..."
+                      : venue.description}
+                  </P>
                   {/* Max Guests and Price at the Bottom */}
                   <div className="md:mt-auto flex justify-between">
                     <div className="flex items-center mt-2 text-sm text-gray-600">

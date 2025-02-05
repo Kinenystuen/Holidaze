@@ -10,14 +10,11 @@ export type User = {
   email: string;
   bio: string;
   venueManager: boolean;
-  avatar?: {
-    url: string;
-    alt: string;
-  };
-
-  banner?: {
-    url: string;
-    alt: string;
+  avatar?: Media;
+  banner?: Media;
+  _count?: {
+    venues: number;
+    bookings: number;
   };
 };
 
@@ -30,43 +27,48 @@ export interface RegisterProfile {
   email: string;
   password: string;
 }
-
-export interface UserProfile {
+export type UserProfile = {
   name: string;
   email: string;
   bio: string;
-  avatar: {
-    url: string;
-    alt: string;
-  };
-  banner: {
-    url: string;
-    alt: string;
-  };
+  avatar: Media;
+  banner: Media;
   venueManager: boolean;
+  venues?: Venue[];
+  bookings?: Booking[];
   _count: {
     venues: number;
     bookings: number;
   };
-}
+};
 
 export interface EditUserProfile {
   bio: string;
-  avatar: {
-    url: string;
-    alt: string;
-  };
-  banner: {
-    url: string;
-    alt: string;
-  };
+  avatar: Media;
+  banner: Media;
   venueManager: boolean;
 }
 
+/* Profile API Responses */
 export interface ProfileResponse {
   data: UserProfile;
   meta: Record<string, unknown>;
 }
+
+export interface UsersResponse {
+  data: UserProfile[];
+  meta: PaginationMeta;
+}
+
+export type PaginationMeta = {
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  previousPage: number | null;
+  nextPage: number | null;
+  pageCount: number;
+  totalCount: number;
+};
 
 export interface Booking {
   id: string;
@@ -75,31 +77,99 @@ export interface Booking {
   guests: number;
   created: string;
   updated: string;
+  venue?: Venue;
+  customer?: Customer;
 }
 
-export interface BookingData {
-  id: string;
-  created: string;
-  updated: string;
-  dateFrom: string;
-  dateTo: string;
-  guests: number;
-  venue: Venue;
-}
+// export interface BookingData {
+//   id: string;
+//   created: string;
+//   updated: string;
+//   dateFrom: string;
+//   dateTo: string;
+//   guests: number;
 
-export interface MetaData {
-  isFirstPage: boolean;
-  isLastPage: boolean;
-  currentPage: number;
-  previousPage: number | null;
-  nextPage: number | null;
-  pageCount: number;
-  totalCount: number;
-}
+// }
 
 export interface BookingsResponse {
   data: Booking[];
-  meta: MetaData;
+  meta: PaginationMeta;
+}
+
+/* Venue props */ /////////////////////////////
+
+export interface Media {
+  url: string;
+  alt: string;
+}
+
+export interface Meta {
+  wifi: boolean;
+  parking: boolean;
+  breakfast: boolean;
+  pets: boolean;
+}
+
+export interface Location {
+  address: string;
+  city: string;
+  zip: string;
+  country: string;
+  continent: string;
+  lat: number;
+  lng: number;
+}
+
+export interface Owner {
+  name: string;
+  email: string;
+  bio: string;
+  avatar: Media;
+  banner: Media;
+}
+
+export interface Customer {
+  name: string;
+  email: string;
+  bio: string;
+  avatar: Media;
+  banner: Media;
+}
+
+export interface Venue {
+  id: string;
+  name: string;
+  description: string;
+  media: Media[];
+  price: number;
+  maxGuests: number;
+  rating: number;
+  created: string;
+  updated: string;
+  meta: Meta;
+  location: Location;
+  owner: Owner;
+  bookings: Booking[];
+}
+
+export interface VenuesResponse {
+  data: Venue[];
+  meta: PaginationMeta;
+}
+
+/* BreadCrumb props */
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  current?: boolean;
+  isDropdown?: boolean;
+  dropdownItems?: { label: string; href?: string }[];
+}
+
+export interface BreadcrumbProps {
+  items: BreadcrumbItem[];
+  goBack?: boolean;
+  className?: string;
 }
 
 /* Button props */
@@ -125,110 +195,5 @@ export type H1Props = {
 /* Loader Props */
 export interface LoaderProps {
   theme?: "light" | "dark";
-  className?: string;
-}
-
-/* Venue props */ /////////////////////////////
-export interface Media {
-  url: string;
-  alt: string;
-}
-
-export interface Meta {
-  wifi: boolean;
-  parking: boolean;
-  breakfast: boolean;
-  pets: boolean;
-}
-
-export interface Location {
-  address: string;
-  city: string;
-  zip: string;
-  country: string;
-  continent: string;
-  lat: number;
-  lng: number;
-}
-
-export interface Avatar {
-  url: string;
-  alt: string;
-}
-
-export interface Banner {
-  url: string;
-  alt: string;
-}
-
-export interface Owner {
-  name: string;
-  email: string;
-  bio: string;
-  avatar: Avatar;
-  banner: Banner;
-}
-
-export interface Customer {
-  name: string;
-  email: string;
-  bio: string;
-  avatar: Avatar;
-  banner: Banner;
-}
-
-export interface Booking {
-  id: string;
-  dateFrom: string;
-  dateTo: string;
-  guests: number;
-  created: string;
-  updated: string;
-  customer: Customer;
-}
-
-export interface Venue {
-  id: string;
-  name: string;
-  description: string;
-  media: Media[];
-  price: number;
-  maxGuests: number;
-  rating: number;
-  created: string;
-  updated: string;
-  meta: Meta;
-  location: Location;
-  owner: Owner;
-  bookings: Booking[];
-}
-
-export interface MetaData {
-  isFirstPage: boolean;
-  isLastPage: boolean;
-  currentPage: number;
-  previousPage: number | null;
-  nextPage: number | null;
-  pageCount: number;
-  totalCount: number;
-}
-
-export interface VenuesResponse {
-  data: Venue[];
-  meta: MetaData;
-}
-
-/* BreadCrumb props */
-export interface BreadcrumbItem {
-  label: string;
-  href?: string;
-  current?: boolean;
-  isDropdown?: boolean;
-  dropdownItems?: { label: string; href?: string }[];
-}
-
-export interface BreadcrumbProps {
-  items: BreadcrumbItem[];
-  goBack?: boolean;
   className?: string;
 }

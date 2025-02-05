@@ -127,9 +127,9 @@ const SelVenue: React.FC<SelVenueProps> = ({
         </div>
 
         {/* Venue Details */}
-        <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-6 mb-5">
+        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-5">
           {/* Left Column: Description & Features */}
-          <div className="md:col-span-2">
+          <div className="col-span-1 md:col-span-2 lg:col-span-2">
             {/* Venue Title & Rating */}
             <div className="flex justify-between items-center flex-wrap mt-4 mb-1">
               <H1>{venue?.name}</H1>
@@ -140,7 +140,9 @@ const SelVenue: React.FC<SelVenueProps> = ({
               </div>
             </div>
 
-            <P className="text-lg text-gray-600">{venue?.description}</P>
+            <P className="text-lg text-gray-600 break-words whitespace-normal">
+              {venue?.description}
+            </P>
 
             <div className="mt-6 grid md:hidden grid-cols-2 gap-4 mx-2 mb-6 text-gray-700">
               {venue?.meta.wifi && <Feature icon={faWifi} text="Wi-Fi" />}
@@ -159,11 +161,11 @@ const SelVenue: React.FC<SelVenueProps> = ({
             </div>
 
             {/* Rating Badge */}
-            {venue.rating === 5 && (
+            {venue.rating >= 4 && (
               <div className="relative border border-color1-200 bg-color2-500 dark:bg-color1-600 dark:border-color3 p-6 my-10 mx-8 rounded-lg shadow-lg">
                 {/* Badge */}
                 <div className="absolute -top-3 left-4 bg-color1-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-                  ★ 5.0 - Guest Favorite
+                  ★ {venue.rating} - Guest Favorite
                 </div>
 
                 {/* Content */}
@@ -181,8 +183,8 @@ const SelVenue: React.FC<SelVenueProps> = ({
                       </P>
                       <P className="text-sm text-gray-700 dark:text-gray-300 mt-1">
                         Guests love staying here! This venue has consistently
-                        received 5-star ratings for its exceptional service,
-                        comfort, and hospitality.
+                        received {venue.rating}-star ratings for its exceptional
+                        service, comfort, and hospitality.
                       </P>
                     </div>
                   </div>

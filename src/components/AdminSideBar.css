@@ -1,3 +1,31 @@
 .sidebar-link {
     @apply flex items-center space-x-3 p-2 hover:bg-color1-500 rounded-md transition text-whiteFont-600;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #514472;
+    /* Track color */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #65558f;
+    /* Thumb color */
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Thumb hover color */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #65558f #514472;
+    /* Thumb color, then track color */
+}

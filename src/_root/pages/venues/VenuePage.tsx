@@ -39,6 +39,7 @@ const VenuePage = () => {
           {/* Left-side menu */}
           <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-screen sticky top-0 custom-scrollbar">
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
+            <SearchBar onSearch={handleSearch} />
             <FilterMenu
               filters={filters}
               onFilterChange={(newFilters) => setFilters(newFilters)}
@@ -59,11 +60,11 @@ const VenuePage = () => {
               {/* Search Bar */}
 
               <div
-                className={`bg-customBg dark:bg-customBgDark-500 md:bg-transparent dark:md:bg-transparent shadow-sm md:shadow-none z-20 w-full py-0 px-4`}
+                className={`bg-inherit dark:bg-inherit md:bg-transparent dark:md:bg-transparent z-20 w-full py-0 px-4`}
               >
-                <div className="flex gap-2 py-2">
+                <div className="flex gap-2 py-2 md:hidden">
                   <SearchBar onSearch={handleSearch} />
-                  <div className="flex md:hidden">
+                  <div className="flex">
                     <FilterMenu
                       filters={filters}
                       boxPosition="right-0"

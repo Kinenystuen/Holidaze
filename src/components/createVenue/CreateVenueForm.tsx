@@ -23,7 +23,7 @@ import {
   faWifi
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MetaCheckbox from "./MetaCheckbox";
+import MetaCheckbox from "../ui/MetaCheckbox";
 import LoaderSmall from "../ui/LoaderSmall";
 import { useState } from "react";
 import VenuePreview from "./VenuePreview";

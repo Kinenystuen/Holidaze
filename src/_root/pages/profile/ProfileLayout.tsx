@@ -3,6 +3,7 @@ import { useUserContext } from "../../../components/context/useUserContext";
 import AdminSidebar from "../../../components/AdminSideBar";
 import H1 from "../../../components/shared/Typography/H1";
 import { useState } from "react";
+import ThemeToggle from "../../../components/shared/ThemeToggle";
 
 const ProfileLayout = () => {
   const { user } = useUserContext();
@@ -27,12 +28,13 @@ const ProfileLayout = () => {
 
           {/* Right-side content - Changes based on route */}
           <div className="flex flex-col flex-1 w-full">
-            <div className=" border-b-2 dark:border-customBgDark-500 w-full mt-3 pb-3 mb-6 flex items-center justify-start">
-              <H1 className="mx-6 ml-12 text-customBgDark-500 dark:text-whiteFont-600 font-extrabold">
+            <div className="border-b-2 px-6 dark:border-customBgDark-500 w-full mt-3 pb-3 mb-6 flex items-center justify-between">
+              <H1 className="text-customBgDark-500 dark:text-whiteFont-600 font-extrabold">
                 Dashboard
               </H1>
+              <ThemeToggle />
             </div>
-            <div className="relative flex flex-col w-full md:flex 2xl:max-w-7xl flex-1 gap-2 custom-scrollbar mx-auto">
+            <div className="relative flex flex-col w-full flex-1 gap-2 custom-scrollbar mx-auto">
               <Outlet />
             </div>
           </div>

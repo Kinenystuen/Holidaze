@@ -9,7 +9,7 @@ import P from "../../../components/shared/Typography/P";
 import Button from "../../../components/shared/Button/Button";
 
 import { useUserContext } from "../../../components/context/useUserContext";
-import { BookingData } from "../../../components/library/types";
+import { Booking } from "../../../components/library/types";
 import BookingCard from "../../../components/Booking/BookingCard";
 import H3 from "../../../components/shared/Typography/H3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,7 @@ const MyBookings = () => {
   const [showPastBookings, setShowPastBookings] = useState(false);
 
   const { response, isLoading, isError, errorMessage, fetchData } = useApi<{
-    bookings: BookingData[];
+    bookings: Booking[];
   }>(
     `${apiHostUrl}/holidaze/profiles/${user?.name}?_owner=true&_bookings=true`,
     {},
@@ -101,13 +101,13 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl">
+    <div className="w-full mx-auto">
       <div className="max-w-screen-xl mx-auto px-10">
         <H2 className="text-2xl font-semibold mt-8">My Bookings</H2>
       </div>
       {/* Upcoming Bookings */}
       {upcomingBookings.length > 0 && (
-        <div className=" px-10 mb-20">
+        <div className="2xl:max-w-7xl mx-auto max-w-4xl px-10 mb-20">
           <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-4">
             Upcoming Bookings ({upcomingBookings.length})
           </H3>
@@ -129,54 +129,56 @@ const MyBookings = () => {
       {/* Past Bookings */}
       {pastBookings.length > 0 && (
         <div className="bg-gray-200 dark:bg-customBgDark-700 mx-auto px-10 py-2 pb-[40vh]">
-          <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-6">
-            Past Bookings ({pastBookings.length})
-          </H3>
-          <div className="flex justify-center">
-            <Button
-              buttonType="violetSecondary"
-              className="border-none mt-2 transform duration-500"
-              onClick={handleShowPastBookings}
-            >
-              <FontAwesomeIcon
-                icon={faChevronDown}
-                className={`mr-2 transform duration-500 ${
-                  showPastBookings ? "rotate-180" : ""
-                }`}
-              />
-              {showPastBookings ? "Hide" : "Show"} past bookings
-            </Button>
-          </div>
-
-          {/* Animate presence of past bookings */}
-          <AnimatePresence>
-            {showPastBookings && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="overflow-hidden"
+          <div className="2xl:max-w-7xl mx-auto">
+            <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-6">
+              Past Bookings ({pastBookings.length})
+            </H3>
+            <div className="flex justify-center">
+              <Button
+                buttonType="violetSecondary"
+                className="border-none mt-2 transform duration-500"
+                onClick={handleShowPastBookings}
               >
-                <div className="mx-auto max-w-screen-lg mt-4 grid grid-cols-1 gap-6">
-                  {pastBookings.map((booking, index) => (
-                    <motion.div
-                      key={booking.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <BookingCard
-                        booking={booking}
-                        refetchBookings={fetchData}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className={`mr-2 transform duration-500 ${
+                    showPastBookings ? "rotate-180" : ""
+                  }`}
+                />
+                {showPastBookings ? "Hide" : "Show"} past bookings
+              </Button>
+            </div>
+
+            {/* Animate presence of past bookings */}
+            <AnimatePresence>
+              {showPastBookings && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="mx-auto max-w-screen-lg mt-4 grid grid-cols-1 gap-6">
+                    {pastBookings.map((booking, index) => (
+                      <motion.div
+                        key={booking.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <BookingCard
+                          booking={booking}
+                          refetchBookings={fetchData}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       )}
     </div>

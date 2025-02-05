@@ -1,7 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSort } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoneyBill1Wave,
+  faSort,
+  faSortAlphaAsc,
+  faSortAmountDownAlt,
+  faSortAmountUp,
+  faStar
+} from "@fortawesome/free-solid-svg-icons";
 import P from "../../../components/shared/Typography/P";
+import MetaRadio from "../../../components/ui/MetaRadio";
 
 interface SortMenuProps {
   sortField: string;
@@ -45,7 +53,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
 
   const handleSortChange = (field: string, order: string) => {
     onSortChange(field, order);
-    setIsOpen(false);
+    // setIsOpen(false);
   };
 
   return (
@@ -54,7 +62,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
       <button
         ref={buttonRef}
         onClick={toggleDropdown}
-        className="inline-flex flex-col text-sm md:flex-row bg-transparent text-black dark:text-whiteFont-500 justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg hover:border-color2-500 dark:hover:border-customBgDark-500 hover:bg-color2-300  dark:hover:bg-customBgDark-400 focus:outline-none"
+        className="inline-flex flex-col text-sm md:flex-row justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg bg-transparent text-gray-600 hover:text-black hover:bg-transparent dark:hover:bg-transparent dark:text-whiteFont-500 dark:hover:text-white "
       >
         <FontAwesomeIcon icon={faSort} className="mr-0 md:mr-2" />
         Sort
@@ -71,79 +79,54 @@ const SortMenu: React.FC<SortMenuProps> = ({
               <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
                 Sort by:
               </P>
-              <div className="flex flex-col space-y-2">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortField"
-                    value="name"
-                    checked={sortField === "name"}
-                    onChange={() => handleSortChange("name", sortOrder)}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Name
-                  </span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortField"
-                    value="price"
-                    checked={sortField === "price"}
-                    onChange={() => handleSortChange("price", sortOrder)}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Price
-                  </span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortField"
-                    value="rating"
-                    checked={sortField === "rating"}
-                    onChange={() => handleSortChange("rating", sortOrder)}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Rating
-                  </span>
-                </label>
+              <div className="flex flex-col space-y-1">
+                <MetaRadio
+                  id="sort-name"
+                  name="sortField"
+                  label="Name"
+                  icon={faSortAlphaAsc}
+                  checked={sortField === "name"}
+                  onChange={() => handleSortChange("name", sortOrder)}
+                />
+                <MetaRadio
+                  id="sort-price"
+                  name="sortField"
+                  label="Price"
+                  icon={faMoneyBill1Wave}
+                  checked={sortField === "price"}
+                  onChange={() => handleSortChange("price", sortOrder)}
+                />
+                <MetaRadio
+                  id="sort-rating"
+                  name="sortField"
+                  label="Rating"
+                  icon={faStar}
+                  checked={sortField === "rating"}
+                  onChange={() => handleSortChange("rating", sortOrder)}
+                />
               </div>
             </div>
             <div>
               <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
                 Order:
               </P>
-              <div className="flex flex-col space-y-2">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortOrder"
-                    value="asc"
-                    checked={sortOrder === "asc"}
-                    onChange={() => handleSortChange(sortField, "asc")}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Ascending
-                  </span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortOrder"
-                    value="desc"
-                    checked={sortOrder === "desc"}
-                    onChange={() => handleSortChange(sortField, "desc")}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Descending
-                  </span>
-                </label>
+              <div className="flex flex-col space-y-1">
+                <MetaRadio
+                  id="sort-asc"
+                  name="sortOrder"
+                  label="Ascending"
+                  icon={faSortAmountDownAlt}
+                  checked={sortOrder === "asc"}
+                  onChange={() => handleSortChange(sortField, "asc")}
+                />
+                <MetaRadio
+                  id="sort-desc"
+                  name="sortOrder"
+                  label="Descending"
+                  icon={faSortAmountUp}
+                  checked={sortOrder === "desc"}
+                  onChange={() => handleSortChange(sortField, "desc")}
+                />
               </div>
             </div>
           </div>
