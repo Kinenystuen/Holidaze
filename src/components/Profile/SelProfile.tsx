@@ -29,11 +29,11 @@ const SelProfile: React.FC<SelUserProps> = ({ user }) => {
               />
             </div>
             <H2 className="md:text-2xl font-semibold capitalize">
-              {user.name}'s venues ({user.venues.length}):
+              {user.name}'s venues ({user.venues?.length}):
             </H2>
           </div>
-          {user.venues.length > 0 ? (
-            <UserVenues venues={user.venues} />
+          {(user.venues?.length ?? 0) > 0 ? (
+            <UserVenues venues={user.venues ?? []} />
           ) : (
             <div className="w-fit">
               <div className="flex content-start items-start justify-start bg-white dark:bg-customBgDark-500 rounded-lg shadow-md">
