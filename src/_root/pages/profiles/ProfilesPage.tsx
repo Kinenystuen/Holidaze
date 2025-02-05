@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UsersResponse } from "../../../components/library/types";
+import { UsersResponse, UserProfile } from "../../../components/library/types";
 import { useApi } from "../../../components/hooks/UseApi";
 import { apiHostUrl } from "../../../components/library/constants";
 import Loader from "../../../components/ui/Loader";
@@ -14,8 +14,7 @@ import { useUserContext } from "../../../components/context/useUserContext";
 import ProfilesDisplay from "./ProfilesDisplay";
 
 const ProfilesPage = () => {
-  const [profileData, setProfileData] = useState<UsersResponse | null>(null);
-
+  const [profileData, setProfileData] = useState<UserProfile[]>([]);
   const { isAuthenticated } = useUserContext();
 
   // Fetch venue data
@@ -26,11 +25,9 @@ const ProfilesPage = () => {
   // Update state when response is available
   useEffect(() => {
     if (response?.data) {
-      setProfileData(response.data);
+      setProfileData(response.data as unknown as UserProfile[]);
     }
   }, [response]);
-
-  console.log(profileData);
 
   if (!isAuthenticated) {
     return (
@@ -74,7 +71,7 @@ const ProfilesPage = () => {
       />
       <div className="container max-w-screen-xl mx-auto px-5 md:px-10">
         <Breadcrumb items={breadcrumbItems} />
-        <ProfilesDisplay data={profileData} />
+        <ProfilesDisplay profiles={profileData} />
       </div>
     </div>
   );
