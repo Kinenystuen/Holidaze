@@ -9,7 +9,7 @@ import P from "../../../components/shared/Typography/P";
 import Button from "../../../components/shared/Button/Button";
 
 import { useUserContext } from "../../../components/context/useUserContext";
-import { BookingData } from "../../../components/library/types";
+import { Booking } from "../../../components/library/types";
 import BookingCard from "../../../components/Booking/BookingCard";
 import H3 from "../../../components/shared/Typography/H3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,7 @@ const MyBookings = () => {
   const [showPastBookings, setShowPastBookings] = useState(false);
 
   const { response, isLoading, isError, errorMessage, fetchData } = useApi<{
-    bookings: BookingData[];
+    bookings: Booking[];
   }>(
     `${apiHostUrl}/holidaze/profiles/${user?.name}?_owner=true&_bookings=true`,
     {},
