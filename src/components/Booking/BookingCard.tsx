@@ -3,7 +3,7 @@ import H3 from "../shared/Typography/H3";
 import P from "../shared/Typography/P";
 import { FormatDate } from "../ui/FormatDate";
 import Button from "../shared/Button/Button";
-import { BookingData } from "../library/types";
+import { Booking } from "../library/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -23,7 +23,7 @@ const BookingCard = ({
   booking,
   refetchBookings
 }: {
-  booking: BookingData;
+  booking: Booking;
   refetchBookings: () => void;
 }) => {
   const { deleteBooking, isLoading } = useDeleteBooking(booking.id);
@@ -52,8 +52,8 @@ const BookingCard = ({
           <div className="w-full min-h-52 md:w-[30vw] max-h-72 rounded-t-lg md:rounded-none md:rounded-s-lg overflow-hidden">
             <img
               className="object-cover w-full h-full"
-              src={booking.venue.media[0].url}
-              alt={booking.venue.media[0].alt}
+              src={booking.venue?.media[0].url}
+              alt={booking.venue?.media[0].alt}
             />
           </div>
 
@@ -120,10 +120,10 @@ const BookingCard = ({
             {/* Booking Info */}
             <div className="flex flex-col w-full h-fit">
               <div className="px-4 py-2 w-full flex flex-col gap-1 flex-grow">
-                <H3 className="text-xl font-bold">{booking.venue.name}</H3>
+                <H3 className="text-xl font-bold">{booking.venue?.name}</H3>
                 {/* Location */}
                 <div className="flex items-center text-sm text-gray-600 ">
-                  {booking.venue.location && (
+                  {booking.venue?.location && (
                     <div className="flex items-center ">
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}
@@ -131,10 +131,10 @@ const BookingCard = ({
                       />
                       <P className="text-gray-500 text-xs">
                         {[
-                          booking.venue.location.address,
-                          booking.venue.location.zip,
-                          booking.venue.location.city,
-                          booking.venue.location.country
+                          booking.venue?.location.address,
+                          booking.venue?.location.zip,
+                          booking.venue?.location.city,
+                          booking.venue?.location.country
                         ]
                           .filter(Boolean)
                           .join(", ") || "Location not available"}
@@ -183,7 +183,8 @@ const BookingCard = ({
                       className="w-4 h-4 text-2xl p-1"
                     />
                     <P className="text-sm text-gray-600 dark:text-gray-300">
-                      Total price: {booking.venue.price * booking.guests} kr
+                      Total price:{" "}
+                      {(booking.venue?.price ?? 0) * booking.guests} kr
                     </P>
                   </div>
                 </div>
@@ -222,7 +223,7 @@ const BookingCard = ({
                     ]}
                   />
                 )}
-                <Link to={`/venue/${booking.venue.id}`}>
+                <Link to={`/venue/${booking.venue?.id}`}>
                   <Button buttonType="violet">View Venue</Button>
                 </Link>
               </div>
