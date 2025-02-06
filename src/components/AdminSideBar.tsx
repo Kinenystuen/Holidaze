@@ -92,7 +92,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         <Button
           buttonType="transparent"
           className={`hidden md:flex absolute top-2 right-1 text-white ${
-            isCollapsed ? "top-14 mt-12" : ""
+            isCollapsed ? "top-2 mt-8" : ""
           }`}
           onClick={toggleCollapse}
         >
