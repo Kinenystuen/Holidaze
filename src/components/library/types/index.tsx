@@ -81,15 +81,14 @@ export interface Booking {
   customer?: Customer;
 }
 
-// export interface BookingData {
-//   id: string;
-//   created: string;
-//   updated: string;
-//   dateFrom: string;
-//   dateTo: string;
-//   guests: number;
-
-// }
+export interface BookingData {
+  venueName: string;
+  dateFrom: string;
+  dateTo: string;
+  guests: number;
+  venueId: string;
+  price: number;
+}
 
 export interface BookingsResponse {
   data: Booking[];
