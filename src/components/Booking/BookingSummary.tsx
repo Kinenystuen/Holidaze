@@ -52,6 +52,10 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({
       <H3 className="flex text-md justify-between mt-3 border-t border-color2-600 pt-2">
         Total Price
       </H3>
+      <P className="flex justify-between">
+        {price} kr x {guests} guests x {nights}{" "}
+        {nights > 1 ? "nights" : "night"}:
+      </P>
       <P className="flex text-3xl text-whiteFont-100 justify-end">
         {totalPrice} kr
       </P>
