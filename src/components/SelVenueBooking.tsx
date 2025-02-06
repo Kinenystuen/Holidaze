@@ -30,59 +30,58 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   refetchVenue
 }) => {
   const { isAuthenticated } = useUserContext();
-  const bookedDates = useCallback(
-    () =>
-      venue.bookings.map((booking) => ({
-        start: new Date(booking.dateFrom),
-        end: new Date(booking.dateTo)
-      })),
-    [venue.bookings]
-  );
+  const bookedDates = useCallback(() => {
+    return venue.bookings.map((booking) => ({
+      start: new Date(booking.dateFrom),
+      end: new Date(booking.dateTo)
+    }));
+  }, [venue.bookings]);
 
   /* Function to check if a date is disabled */
   const isDateDisabled = useCallback(
     (date: Date) => {
-      return bookedDates().some(({ start, end }) => {
-        const nextDay = addDays(date, 1);
-        return (
-          isWithinInterval(date, {
-            start,
-            end: setMinutes(setHours(end, 10), 59)
-          }) ||
-          isWithinInterval(nextDay, {
-            start,
-            end: setMinutes(setHours(end, 9), 59)
-          })
-        );
-      });
+      return bookedDates().some(({ start, end }) =>
+        isWithinInterval(date, { start, end })
+      );
     },
     [bookedDates]
   );
 
   const findNextAvailableDates = useCallback(() => {
-    let startDate = new Date();
-    let endDate = addDays(startDate, 1);
+    let searchDate = new Date();
+    let maxSearchDays = 365; // Prevent infinite loops
 
-    while (isDateDisabled(startDate) || isDateDisabled(endDate)) {
-      startDate = addDays(startDate, 1);
-      endDate = addDays(startDate, 1);
+    while (maxSearchDays > 0) {
+      const nextDay = addDays(searchDate, 1);
+
+      const isSearchDateBooked = isDateDisabled(searchDate);
+      const isNextDayBooked = isDateDisabled(nextDay);
+
+      if (!isSearchDateBooked && !isNextDayBooked) {
+        return {
+          startDate: setMinutes(setHours(searchDate, 15), 0), // ✅ Check-in at 15:00
+          endDate: setMinutes(setHours(nextDay, 11), 0) // ✅ Check-out at 11:00
+        };
+      }
+
+      searchDate = addDays(searchDate, 1);
+      maxSearchDays--;
     }
 
-    return {
-      startDate: setMinutes(setHours(startDate, 15), 0), // Check-in at 3 PM
-      endDate: setMinutes(setHours(endDate, 11), 0) // Check-out at 11 AM
-    };
+    return null; // No available dates found
   }, [isDateDisabled]);
 
   const [dateRange, setDateRange] = useState(() => {
     const initialDates = findNextAvailableDates();
-    return [
-      {
-        startDate: initialDates.startDate,
-        endDate: initialDates.endDate,
-        key: "selection"
-      }
-    ];
+    return initialDates
+      ? [
+          {
+            startDate: initialDates.startDate,
+            endDate: initialDates.endDate,
+            key: "selection"
+          }
+        ]
+      : [];
   });
 
   const [guests, setGuests] = useState(1);
@@ -100,17 +99,22 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   /* Update dateRange only when `venue.bookings` change */
   useEffect(() => {
     const updatedDates = findNextAvailableDates();
-    setDateRange([
-      {
-        startDate: updatedDates.startDate,
-        endDate: updatedDates.endDate,
-        key: "selection"
-      }
-    ]);
+    setDateRange(
+      updatedDates
+        ? [
+            {
+              startDate: updatedDates.startDate,
+              endDate: updatedDates.endDate,
+              key: "selection"
+            }
+          ]
+        : []
+    );
   }, [venue.bookings, findNextAvailableDates]);
 
   /* Update total price when guests or dateRange changes */
   useEffect(() => {
+    if (dateRange.length === 0) return;
     const totalNights = Math.max(
       differenceInDays(dateRange[0].endDate, dateRange[0].startDate),
       1
@@ -150,28 +154,32 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   /* Handle booking confirmation */
   const handleBooking = () => {
     setErrorMessage(null);
+    setIsBooking(true);
 
     if (guests < 1) {
       setErrorMessage("Please select at least 1 guest.");
+      setIsBooking(false);
       return;
     }
 
-    setBookingData({
+    const newBooking = {
       venueName: venue.name,
       dateFrom: dateRange[0].startDate.toISOString(),
       dateTo: dateRange[0].endDate.toISOString(),
       guests,
-      venueId: venue.id,
-      price: totalPrice
-    });
+      venueId: venue.id
+    };
 
-    setIsBooking(true);
+    console.log("Booking Data Sent:", newBooking);
+    setBookingData(newBooking);
   };
 
   const handleSuccess = () => {
     setConfirmedBooking(bookingData);
     setIsBooking(false);
     setIsSummaryOpen(false);
+    setIsConfirmationOpen(true);
+    setBookingData(null);
   };
 
   const handleError = (error: string) => {
@@ -232,7 +240,11 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
                 disabled={isBooking}
                 className="w-full"
               >
-                {isBooking ? <LoaderSmall /> : "Confirm Booking"}
+                {isBooking ? (
+                  <LoaderSmall className="w-full mx-auto" />
+                ) : (
+                  "Confirm Booking"
+                )}
               </Button>
               {errorMessage && (
                 <P className="mt-2 text-red-500 text-sm">{errorMessage}</P>
@@ -244,6 +256,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
         {confirmedBooking && (
           <BookingConfirmation
             booking={confirmedBooking}
+            total={totalPrice}
             isConfirmationOpen={isConfirmationOpen}
             onClose={() => {
               setConfirmedBooking(null);
