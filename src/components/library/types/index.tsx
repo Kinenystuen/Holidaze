@@ -87,7 +87,6 @@ export interface BookingData {
   dateTo: string;
   guests: number;
   venueId: string;
-  price: number;
 }
 
 export interface BookingsResponse {
