@@ -56,9 +56,7 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({
         {price} kr x {guests} guests x {nights}{" "}
         {nights > 1 ? "nights" : "night"}:
       </P>
-      <P className="flex text-3xl text-whiteFont-100 justify-end">
-        {totalPrice} kr
-      </P>
+      <P className="flex text-3xl justify-end">{totalPrice} kr</P>
     </div>
   );
 };
