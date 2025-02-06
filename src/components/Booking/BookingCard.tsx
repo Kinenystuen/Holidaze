@@ -18,6 +18,7 @@ import {
 import ButtonDropdown from "../ButtonDropdown";
 import { useDeleteBooking } from "../hooks/UseDeleteBooking";
 import LoaderSmall from "../ui/LoaderSmall";
+import { useEffect, useState } from "react";
 
 const BookingCard = ({
   booking,
@@ -27,6 +28,22 @@ const BookingCard = ({
   refetchBookings: () => void;
 }) => {
   const { deleteBooking, isLoading } = useDeleteBooking(booking.id);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  useEffect(() => {
+    if (booking.dateFrom && booking.dateTo && booking.venue?.price) {
+      const calculatedNights = Math.max(
+        Math.floor(
+          (new Date(booking.dateTo).getTime() -
+            new Date(booking.dateFrom).getTime()) /
+            (1000 * 60 * 60 * 24)
+        ),
+        1
+      );
+
+      setTotalPrice(booking.venue.price * calculatedNights * booking.guests);
+    }
+  }, [booking.dateFrom, booking.dateTo, booking.guests, booking.venue?.price]);
 
   const handleEditBooking = () => {
     console.log("Edit booking clicked");
@@ -183,8 +200,7 @@ const BookingCard = ({
                       className="w-4 h-4 text-2xl p-1"
                     />
                     <P className="text-sm text-gray-600 dark:text-gray-300">
-                      Total price:{" "}
-                      {(booking.venue?.price ?? 0) * booking.guests} kr
+                      Total price: {totalPrice} kr
                     </P>
                   </div>
                 </div>
