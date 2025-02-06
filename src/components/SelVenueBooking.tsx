@@ -9,7 +9,7 @@ import {
 import DateRangePicker from "./DateRangePicker";
 import GuestsSelector from "./GuestsSelector";
 import BookVenue from "./Booking/BookVenue";
-import { Venue } from "./library/types";
+import { BookingData, Venue } from "./library/types";
 import { RangeKeyDict } from "react-date-range";
 import BookingSummary from "./Booking/BookingSummary";
 import BookingConfirmation from "./Booking/BookingConfirmation";
@@ -92,23 +92,10 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isBooking, setIsBooking] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [bookingData, setBookingData] = useState<{
-    venueName: string;
-    dateFrom: string;
-    dateTo: string;
-    guests: number;
-    venueId: string;
-    price: number;
-  } | null>(null);
-
-  const [confirmedBooking, setConfirmedBooking] = useState<{
-    venueName: string;
-    dateFrom: string;
-    dateTo: string;
-    guests: number;
-    venueId: string;
-    price: number;
-  } | null>(null);
+  const [bookingData, setBookingData] = useState<BookingData | null>(null);
+  const [confirmedBooking, setConfirmedBooking] = useState<BookingData | null>(
+    null
+  );
 
   /* Update dateRange only when `venue.bookings` change */
   useEffect(() => {
@@ -134,7 +121,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   /* Handle date selection */
   const handleDateChange = (rangesByKey: RangeKeyDict) => {
     const { selection } = rangesByKey;
-
     let checkInDate = selection.startDate || new Date();
     let checkOutDate = selection.endDate || addDays(checkInDate, 1);
 
@@ -170,24 +156,22 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
       return;
     }
 
-    const newBookingData = {
+    setBookingData({
       venueName: venue.name,
       dateFrom: dateRange[0].startDate.toISOString(),
       dateTo: dateRange[0].endDate.toISOString(),
       guests,
       venueId: venue.id,
       price: totalPrice
-    };
+    });
 
-    setBookingData(newBookingData);
     setIsBooking(true);
   };
 
   const handleSuccess = () => {
     setConfirmedBooking(bookingData);
-    setIsConfirmationOpen(true);
     setIsBooking(false);
-    // setBookingData(null);
+    setIsSummaryOpen(false);
   };
 
   const handleError = (error: string) => {
