@@ -57,7 +57,7 @@ const DatePickerModal: React.FC<ModalProps> = ({
       {/* Close Button */}
       <Button
         onClick={onClose}
-        className="absolute top-4 right-4 bg-white dark:bg-customBgDark-400 text-gray-700 dark:text-whiteFont-500 px-3 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-customBgDark-500 transition"
+        className="absolute top-16 md:top-4 right-4 p-1 px-3 rounded-md transition z-20"
         aria-label="Close Modal"
       >
         ✕
