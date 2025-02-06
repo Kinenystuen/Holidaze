@@ -114,13 +114,17 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
 
   /* Update total price when guests or dateRange changes */
   useEffect(() => {
-    if (dateRange.length === 0) return;
+    if (dateRange.length === 0 || !venue.price) return;
+
     const totalNights = Math.max(
       differenceInDays(dateRange[0].endDate, dateRange[0].startDate),
       1
     );
+
     setTotalPrice(totalNights * venue.price * guests);
   }, [dateRange, guests, venue.price]);
+
+  console.log(totalPrice);
 
   /* Handle date selection */
   const handleDateChange = (rangesByKey: RangeKeyDict) => {
