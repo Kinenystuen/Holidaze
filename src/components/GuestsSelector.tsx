@@ -13,14 +13,14 @@ const GuestsSelector: React.FC<GuestsSelectorProps> = ({
     <div className="relative w-full">
       <label
         htmlFor="guests"
-        className="absolute text-gray-600 dark:text-gray-400 left-2 md:left-3 top-2 text-sm font-medium uppercase pointer-events-none"
+        className="absolute text-gray-600 dark:text-gray-400 left-2 md:left-3 top-1 sm:top-2 text-xs sm:text-sm font-medium uppercase pointer-events-none"
       >
-        <small>Guests</small>
+        Guests
       </label>
       <select
         id="guests"
         name="guests"
-        className="w-full cursor-pointer border border-color1-200 dark:border-customBgDark-400 p-3 pt-7 pb-3 rounded-b-md bg-gray-100 dark:bg-customBgDark-500 pl-2 pr-10 py-2 font-bold focus:outline-none sm:text-sm"
+        className="w-full cursor-pointer border border-color1-200 dark:border-customBgDark-400 p-3 pt-8 pb-3 rounded-md bg-gray-100 dark:bg-customBgDark-500 pl-2 pr-10 py-2 font-bold focus:outline-none sm:text-sm"
         value={guests}
         onChange={(e) => onChange(Number(e.target.value))}
       >
