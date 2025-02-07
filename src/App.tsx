@@ -10,7 +10,6 @@ import MyBookings from "./_root/pages/profile/MyBookings";
 import ManageVenues from "./_root/pages/profile/ManageVenues";
 import PrivateProfile from "./_root/pages/profile/PrivateProfile";
 import AdminCreateVenue from "./_root/pages/profile/AdminCreateVenue";
-import AdminBookings from "./_root/pages/profile/AdminBookings";
 import AdminSettings from "./_root/pages/profile/AdminSettings";
 import PageNotFound from "./_root/pages/PageNotFound";
 import UserProfileData from "./_root/pages/profile/UserProfileData";
@@ -44,7 +43,6 @@ function App() {
         <Route path="bookings" element={<MyBookings />} />
         <Route path="venues" element={<ManageVenues />} />
         <Route path="create-venue" element={<AdminCreateVenue />} />
-        <Route path="venue-bookings" element={<AdminBookings />} />
         <Route path="settings" element={<AdminSettings />} />
       </Route>
 

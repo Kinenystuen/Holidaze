@@ -202,16 +202,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
                 </Link>
               </Tooltip>
               <Tooltip
-                text="Venue Bookings"
-                position={isCollapsed ? "right" : "bottom"}
-                className="w-full"
-              >
-                <Link to="venue-bookings" className="sidebar-link gap-2">
-                  <FontAwesomeIcon icon={faCalendar} className="w-5" />
-                  {!isCollapsed && "Venue Bookings"}
-                </Link>
-              </Tooltip>
-              <Tooltip
                 text="Earnings Report"
                 position={isCollapsed ? "right" : "bottom"}
                 className="w-full"
