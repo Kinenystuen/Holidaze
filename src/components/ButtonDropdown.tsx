@@ -34,7 +34,7 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ label, options }) => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div className="relative inline-block text-left z-30" ref={dropdownRef}>
       <Button
         buttonType="violetSecondary"
         onClick={() => setIsOpen(!isOpen)}
@@ -44,7 +44,7 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ label, options }) => {
       </Button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-customBgDark-500 border rounded-lg overflow-hidden shadow-md z-10">
+        <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-customBgDark-500 border rounded-lg overflow-hidden shadow-md z-30">
           {options.map((option, index) => (
             <Button
               buttonType="violetSecondary"
