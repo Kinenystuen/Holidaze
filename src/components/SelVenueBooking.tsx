@@ -59,8 +59,8 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
 
       if (!isSearchDateBooked && !isNextDayBooked) {
         return {
-          startDate: setMinutes(setHours(searchDate, 15), 0), // ✅ Check-in at 15:00
-          endDate: setMinutes(setHours(nextDay, 11), 0) // ✅ Check-out at 11:00
+          startDate: setMinutes(setHours(searchDate, 15), 0),
+          endDate: setMinutes(setHours(nextDay, 11), 0)
         };
       }
 
@@ -173,8 +173,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
       guests,
       venueId: venue.id
     };
-
-    console.log("Booking Data Sent:", newBooking);
     setBookingData(newBooking);
   };
 
