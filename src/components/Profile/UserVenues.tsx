@@ -27,7 +27,7 @@ const UserVenues: React.FC<UserVenuesProps> = ({ venues }) => {
           <Link
             key={venue.id}
             to={`/venue/${venue.id}`}
-            className="flex flex-col bg-customBg dark:bg-customBgDark-500 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
+            className="flex flex-col bg-white dark:bg-customBgDark-500 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
           >
             {/* Image */}
             <div className="h-52">
