@@ -88,6 +88,11 @@ export interface BookingData {
   guests: number;
   venueId: string;
 }
+export interface EditBookingData {
+  dateFrom: string;
+  dateTo: string;
+  guests: number;
+}
 
 export interface BookingsResponse {
   data: Booking[];
