@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DateRange, RangeKeyDict } from "react-date-range";
+import { RangeKeyDict } from "react-date-range";
 import { apiHostUrl } from "../library/constants";
 import Modal from "../ui/Modal";
 import GuestsSelector from "../GuestsSelector";
