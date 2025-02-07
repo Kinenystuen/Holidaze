@@ -97,7 +97,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
                 Booking ID: <strong>{booking.venueId}</strong>
               </P>
 
-              <div className="mt-6 flex flex-col sm:flex-row w-full max-w-xs sm:max-w-sm justify-between gap-2">
+              <div className="mt-6 flex flex-col sm:flex-row w-full max-w-xs sm:max-w-md justify-between sm:justify-center gap-2">
                 <Link to="/profile/bookings">
                   <Button buttonType="violetSecondary" className="w-full">
                     View My Bookings
