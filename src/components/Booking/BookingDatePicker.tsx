@@ -48,8 +48,6 @@ const BookingDatePicker: React.FC<BookingDatePickerProps> = ({
     }
   }, [response, bookingId]);
 
-  console.log(disabledDates);
-
   return (
     <DateRange
       ranges={selectedRange}
