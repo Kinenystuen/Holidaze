@@ -221,7 +221,7 @@ const VenueCard = ({
                   >
                     <div
                       key={booking.id}
-                      className="bg-white dark:bg-color4-900 border p-3 rounded-md mb-2"
+                      className="bg-white dark:bg-color4-900 border border-color4-500 dark:border-color4-900 p-3 rounded-md mb-2"
                     >
                       <div className="flex flex-row justify-between content-center items-center flex-wrap gap-5">
                         <Link to={`/profile/${booking.customer?.name}`}>
