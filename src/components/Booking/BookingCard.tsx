@@ -255,6 +255,7 @@ const BookingCard = ({
           maxGuests={booking.venue?.maxGuests ?? 0}
           onClose={() => setIsEditing(false)}
           onUpdate={refetchBookings}
+          venueId={booking.venue?.id ?? ""}
         />
       )}
     </div>
