@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faClock, faUsers } from "@fortawesome/free-solid-svg-icons";
 import H2 from "../shared/Typography/H2";
 import { FormatDate } from "../ui/FormatDate";
+import BookingDatePicker from "./BookingDatePicker";
 
 interface EditBookingProps {
   booking: {
@@ -22,13 +23,15 @@ interface EditBookingProps {
   maxGuests: number;
   onClose: () => void;
   onUpdate: () => void;
+  venueId: string;
 }
 
 const EditBooking: React.FC<EditBookingProps> = ({
   booking,
   maxGuests,
   onClose,
-  onUpdate
+  onUpdate,
+  venueId
 }) => {
   const [dateRange, setDateRange] = useState([
     {
@@ -110,27 +113,23 @@ const EditBooking: React.FC<EditBookingProps> = ({
   return (
     <>
       {/* Edit Booking Modal */}
-      <Modal isOpen={true} onClose={onClose} title="Edit Booking">
+      <Modal isOpen={true} onClose={onClose} className="max-w-md">
+        <H2>Edit Booking</H2>
         <div className="p-4 space-y-4">
           {/* Date Picker */}
           <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-300">
-              Select Dates
-            </label>
-            <DateRange
-              ranges={dateRange}
-              onChange={handleDateChange}
-              moveRangeOnFirstSelection={false}
-              minDate={new Date()}
-              className="border rounded-md w-full"
+            <P>Select Dates</P>
+            <BookingDatePicker
+              venueId={venueId}
+              bookingId={booking.id}
+              selectedRange={dateRange}
+              onDateChange={handleDateChange}
             />
           </div>
 
           {/* Guests Selector */}
           <div>
-            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-300">
-              Number of Guests
-            </label>
+            <P>Number of Guests</P>
             <GuestsSelector
               guests={guests}
               maxGuests={maxGuests}
