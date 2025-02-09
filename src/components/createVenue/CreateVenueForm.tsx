@@ -122,7 +122,7 @@ const VenueForm = () => {
             }
           })}
           placeholder="Description"
-          className="peer w-full p-2 pl-10 pt-5 pb-2 border border-gray-300 rounded-md"
+          className="peer w-full p-2 pl-10 pt-5 pb-2 border dark:bg-customBgDark-500 border-gray-300 dark:border-customBgDark-500 rounded-md"
           onChange={(e) => {
             updateVenue({ description: e.target.value });
             clearErrors("description");
