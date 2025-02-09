@@ -140,10 +140,10 @@ const Input = <T extends FieldValues>({
       <label
         htmlFor={InputId}
         className={`absolute rounded-md left-6 top-[-8px] text-gray-500 dark:text-whiteFont-700 bg-white text-sm dark:bg-customBgDark-500 px-1 transition-all 
-      peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
-      peer-focus:top-[-8px] peer-focus:text-sm peer-focus:text-color4-800 dark:peer-focus:text-whiteFont-600 ${
-        icon ? "peer-placeholder-shown:left-11 peer-focus:left-6" : ""
-      }`}
+        peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+        peer-focus:top-[-8px] peer-focus:text-sm peer-focus:text-color4-800 dark:peer-focus:text-whiteFont-600 ${
+          icon ? "peer-placeholder-shown:left-11 peer-focus:left-6" : ""
+        }`}
       >
         {InputLabel}
       </label>
