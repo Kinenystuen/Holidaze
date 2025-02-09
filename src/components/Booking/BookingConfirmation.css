@@ -1,0 +1,23 @@
+.customBox-scrollbar::-webkit-scrollbar {
+    width: 2px;
+}
+
+.customBox-scrollbar::-webkit-scrollbar-track {
+    background: #232323;
+    border-radius: 10px;
+}
+
+.customBox-scrollbar::-webkit-scrollbar-thumb {
+    background: #2c2c2c;
+    border-radius: 4px;
+}
+
+.customBox-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* For Firefox */
+.customBox-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #232323 #2c2c2c;
+}

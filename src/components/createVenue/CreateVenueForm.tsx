@@ -30,7 +30,7 @@ import VenuePreview from "./VenuePreview";
 import H3 from "../shared/Typography/H3";
 
 const VenueForm = () => {
-  const { venue, updateVenue } = useVenue();
+  const { venue, setVenue, updateVenue } = useVenue();
   const [togglePreview, setTogglePreview] = useState(false);
   const { createVenue, loading } = useCreateVenue();
 
@@ -121,13 +121,24 @@ const VenueForm = () => {
               message: "Maximum length is 1000 characters."
             }
           })}
-          placeholder="Description"
-          className="peer w-full p-2 pl-10 pt-5 pb-2 border border-gray-300 rounded-md"
+          placeholder=""
+          className="peer w-full p-2 pl-10 pt-5 pb-2 border dark:bg-customBgDark-500 border-gray-300 dark:border-customBgDark-500 rounded-md"
           onChange={(e) => {
             updateVenue({ description: e.target.value });
             clearErrors("description");
           }}
         />
+        {/* Input Label */}
+        <label
+          htmlFor={"Description"}
+          className={`absolute rounded-md left-6 top-[-8px] text-gray-500 dark:text-whiteFont-700 bg-white text-sm dark:bg-customBgDark-500 px-1 transition-all 
+          peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+          peer-focus:top-[-8px] peer-focus:text-sm peer-focus:text-color4-800 dark:peer-focus:text-whiteFont-600
+            peer-placeholder-shown:left-11 peer-focus:left-6
+          }`}
+        >
+          Description
+        </label>
         <ErrorMessage
           errors={errors}
           name="description"
@@ -248,7 +259,10 @@ const VenueForm = () => {
 
       <H3 className="mt-3">Add images</H3>
       {/* Image uploader */}
-      <ImageUploader />
+      <ImageUploader
+        media={venue.media}
+        setMedia={(newMedia) => setVenue({ ...venue, media: newMedia })}
+      />
 
       <div className="flex justify-center gap-2 mb-20">
         <Button

@@ -95,7 +95,6 @@ const MyBookings = () => {
 
   const handleShowPastBookings = () => {
     setShowPastBookings((prev) => {
-      console.log("Toggling past bookings:", !prev);
       return !prev;
     });
   };

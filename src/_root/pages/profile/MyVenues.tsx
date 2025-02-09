@@ -20,7 +20,7 @@ const MyVenues = () => {
   const { response, isLoading, isError, errorMessage, fetchData } = useApi<{
     venues: Venue[];
   }>(
-    `${apiHostUrl}/holidaze/profiles/${user?.name}?_owner=true&_venues=true&_bookings=true`,
+    `${apiHostUrl}/holidaze/profiles/${user?.name}?_owner=true&_venues=true`,
     {},
     true
   );

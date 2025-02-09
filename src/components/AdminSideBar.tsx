@@ -92,7 +92,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         <Button
           buttonType="transparent"
           className={`hidden md:flex absolute top-2 right-1 text-white ${
-            isCollapsed ? "top-14 mt-12" : ""
+            isCollapsed ? "top-2 mt-11" : ""
           }`}
           onClick={toggleCollapse}
         >
@@ -199,16 +199,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
                 <Link to="create-venue" className="sidebar-link gap-2">
                   <FontAwesomeIcon icon={faPlus} className="w-5" />
                   {!isCollapsed && "Create Venue"}
-                </Link>
-              </Tooltip>
-              <Tooltip
-                text="Venue Bookings"
-                position={isCollapsed ? "right" : "bottom"}
-                className="w-full"
-              >
-                <Link to="venue-bookings" className="sidebar-link gap-2">
-                  <FontAwesomeIcon icon={faCalendar} className="w-5" />
-                  {!isCollapsed && "Venue Bookings"}
                 </Link>
               </Tooltip>
               <Tooltip

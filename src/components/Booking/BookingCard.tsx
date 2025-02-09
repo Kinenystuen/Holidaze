@@ -18,6 +18,8 @@ import {
 import ButtonDropdown from "../ButtonDropdown";
 import { useDeleteBooking } from "../hooks/UseDeleteBooking";
 import LoaderSmall from "../ui/LoaderSmall";
+import { useEffect, useState } from "react";
+import EditBooking from "./EditBooking";
 
 const BookingCard = ({
   booking,
@@ -27,9 +29,26 @@ const BookingCard = ({
   refetchBookings: () => void;
 }) => {
   const { deleteBooking, isLoading } = useDeleteBooking(booking.id);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (booking.dateFrom && booking.dateTo && booking.venue?.price) {
+      const calculatedNights = Math.max(
+        Math.floor(
+          (new Date(booking.dateTo).getTime() -
+            new Date(booking.dateFrom).getTime()) /
+            (1000 * 60 * 60 * 24)
+        ),
+        1
+      );
+
+      setTotalPrice(booking.venue.price * calculatedNights * booking.guests);
+    }
+  }, [booking.dateFrom, booking.dateTo, booking.guests, booking.venue?.price]);
 
   const handleEditBooking = () => {
-    console.log("Edit booking clicked");
+    setIsEditing(true);
   };
 
   const handleCancelBooking = async () => {
@@ -40,7 +59,7 @@ const BookingCard = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-full md:max-h-[18rem] bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600">
+    <div className="flex flex-col md:flex-row h-full md:max-h-[22rem] bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600">
       {/* Show Loader if deleting */}
       {isLoading ? (
         <div className="flex justify-center items-center w-full h-40">
@@ -57,12 +76,12 @@ const BookingCard = ({
             />
           </div>
 
-          <div className="flex flex-col items-center md:flex-row">
+          <div className="flex flex-col my-2 items-center md:flex-row">
             {/* Dates */}
             <div className="flex flex-row md:flex-col gap-3 justify-center content-center md:px-4">
               {/* DateFrom */}
-              <div className="flex flex-col items-center justify-center text-center w-full">
-                <P className="text-xl font-medium mb-[-0.5rem] w-full">
+              <div className="flex xs:gap-1 md:gap-0 flex-col xs:flex-row md:flex-col items-center justify-center text-center w-full">
+                <P className="text-xl font-medium mb-[-0.5rem] xs:m-0 md:mb-[-0.5rem] w-full">
                   <FormatDate
                     dateString={booking.dateFrom}
                     position="center"
@@ -76,7 +95,7 @@ const BookingCard = ({
                     formatString="d"
                   />
                 </P>
-                <P className="mt-[-0.4rem] w-full">
+                <P className="mt-[-0.4rem] xs:m-0 md:mt-[-0.4rem] w-full">
                   <FormatDate
                     dateString={booking.dateFrom}
                     position="center"
@@ -91,8 +110,8 @@ const BookingCard = ({
                 />
               </div>
               {/* DateTo */}
-              <div className="flex flex-col items-center justify-center text-center w-full">
-                <P className="text-xl font-medium mb-[-0.5rem] w-full">
+              <div className="flex xs:gap-1 md:gap-0 flex-col xs:flex-row md:flex-col items-center justify-center text-center w-full">
+                <P className="text-xl font-medium mb-[-0.5rem] xs:m-0 md:mb-[-0.5rem] w-full">
                   <FormatDate
                     dateString={booking.dateTo}
                     position="center"
@@ -106,7 +125,7 @@ const BookingCard = ({
                     formatString="d"
                   />
                 </P>
-                <P className="mt-[-0.4rem] w-full">
+                <P className="mt-[-0.4rem] xs:m-0 md:mt-[-0.4rem]  w-full">
                   <FormatDate
                     dateString={booking.dateTo}
                     position="center"
@@ -115,7 +134,7 @@ const BookingCard = ({
                 </P>
               </div>
             </div>
-            <span className="border-r dark:border-customBgDark-400 my-3"></span>
+            <span className="md:border-r dark:border-customBgDark-400 md:my-3"></span>
 
             {/* Booking Info */}
             <div className="flex flex-col w-full h-fit">
@@ -183,8 +202,7 @@ const BookingCard = ({
                       className="w-4 h-4 text-2xl p-1"
                     />
                     <P className="text-sm text-gray-600 dark:text-gray-300">
-                      Total price:{" "}
-                      {(booking.venue?.price ?? 0) * booking.guests} kr
+                      Total price: {totalPrice} kr
                     </P>
                   </div>
                 </div>
@@ -230,6 +248,15 @@ const BookingCard = ({
             </div>
           </div>
         </>
+      )}
+      {isEditing && (
+        <EditBooking
+          booking={booking}
+          maxGuests={booking.venue?.maxGuests ?? 0}
+          onClose={() => setIsEditing(false)}
+          onUpdate={refetchBookings}
+          venueId={booking.venue?.id ?? ""}
+        />
       )}
     </div>
   );
