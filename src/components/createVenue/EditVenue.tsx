@@ -373,8 +373,6 @@ const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
           {/* Image Uploader */}
           <H3 className="mt-3">Add images</H3>
           <ImageUploader media={media} setMedia={setMedia} />
-
-          {/* Include media in submission */}
           {media.map((image, index) => (
             <input
               key={index}
