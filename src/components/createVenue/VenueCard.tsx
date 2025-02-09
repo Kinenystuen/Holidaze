@@ -27,6 +27,7 @@ import { useApi } from "../hooks/UseApi";
 import { FormatDate } from "../ui/FormatDate";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import EditVenue from "./EditVenue";
 
 const VenueCard = ({
   venue,
@@ -38,6 +39,7 @@ const VenueCard = ({
   const { deleteVenue, isLoading } = useDeleteVenue(venue.id);
   const [bookings, setBookings] = useState<Venue | null>(null);
   const [expandedVenue, setExpandedVenue] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   // Fetch venue data
   const { response } = useApi<Venue>(
@@ -60,6 +62,7 @@ const VenueCard = ({
 
   const handleEditVenue = () => {
     console.log("Edit venue clicked");
+    setIsEditing(true);
   };
 
   const handleDeleteVenue = async () => {
@@ -88,10 +91,10 @@ const VenueCard = ({
           {/* Venue Card */}
           <div
             key={venue.id}
-            className="flex flex-col md:flex-row h-full md:max-h-[18rem] bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600 "
+            className="flex flex-col md:flex-row h-full md:h-fit bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600 "
           >
             {/* Venue Image */}
-            <div className="relative w-full lg:w-64 h-48 lg:h-auto overflow-hidden rounded-t-lg lg:rounded-none lg:rounded-l-lg">
+            <div className="relative w-full md:w-64 h-48 md:h-auto overflow-hidden rounded-t-lg lg:rounded-none lg:rounded-l-lg">
               <img
                 src={venue.media[0]?.url || "/placeholder.jpg"}
                 alt={venue.media[0]?.alt || "Venue Image"}
@@ -167,7 +170,7 @@ const VenueCard = ({
               </div>
 
               {/* Actions */}
-              <div className="flex gap-3 mt-4 justify-center lg:justify-end flex-wrap">
+              <div className="flex gap-3 mt-4 justify-start lg:justify-end flex-wrap">
                 <Button
                   buttonType="violetSecondary"
                   className="w-full xs:w-fit transform duration-500"
@@ -185,26 +188,31 @@ const VenueCard = ({
                   />
                 </Button>
 
-                <ButtonDropdown
-                  label="Edit Venue"
-                  options={[
-                    {
-                      label: "Edit Venue",
-                      action: handleEditVenue,
-                      icon: faEdit
-                    },
-                    {
-                      label: "Delete Venue",
-                      action: handleDeleteVenue,
-                      icon: faTrash,
-                      danger: true
-                    }
-                  ]}
-                />
+                <div className="flex gap-3 flex-wrap justify-center lg:justify-end">
+                  <ButtonDropdown
+                    label="Edit Venue"
+                    className="w-full xs:w-auto"
+                    options={[
+                      {
+                        label: "Edit Venue",
+                        action: handleEditVenue,
+                        icon: faEdit
+                      },
+                      {
+                        label: "Delete Venue",
+                        action: handleDeleteVenue,
+                        icon: faTrash,
+                        danger: true
+                      }
+                    ]}
+                  />
 
-                <Link to={`/venue/${venue.id}`}>
-                  <Button buttonType="violet">View Venue</Button>
-                </Link>
+                  <Link to={`/venue/${venue.id}`} className="w-full xs:w-auto">
+                    <Button buttonType="violet" className="w-full xs:w-auto">
+                      View Venue
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -323,6 +331,13 @@ const VenueCard = ({
                 <P className="text-gray-500">No bookings yet.</P>
               )}
             </div>
+          )}
+          {isEditing && (
+            <EditVenue
+              venue={venue}
+              onClose={() => setIsEditing(false)}
+              onUpdate={refetchVenue}
+            />
           )}
         </>
       )}
