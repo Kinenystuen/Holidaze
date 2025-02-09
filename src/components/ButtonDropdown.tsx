@@ -6,6 +6,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface ButtonDropdownProps {
   label: string;
+  className?: string;
   options: {
     label: string;
     action: () => void;
@@ -14,7 +15,11 @@ interface ButtonDropdownProps {
   }[];
 }
 
-const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ label, options }) => {
+const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
+  label,
+  className,
+  options
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -34,11 +39,14 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ label, options }) => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left z-30" ref={dropdownRef}>
+    <div
+      className={`relative inline-block text-left z-30 ${className}`}
+      ref={dropdownRef}
+    >
       <Button
         buttonType="violetSecondary"
         onClick={() => setIsOpen(!isOpen)}
-        className=""
+        className="w-full"
       >
         {label} <FontAwesomeIcon icon={faEllipsisV} className="ml-2" />
       </Button>
