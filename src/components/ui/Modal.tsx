@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useSwipeable } from "react-swipeable";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../shared/Button/Button";
 
@@ -39,19 +38,12 @@ const Modal: React.FC<ModalProps> = ({
     };
   }, [isOpen, onClose]);
 
-  // Close modal when clicking outside
+  // Close modal only when clicking outside the content
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
-
-  // Swipe handlers (only allow swipe if content is not scrollable)
-  const swipeHandlers = useSwipeable({
-    onSwipedDown: () => onClose(),
-    preventScrollOnSwipe: true,
-    trackMouse: true
-  });
 
   return createPortal(
     <AnimatePresence>
@@ -59,7 +51,6 @@ const Modal: React.FC<ModalProps> = ({
         <motion.div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2"
           onClick={handleBackdropClick}
-          {...swipeHandlers}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -68,7 +59,7 @@ const Modal: React.FC<ModalProps> = ({
           <motion.div
             className={`relative flex flex-col justify-center bg-white dark:bg-customBgDark-500 rounded-lg shadow-lg w-full max-w-4xl 
             max-h-screen overflow-y-auto p-6 ${className}`}
-            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -76,8 +67,9 @@ const Modal: React.FC<ModalProps> = ({
           >
             {/* Close Button */}
             <Button
+              buttonType="violet"
               onClick={onClose}
-              className="absolute z-50 top-4 right-4 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white px-3 py-1 rounded-full hover:bg-gray-400 dark:hover:bg-gray-600 transition"
+              className="absolute z-50 top-4 right-4 px-3 py-1 transition"
               aria-label="Close Modal"
             >
               ✕
