@@ -240,7 +240,7 @@ const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
                 }
               })}
               placeholder=""
-              className="peer w-full p-2 pl-10 pt-5 pb-2 border dark:bg-customBgDark-500 border-gray-300 dark:border-customBgDark-500 rounded-md"
+              className="peer w-full p-2 pl-10 pt-5 pb-2 border dark:bg-customBgDark-500 border-gray-300 dark:border-zinc-700 rounded-md"
             />
             {/* Input Label */}
             <label
@@ -313,7 +313,7 @@ const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
           </div>
           <H3 className="mt-3">Rating</H3>
           {/* Rating */}
-          <label className="flex flex-col gap-2 w-full max-w-72 p-3 rounded-md border border-gray-300 dark:border-customBgDark-500 bg-white dark:bg-customBgDark-500 text-black dark:text-whiteFont-500 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <label className="flex flex-col gap-2 w-full max-w-72 p-3 rounded-md border border-gray-300 dark:border-zinc-700  bg-white dark:bg-customBgDark-500 text-black dark:text-whiteFont-500 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             <div className="flex items-center gap-3">
               <FontAwesomeIcon
                 icon={faStar}

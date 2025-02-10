@@ -28,7 +28,7 @@ const MetaCheckbox: React.FC<MetaCheckboxProps> = ({
       htmlFor={id}
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      className="flex items-center gap-3 cursor-pointer p-3 rounded-md border border-gray-300 dark:border-customBgDark-500 
+      className="flex items-center gap-3 cursor-pointer p-3 rounded-md border border-gray-300 dark:border-zinc-700 
                  bg-white dark:bg-customBgDark-500 text-black dark:text-whiteFont-500 transition-all duration-300 
                  hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-color4-700 outline-none"
     >

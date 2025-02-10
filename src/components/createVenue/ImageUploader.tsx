@@ -63,7 +63,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ media, setMedia }) => {
             placeholder="Enter image URL"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            className="peer w-full p-2 pl-10 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700"
+            className="peer w-full p-2 pl-10 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700"
           />
         </div>
 
@@ -78,11 +78,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ media, setMedia }) => {
             placeholder="Enter image description (alt text)"
             value={imageAlt}
             onChange={(e) => setImageAlt(e.target.value)}
-            className="peer w-full p-2 pl-10 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-customBgDark-500 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700"
+            className="peer w-full p-2 pl-10 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700"
           />
         </div>
 
-        <Button onClick={addImage}>Add Image</Button>
+        <Button className="mx-auto" onClick={addImage}>
+          Add Image
+        </Button>
       </div>
 
       {/* Image List with Drag-and-Drop */}
