@@ -202,8 +202,8 @@ const SelVenue: React.FC<SelVenueProps> = ({
           <SelVenueBooking venue={venue} refetchVenue={fetchData} />
 
           {/* Owner Details Section 2*/}
-          <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-3" />
-          <div className="flex md:hidden flex-col gap-4 items-start justify-between p-1 my-6 mb-10 px-2">
+          <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-1" />
+          <div className="flex md:hidden flex-col gap-4 items-start justify-between p-1 my-2 mb-10 px-2">
             <Link
               to={`/profile/${encodeURIComponent(venue.owner.name)}`}
               className="flex items-center gap-5 cursor-pointer"

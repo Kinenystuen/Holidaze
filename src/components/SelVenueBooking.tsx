@@ -191,7 +191,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
 
   return (
     <div className="w-full flex justify-center md:col-span-2 lg:col-span-1 mx-0 px-0">
-      <div className="w-full xs:w-fit mx-4 h-fit my-10 bg-white dark:bg-customBgDark-500 p-2 md:p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
+      <div className="w-full xs:w-fit mx-4 h-fit my-2 bg-white dark:bg-customBgDark-500 p-2 md:p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
         <div className="flex content-center w-full flex-col my-4 max-w-sm gap-4 justify-center items-start">
           <H2 className="text-2xl font-semibold">{venue?.price} kr / night</H2>
           <div className="w-full">
