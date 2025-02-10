@@ -70,15 +70,20 @@ const EditBooking: React.FC<EditBookingProps> = ({
     false
   );
 
-  // Handles booking update request
   const handleUpdateBooking = async () => {
     setIsSaving(true);
     setError(null);
     setSuccessMessage(null);
 
+    const checkIn = new Date(dateRange[0].startDate);
+    checkIn.setUTCHours(14, 0, 0, 0); // Set check-in to 15:00 UTC
+
+    const checkOut = new Date(dateRange[0].endDate);
+    checkOut.setUTCHours(10, 0, 0, 0); // Set check-out to 11:00 UTC
+
     const updatedBooking = {
-      dateFrom: dateRange[0].startDate.toISOString(),
-      dateTo: dateRange[0].endDate.toISOString(),
+      dateFrom: checkIn.toISOString(),
+      dateTo: checkOut.toISOString(),
       guests
     };
 
@@ -86,6 +91,7 @@ const EditBooking: React.FC<EditBookingProps> = ({
       await fetchData({
         body: updatedBooking
       });
+      setSuccessMessage("Booking updated successfully!");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message || "An unexpected error occurred.");
