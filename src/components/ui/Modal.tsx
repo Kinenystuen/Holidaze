@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../shared/Button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 interface ModalProps {
   isOpen: boolean;
@@ -69,14 +71,18 @@ const Modal: React.FC<ModalProps> = ({
             <Button
               buttonType="violet"
               onClick={onClose}
-              className="absolute z-50 top-4 right-4 px-3 py-1 transition"
+              className="absolute z-30 w-8 h-8 top-4 right-4 px-3 py-1 transition flex items-center justify-center"
               aria-label="Close Modal"
             >
-              ✕
+              <FontAwesomeIcon icon={faClose} className="w-4 h-4" />
             </Button>
 
             {/* Modal Title */}
-            {title && <h2 className="text-lg font-semibold mb-4">{title}</h2>}
+            {title && (
+              <h2 className="text-lg text-center font-semibold mb-4">
+                {title}
+              </h2>
+            )}
 
             {/* Modal Content */}
             <div className="overflow-y-auto max-h-[80vh] px-2">{children}</div>
