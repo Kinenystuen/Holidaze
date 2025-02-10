@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   addDays,
+  differenceInCalendarDays,
   differenceInDays,
   isWithinInterval,
   setHours,
@@ -117,7 +118,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     if (dateRange.length === 0 || !venue.price) return;
 
     const totalNights = Math.max(
-      differenceInDays(dateRange[0].endDate, dateRange[0].startDate),
+      differenceInCalendarDays(dateRange[0].endDate, dateRange[0].startDate),
       1
     );
 
@@ -155,7 +156,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     setIsSummaryOpen(!isSummaryOpen);
   };
 
-  /* Handle booking confirmation */
   const handleBooking = () => {
     setErrorMessage(null);
     setIsBooking(true);
@@ -166,13 +166,21 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
       return;
     }
 
+    // Ensure check-in is 15:00 and check-out is 11:00 in UTC
+    const checkIn = new Date(dateRange[0].startDate);
+    checkIn.setUTCHours(14, 0, 0, 0); // Set to 15:00 UTC
+
+    const checkOut = new Date(dateRange[0].endDate);
+    checkOut.setUTCHours(10, 0, 0, 0); // Set to 11:00 UTC
+
     const newBooking = {
       venueName: venue.name,
-      dateFrom: dateRange[0].startDate.toISOString(),
-      dateTo: dateRange[0].endDate.toISOString(),
+      dateFrom: checkIn.toISOString(), // Ensure the correct time is preserved
+      dateTo: checkOut.toISOString(),
       guests,
       venueId: venue.id
     };
+
     setBookingData(newBooking);
   };
 
