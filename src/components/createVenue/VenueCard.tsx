@@ -91,7 +91,7 @@ const VenueCard = ({
           {/* Venue Card */}
           <div
             key={venue.id}
-            className="flex flex-col md:flex-row h-full md:h-fit bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600 "
+            className="flex flex-col md:flex-row h-fit bg-white col-span-1 md:col-span-1 dark:bg-customBgDark-500 rounded-xl shadow-sm border border-gray-200 dark:border-customBgDark-600 "
           >
             {/* Venue Image */}
             <div className="relative w-full md:w-64 h-48 md:h-auto overflow-hidden rounded-t-lg lg:rounded-none lg:rounded-l-lg">
@@ -218,7 +218,7 @@ const VenueCard = ({
           </div>
           {/* Expandable Bookings List */}
           {expandedVenue === venue.id && (
-            <div className="mt-4 p-4 border-t border-color4-600 dark:border-color4-800">
+            <div className="mt-4 p-4 h-fit border-t border-color4-600 dark:border-color4-800">
               {bookings && bookings.bookings.length > 0 ? (
                 bookings?.bookings.map((booking) => (
                   <motion.div
@@ -231,9 +231,9 @@ const VenueCard = ({
                       key={booking.id}
                       className="bg-white dark:bg-color4-900 border border-color4-500 dark:border-color4-900 p-3 rounded-md mb-2"
                     >
-                      <div className="flex flex-row justify-between content-center items-center flex-wrap gap-5">
+                      <div className="flex flex-row justify-between content-center items-center flex-wrap gap-5 w-full truncate">
                         <Link to={`/profile/${booking.customer?.name}`}>
-                          <div className="flex items-center gap-3 m-2 min-w-[16rem]">
+                          <div className="flex items-center w-full whitespace-nowrap gap-3 m-2">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
                               <img
                                 src={booking.customer?.avatar.url}
@@ -241,9 +241,9 @@ const VenueCard = ({
                                 className="h-full w-full object-cover"
                               />
                             </div>
-                            <div className="flex flex-col justify-center">
+                            <div className="flex flex-col justify-center w-full">
                               <P>{booking.customer?.name}</P>
-                              <P className="text-sm text-whiteFont-800 dark:text-whiteFont-700">
+                              <P className="text-xs md:text-sm text-whiteFont-800 dark:text-whiteFont-700 w-full truncate">
                                 {booking.customer?.email}
                               </P>
                             </div>

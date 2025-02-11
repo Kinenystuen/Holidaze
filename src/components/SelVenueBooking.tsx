@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   addDays,
-  differenceInDays,
+  differenceInCalendarDays,
   isWithinInterval,
   setHours,
   setMinutes
@@ -117,7 +117,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     if (dateRange.length === 0 || !venue.price) return;
 
     const totalNights = Math.max(
-      differenceInDays(dateRange[0].endDate, dateRange[0].startDate),
+      differenceInCalendarDays(dateRange[0].endDate, dateRange[0].startDate),
       1
     );
 
@@ -155,7 +155,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     setIsSummaryOpen(!isSummaryOpen);
   };
 
-  /* Handle booking confirmation */
   const handleBooking = () => {
     setErrorMessage(null);
     setIsBooking(true);
@@ -166,13 +165,21 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
       return;
     }
 
+    // Ensure check-in is 15:00 and check-out is 11:00 in UTC
+    const checkIn = new Date(dateRange[0].startDate);
+    checkIn.setUTCHours(14, 0, 0, 0); // Set to 15:00 UTC
+
+    const checkOut = new Date(dateRange[0].endDate);
+    checkOut.setUTCHours(10, 0, 0, 0); // Set to 11:00 UTC
+
     const newBooking = {
       venueName: venue.name,
-      dateFrom: dateRange[0].startDate.toISOString(),
-      dateTo: dateRange[0].endDate.toISOString(),
+      dateFrom: checkIn.toISOString(), // Ensure the correct time is preserved
+      dateTo: checkOut.toISOString(),
       guests,
       venueId: venue.id
     };
+
     setBookingData(newBooking);
   };
 
@@ -191,7 +198,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
 
   return (
     <div className="w-full flex justify-center md:col-span-2 lg:col-span-1 mx-0 px-0">
-      <div className="w-full xs:w-fit mx-4 h-fit my-10 bg-white dark:bg-customBgDark-500 p-2 md:p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
+      <div className="w-full xs:w-fit mx-4 h-fit my-2 bg-white dark:bg-customBgDark-500 p-2 md:p-6 rounded-lg shadow-md border border-gray-200 dark:border-customBgDark-600">
         <div className="flex content-center w-full flex-col my-4 max-w-sm gap-4 justify-center items-start">
           <H2 className="text-2xl font-semibold">{venue?.price} kr / night</H2>
           <div className="w-full">

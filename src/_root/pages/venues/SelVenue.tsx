@@ -3,6 +3,7 @@ import { Venue } from "../../../components/library/types";
 import H1 from "../../../components/shared/Typography/H1";
 import {
   faCar,
+  faEdit,
   faMapMarkerAlt,
   faPaw,
   faPerson,
@@ -17,8 +18,11 @@ import "swiper/swiper-bundle.css";
 import "./SelVenue.css";
 import SelVenueSwiper from "../../../components/SelVenueSwiper";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import SelVenueBooking from "../../../components/SelVenueBooking";
+import { useUserContext } from "../../../components/context/useUserContext";
+import Button from "../../../components/shared/Button/Button";
+import EditVenue from "../../../components/createVenue/EditVenue";
 
 /** Small Feature Box */
 const Feature = ({ icon, text }: { icon: IconDefinition; text: string }) => (
@@ -37,6 +41,14 @@ const SelVenue: React.FC<SelVenueProps> = ({
   venue,
   refetchVenue: fetchData
 }) => {
+  const { user } = useUserContext();
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditVenue = () => {
+    console.log("Edit venue clicked");
+    setIsEditing(true);
+  };
+
   return (
     <div className="flex-1">
       <div className="">
@@ -98,30 +110,64 @@ const SelVenue: React.FC<SelVenueProps> = ({
               </div>
             </div>
             <hr className="border-color2-500 dark:border-customBgDark-500 hidden md:block my-3" />
-            <div className="hidden md:flex flex-col gap-4 items-start justify-between p-1 mb-3 px-2">
-              {/* Owner Details Section */}
+            {/* Owner Details Section */}
+            <div className="hidden md:flex flex-row gap-4 items-center justify-between p-1 mb-3 px-2">
               <Link
                 to={`/profile/${encodeURIComponent(venue.owner.name)}`}
                 className="flex items-center gap-5 cursor-pointer"
               >
-                {/* Owner Avatar */}
-                <img
-                  src={venue.owner.avatar?.url}
-                  alt={`Avatar of ${venue.owner.name}`}
-                  className="w-14 h-14 rounded-full object-cover shadow-md"
-                />
-
-                {/* Owner Info */}
-                <div className="flex flex-col">
-                  <P className="text-lg text-gray-800 dark:text-whiteFont-400">
-                    Hosted by{" "}
-                    <span className="font-semibold">{venue.owner.name}</span>
-                  </P>
-                  <P className="text-[12px] text-gray-500 dark:text-whiteFont-600">
-                    {venue.owner.email || "No email provided"}
-                  </P>
+                <div className="w-14 h-14 rounded-full overflow-hidden shadow-md">
+                  {/* Owner Avatar */}
+                  <img
+                    src={venue.owner.avatar?.url}
+                    alt={`Avatar of ${venue.owner.name}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </Link>
+
+              <div className="flex flex-row flex-wrap items-center gap-2 w-full">
+                {/* Owner Info */}
+                <Link
+                  to={`/profile/${encodeURIComponent(venue.owner.name)}`}
+                  className="flex items-center gap-5 w-full cursor-pointer"
+                >
+                  <div className="flex w-full flex-col">
+                    <P className="text-lg font-semibold text-gray-800 dark:text-whiteFont-400">
+                      {venue.owner.name === user.name ? (
+                        <>
+                          {venue.owner.name}{" "}
+                          <span className="text-sm font-light text-color1-500">
+                            - Your Venue
+                          </span>
+                        </>
+                      ) : (
+                        `Hosted by ${venue.owner.name}`
+                      )}
+                    </P>
+
+                    <P className="text-[12px] text-gray-500 dark:text-whiteFont-600">
+                      {venue.owner.email || "No email provided"}
+                    </P>
+                  </div>
+                </Link>
+                {venue.owner.name === user.name && (
+                  <div className="flex justify-end items-center gap-2">
+                    {/* <Tooltip text="Edit Venue" position="bottom"> */}
+                    <Button
+                      className="rounded-lg w-full h-8 px-3 group flex flex-col flex-wrap justify-center items-center"
+                      buttonType="violet"
+                      onClick={handleEditVenue}
+                    >
+                      <FontAwesomeIcon icon={faEdit} className="w-4 h-4" />
+                      <span className="opacity-0 w-[1px] whitespace-nowrap p-0 m-0 group-hover:w-fit group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-500 ease-in-out group-hover:ml-2">
+                        Edit Venue
+                      </span>
+                    </Button>
+                    {/* </Tooltip> */}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -202,31 +248,72 @@ const SelVenue: React.FC<SelVenueProps> = ({
           <SelVenueBooking venue={venue} refetchVenue={fetchData} />
 
           {/* Owner Details Section 2*/}
-          <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-3" />
-          <div className="flex md:hidden flex-col gap-4 items-start justify-between p-1 my-6 mb-10 px-2">
+          <hr className="md:hidden border-color2-500 dark:border-customBgDark-500 my-1" />
+          {/* Owner Details Section */}
+          <div className="flex md:hidden flex-row mx-auto gap-4 items-center justify-between content-center p-1 mb-3 bg-white dark:bg-customBgDark-500 w-full max-w-sm rounded-lg shadow-sm px-3 py-4">
             <Link
               to={`/profile/${encodeURIComponent(venue.owner.name)}`}
               className="flex items-center gap-5 cursor-pointer"
             >
-              {/* Owner Avatar */}
-              <img
-                src={venue.owner.avatar?.url}
-                alt={`Avatar of ${venue.owner.name}`}
-                className="w-14 h-14 rounded-full object-cover shadow-md"
-              />
-
-              {/* Owner Info */}
-              <div className="flex flex-col">
-                <P className="text-lg font-semibold text-gray-800 dark:text-whiteFont-400">
-                  Hosted by {venue.owner.name}
-                </P>
-                <P className="text-[12px] text-gray-500 dark:text-whiteFont-600">
-                  {venue.owner.email || "No email provided"}
-                </P>
+              <div className="w-14 h-14 rounded-full overflow-hidden shadow-md">
+                {/* Owner Avatar */}
+                <img
+                  src={venue.owner.avatar?.url}
+                  alt={`Avatar of ${venue.owner.name}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </Link>
+
+            <div className="flex flex-row flex-wrap items-center gap-2 w-full">
+              {/* Owner Info */}
+              <Link
+                to={`/profile/${encodeURIComponent(venue.owner.name)}`}
+                className="flex items-center gap-5 w-full cursor-pointer"
+              >
+                <div className="flex w-full flex-col">
+                  <P className="text-lg font-semibold text-gray-800 dark:text-whiteFont-400">
+                    {venue.owner.name === user.name ? (
+                      <>
+                        {venue.owner.name}{" "}
+                        <span className="text-sm font-light text-color1-500">
+                          - Your Venue
+                        </span>
+                      </>
+                    ) : (
+                      `Hosted by ${venue.owner.name}`
+                    )}
+                  </P>
+
+                  <P className="text-[12px] text-gray-500 dark:text-whiteFont-600">
+                    {venue.owner.email || "No email provided"}
+                  </P>
+                </div>
+              </Link>
+              {venue.owner.name === user.name && (
+                <div className="flex justify-end items-center gap-2">
+                  {/* <Tooltip text="Edit Venue" position="bottom"> */}
+                  <Button
+                    className="rounded-lg w-fit h-8 px-3 group flex flex-col flex-wrap justify-center items-center"
+                    buttonType="violet"
+                    onClick={handleEditVenue}
+                  >
+                    <FontAwesomeIcon icon={faEdit} className="w-4 h-4" />
+                    <span className="ml-2">Edit Venue</span>
+                  </Button>
+                  {/* </Tooltip> */}
+                </div>
+              )}
+            </div>
           </div>
         </div>
+        {isEditing && (
+          <EditVenue
+            venue={venue}
+            onClose={() => setIsEditing(false)}
+            onUpdate={fetchData}
+          />
+        )}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import P from "../../../components/shared/Typography/P";
 import H3 from "../../../components/shared/Typography/H3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt, faStar } from "@fortawesome/free-solid-svg-icons";
 import ErrorMessage from "../../../components/shared/ErrorMessage";
 import Loader from "../../../components/ui/Loader";
 import { Venue } from "../../../components/library/types";
@@ -45,11 +45,17 @@ const TopRated = () => {
 
   useEffect(() => {
     if (response?.data) {
+      const filteredVenues = response.data.filter(
+        (venue) =>
+          venue.location && venue.location.city && venue.location.country
+      );
+
       // Sort by rating (highest to lowest)
-      const sortedVenues = [...response.data].sort(
+      const sortedVenues = [...filteredVenues].sort(
         (a, b) => b.rating - a.rating
       );
 
+      // Shuffle and take the top 10
       const shuffledVenues = sortedVenues
         .slice(0, 10)
         .sort(() => Math.random() - 0.5);
@@ -101,11 +107,11 @@ const TopRated = () => {
                   </div>
                 )}
                 <div className="p-4">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center gap-2">
                     <H3 className="text-sm font-semibold truncate">
                       {venue.name}
                     </H3>
-                    <div className="text-sm text-customBgDark-900 dark:text-whiteFont-500">
+                    <div className="text-sm text-customBgDark-900 dark:text-whiteFont-500 whitespace-nowrap">
                       <FontAwesomeIcon
                         icon={faStar}
                         size="sm"
@@ -113,6 +119,31 @@ const TopRated = () => {
                       />
                       {venue.rating}
                     </div>
+                  </div>
+                  {/* Location */}
+                  <div className="flex items-center text-sm text-gray-600 md:mt-1 ">
+                    {venue.location ? (
+                      <div className="flex items-center w-full overflow-hidden">
+                        <FontAwesomeIcon
+                          icon={faMapMarkerAlt}
+                          className="mr-2 text-gray-500 w-3 h-3 flex-shrink-0"
+                        />
+                        <P className="text-gray-600 text-sm truncate w-full overflow-hidden whitespace-nowrap text-ellipsis">
+                          {[
+                            venue.location.address,
+                            venue.location.zip,
+                            venue.location.city,
+                            venue.location.country
+                          ]
+                            .filter(Boolean)
+                            .join(", ") || "Location not available"}
+                        </P>
+                      </div>
+                    ) : (
+                      <P className="text-gray-500 italic">
+                        Location not available
+                      </P>
+                    )}
                   </div>
                 </div>
               </div>

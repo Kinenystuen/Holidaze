@@ -73,11 +73,32 @@ const Venues = ({
     const filterAndSortVenues = () => {
       let result = [...allVenues];
 
-      // Apply search filter
       if (searchQuery.trim() !== "") {
-        result = result.filter((venue) =>
-          venue.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+        result = result.filter((venue) => {
+          const query = searchQuery.toLowerCase();
+
+          // Check name and description
+          const matchesName = venue.name.toLowerCase().includes(query);
+          const matchesDescription =
+            venue.description &&
+            venue.description.toLowerCase().includes(query);
+
+          // Check location fields (handle missing fields safely)
+          const matchesLocation =
+            venue.location &&
+            ["address", "city", "zip", "country", "continent"].some(
+              (key) =>
+                venue.location[key as keyof typeof venue.location] &&
+                venue.location[key as keyof typeof venue.location] &&
+                typeof venue.location[key as keyof typeof venue.location] ===
+                  "string" &&
+                (venue.location[key as keyof typeof venue.location] as string)
+                  .toLowerCase()
+                  .includes(query)
+            );
+
+          return matchesName || matchesDescription || matchesLocation;
+        });
       }
 
       // Apply filters

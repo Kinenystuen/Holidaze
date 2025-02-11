@@ -1,17 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
-  faTwitter,
   faInstagram,
-  faLinkedinIn
+  faLinkedinIn,
+  faXTwitter
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import P from "./Typography/P";
+import Button from "./Button/Button";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-10">
+    <footer className="bg-color1-800 text-whiteFont-500 py-10">
       <div className="container mx-auto px-6 sm:px-10 max-w-screen-xl">
         {/* Footer Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -69,32 +70,24 @@ const Footer = () => {
             <div className="flex space-x-4">
               <Link
                 to="/"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition"
               >
                 <FontAwesomeIcon icon={faFacebookF} size="lg" />
               </Link>
               <Link
                 to="/"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition"
               >
-                <FontAwesomeIcon icon={faTwitter} size="lg" />
+                <FontAwesomeIcon icon={faXTwitter} size="lg" />
               </Link>
               <Link
                 to="/"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition"
               >
                 <FontAwesomeIcon icon={faInstagram} size="lg" />
               </Link>
               <Link
                 to="/"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition"
               >
                 <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
@@ -117,20 +110,21 @@ const Footer = () => {
                     type="email"
                     id="email"
                     placeholder="Enter your email"
-                    className="w-full px-4 py-2 rounded-lg bg-gray-700 text-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full px-4 py-2 rounded-lg bg-color1-700 text-whiteFont-500 placeholder-whiteFont-600  focus:ring-2 focus:ring-color1-500 focus:outline-none"
                   />
                   <FontAwesomeIcon
                     icon={faEnvelope}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-color1-300"
                   />
                 </div>
               </div>
-              <button
+              <Button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition"
+                buttonType="violet"
+                className="bg-color3-400"
               >
                 Subscribe
-              </button>
+              </Button>
             </form>
           </div>
         </div>
