@@ -1,14 +1,30 @@
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/shared/Button/Button";
 import ErrorMessage from "../../components/shared/ErrorMessage";
-import { Link } from "react-router-dom";
+import Header from "../../components/shared/Header";
 
 const PageNotFound = () => {
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center h-[80vh]">
+    <div className="flex flex-col justify-start w-screen items-center h-screen">
+      <Header />
+
       <ErrorMessage message="404 Page not found">
-        <Link to="/" className="m-1.5 p-2 hover:bg-transparent rounded-lg px-4">
-          <Button buttonType="violet">Go back to homepage</Button>
-        </Link>
+        <Button
+          onClick={handleGoBack}
+          buttonType="violet"
+          className="my-3 px-8"
+        >
+          Go back
+        </Button>
       </ErrorMessage>
     </div>
   );
