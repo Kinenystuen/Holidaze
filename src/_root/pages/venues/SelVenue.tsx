@@ -294,7 +294,7 @@ const SelVenue: React.FC<SelVenueProps> = ({
                 <div className="flex justify-end items-center gap-2">
                   {/* <Tooltip text="Edit Venue" position="bottom"> */}
                   <Button
-                    className="rounded-lg w-fit h-8 px-3 group flex flex-col flex-wrap justify-center items-center"
+                    className="rounded-lg w-full h-8 group flex flex-col flex-wrap justify-center items-center"
                     buttonType="violet"
                     onClick={handleEditVenue}
                   >
