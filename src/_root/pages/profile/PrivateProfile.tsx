@@ -14,6 +14,7 @@ import LoaderSmall from "../../../components/ui/LoaderSmall";
 import EditProfile from "./EditProfile";
 import Button from "../../../components/shared/Button/Button";
 import ProfileCard from "../../../components/ui/ProfileCard";
+import MetaTags from "../../../components/metaTags";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();

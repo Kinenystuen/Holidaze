@@ -4,6 +4,7 @@ import AdminSidebar from "../../../components/AdminSideBar";
 import H1 from "../../../components/shared/Typography/H1";
 import { useState } from "react";
 import ThemeToggle from "../../../components/shared/ThemeToggle";
+import MetaTags from "../../../components/metaTags";
 
 const ProfileLayout = () => {
   const { user } = useUserContext();
@@ -11,6 +12,11 @@ const ProfileLayout = () => {
 
   return (
     <div className="relative container mx-auto min-w-full">
+      <MetaTags
+        title={`Admin Pages - Holidaze`}
+        keywords="Holidaze, venue, hotel, booking, holiday, vacation, admin"
+        description={`Book your stay at Holidaze. Enjoy great amenities and a wonderful experience!`}
+      />
       <div className="mx-auto">
         <div className="w-full md:flex">
           {/* Left-side menu */}
