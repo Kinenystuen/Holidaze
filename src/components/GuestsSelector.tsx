@@ -10,10 +10,10 @@ const GuestsSelector: React.FC<GuestsSelectorProps> = ({
   onChange
 }) => {
   return (
-    <div className="relative w-full h-16">
+    <div className="relative w-full h-16 flex justify-end">
       <label
         htmlFor="guests"
-        className="absolute top-3 left-2 block mb-1 uppercase text-sm font-semibold text-gray-600 dark:text-gray-400"
+        className="absolute top-2 left-3 text-xs uppercase sm:text-sm font-semibold text-gray-600 dark:text-gray-400 pointer-events-none"
       >
         <small>Guests</small>
       </label>
@@ -22,7 +22,7 @@ const GuestsSelector: React.FC<GuestsSelectorProps> = ({
       <select
         id="guests"
         name="guests"
-        className="w-full h-16 cursor-pointer border border-color1-200 dark:border-customBgDark-400 p-1 pt-8 pb-3 rounded-md bg-gray-100 dark:bg-customBgDark-500 font-bold focus:outline-none sm:text-sm"
+        className="w-full h-16 cursor-pointer border border-color1-200 dark:border-customBgDark-400 px-3 pt-6 pb-2 rounded-md bg-gray-100 dark:bg-customBgDark-500 font-bold focus:outline-none sm:text-sm"
         value={guests}
         onChange={(e) => onChange(Number(e.target.value))}
       >
