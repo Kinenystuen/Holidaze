@@ -14,7 +14,7 @@ interface SelUserProps {
 const ProfileCard: React.FC<SelUserProps> = ({ userData }) => {
   const { user } = useUserContext();
   return (
-    <div className="col-span-4 md:col-span-3 lg:col-span-2 flex flex-col h-fit bg-white dark:bg-customBgDark-500 shadow-sm rounded-xl w-full items-center">
+    <div className="col-span-4 flex flex-col h-fit bg-white dark:bg-customBgDark-500 shadow-sm rounded-xl w-full items-center">
       {/* Banner area */}
       <div className="flex w-full">
         {/* Banner */}
