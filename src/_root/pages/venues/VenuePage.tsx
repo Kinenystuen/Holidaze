@@ -7,6 +7,7 @@ import SortMenu from "./SortMenu";
 import FilterMenu from "./FilterMenu";
 import "./VenuePage.css";
 import ScrollToTopBtn from "../../../components/ui/ScrollToTopBtn";
+import MetaTags from "../../../components/metaTags";
 
 const VenuePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +35,11 @@ const VenuePage = () => {
 
   return (
     <div className="relative container mx-auto min-w-full">
+      <MetaTags
+        title={`Venues - Holidaze`}
+        keywords="holidaze, venue, hotel, booking, holiday, vacation"
+        description={`Book your stay at Holidaze. Enjoy great amenities and a wonderful experience!`}
+      />
       <div className=" mx-auto max-w-7xl">
         <div className="w-full md:flex">
           {/* Left-side menu */}

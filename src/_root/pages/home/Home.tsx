@@ -1,10 +1,16 @@
 import FixedImage from "../../../components/shared/FixedImage";
 import HeroHome from "../../../components/HeroHome";
 import PopDest from "./PopDest";
+import MetaTags from "../../../components/metaTags";
 
 const Home = () => {
   return (
     <div className="relative">
+      <MetaTags
+        title={`Holidaze`}
+        keywords="holidaze, venue, hotel, booking, holiday, vacation"
+        description={`Book your stay at Holidaze. Enjoy great amenities and a wonderful experience!`}
+      />
       {/* HERO SECTION */}
       <HeroHome />
       {/* Popular Destinations */}
