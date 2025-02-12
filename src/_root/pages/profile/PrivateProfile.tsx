@@ -14,7 +14,6 @@ import LoaderSmall from "../../../components/ui/LoaderSmall";
 import EditProfile from "./EditProfile";
 import Button from "../../../components/shared/Button/Button";
 import ProfileCard from "../../../components/ui/ProfileCard";
-import MetaTags from "../../../components/metaTags";
 
 const PrivateProfile = () => {
   const { user } = useUserContext();
@@ -27,11 +26,11 @@ const PrivateProfile = () => {
           <ProfileCard userData={user} />
 
           {/* Edit Profile and Settings */}
-          <div className="col-span-4 md:col-span-3 lg:col-span-1 flex whitespace-nowrap items-center justify-center">
-            <div className="w-fit flex flex-col xs:flex-row lg:flex-col items-center gap-2">
+          <div className="col-span-4 md:col-span-3 lg:col-span-4 flex whitespace-nowrap items-center justify-center">
+            <div className="w-fit flex flex-col xs:flex-row items-center gap-2">
               <EditProfile />
               <Link to={"settings"} className="w-full">
-                <Button className="rounded-lg w-full">
+                <Button className="w-full py-2">
                   <FontAwesomeIcon icon={faCog} className="mr-2" />
                   Settings
                 </Button>
