@@ -66,6 +66,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         <Button
           className="md:hidden fixed top-[4.4rem] left-0 z-10 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
           onClick={toggleMenu}
+          ariaLabel="Toggle Sidebar"
         >
           <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
         </Button>
@@ -95,6 +96,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
             isCollapsed ? "top-2 mt-11" : ""
           }`}
           onClick={toggleCollapse}
+          ariaLabel="Collapse Sidebar"
         >
           <Tooltip
             text={isCollapsed ? "Open Sidebar" : "Collapse Sidebar"}
@@ -118,7 +120,11 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
             position={isCollapsed ? "right" : "bottom"}
           >
             <Link className="text-whiteFont-500 dark:text-whiteFont-600" to="/">
-              {!isCollapsed ? "Holidaze" : "H"}
+              {typeof isCollapsed === "boolean"
+                ? !isCollapsed
+                  ? "Holidaze"
+                  : "H"
+                : "Holidaze"}
             </Link>
           </Tooltip>
         </div>
