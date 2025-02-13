@@ -21,7 +21,7 @@ const popularDestinations = [
     country: "Norway",
     flag: "NO",
     image:
-      "https://images.unsplash.com/photo-1565704927742-7fae2c6f7630?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "https://images.unsplash.com/photo-1639687809372-fe6e87e05fe4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG5pZGFyb3N8ZW58MHx8MHx8fDA%3D"
   },
   {
     name: "London",
