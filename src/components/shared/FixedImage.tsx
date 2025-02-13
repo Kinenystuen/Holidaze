@@ -6,13 +6,15 @@ interface FixedImageProps {
   imageUrl: string;
   alt?: string;
   overlayColor?: string;
+  children?: React.ReactNode;
 }
 
 const FixedImage: React.FC<FixedImageProps> = ({
   className = "",
   imageUrl,
   alt = "Fixed background image",
-  overlayColor
+  overlayColor,
+  children
 }) => {
   return (
     <div className={`relative ${className}`}>
@@ -32,6 +34,11 @@ const FixedImage: React.FC<FixedImageProps> = ({
           style={{ backgroundColor: overlayColor, mixBlendMode: "multiply" }}
         ></div>
       )}
+
+      {/* Content inside the fixed image */}
+      <div className="relative z-10 flex items-center justify-center h-full text-white text-center p-6">
+        {children}
+      </div>
     </div>
   );
 };
