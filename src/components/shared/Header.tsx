@@ -86,7 +86,7 @@ const Header: React.FC = () => {
                 <Button
                   buttonType="transparent"
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="text-gray-800 dark:text-whiteFont-600 focus:outline-none border-0 flex items-center p-2 md:p-0"
+                  className="text-gray-800 dark:text-whiteFont-600 focus:outline-none border-0 flex items-center p-2 ms-3 md:p-0"
                 >
                   <FontAwesomeIcon
                     icon={isMenuOpen ? faXmark : faBars}
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="absolute top-0 w-full pt-16 p-4 border-b dark:border-customBgDark-600 shadow-md bg-customBg dark:bg-customBgDark-500 z-20 md:hidden">
+            <div className="absolute top-0 w-full pt-16 p-4 border-b dark:border-customBgDark-600 shadow-md bg-customBg dark:bg-customBgDark-500 z-20 md:hidden transform duration-300">
               <nav className="w-full mx-0 space-y-4 px-2 my-4">
                 {headerNavLinks.map((link: INavLink) => {
                   const isActive = pathname === link.route;
