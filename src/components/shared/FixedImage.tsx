@@ -7,6 +7,7 @@ interface FixedImageProps {
   alt?: string;
   overlayColor?: string;
   children?: React.ReactNode;
+  backgroundPosition?: string;
 }
 
 const FixedImage: React.FC<FixedImageProps> = ({
@@ -14,15 +15,17 @@ const FixedImage: React.FC<FixedImageProps> = ({
   imageUrl,
   alt = "Fixed background image",
   overlayColor,
-  children
+  children,
+  backgroundPosition = "center"
 }) => {
   return (
     <div className={`relative ${className}`}>
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-fixed bg-cover bg-center"
+        className="absolute inset-0 bg-fixed bg-cover"
         style={{
-          backgroundImage: `url('${imageUrl}')`
+          backgroundImage: `url('${imageUrl}')`,
+          backgroundPosition
         }}
         aria-label={alt}
         role="img"
