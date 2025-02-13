@@ -20,13 +20,13 @@ const UserDropParent: React.FC = () => {
         <div className="hidden md:flex">
           <Link
             to="/auth?type=login"
-            className="px-3 py-[0.4rem] text-sm bg-color2 text-black rounded-none rounded-s-xl hover:bg-color2-400 hover:text-color1-700 transition flex items-center"
+            className="px-3 py-[0.4rem] text-sm bg-color2 dark:bg-color3-400 text-black dark:text-whiteFont-500 rounded-none rounded-s-xl hover:bg-color2-400 hover:text-color1-700 transition flex items-center"
           >
             <FontAwesomeIcon icon={faUser} className="mr-2 my-0" /> Login
           </Link>
           <Link
             to="/auth?type=register"
-            className="px-3 py-[0.4rem] text-sm border bg-white border-color2-500 text-black rounded-none rounded-e-xl hover:bg-gray-100 hover:text-black transition flex items-center"
+            className="px-3 py-[0.4rem] text-sm border bg-white dark:bg-color5-500 border-color2-500 dark:border-color1-500 text-black dark:text-whiteFont-500 rounded-none rounded-e-xl hover:bg-gray-100 hover:text-black transition flex items-center"
           >
             Register
           </Link>
