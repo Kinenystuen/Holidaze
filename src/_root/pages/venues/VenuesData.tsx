@@ -100,14 +100,14 @@ const VenuesData: React.FC<VenuesDataProps> = ({
                     </div>
 
                     {/* Location */}
-                    <div className="flex items-center text-sm text-gray-600 mt-[-4px]">
+                    <div className="flex items-center text-sm text-gray-600 mt-1">
                       {(venue.location.city || venue.location.country) && (
                         <div className="flex items-center">
                           <FontAwesomeIcon
                             icon={faMapMarkerAlt}
                             className="mr-2 text-gray-500 w-3 h-3 px-1"
                           />
-                          <P className="text-gray-600 text-[10px]">
+                          <P className="text-gray-600 text-xs">
                             {[venue.location.city, venue.location.country]
                               .filter(Boolean)
                               .join(", ")}
