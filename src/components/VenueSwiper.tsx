@@ -16,12 +16,14 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
       >
         {media.length > 0 ? (
           media.map((image, index) => (
-            <SwiperSlide key={index}>
-              <img
-                src={image.url}
-                alt={image.alt || "Venue Image"}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
+            <SwiperSlide key={index} className="overflow-hidden">
+              <div className="w-full h-full overflow-hidden">
+                <img
+                  src={image.url}
+                  alt={image.alt || "Venue Image"}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
             </SwiperSlide>
           ))
         ) : (

@@ -10,7 +10,8 @@ import {
   faChartBar,
   faSignOut,
   faAngleLeft,
-  faAngleRight
+  faAngleRight,
+  faHome
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "./library/types";
@@ -66,6 +67,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         <Button
           className="md:hidden fixed top-[4.4rem] left-0 z-10 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
           onClick={toggleMenu}
+          ariaLabel="Toggle Sidebar"
         >
           <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
         </Button>
@@ -95,6 +97,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
             isCollapsed ? "top-2 mt-11" : ""
           }`}
           onClick={toggleCollapse}
+          ariaLabel="Collapse Sidebar"
         >
           <Tooltip
             text={isCollapsed ? "Open Sidebar" : "Collapse Sidebar"}
@@ -118,7 +121,11 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
             position={isCollapsed ? "right" : "bottom"}
           >
             <Link className="text-whiteFont-500 dark:text-whiteFont-600" to="/">
-              {!isCollapsed ? "Holidaze" : "H"}
+              {typeof isCollapsed === "boolean"
+                ? !isCollapsed
+                  ? "Holidaze"
+                  : "H"
+                : "Holidaze"}
             </Link>
           </Tooltip>
         </div>
@@ -226,6 +233,29 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
             <Link to="settings" className="sidebar-link gap-2">
               <FontAwesomeIcon icon={faCog} className="w-5" />
               {!isCollapsed && "Account Settings"}
+            </Link>
+          </Tooltip>
+        </div>
+        <hr className="border-gray-500 my-4 mx-6" />
+        <div className="space-y-2 px-3">
+          <Tooltip
+            text="Go back to homepage"
+            position={isCollapsed ? "right" : "bottom"}
+            className="w-full"
+          >
+            <Link to="/" className="sidebar-link gap-2">
+              <FontAwesomeIcon icon={faHome} className="w-5" />
+              {!isCollapsed && "Home"}
+            </Link>
+          </Tooltip>
+          <Tooltip
+            text="Go back to homepage"
+            position={isCollapsed ? "right" : "bottom"}
+            className="w-full"
+          >
+            <Link to="/venues" className="sidebar-link gap-2">
+              <FontAwesomeIcon icon={faBuilding} className="w-5" />
+              {!isCollapsed && "All Venues"}
             </Link>
           </Tooltip>
         </div>

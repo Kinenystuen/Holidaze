@@ -165,7 +165,7 @@ const VenueCard = ({
                 </div>
                 <P className="text-lg font-semibold text-black dark:text-gray-200">
                   {venue.price} kr
-                  <span className="text-sm text-whiteFont-700"> / night</span>
+                  <span className="text-sm text-whiteFont-800"> / night</span>
                 </P>
               </div>
 
@@ -233,7 +233,7 @@ const VenueCard = ({
                     >
                       <div className="flex flex-row justify-between content-center items-center flex-wrap gap-5 w-full truncate">
                         <Link to={`/profile/${booking.customer?.name}`}>
-                          <div className="flex items-center w-full whitespace-nowrap gap-3 m-2">
+                          <div className="flex flex-grow w-[16rem] items-center whitespace-nowrap gap-3 m-2">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
                               <img
                                 src={booking.customer?.avatar.url}
@@ -250,7 +250,7 @@ const VenueCard = ({
                           </div>
                         </Link>
                         {/* Dates */}
-                        <div className="flex flex-row md:flex-col gap-3 max-w-[8rem] justify-center content-center md:px-4">
+                        <div className="flex flex-1 flex-row md:flex-col gap-3 max-w-[8rem] justify-center content-center md:px-4">
                           <div className="flex flex-row items-center">
                             {/* DateFrom */}
                             <div className="flex flex-col items-center justify-center text-center w-full">
@@ -308,10 +308,10 @@ const VenueCard = ({
                             </div>
                           </div>
                         </div>
-                        <P className="text-sm">
+                        <P className="text-sm flex flex-1 justify-end">
                           <strong>Guests:</strong> {booking.guests}
                         </P>
-                        <div className="flex flex-row items-center gap-3 p-1 text-gray-600 dark:text-whiteFont-800 ">
+                        <div className="flex flex-1 justify-end flex-row items-center gap-3 p-1 text-gray-600 dark:text-whiteFont-800 ">
                           <FontAwesomeIcon
                             icon={faInfoCircle}
                             className="w-3 h-3 text-2xl"

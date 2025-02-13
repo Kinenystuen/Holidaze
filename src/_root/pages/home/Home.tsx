@@ -2,6 +2,8 @@ import FixedImage from "../../../components/shared/FixedImage";
 import HeroHome from "../../../components/HeroHome";
 import PopDest from "./PopDest";
 import MetaTags from "../../../components/metaTags";
+import PopularDestinations from "./PopularDestinations";
+import PopularStayTypes from "./PopularStayTypes";
 
 const Home = () => {
   return (
@@ -13,8 +15,12 @@ const Home = () => {
       />
       {/* HERO SECTION */}
       <HeroHome />
-      {/* Popular Destinations */}
+      {/* GuestFav */}
       <PopDest />
+      {/* Popular Destinations */}
+      <PopularDestinations />
+      {/* Popular Stay Types */}
+      <PopularStayTypes />
 
       {/* Fixed Image Background Section */}
       <FixedImage
