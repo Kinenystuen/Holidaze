@@ -124,8 +124,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     setTotalPrice(totalNights * venue.price * guests);
   }, [dateRange, guests, venue.price]);
 
-  console.log(totalPrice);
-
   /* Handle date selection */
   const handleDateChange = (rangesByKey: RangeKeyDict) => {
     const { selection } = rangesByKey;
