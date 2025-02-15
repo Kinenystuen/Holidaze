@@ -45,7 +45,6 @@ const SelVenue: React.FC<SelVenueProps> = ({
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEditVenue = () => {
-    console.log("Edit venue clicked");
     setIsEditing(true);
   };
 
