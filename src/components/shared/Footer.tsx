@@ -9,6 +9,8 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import P from "./Typography/P";
 import Button from "./Button/Button";
+import H2 from "./Typography/H2";
+import H3 from "./Typography/H3";
 
 const Footer = () => {
   return (
@@ -18,16 +20,21 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo and About */}
           <div>
-            <h2 className="text-xl font-semibold mb-4">Holidaze</h2>
-            <p className="text-gray-400 text-sm">
+            <H2 className="md:text-xl text-whiteFont-500 font-semibold mb-4">
+              Holidaze
+            </H2>
+
+            <P className="text-gray-400 text-sm">
               Your gateway to amazing venues. Book your next adventure with
               confidence and ease.
-            </p>
+            </P>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <H3 className="text-lg text-whiteFont-500 font-semibold mb-4">
+              Quick Links
+            </H3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -66,7 +73,9 @@ const Footer = () => {
 
           {/* Social Media */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+            <H3 className="text-lg text-whiteFont-500 font-semibold mb-4">
+              Follow Us
+            </H3>
             <div className="flex space-x-4">
               <Link
                 to="/"
@@ -97,9 +106,9 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">
+            <H3 className="text-lg text-whiteFont-500 font-semibold mb-4">
               Subscribe to our Newsletter
-            </h3>
+            </H3>
             <form className="flex flex-col space-y-4">
               <div>
                 <label htmlFor="email" className="sr-only">
