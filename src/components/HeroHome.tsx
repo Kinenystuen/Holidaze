@@ -1,5 +1,4 @@
 import SearchBarHome from "../_root/pages/home/SearchBarHome";
-import FixedImage from "./shared/FixedImage";
 import H1 from "./shared/Typography/H1";
 import P from "./shared/Typography/P";
 
