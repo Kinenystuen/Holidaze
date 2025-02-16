@@ -301,7 +301,16 @@ const VenueForm = () => {
             `}
             >
               <Input
-                InputId={`location.${id}`}
+                InputId={
+                  `location.${id}` as
+                    | "location.address"
+                    | "location.city"
+                    | "location.zip"
+                    | "location.country"
+                    | "location.continent"
+                    | "location.lat"
+                    | "location.lng"
+                }
                 InputLabel={label}
                 icon={icon}
                 type={type}
