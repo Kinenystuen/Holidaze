@@ -61,7 +61,6 @@ const VenueCard = ({
   };
 
   const handleEditVenue = () => {
-    console.log("Edit venue clicked");
     setIsEditing(true);
   };
 
