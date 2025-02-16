@@ -8,33 +8,77 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faImage, faPenAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "../shared/Button/Button";
+import LoaderSmall from "../ui/LoaderSmall";
 import { Media } from "../library/types";
+import Input from "../ui/Input";
+import {
+  FieldValues,
+  UseFormRegister,
+  FieldErrors,
+  Path
+} from "react-hook-form";
 
-interface ImageUploaderProps {
+interface ImageUploaderProps<T extends FieldValues> {
   media: Media[];
+  register: UseFormRegister<T>;
+  errors: FieldErrors<T>;
   setMedia: (media: Media[]) => void;
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ media, setMedia }) => {
+const ImageUploader = <T extends FieldValues>({
+  media,
+  setMedia,
+  register,
+  errors
+}: ImageUploaderProps<T>) => {
   const [imageUrl, setImageUrl] = useState("");
   const [imageAlt, setImageAlt] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Add a new image
-  const addImage = (event: React.FormEvent) => {
+  // Add a new image with loading effect
+  const addImage = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!imageUrl.trim() || !imageAlt.trim()) return;
 
-    setMedia([...media, { url: imageUrl, alt: imageAlt }]);
+    if (
+      (!imageUrl.trim() && imageAlt.trim()) ||
+      (imageUrl.trim() && !imageAlt.trim())
+    ) {
+      setError("Both Image URL and Alt Text are required.");
+      return;
+    }
 
-    // Clear inputs
-    setImageUrl("");
-    setImageAlt("");
+    if (!imageUrl.trim() && !imageAlt.trim()) {
+      setError("");
+      return;
+    }
+
+    setLoading(true);
+
+    // Adding new image
+    const newImage = { url: imageUrl.trim(), alt: imageAlt.trim() };
+
+    setTimeout(() => {
+      setMedia([...media, newImage]);
+
+      setImageUrl("");
+      setImageAlt("");
+      setError("");
+      setLoading(false);
+    }, 500);
   };
 
   // Remove an image
   const removeImage = (event: React.FormEvent, index: number) => {
     event.preventDefault();
     setMedia(media.filter((_, i) => i !== index));
+  };
+
+  // Handle alt text editing for existing images
+  const updateAltText = (index: number, newAlt: string) => {
+    const updatedMedia = [...media];
+    updatedMedia[index] = { ...updatedMedia[index], alt: newAlt };
+    setMedia(updatedMedia);
   };
 
   // Handle drag-and-drop sorting
@@ -52,38 +96,30 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ media, setMedia }) => {
     <>
       {/* Image Input Fields */}
       <div className="relative flex flex-col gap-2 pt-2 mb-4 border-2 p-2 rounded-lg border-dotted border-gray-300 dark:border-customBgDark-500">
-        <div className="relative flex-1">
-          <FontAwesomeIcon
-            icon={faImage}
-            className="absolute h-4 w-4 top-5 left-4 text-gray-400"
-          />
-          <input
-            id="ImageUploader"
-            type="text"
-            placeholder="Enter image URL"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            className="peer w-full p-2 pl-10 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700"
-          />
-        </div>
+        <Input
+          InputId={"imageUrl" as Path<T>}
+          InputLabel="Enter Image URL"
+          icon={faImage}
+          register={register}
+          errors={errors}
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+        />
 
-        <div className="relative flex-1">
-          <FontAwesomeIcon
-            icon={faPenAlt}
-            className="absolute h-4 w-4 top-5 left-4 text-gray-400"
-          />
-          <input
-            id="AltTextUploader"
-            type="text"
-            placeholder="Enter image description (alt text)"
-            value={imageAlt}
-            onChange={(e) => setImageAlt(e.target.value)}
-            className="peer w-full p-2 pl-10 text-black dark:text-whiteFont-500 bg-white dark:bg-customBgDark-500 border border-gray-300 dark:border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-color4-700"
-          />
-        </div>
+        <Input
+          InputId={"imageAlt" as Path<T>}
+          InputLabel="Alt text"
+          icon={faPenAlt}
+          register={register}
+          errors={errors}
+          value={imageAlt}
+          onChange={(e) => setImageAlt(e.target.value)}
+        />
 
-        <Button className="mx-auto" onClick={addImage}>
-          Add Image
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+
+        <Button className="mx-auto" onClick={addImage} disabled={loading}>
+          {loading ? <LoaderSmall /> : "Add Image"}
         </Button>
       </div>
 
@@ -107,17 +143,23 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ media, setMedia }) => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className="relative h-48 border rounded-md cursor-move"
+                      className="relative h-48 border rounded-md cursor-move flex flex-col"
                     >
                       <img
                         src={image.url}
                         alt={image.alt}
-                        className="w-full h-full object-cover border rounded-md cursor-move"
+                        className="w-full h-32 object-cover border rounded-md cursor-move"
                       />
-                      {/* Image Description */}
-                      <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-center text-sm p-1">
-                        {image.alt}
-                      </div>
+                      {/* Image Description Editing */}
+                      <Input
+                        InputId={`media.${index}.alt` as Path<T>}
+                        InputLabel="Alt text"
+                        icon={faPenAlt}
+                        register={register}
+                        errors={errors}
+                        value={image.alt}
+                        onChange={(e) => updateAltText(index, e.target.value)}
+                      />
                       {/* Remove Button */}
                       <Button
                         buttonType="violetSecondary"
