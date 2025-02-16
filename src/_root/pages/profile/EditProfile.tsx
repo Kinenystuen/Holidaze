@@ -95,7 +95,7 @@ const EditProfile = () => {
 
       {/* Modal for Editing Profile */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div className="p-6 flex flex-col items-center w-full">
+        <div className="md:p-6 flex flex-col items-center w-full">
           <H2 className="md:text-4xl font-heading font-semibold text-color1-600 dark:text-color1-200">
             Edit Profile
           </H2>
