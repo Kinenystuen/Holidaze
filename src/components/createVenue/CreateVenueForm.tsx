@@ -58,7 +58,25 @@ const VenueForm = () => {
     formState: { errors },
     clearErrors
   } = useForm({
-    mode: "onBlur"
+    mode: "onBlur",
+    defaultValues: {
+      name: "",
+      description: "",
+      price: 0,
+      maxGuests: 1,
+      rating: 0,
+      imageUrl: "",
+      imageAlt: "",
+      location: {
+        address: "",
+        city: "",
+        zip: "",
+        country: "",
+        continent: "",
+        lat: 0,
+        lng: 0
+      }
+    }
   });
 
   const submitHandler = () => {
@@ -308,6 +326,8 @@ const VenueForm = () => {
         <H3 className="mt-3">Add images</H3>
         {/* Image uploader */}
         <ImageUploader
+          register={register}
+          errors={errors}
           media={venue.media}
           setMedia={(newMedia) => setVenue({ ...venue, media: newMedia })}
         />
