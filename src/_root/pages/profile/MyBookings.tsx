@@ -106,7 +106,7 @@ const MyBookings = () => {
       </div>
       {/* Upcoming Bookings */}
       {upcomingBookings.length > 0 && (
-        <div className="2xl:max-w-7xl mx-auto max-w-4xl px-10 mb-20">
+        <div className="2xl:max-w-7xl mx-auto max-w-4xl px-5 md:px-10 mb-20">
           <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-4">
             Upcoming Bookings ({upcomingBookings.length})
           </H3>
@@ -127,7 +127,7 @@ const MyBookings = () => {
       )}
       {/* Past Bookings */}
       {pastBookings.length > 0 && (
-        <div className="bg-gray-200 dark:bg-customBgDark-700 mx-auto px-10 py-2 pb-[40vh]">
+        <div className="bg-gray-200 dark:bg-customBgDark-700 mx-auto px-5 md:px-10 py-2 pb-[40vh]">
           <div className="2xl:max-w-7xl mx-auto">
             <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-6">
               Past Bookings ({pastBookings.length})
