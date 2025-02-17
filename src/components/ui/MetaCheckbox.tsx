@@ -43,7 +43,7 @@ const MetaCheckbox: React.FC<MetaCheckboxProps> = ({
         />
         {/* Checkbox background */}
         <div
-          className="w-full h-full border-2 border-gray-400 rounded-md peer-checked:bg-green-600 peer-checked:border-green-600 
+          className="w-full h-full border-2 border-gray-400 rounded-md peer-checked:bg-color1-500 peer-checked:border-color1-500 
                        flex items-center justify-center transition-all duration-200"
         >
           {/* Checkmark */}
