@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import H1 from "../../../components/shared/Typography/H1";
 import SearchBar from "./SearchBarVen";
 import Venues from "./venues";
@@ -14,7 +14,7 @@ const VenuePage = () => {
   const initialSearch = searchParams.get("search") || "";
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
 
-  const [sortField, setSortField] = useState<string>("price");
+  const [sortField, setSortField] = useState<string>("name");
   const [sortOrder, setSortOrder] = useState<string>("asc");
 
   const [filters, setFilters] = useState({
@@ -23,11 +23,6 @@ const VenuePage = () => {
     breakfast: false,
     pets: false
   });
-
-  useEffect(() => {
-    setSortField("price");
-    setSortOrder("asc");
-  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
