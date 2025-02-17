@@ -50,7 +50,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
           onClose={onClose}
           className="bg-white dark:bg-customBgDark-500 rounded-lg shadow-lg"
         >
-          <div className="w-full  p-6 overflow-y-auto max-h-[90vh] customBox-scrollbar">
+          <div className="w-full p-6 overflow-y-auto max-h-[90vh] customBox-scrollbar">
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 bg-color1-100 dark:bg-color1-600 p-4 m-2 rounded-full flex items-center justify-center">
                 <FontAwesomeIcon
