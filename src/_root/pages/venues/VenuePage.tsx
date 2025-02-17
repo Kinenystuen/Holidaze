@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import H1 from "../../../components/shared/Typography/H1";
 import SearchBar from "./SearchBarVen";
 import Venues from "./venues";
@@ -13,14 +13,21 @@ const VenuePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") || "";
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
-  const [sortField, setSortField] = useState<string>("name");
+
+  const [sortField, setSortField] = useState<string>("price");
   const [sortOrder, setSortOrder] = useState<string>("asc");
+
   const [filters, setFilters] = useState({
     wifi: false,
     parking: false,
     breakfast: false,
     pets: false
   });
+
+  useEffect(() => {
+    setSortField("price");
+    setSortOrder("asc");
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -43,20 +50,27 @@ const VenuePage = () => {
       <div className=" mx-auto max-w-7xl">
         <div className="w-full md:flex">
           {/* Left-side menu */}
-          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-80 top-16 sticky custom-scrollbar">
+          <div
+            className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 
+            h-screen max-h-screen sticky top-16 overflow-y-auto custom-scrollbar pb-32"
+          >
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
             <SearchBar onSearch={handleSearch} />
-            <FilterMenu
-              filters={filters}
-              onFilterChange={(newFilters) => setFilters(newFilters)}
-            />
+
             <SortMenu
+              key={`${sortField}-${sortOrder}`}
               sortField={sortField}
               sortOrder={sortOrder}
               onSortChange={(field, order) => {
                 setSortField(field);
                 setSortOrder(order);
               }}
+            />
+
+            <hr className="border-t border-color1-200 dark:border-color1-500 my-4" />
+            <FilterMenu
+              filters={filters}
+              onFilterChange={(newFilters) => setFilters(newFilters)}
             />
           </div>
 
@@ -82,7 +96,6 @@ const VenuePage = () => {
                     <SortMenu
                       sortField={sortField}
                       sortOrder={sortOrder}
-                      boxPosition="right-0"
                       onSortChange={(field, order) => {
                         setSortField(field);
                         setSortOrder(order);
