@@ -58,7 +58,7 @@ const MetaRadio: React.FC<MetaRadioProps> = ({
         icon={icon}
         className={`text-lg ${
           checked
-            ? "text-color1-500 dark:text-color1-500"
+            ? "text-color1-500 dark:text-color1-200"
             : "text-gray-600 dark:text-gray-300"
         }`}
       />
@@ -67,7 +67,7 @@ const MetaRadio: React.FC<MetaRadioProps> = ({
       <span
         className={`text-sm font-medium capitalize ${
           checked
-            ? "text-color1-500 dark:text-color1-500"
+            ? "text-color1-500 dark:text-color1-200"
             : "text-black dark:text-whiteFont-500"
         }`}
       >
