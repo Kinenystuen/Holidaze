@@ -69,7 +69,10 @@ const VenuePage = () => {
                 className={`bg-inherit dark:bg-inherit md:bg-transparent dark:md:bg-transparent z-20 w-full py-0 px-4`}
               >
                 <div className="flex gap-2 py-2 md:hidden">
-                  <SearchBar onSearch={handleSearch} />
+                  <SearchBar
+                    onSearch={handleSearch}
+                    searchPlaceholder="Search for venues..."
+                  />
                   <div className="flex">
                     <FilterMenu
                       filters={filters}
