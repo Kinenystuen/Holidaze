@@ -24,7 +24,6 @@ const MyVenues = () => {
     {},
     true
   );
-  console.log(response);
 
   useEffect(() => {
     if (user?.name) {

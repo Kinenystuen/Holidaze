@@ -12,7 +12,7 @@ export const useDeleteVenue = (venueId: string) => {
     if (!venueId) return;
 
     try {
-      console.log(`Deleting venue with ID: ${venueId}`);
+      // console.log(`Deleting venue with ID: ${venueId}`);
       await fetchData();
       alert("Venue successfully deleted!");
     } catch (error) {

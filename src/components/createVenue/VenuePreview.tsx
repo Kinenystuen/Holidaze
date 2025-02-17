@@ -31,7 +31,6 @@ const Feature = ({ icon, text }: { icon: IconDefinition; text: string }) => (
 const VenuePreview = ({ onClose }: { onClose: () => void }) => {
   const { venue } = useVenue();
   const { user } = useUserContext();
-  console.log(venue);
 
   return (
     <Modal isOpen={true} onClose={onClose} className="max-w-7xl">

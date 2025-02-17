@@ -53,8 +53,6 @@ const VenueCard = ({
     }
   }, [response]);
 
-  console.log(bookings);
-
   // Toggle accordion
   const toggleDropdown = (venueId: string) => {
     setExpandedVenue(expandedVenue === venueId ? null : venueId);

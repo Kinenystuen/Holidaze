@@ -48,7 +48,6 @@ const VenueForm = () => {
 
   const handlePreview = () => {
     setTogglePreview(!togglePreview);
-    console.log(togglePreview);
   };
 
   const {
