@@ -20,7 +20,7 @@ const SimilarVenues: React.FC<SimilarVenuesProps> = ({ similarVenues }) => {
     <>
       {/* Similar Venues Section */}
       {similarVenues.length > 0 ? (
-        <div className="relative mt-12 md:mt-20">
+        <div className="relative mt-12 md:my-20">
           <H2 className="text-2xl font-semibold mb-4">You Might Also Like</H2>
           <SwiperNavigation
             isBeginning={isBeginning}
