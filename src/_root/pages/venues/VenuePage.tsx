@@ -51,8 +51,8 @@ const VenuePage = () => {
         <div className="w-full md:flex">
           {/* Left-side menu */}
           <div
-            className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 
-            h-screen max-h-screen sticky top-16 overflow-y-auto custom-scrollbar pb-32"
+            className="custom-scrollbarVenue hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 
+            h-screen max-h-screen sticky top-16 overflow-y-auto pb-32"
           >
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
             <SearchBar onSearch={handleSearch} />
