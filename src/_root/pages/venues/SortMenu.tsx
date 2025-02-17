@@ -4,8 +4,8 @@ import {
   faMoneyBill1Wave,
   faSort,
   faSortAlphaAsc,
+  faSortAmountDown,
   faSortAmountDownAlt,
-  faSortAmountUp,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
 import P from "../../../components/shared/Typography/P";
@@ -140,7 +140,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
                 id="sort-desc"
                 name="sortOrder"
                 label="Descending"
-                icon={faSortAmountUp}
+                icon={faSortAmountDown}
                 checked={sortOrder === "desc"}
                 onChange={() => handleSortChange(sortField, "desc")}
               />
