@@ -144,8 +144,8 @@ const Footer = () => {
         </div>
       </div>
       <P className="text-center text-gray-400 text-sm mt-4">
-        Holidaze is a fictional company. This website and it’s content is
-        created as a project for Noroff.
+        Holidaze is a fictional company. This website and it’s content is a
+        project for Noroff, created by Kine Odden Nystuen.
       </P>
     </footer>
   );
