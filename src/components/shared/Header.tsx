@@ -7,8 +7,10 @@ import { INavLink } from "../library/types";
 import ThemeToggle from "./ThemeToggle";
 import Button from "./Button/Button";
 import UserDropParent from "./UserDropParent";
+import { useUserContext } from "../context/useUserContext";
 
 const Header: React.FC = () => {
+  const { isAuthenticated } = useUserContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -43,25 +45,27 @@ const Header: React.FC = () => {
             </div>
             <div className="flex-1">
               {/* Navigation Links */}
-              <nav className="hidden w-full md:flex  justify-center content-end">
-                {headerNavLinks.map((link: INavLink) => {
-                  const isActive = pathname === link.route;
-                  return (
-                    <NavLink
-                      key={link.label}
-                      to={link.route}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`transition flex items-center text-md ${
-                        isActive
-                          ? "text-color1-800 hover:text-inherit dark:text-whiteFont-400 cursor-default"
-                          : "text-gray-600 dark:text-whiteFont-600 hover:text-color1-500"
-                      }`}
-                    >
-                      <span className="sr-only">{link.title}</span>
-                      {link.label}
-                    </NavLink>
-                  );
-                })}
+              <nav className="hidden w-full md:flex gap-3  justify-center content-end">
+                {headerNavLinks
+                  .filter((link) => !link.requiresAuth || isAuthenticated) // Only show if user is authenticated
+                  .map((link: INavLink) => {
+                    const isActive = pathname === link.route;
+                    return (
+                      <NavLink
+                        key={link.label}
+                        to={link.route}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`transition flex items-center text-md ${
+                          isActive
+                            ? "text-color1-800 hover:text-inherit dark:text-whiteFont-400 cursor-default"
+                            : "text-gray-600 dark:text-whiteFont-600 hover:text-color1-500"
+                        }`}
+                      >
+                        <span className="sr-only">{link.title}</span>
+                        {link.label}
+                      </NavLink>
+                    );
+                  })}
               </nav>
             </div>
 

@@ -14,6 +14,7 @@ interface PaginationProps {
   goToSelPage: (page: number) => void;
   goToNextPage: () => void;
   goToPreviousPage: () => void;
+  paginationType?: string;
 }
 
 const VenuePagination: React.FC<PaginationProps> = ({
@@ -22,7 +23,8 @@ const VenuePagination: React.FC<PaginationProps> = ({
   totalCount,
   goToSelPage,
   goToNextPage,
-  goToPreviousPage
+  goToPreviousPage,
+  paginationType = "Venues"
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -103,7 +105,9 @@ const VenuePagination: React.FC<PaginationProps> = ({
         <P>
           Page {currentPage} of {pageCount}
         </P>
-        <P>Total venues: {totalCount}</P>
+        <P>
+          Total {paginationType}: {totalCount}
+        </P>
       </div>
     </div>
   );

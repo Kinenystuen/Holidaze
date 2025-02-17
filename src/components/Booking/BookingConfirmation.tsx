@@ -50,7 +50,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
           onClose={onClose}
           className="bg-white dark:bg-customBgDark-500 rounded-lg shadow-lg"
         >
-          <div className="w-full max-w-lg  p-6 overflow-y-auto max-h-[90vh] customBox-scrollbar">
+          <div className="w-full p-6 overflow-y-auto max-h-[90vh] customBox-scrollbar">
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 bg-color1-100 dark:bg-color1-600 p-4 m-2 rounded-full flex items-center justify-center">
                 <FontAwesomeIcon
@@ -70,7 +70,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
                 Thank you for choosing our service!
               </P>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full p-6 mt-4 bg-gray-200 dark:bg-customBgDark-600 border border-gray-300 dark:border-customBgDark-500 rounded-lg text-gray-600 dark:text-gray-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-md p-6 mt-4 bg-gray-200 dark:bg-customBgDark-600 border border-gray-300 dark:border-customBgDark-500 rounded-lg text-gray-600 dark:text-gray-300">
                 <div className="flex flex-col">
                   <P className="font-semibold">Check-in:</P>
                   <P>

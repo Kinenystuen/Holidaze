@@ -1,13 +1,15 @@
-import { User } from "../types";
+import { INavLink, User } from "../types";
 
 export const apiHostUrl = import.meta.env.VITE_API_HOST_URL;
 export const apiKey = import.meta.env.VITE_API_KEY;
 
-export const headerNavLinks = [
+export const headerNavLinks: INavLink[] = [
+  { label: "Venues", route: "/venues", title: "Venues", requiresAuth: false },
   {
-    title: "Venues",
-    route: "/venues",
-    label: "Venues"
+    label: "Profiles",
+    route: "/profiles",
+    title: "Profiles",
+    requiresAuth: true
   }
 ];
 

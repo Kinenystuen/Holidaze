@@ -23,6 +23,7 @@ interface InputProps<T extends FieldValues> {
   type?: string;
   autoComplete?: string;
   checked?: boolean;
+  value?: string;
 }
 /**
  * Input Component
@@ -90,7 +91,8 @@ const Input = <T extends FieldValues>({
   onChange,
   type = "text",
   autoComplete = "on",
-  checked
+  checked,
+  value
 }: InputProps<T>): JSX.Element => {
   const errorMessage = (errors[InputId]?.message as string) || "";
 
@@ -138,6 +140,7 @@ const Input = <T extends FieldValues>({
         autoComplete={autoComplete}
         checked={type === "checkbox" ? checked : undefined}
         aria-invalid={!!errorMessage}
+        value={value}
       />
 
       <label

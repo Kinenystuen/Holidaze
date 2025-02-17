@@ -65,7 +65,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       {/* Hamburger Button for Mobile Screens */}
       <div>
         <Button
-          className="md:hidden fixed top-[4.4rem] left-0 z-10 bg-color1-500 text-white p-2 rounded-none rounded-e-md shadow-md"
+          className="md:hidden fixed top-[4.4rem] right-0 z-10 bg-color1-500 text-white p-2 rounded-none rounded-s-md shadow-md"
           onClick={toggleMenu}
           ariaLabel="Toggle Sidebar"
         >
@@ -90,30 +90,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         md:translate-x-0 md:flex md:flex-col max-w-[270px] 
         overflow-visible overflow-x-visible overflow-y-auto custom-scrollbar`}
       >
-        {/* Collapse Button (Only for md screens and larger) */}
-        <Button
-          buttonType="transparent"
-          className={`hidden md:flex absolute top-2 right-1 text-white ${
-            isCollapsed ? "top-2 mt-11" : ""
-          }`}
-          onClick={toggleCollapse}
-          ariaLabel="Collapse Sidebar"
-        >
-          <Tooltip
-            text={isCollapsed ? "Open Sidebar" : "Collapse Sidebar"}
-            position="right"
-          >
-            <FontAwesomeIcon
-              icon={isCollapsed ? faAngleRight : faAngleLeft}
-              className="w-5 h-5"
-            />
-          </Tooltip>
-        </Button>
-
         {/* Logo */}
         <div
           className={`flex items-center justify-start text-2xl font-bold text-gray-800 transition-all duration-300 ${
-            isCollapsed ? "text-4xl mx-[1.1rem] mb-10 h-16 w-16" : "mx-6 mt-3"
+            isCollapsed ? "text-4xl mx-[1.1rem] mt-1 h-16 w-16" : "mx-6 mt-3"
           }`}
         >
           <Tooltip
@@ -129,6 +109,25 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
             </Link>
           </Tooltip>
         </div>
+        {/* Collapse Button (Only for md screens and larger) */}
+        <Button
+          buttonType="transparent"
+          className={`flex top-2 right-1 text-white ${
+            isCollapsed ? "mt-0 " : "absolute"
+          }`}
+          onClick={toggleCollapse}
+          ariaLabel="Collapse Sidebar"
+        >
+          <Tooltip
+            text={isCollapsed ? "Open Sidebar" : "Collapse Sidebar"}
+            position="right"
+          >
+            <FontAwesomeIcon
+              icon={isCollapsed ? faAngleRight : faAngleLeft}
+              className="w-5 h-5"
+            />
+          </Tooltip>
+        </Button>
         {/* Profile Section (Hidden when collapsed) */}
         <div
           className={`flex items-center space-x-3 ${

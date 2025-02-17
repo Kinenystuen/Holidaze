@@ -99,7 +99,7 @@ const RegisterForm: React.FC = () => {
       </Link>
 
       {/* Register Heading */}
-      <H2 className="mt-4 text-2xl font-semibold text-gray-800 dark:text-white">
+      <H2 className="mt-4 mb-2 text-2xl font-semibold text-gray-800 dark:text-white">
         Register
       </H2>
       {/* Username Input */}

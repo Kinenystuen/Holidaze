@@ -13,8 +13,10 @@ const VenuePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") || "";
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
+
   const [sortField, setSortField] = useState<string>("name");
   const [sortOrder, setSortOrder] = useState<string>("asc");
+
   const [filters, setFilters] = useState({
     wifi: false,
     parking: false,
@@ -43,20 +45,27 @@ const VenuePage = () => {
       <div className=" mx-auto max-w-7xl">
         <div className="w-full md:flex">
           {/* Left-side menu */}
-          <div className="hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 h-80 top-16 sticky custom-scrollbar">
+          <div
+            className="custom-scrollbarVenue hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 
+            h-screen max-h-screen sticky top-16 overflow-y-auto pb-32"
+          >
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
             <SearchBar onSearch={handleSearch} />
-            <FilterMenu
-              filters={filters}
-              onFilterChange={(newFilters) => setFilters(newFilters)}
-            />
+
             <SortMenu
+              key={`${sortField}-${sortOrder}`}
               sortField={sortField}
               sortOrder={sortOrder}
               onSortChange={(field, order) => {
                 setSortField(field);
                 setSortOrder(order);
               }}
+            />
+
+            <hr className="border-t border-color1-200 dark:border-color1-500 my-4" />
+            <FilterMenu
+              filters={filters}
+              onFilterChange={(newFilters) => setFilters(newFilters)}
             />
           </div>
 
@@ -69,7 +78,10 @@ const VenuePage = () => {
                 className={`bg-inherit dark:bg-inherit md:bg-transparent dark:md:bg-transparent z-20 w-full py-0 px-4`}
               >
                 <div className="flex gap-2 py-2 md:hidden">
-                  <SearchBar onSearch={handleSearch} />
+                  <SearchBar
+                    onSearch={handleSearch}
+                    searchPlaceholder="Search for venues..."
+                  />
                   <div className="flex">
                     <FilterMenu
                       filters={filters}
@@ -79,7 +91,6 @@ const VenuePage = () => {
                     <SortMenu
                       sortField={sortField}
                       sortOrder={sortOrder}
-                      boxPosition="right-0"
                       onSortChange={(field, order) => {
                         setSortField(field);
                         setSortOrder(order);

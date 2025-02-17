@@ -24,7 +24,6 @@ const MyVenues = () => {
     {},
     true
   );
-  console.log(response);
 
   useEffect(() => {
     if (user?.name) {
@@ -66,8 +65,10 @@ const MyVenues = () => {
 
   return (
     <div className="container mx-auto max-w-4xl">
-      <H1 className="max-w-4xl mx-auto font-semibold px-10 mt-4">My Venues</H1>
-      <div className=" px-10 mb-20">
+      <H1 className="max-w-4xl mx-auto font-semibold px-5 md:px-10 mt-4">
+        My Venues
+      </H1>
+      <div className="px-5 md:px-10 mb-20">
         <div className=" mx-auto mt-4 grid grid-cols-1 gap-6">
           <div className="flex gap-4 justify-between items-center">
             Venues: {response.data.venues.length}

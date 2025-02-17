@@ -53,15 +53,12 @@ const VenueCard = ({
     }
   }, [response]);
 
-  console.log(bookings);
-
   // Toggle accordion
   const toggleDropdown = (venueId: string) => {
     setExpandedVenue(expandedVenue === venueId ? null : venueId);
   };
 
   const handleEditVenue = () => {
-    console.log("Edit venue clicked");
     setIsEditing(true);
   };
 
@@ -188,7 +185,7 @@ const VenueCard = ({
                   />
                 </Button>
 
-                <div className="flex gap-3 flex-wrap justify-center lg:justify-end">
+                <div className="flex w-full gap-3 flex-wrap justify-start lg:justify-end">
                   <ButtonDropdown
                     label="Edit Venue"
                     className="w-full xs:w-auto"

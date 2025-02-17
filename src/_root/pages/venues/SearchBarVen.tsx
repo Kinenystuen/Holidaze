@@ -3,7 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
+const SearchBar = ({
+  onSearch,
+  searchPlaceholder = "Search..."
+}: {
+  onSearch: (query: string) => void;
+  searchPlaceholder?: string;
+}) => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -52,7 +58,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
           type="text"
           value={searchInput}
           onChange={handleInputChange}
-          placeholder="Search for venues..."
+          placeholder={searchPlaceholder}
           className="w-full h-[2.8rem] pl-10 pr-10 py-2 border bg-customBg rounded-full text-black dark:text-whiteFont-500 dark:placeholder-whiteFont-600 dark:bg-customBgDark-500 dark:border-color3-800 ring-2 ring-color1-200 dark:ring-color1-500 focus:ring-3 focus:outline-none focus:ring-color2"
         />
 

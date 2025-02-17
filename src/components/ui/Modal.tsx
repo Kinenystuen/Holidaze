@@ -60,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
         >
           <motion.div
             className={`relative flex flex-col justify-center bg-white dark:bg-customBgDark-600 rounded-lg shadow-lg w-full max-w-4xl 
-            max-h-screen overflow-y-auto p-6 customBox-scrollbar ${className}`}
+            max-h-screen overflow-y-auto p-2 py-6 md:p-6 customBox-scrollbar ${className}`}
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

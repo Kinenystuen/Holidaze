@@ -3,7 +3,7 @@ import { UserProfile } from "../../../components/library/types";
 import H2 from "../../../components/shared/Typography/H2";
 import P from "../../../components/shared/Typography/P";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding, faCertificate } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 interface SelUserProps {
@@ -25,8 +25,8 @@ const ProfilesDisplay: React.FC<SelUserProps> = ({ profiles }) => {
           to={`/profile/${encodeURIComponent(profile.name)}`}
           key={profile.name}
         >
-          <div className="w-full">
-            <div className="flex bg-white dark:bg-customBgDark-500 rounded-lg shadow-sm">
+          <div className="relative w-full hover:scale-105 transition-transform duration-300 ease-in-out">
+            <div className="flex bg-white dark:bg-customBgDark-500 rounded-lg shadow-sm  overflow-hidden">
               <div className="w-14 h-14 m-3 my-4 rounded-full overflow-hidden">
                 <img
                   src={profile.avatar?.url}
@@ -41,9 +41,9 @@ const ProfilesDisplay: React.FC<SelUserProps> = ({ profiles }) => {
                     <div className="absolute -top-[0.05rem] -right-5">
                       <FontAwesomeIcon
                         icon={faCertificate}
-                        className="w-5 h-5 p-0 m-0 text-color1"
+                        className="w-4 h-4 p-0 m-0 text-color1"
                       />
-                      <span className="absolute top-[0.12rem] left-[0.37rem] text-xs font-medium text-white">
+                      <span className="absolute top-[0.28rem] left-[0.32rem] text-[9px] font-medium text-white">
                         V
                       </span>
                     </div>
@@ -53,6 +53,18 @@ const ProfilesDisplay: React.FC<SelUserProps> = ({ profiles }) => {
                   {profile.email}
                 </P>
               </div>
+              {profile._count?.venues > 0 && (
+                <div className="flex flex-col justify-center  w-fit min-w-28 items-center bg-color2-500 gap-1  px-3 py-1 text-sm font-medium ">
+                  <FontAwesomeIcon
+                    icon={faBuilding}
+                    className="w-4 h-4 text-color1-700"
+                  />
+                  <span>
+                    {profile._count.venues} Venue
+                    {profile._count.venues > 1 ? "s" : ""}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </Link>

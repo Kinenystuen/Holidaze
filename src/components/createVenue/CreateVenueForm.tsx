@@ -48,7 +48,6 @@ const VenueForm = () => {
 
   const handlePreview = () => {
     setTogglePreview(!togglePreview);
-    console.log(togglePreview);
   };
 
   const {
@@ -58,7 +57,25 @@ const VenueForm = () => {
     formState: { errors },
     clearErrors
   } = useForm({
-    mode: "onBlur"
+    mode: "onBlur",
+    defaultValues: {
+      name: "",
+      description: "",
+      price: 0,
+      maxGuests: 1,
+      rating: 0,
+      imageUrl: "",
+      imageAlt: "",
+      location: {
+        address: "",
+        city: "",
+        zip: "",
+        country: "",
+        continent: "",
+        lat: 0,
+        lng: 0
+      }
+    }
   });
 
   const submitHandler = () => {
@@ -272,36 +289,53 @@ const VenueForm = () => {
         </label>
 
         <H3 className="mt-3">Location</H3>
+
         {/* Location inputs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {/* Location inputs */}
+        <div className="grid grid-cols-2 gap-3">
           {locationFields.map(({ id, label, icon, type }) => (
-            <Input
+            <div
               key={id}
-              InputId={`location.${id}`}
-              InputLabel={label}
-              icon={icon}
-              type={type}
-              register={register}
-              errors={errors}
-              onChange={(e) =>
-                updateVenue({
-                  location: {
-                    ...venue.location,
-                    [id]:
-                      type === "number"
-                        ? Number(e.target.value)
-                        : e.target.value
-                  }
-                })
-              }
-            />
+              className={`
+              ${["address", "city"].includes(id) ? "col-span-2" : "col-span-1"}
+            `}
+            >
+              <Input
+                InputId={
+                  `location.${id}` as
+                    | "location.address"
+                    | "location.city"
+                    | "location.zip"
+                    | "location.country"
+                    | "location.continent"
+                    | "location.lat"
+                    | "location.lng"
+                }
+                InputLabel={label}
+                icon={icon}
+                type={type}
+                register={register}
+                errors={errors}
+                onChange={(e) =>
+                  updateVenue({
+                    location: {
+                      ...venue.location,
+                      [id]:
+                        type === "number"
+                          ? Number(e.target.value)
+                          : e.target.value
+                    }
+                  })
+                }
+              />
+            </div>
           ))}
         </div>
 
         <H3 className="mt-3">Add images</H3>
         {/* Image uploader */}
         <ImageUploader
+          register={register}
+          errors={errors}
           media={venue.media}
           setMedia={(newMedia) => setVenue({ ...venue, media: newMedia })}
         />

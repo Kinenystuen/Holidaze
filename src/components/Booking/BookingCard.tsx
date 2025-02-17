@@ -78,9 +78,9 @@ const BookingCard = ({
 
           <div className="flex flex-col my-2 items-center md:flex-row">
             {/* Dates */}
-            <div className="flex flex-row md:flex-col gap-3 justify-center content-center md:px-4">
+            <div className="flex flex-row md:flex-col gap-3 justify-evenly xs:justify-center content-center md:px-4 w-full md:w-fit">
               {/* DateFrom */}
-              <div className="flex xs:gap-1 md:gap-0 flex-col xs:flex-row md:flex-col items-center justify-center text-center w-full">
+              <div className="flex xs:gap-1 md:gap-0 flex-col xs:flex-row md:flex-col items-center justify-center text-center w-full max-w-32">
                 <P className="text-xl font-medium mb-[-0.5rem] xs:m-0 md:mb-[-0.5rem] w-full">
                   <FormatDate
                     dateString={booking.dateFrom}
@@ -110,7 +110,7 @@ const BookingCard = ({
                 />
               </div>
               {/* DateTo */}
-              <div className="flex xs:gap-1 md:gap-0 flex-col xs:flex-row md:flex-col items-center justify-center text-center w-full">
+              <div className="flex xs:gap-1 md:gap-0 flex-col xs:flex-row md:flex-col items-center justify-center text-center w-full max-w-32">
                 <P className="text-xl font-medium mb-[-0.5rem] xs:m-0 md:mb-[-0.5rem] w-full">
                   <FormatDate
                     dateString={booking.dateTo}

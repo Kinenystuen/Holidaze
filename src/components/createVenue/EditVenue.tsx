@@ -31,6 +31,7 @@ import MetaCheckbox from "../ui/MetaCheckbox";
 import { Meta } from "../library/types";
 import H3 from "../shared/Typography/H3";
 import ImageUploader from "./ImageUploader";
+import { Link } from "react-router-dom";
 
 export interface VenueLocation {
   address?: string;
@@ -181,7 +182,6 @@ const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
       };
 
       await fetchData({ body: JSON.parse(JSON.stringify(parsedData)) });
-      console.log(parsedData);
     } catch (error) {
       if (error instanceof Error) {
         setError(`Error updating venue: ${error.message}`);
@@ -372,7 +372,12 @@ const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
 
           {/* Image Uploader */}
           <H3 className="mt-3">Add images</H3>
-          <ImageUploader media={media} setMedia={setMedia} />
+          <ImageUploader
+            media={media}
+            setMedia={setMedia}
+            register={register}
+            errors={errors}
+          />
           {media.map((image, index) => (
             <input
               key={index}
@@ -414,6 +419,14 @@ const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
             <P className="mt-2 max-w-md text-center">
               Venue "{venue.name}" has been successfully updated.
             </P>
+            <div className="flex gap-3 mt-4">
+              <Button buttonType="violetSecondary" onClick={handleSuccessClose}>
+                Edit Another
+              </Button>
+              <Link to={`/venue/${venue.id}`}>
+                <Button buttonType="violet">View Venue</Button>
+              </Link>
+            </div>
           </div>
         </Modal>
       )}

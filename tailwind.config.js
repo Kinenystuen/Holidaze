@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['"Playfair Display"', "serif"], // For headings
-        body: ['"Roboto"', "sans-serif"] // For body text
+        heading: ["Playfair Display", "serif"], // For headings
+        body: ["Roboto", "sans-serif"] // For body text
       },
       screens: {
         xs: "420px"

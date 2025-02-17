@@ -80,7 +80,7 @@ const LoginForm: React.FC = () => {
           <FontAwesomeIcon icon={faTimes} className="w-6 h-6" />
         </Tooltip>
       </Link>
-      <H2 className="mt-4 text-2xl font-semibold text-gray-800 dark:text-white">
+      <H2 className="mt-4 mb-2 text-2xl font-semibold text-gray-800 dark:text-white">
         Login
       </H2>
 

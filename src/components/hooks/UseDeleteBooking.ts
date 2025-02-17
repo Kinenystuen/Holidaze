@@ -12,7 +12,7 @@ export const useDeleteBooking = (bookingId: string) => {
     if (!bookingId) return;
 
     try {
-      console.log(`Deleting booking with ID: ${bookingId}`);
+      // console.log(`Deleting booking with ID: ${bookingId}`);
       await fetchData();
       alert("Booking successfully deleted!");
     } catch (error) {
