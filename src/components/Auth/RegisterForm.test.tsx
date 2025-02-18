@@ -7,10 +7,10 @@ import { useAuth } from "../hooks/useAuth";
 vi.mock("../hooks/useAuth");
 
 describe("RegisterForm Component", () => {
-  let mockSubmitAuth;
+  let mockSubmitAuth: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
-    vi.resetAllMocks(); // Reset all mocks before each test
+    vi.resetAllMocks();
     mockSubmitAuth = vi.fn().mockResolvedValue({});
 
     (
