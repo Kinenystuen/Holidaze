@@ -32,9 +32,9 @@ interface RegisterFormData {
  *
  * Features:
  * - Input validation:
- *   - Username: Alphanumeric, 3-30 characters
- *   - Email: Must match Noroff email format (e.g., `name@noroff.no` or `name@stud.noroff.no`)
- *   - Password: Minimum of 8 characters
+ *   - Username: Alphanumeric, 3-30 characters, starting with an uppercase letter.
+ *   - Email: Must match Noroff email format (e.g., `name@stud.noroff.no`)
+ *   - Password: Minimum of 8 characters, including uppercase, lowercase, number, and special character.
  * - Error handling: Displays field-specific errors and API errors
  * - Button states: Disables the submit button while processing or submitting
  *
