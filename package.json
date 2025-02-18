@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky install",
-    "test": "vitest",
+    "test-unit": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage"
   },
