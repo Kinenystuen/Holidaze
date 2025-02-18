@@ -3,6 +3,7 @@
     "types": ["vitest/globals", "@testing-library/jest-dom"],
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "module": "ESNext",
     "jsx": "react-jsx"
   },
   "include": ["src", "src/setupTests.ts", "vite.config.ts"]
