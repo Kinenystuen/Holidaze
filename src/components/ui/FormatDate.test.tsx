@@ -28,7 +28,7 @@ describe("FormatDate Component", () => {
     const { container } = render(
       <FormatDate dateString="2025-02-18T12:30:00Z" />
     );
-    expect(container.firstChild).toHaveClass("text-left");
+    expect(container.firstChild).toHaveClass("text-center");
   });
 
   test("Applies right alignment class", () => {
