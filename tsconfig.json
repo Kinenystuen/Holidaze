@@ -1,7 +1,9 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src", "src/setupTests.ts", "vite.config.ts"]
 }
