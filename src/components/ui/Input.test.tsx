@@ -4,8 +4,14 @@ import { useForm } from "react-hook-form";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Input from "./Input";
 
+interface TestFormProps {
+  InputId: string;
+  InputLabel: string;
+  [key: string]: unknown;
+}
+
 // Helper component to test Input inside a form
-const TestForm = ({ InputId, InputLabel, ...props }) => {
+const TestForm = ({ InputId, InputLabel, ...props }: TestFormProps) => {
   const {
     register,
     handleSubmit,
