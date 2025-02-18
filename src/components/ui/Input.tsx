@@ -101,6 +101,7 @@ const Input = <T extends FieldValues>({
       {icon && (
         <FontAwesomeIcon
           icon={icon}
+          data-testid="icon"
           className="absolute h-4 w-4 top-5 left-4 text-gray-400 peer-focus:text-color4-700 dark:text-gray-500 dark:peer-focus:text-color4-600"
         />
       )}
