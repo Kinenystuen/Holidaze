@@ -4,12 +4,17 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
+  base: "/Holidaze/",
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/setupTests.ts"
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src")
     }
   },
-  base: "/Holidaze/",
   build: {
     outDir: "dist"
   },

@@ -12,6 +12,7 @@ import {
   faTimesCircle,
   faSyncAlt
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 /**
  * ProfileSettings - Allows users to update their venue manager status.
@@ -102,6 +103,13 @@ export function ProfileSettings() {
               ? "You are a Venue Manager."
               : "You are not a Venue Manager."}
           </P>
+          {isVenueManager && (
+            <Link to="/profile/create-venue" className="mt-4">
+              <Button buttonType="violet" className=" px-4 inline-block">
+                Create New Venue
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Error Message */}

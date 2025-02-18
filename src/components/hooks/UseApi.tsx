@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { apiKey } from "../library/constants/index.ts";
-import * as storage from "../library/storage/index.ts";
+import { apiKey } from "../library/constants/index";
+import * as storage from "../library/storage/index";
 
 export const headers = (contentType: string | false = false): Headers => {
   const headers = new Headers();

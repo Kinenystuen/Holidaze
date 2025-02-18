@@ -15,6 +15,7 @@ import {
   faUser
 } from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "../ui/ToolTip";
+import P from "../shared/Typography/P";
 
 interface RegisterFormData {
   name: string;
@@ -31,9 +32,9 @@ interface RegisterFormData {
  *
  * Features:
  * - Input validation:
- *   - Username: Alphanumeric, 3-30 characters
- *   - Email: Must match Noroff email format (e.g., `name@noroff.no` or `name@stud.noroff.no`)
- *   - Password: Minimum of 8 characters
+ *   - Username: Alphanumeric, 3-30 characters, starting with an uppercase letter.
+ *   - Email: Must match Noroff email format (e.g., `name@stud.noroff.no`)
+ *   - Password: Minimum of 8 characters, including uppercase, lowercase, number, and special character.
  * - Error handling: Displays field-specific errors and API errors
  * - Button states: Disables the submit button while processing or submitting
  *
@@ -114,9 +115,9 @@ const RegisterForm: React.FC = () => {
           minLength={3}
           maxLength={30}
           pattern={{
-            value: /^[\w]+$/,
+            value: /^[A-Z][A-Za-z0-9_-]{2,29}$/,
             message:
-              "Please provide a valid username. It can only contain letters, numbers, and underscores."
+              "Username must start with an uppercase letter and can only contain letters, numbers, underscores, and hyphens (no letter spacing)."
           }}
         />
       </div>
@@ -145,6 +146,12 @@ const RegisterForm: React.FC = () => {
           errors={errors}
           required
           minLength={8}
+          pattern={{
+            value:
+              /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/,
+            message:
+              "Password must be 8-64 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+          }}
           icon={faLock}
           type={showPassword ? "text" : "password"}
           autoComplete="new-password"
@@ -165,7 +172,11 @@ const RegisterForm: React.FC = () => {
       </div>
 
       {/* Error Message */}
-      {authError && <p className="text-red-500 text-sm mb-4">{authError}</p>}
+      {authError && (
+        <P className="text-red-500 text-sm mb-4">
+          Registration failed{authError}
+        </P>
+      )}
 
       {/* Submit Button */}
       <Button
