@@ -7,6 +7,24 @@ import ThemeToggle from "../../../components/shared/ThemeToggle";
 import MetaTags from "../../../components/metaTags";
 import ScrollToTop from "../../../components/ui/ScrollToTop";
 
+/**
+ * ProfileLayout component that serves as a layout wrapper for admin-related pages.
+ * It includes:
+ * - An admin sidebar for navigation.
+ * - A main content area that dynamically changes based on the route.
+ * - A theme toggle for switching between light and dark mode.
+ * - Meta tags for SEO optimization.
+ * - A scroll-to-top functionality.
+ * - A protected route for authenticated users.
+ * - Uses the <Outlet> from react-router-dom to display child routes.
+ *
+ * @component
+ * @returns {JSX.Element} The ProfileLayout component.
+ *
+ * @example
+ * // Usage in routing
+ * <Route path="/profile/*" element={<ProfileLayout />} />
+ */
 const ProfileLayout = () => {
   const { user } = useUserContext();
   const [isCollapsed, setIsCollapsed] = useState(false);
