@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "../../../components/shared/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faImage, faPen } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../../../components/context/useUserContext";
 import Modal from "../../../components/ui/Modal";
 import H2 from "../../../components/shared/Typography/H2";
@@ -13,6 +13,15 @@ import { EditUserProfile } from "../../../components/library/types";
 import H1 from "../../../components/shared/Typography/H1";
 import P from "../../../components/shared/Typography/P";
 
+/**
+ * EditProfile Component
+ *
+ * Allows users to edit their profile information including bio, avatar, and banner images.
+ * Uses React Hook Form for controlled input handling and a live preview of the updated profile.
+ *
+ * @component
+ * @returns {JSX.Element} The EditProfile component.
+ */
 const EditProfile = () => {
   const { user, setUser } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -108,6 +117,7 @@ const EditProfile = () => {
             <Input
               InputId="bio"
               InputLabel="Bio"
+              icon={faPen}
               register={register}
               errors={errors}
               onChange={(e) =>
@@ -119,6 +129,7 @@ const EditProfile = () => {
             <Input
               InputId="avatar.url"
               InputLabel="Avatar URL"
+              icon={faImage}
               register={register}
               errors={errors}
               onChange={(e) =>
@@ -131,6 +142,7 @@ const EditProfile = () => {
               InputId="banner.url"
               InputLabel="Banner URL"
               register={register}
+              icon={faImage}
               errors={errors}
               onChange={(e) =>
                 setPreview((prev) => ({ ...prev, bannerUrl: e.target.value }))
