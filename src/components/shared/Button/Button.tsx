@@ -1,5 +1,20 @@
 import { ButtonProps } from "../../library/types";
 
+/**
+ * Reusable Button Component with different styles and behaviors.
+ *
+ * @component
+ * @param {Object} props - Component properties
+ * @param {() => void} [props.onClick] - Function called when the button is clicked
+ * @param {React.ReactNode} props.children - The button's content (text, icons, etc.)
+ * @param {string} [props.className] - Additional CSS classes for styling
+ * @param {string} [props.title] - Tooltip text displayed on hover
+ * @param {string} [props.ariaLabel] - Accessible name for screen readers
+ * @param {"blue" | "violet" | "violetSecondary" | "transparent"} [props.buttonType] - Defines the button's style variant
+ * @param {boolean} [props.disabled] - Whether the button is disabled
+ * @param {"button" | "submit" | "reset"} [props.type="button"] - The button's type attribute
+ * @returns {JSX.Element} The styled button component
+ */
 function Button({
   onClick,
   children,
@@ -8,7 +23,7 @@ function Button({
   ariaLabel,
   buttonType,
   disabled,
-  type = "button" // Default to "button" to prevent unintended form submissions
+  type = "button"
 }: ButtonProps) {
   let buttonClass = "";
 

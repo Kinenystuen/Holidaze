@@ -100,13 +100,13 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="w-full mx-auto">
-      <div className="max-w-screen-xl mx-auto px-10">
+    <div className="w-full mx-auto flex flex-col">
+      <div className="max-w-screen-xl w-full mx-auto px-10">
         <H2 className="text-2xl font-semibold mt-8">My Bookings</H2>
       </div>
       {/* Upcoming Bookings */}
-      {upcomingBookings.length > 0 && (
-        <div className="2xl:max-w-7xl mx-auto max-w-4xl px-5 md:px-10 mb-20">
+      {upcomingBookings.length > 0 ? (
+        <div className="2xl:max-w-7xl w-full mx-auto max-w-4xl px-5 md:px-10 mb-20">
           <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-4">
             Upcoming Bookings ({upcomingBookings.length})
           </H3>
@@ -124,10 +124,24 @@ const MyBookings = () => {
             ))}
           </div>
         </div>
+      ) : (
+        <div>
+          <div className="max-w-screen-xl mx-auto px-10">
+            <P className="mt-4">You have no upcoming bookings.</P>
+            <Link to="/venues">
+              <Button
+                buttonType="violetSecondary"
+                className="my-5 px-4 inline-block"
+              >
+                Make a booking
+              </Button>
+            </Link>
+          </div>
+        </div>
       )}
       {/* Past Bookings */}
       {pastBookings.length > 0 && (
-        <div className="bg-gray-200 dark:bg-customBgDark-700 mx-auto px-5 md:px-10 py-2 pb-[40vh]">
+        <div className="bg-gray-200 dark:bg-customBgDark-700 w-full mx-auto px-5 md:px-10 py-2 pb-[40vh]">
           <div className="2xl:max-w-7xl mx-auto">
             <H3 className="max-w-screen-lg mx-auto text-lg font-semibold mt-6">
               Past Bookings ({pastBookings.length})

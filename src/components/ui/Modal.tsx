@@ -52,6 +52,7 @@ const Modal: React.FC<ModalProps> = ({
       {isOpen && (
         <motion.div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2"
+          role="dialog"
           onClick={handleBackdropClick}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -74,6 +75,7 @@ const Modal: React.FC<ModalProps> = ({
               className="absolute z-30 w-8 h-8 top-4 right-4 px-3 py-1 transition flex items-center justify-center"
               aria-label="Close Modal"
             >
+              <span className="sr-only">Close Modal</span>
               <FontAwesomeIcon icon={faClose} className="w-4 h-4" />
             </Button>
 

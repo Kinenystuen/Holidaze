@@ -134,12 +134,12 @@ describe("RegisterForm Component", () => {
     );
 
     fireEvent.input(screen.getByLabelText("Username"), {
-      target: { value: "JohnDoe" }
+      target: { value: "OlaNormann" }
     });
     fireEvent.blur(screen.getByLabelText(/Username/));
 
     fireEvent.input(screen.getByLabelText("Email"), {
-      target: { value: "john@stud.noroff.no" }
+      target: { value: "OlaNormann@stud.noroff.no" }
     });
     fireEvent.blur(screen.getByLabelText(/Email/));
 
