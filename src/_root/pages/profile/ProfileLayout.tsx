@@ -5,6 +5,7 @@ import H1 from "../../../components/shared/Typography/H1";
 import { useState } from "react";
 import ThemeToggle from "../../../components/shared/ThemeToggle";
 import MetaTags from "../../../components/metaTags";
+import ScrollToTop from "../../../components/ui/ScrollToTop";
 
 const ProfileLayout = () => {
   const { user } = useUserContext();
@@ -17,6 +18,7 @@ const ProfileLayout = () => {
         keywords="Holidaze, venue, hotel, booking, holiday, vacation, admin"
         description={`Book your stay at Holidaze. Enjoy great amenities and a wonderful experience!`}
       />
+      <ScrollToTop />
       <div className="mx-auto">
         <div className="w-full md:flex">
           {/* Left-side menu */}
