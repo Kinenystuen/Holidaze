@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 import H2 from "../../../components/shared/Typography/H2";
 
+/**
+ * PopularDestinations - Displays popular destinations with images.
+ * - Uses a grid layout to display images and destination names.
+ * - Each destination is a link to the venues page with a search query.
+ *
+ * @component
+ * @returns {JSX.Element} The PopularDestinations component.
+ */
+
 const popularDestinations = [
   {
     name: "Oslo",
@@ -57,6 +66,7 @@ const PopularDestinations = () => {
               }`}
             >
               <img
+                loading="lazy"
                 src={destination.image}
                 alt={destination.name}
                 className="w-full h-52 object-cover rounded-lg shadow-md group-hover:opacity-80 transition-opacity duration-300"
