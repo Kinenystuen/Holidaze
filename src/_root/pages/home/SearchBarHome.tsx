@@ -45,6 +45,7 @@ const SearchBarHome = () => {
             type="text"
             placeholder="Search for venues..."
             value={query}
+            aria-label="Search for venues"
             onChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
