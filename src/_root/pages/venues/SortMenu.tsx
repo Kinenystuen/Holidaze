@@ -8,7 +8,6 @@ import {
   faSortAmountDownAlt,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
-import P from "../../../components/shared/Typography/P";
 import MetaRadio from "../../../components/ui/MetaRadio";
 
 interface SortMenuProps {
@@ -91,11 +90,11 @@ const SortMenu: React.FC<SortMenuProps> = ({
           isOpen ? "block" : "hidden"
         } absolute md:relative md:flex md:flex-col gap-1 top-full md:top-0 mt-2 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-500 dark:bg-transparent shadow-md md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownStyle}`}
       >
-        <div className="p-4 md:p-0 w-full">
+        <fieldset className="p-4 md:p-0 w-full">
           <div className="mb-4">
-            <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
+            <legend className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
               Sort by:
-            </P>
+            </legend>
             <div className="flex flex-col space-y-1 ">
               <MetaRadio
                 id="sort-name"
@@ -126,9 +125,9 @@ const SortMenu: React.FC<SortMenuProps> = ({
             </div>
           </div>
           <div>
-            <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
+            <legend className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
               Order:
-            </P>
+            </legend>
             <div className="flex flex-col space-y-1">
               <MetaRadio
                 id="sort-asc"
@@ -149,7 +148,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
               />
             </div>
           </div>
-        </div>
+        </fieldset>
       </div>
     </div>
   );
