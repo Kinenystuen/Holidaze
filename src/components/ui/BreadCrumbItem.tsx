@@ -72,11 +72,13 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
                     onClick={() => handleNavigate(item.href!)}
                     buttonType="transparent"
                     className="flex items-center text-sm p-1"
+                    ariaLabel={`Navigate to ${item.label}`}
                   >
                     {index === 0 && (
                       <FontAwesomeIcon
                         icon={faHome}
                         className="w-4 h-4 mr-1"
+                        aria-label="Home"
                         aria-hidden="true"
                       />
                     )}
@@ -100,6 +102,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
                   <FontAwesomeIcon
                     icon={faChevronRight}
                     className="w-3 h-3 text-gray-400"
+                    aria-label="Next"
                     aria-hidden="true"
                   />
                 </li>
