@@ -17,6 +17,7 @@ import {
   FieldErrors,
   Path
 } from "react-hook-form";
+import P from "../shared/Typography/P";
 
 interface ImageUploaderProps<T extends FieldValues> {
   media: Media[];
@@ -24,6 +25,8 @@ interface ImageUploaderProps<T extends FieldValues> {
   errors: FieldErrors<T>;
   setMedia: (media: Media[]) => void;
 }
+
+const MAX_IMAGES = 8;
 
 const ImageUploader = <T extends FieldValues>({
   media,
@@ -40,6 +43,11 @@ const ImageUploader = <T extends FieldValues>({
   const addImage = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (media.length === MAX_IMAGES) {
+      setError(`You can only upload up to ${MAX_IMAGES} images.`);
+      return;
+    }
+
     if (
       (!imageUrl.trim() && imageAlt.trim()) ||
       (imageUrl.trim() && !imageAlt.trim())
@@ -55,12 +63,10 @@ const ImageUploader = <T extends FieldValues>({
 
     setLoading(true);
 
-    // Adding new image
     const newImage = { url: imageUrl.trim(), alt: imageAlt.trim() };
 
     setTimeout(() => {
       setMedia([...media, newImage]);
-
       setImageUrl("");
       setImageAlt("");
       setError("");
@@ -116,7 +122,7 @@ const ImageUploader = <T extends FieldValues>({
           onChange={(e) => setImageAlt(e.target.value)}
         />
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <P className="text-red-500 text-sm mx-2">{error}</P>}
 
         <Button className="mx-auto" onClick={addImage} disabled={loading}>
           {loading ? <LoaderSmall /> : "Add Image"}

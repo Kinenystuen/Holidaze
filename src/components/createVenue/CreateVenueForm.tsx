@@ -209,6 +209,7 @@ const VenueForm = () => {
             icon={faMoneyCheckDollar}
             register={register}
             errors={errors}
+            max={10000}
             required
             pattern={{ value: /^[0-9]+$/, message: "Only numbers allowed." }}
             onChange={(e) => {
