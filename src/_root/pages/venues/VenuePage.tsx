@@ -46,60 +46,34 @@ const VenuePage = () => {
         <div className="w-full md:flex">
           {/* Left-side menu */}
           <div
-            className="custom-scrollbarVenue hidden md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] max-w-[270px] bg-dark-2 
-            h-screen max-h-screen sticky top-16 overflow-y-auto pb-32"
+            className="custom-scrollbarVenue flex md:flex flex-col gap-2 px-6 py-6 md:min-w-[220px] md:max-w-[270px] bg-customBg dark:bg-customBgDark 
+            md:h-screen md:max-h-screen w-screen relative h-10 z-30 md:sticky md:top-16 md:overflow-y-auto pb-32"
           >
             <H1 className="text-2xl font-bold mb-4">Venues</H1>
-            <SearchBar onSearch={handleSearch} />
+            <div className="flex flex-row md:flex-col flex-wrap gap-1 md:gap-2 max-w-screen">
+              <SearchBar onSearch={handleSearch} />
 
-            <SortMenu
-              key={`${sortField}-${sortOrder}`}
-              sortField={sortField}
-              sortOrder={sortOrder}
-              onSortChange={(field, order) => {
-                setSortField(field);
-                setSortOrder(order);
-              }}
-            />
+              <SortMenu
+                key={`${sortField}-${sortOrder}`}
+                sortField={sortField}
+                sortOrder={sortOrder}
+                onSortChange={(field, order) => {
+                  setSortField(field);
+                  setSortOrder(order);
+                }}
+              />
 
-            <hr className="border-t border-color1-200 dark:border-color1-500 my-4" />
-            <FilterMenu
-              filters={filters}
-              onFilterChange={(newFilters) => setFilters(newFilters)}
-            />
+              <hr className="border-t border-color1-200 dark:border-color1-500 my-4" />
+              <FilterMenu
+                filters={filters}
+                onFilterChange={(newFilters) => setFilters(newFilters)}
+              />
+            </div>
           </div>
 
           {/* Right-side content */}
           <div className="flex flex-1 overflow-auto">
             <div className="relative flex flex-col flex-1 gap-2 my-1 px-2 custom-scrollbar max-w-4xl 2xl:max-w-7xl">
-              {/* Search Bar */}
-
-              <div
-                className={`bg-inherit dark:bg-inherit md:bg-transparent dark:md:bg-transparent z-20 w-full py-0 px-4`}
-              >
-                <div className="flex gap-2 py-2 md:hidden">
-                  <SearchBar
-                    onSearch={handleSearch}
-                    searchPlaceholder="Search for venues..."
-                  />
-                  <div className="flex">
-                    <FilterMenu
-                      filters={filters}
-                      boxPosition="right-0"
-                      onFilterChange={(newFilters) => setFilters(newFilters)}
-                    />
-                    <SortMenu
-                      sortField={sortField}
-                      sortOrder={sortOrder}
-                      onSortChange={(field, order) => {
-                        setSortField(field);
-                        setSortOrder(order);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-
               <ScrollToTopBtn />
               {/* Venues Section */}
               <Venues
