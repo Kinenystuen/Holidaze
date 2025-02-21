@@ -7,7 +7,7 @@ import React from "react";
  */
 const HeroGradient: React.FC = () => {
   return (
-    <div className="flex mt-[-4rem] md:mt-[-0rem] justify-center absolute inset-0 z-0 text-gray-300 dark:text-gray-600 opacity-40 dark:opacity-50">
+    <div className="flex mt-[-4rem] md:mt-[-0rem] justify-center absolute inset-0 z-0 text-gray-300 dark:text-gray-600 opacity-40 dark:opacity-10">
       <svg
         width="1278"
         height="829"
