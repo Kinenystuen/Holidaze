@@ -1,19 +1,20 @@
+import React from "react";
+
 /**
- *
  * HeroGradient component.
  * - Renders a gradient background for the hero section.
  * @returns {JSX.Element} The HeroGradient component.
  */
-
-const HeroGradient = () => {
+const HeroGradient: React.FC = () => {
   return (
-    <div className="flex justify-center absolute inset-0 z-0 text-gray-300 dark:text-gray-600 opacity-40 dark:opacity-50">
+    <div className="flex mt-[-4rem] md:mt-[-0rem] justify-center absolute inset-0 z-0 text-gray-300 dark:text-gray-600 opacity-40 dark:opacity-50">
       <svg
         width="1278"
         height="829"
         viewBox="0 0 1278 829"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <path
           d="M0.5 0.5H1267.66L1272 828.5L0.5 818V0.5Z"
@@ -44,9 +45,9 @@ const HeroGradient = () => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(639.25 414.5) rotate(90) scale(414 638.75)"
           >
-            <stop stop-color="#DA7EFB" stop-opacity="0.3" />
-            <stop offset="0.415" stop-color="#B185D6" stop-opacity="0.117778" />
-            <stop offset="0.675" stop-color="#9789BD" stop-opacity="0" />
+            <stop stopColor="#DA7EFB" stopOpacity="0.3" />
+            <stop offset="0.415" stopColor="#B185D6" stopOpacity="0.117778" />
+            <stop offset="0.675" stopColor="#9789BD" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint1_radial_4_53"
@@ -56,9 +57,9 @@ const HeroGradient = () => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(639.25 414.5) rotate(90) scale(414 638.75)"
           >
-            <stop stop-color="#9789BD" stop-opacity="0.3" />
-            <stop offset="0.54" stop-color="#9789BD" stop-opacity="0.1" />
-            <stop offset="1" stop-color="#9789BD" stop-opacity="0" />
+            <stop stopColor="#9789BD" stopOpacity="0.3" />
+            <stop offset="0.54" stopColor="#9789BD" stopOpacity="0.1" />
+            <stop offset="1" stopColor="#9789BD" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint2_radial_4_53"
@@ -68,9 +69,9 @@ const HeroGradient = () => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(639.25 414.5) rotate(90) scale(414 638.75)"
           >
-            <stop stop-color="#9789BD" stop-opacity="0.2" />
-            <stop offset="0.36" stop-color="#E4E0EE" stop-opacity="0.0772727" />
-            <stop offset="0.66" stop-color="white" stop-opacity="0" />
+            <stop stopColor="#9789BD" stopOpacity="0.2" />
+            <stop offset="0.36" stopColor="#E4E0EE" stopOpacity="0.0772727" />
+            <stop offset="0.66" stopColor="white" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint3_radial_4_53"
@@ -80,8 +81,8 @@ const HeroGradient = () => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(639.25 414.5) rotate(90) scale(414 638.75)"
           >
-            <stop stop-color="#DA7EFB" stop-opacity="0.3" />
-            <stop offset="1" stop-color="#9789BD" stop-opacity="0" />
+            <stop stopColor="#DA7EFB" stopOpacity="0.3" />
+            <stop offset="1" stopColor="#9789BD" stopOpacity="0" />
           </radialGradient>
           <radialGradient
             id="paint4_radial_4_53"
@@ -91,8 +92,8 @@ const HeroGradient = () => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(453.91 504.094) rotate(90) scale(195.637 275.655)"
           >
-            <stop stop-color="#DA7EFB" stop-opacity="0.2" />
-            <stop offset="1" stop-color="#DA7EFB" stop-opacity="0" />
+            <stop stopColor="#DA7EFB" stopOpacity="0.2" />
+            <stop offset="1" stopColor="#DA7EFB" stopOpacity="0" />
           </radialGradient>
         </defs>
       </svg>
