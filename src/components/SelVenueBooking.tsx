@@ -25,6 +25,20 @@ interface SelVenueBookingProps {
   refetchVenue: () => void;
 }
 
+/**
+ * SelVenueBooking Component
+ *
+ * This component allows users to book a venue by selecting available dates and specifying the number of guests.
+ * It automatically finds the next available dates, disables booked dates, and ensures the correct booking process.
+ *
+ * @component
+ * @param {Object} props - Component properties
+ * @param {Venue} props.venue - The venue details, including bookings and pricing.
+ * @param {Function} props.refetchVenue - Function to refresh the venue data after a successful booking.
+ *
+ * @returns {JSX.Element} The booking component UI.
+ */
+
 const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
   venue,
   refetchVenue
@@ -37,38 +51,66 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     }));
   }, [venue.bookings]);
 
-  /* Function to check if a date is disabled */
   const isDateDisabled = useCallback(
     (date: Date) => {
-      return bookedDates().some(({ start, end }) =>
-        isWithinInterval(date, { start, end })
+      const utcDate = new Date(
+        Date.UTC(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          0,
+          0,
+          0,
+          0
+        )
       );
+
+      const booked = bookedDates();
+
+      // Check if the date itself is booked
+      const isBooked = booked.some(({ start, end }) =>
+        isWithinInterval(utcDate, { start, end })
+      );
+
+      // Check if the previous day is booked
+      const prevDay = addDays(utcDate, -1);
+      const isPrevBooked = booked.some(({ start, end }) =>
+        isWithinInterval(prevDay, { start, end })
+      );
+
+      // Check if the next day is booked
+      const nextDay = addDays(utcDate, 1);
+      const isNextBooked = booked.some(({ start, end }) =>
+        isWithinInterval(nextDay, { start, end })
+      );
+
+      // Disable if the day is booked OR if it's isolated between two booked dates
+      return isBooked || (isPrevBooked && isNextBooked);
     },
     [bookedDates]
   );
 
   const findNextAvailableDates = useCallback(() => {
     let searchDate = new Date();
-    let maxSearchDays = 365; // Prevent infinite loops
+    let maxSearchDays = 365;
 
     while (maxSearchDays > 0) {
-      const nextDay = addDays(searchDate, 1);
+      if (!isDateDisabled(searchDate)) {
+        const nextDay = addDays(searchDate, 1);
 
-      const isSearchDateBooked = isDateDisabled(searchDate);
-      const isNextDayBooked = isDateDisabled(nextDay);
-
-      if (!isSearchDateBooked && !isNextDayBooked) {
-        return {
-          startDate: setMinutes(setHours(searchDate, 15), 0),
-          endDate: setMinutes(setHours(nextDay, 11), 0)
-        };
+        if (!isDateDisabled(nextDay)) {
+          return {
+            startDate: setMinutes(setHours(searchDate, 15), 0), // Check-in at 3 PM
+            endDate: setMinutes(setHours(nextDay, 11), 0) // Check-out at 11 AM
+          };
+        }
       }
 
       searchDate = addDays(searchDate, 1);
       maxSearchDays--;
     }
 
-    return null; // No available dates found
+    return null;
   }, [isDateDisabled]);
 
   const [dateRange, setDateRange] = useState(() => {
@@ -96,7 +138,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     null
   );
 
-  /* Update dateRange only when `venue.bookings` change */
   useEffect(() => {
     const updatedDates = findNextAvailableDates();
     setDateRange(
@@ -112,7 +153,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     );
   }, [venue.bookings, findNextAvailableDates]);
 
-  /* Update total price when guests or dateRange changes */
   useEffect(() => {
     if (dateRange.length === 0 || !venue.price) return;
 
@@ -130,6 +170,31 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     let checkInDate = selection.startDate || new Date();
     let checkOutDate = selection.endDate || addDays(checkInDate, 1);
 
+    // Normalize to start of the day in UTC
+    checkInDate = new Date(
+      Date.UTC(
+        checkInDate.getFullYear(),
+        checkInDate.getMonth(),
+        checkInDate.getDate(),
+        15,
+        0,
+        0,
+        0 // Check-in time 15:00 UTC
+      )
+    );
+
+    checkOutDate = new Date(
+      Date.UTC(
+        checkOutDate.getFullYear(),
+        checkOutDate.getMonth(),
+        checkOutDate.getDate(),
+        11,
+        0,
+        0,
+        0 // Check-out time 11:00 UTC
+      )
+    );
+
     while (isDateDisabled(checkInDate) || isDateDisabled(checkOutDate)) {
       checkInDate = addDays(checkInDate, 1);
       checkOutDate = addDays(checkInDate, 1);
@@ -137,8 +202,8 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
 
     setDateRange([
       {
-        startDate: setMinutes(setHours(checkInDate, 15), 0),
-        endDate: setMinutes(setHours(checkOutDate, 11), 0),
+        startDate: checkInDate,
+        endDate: checkOutDate,
         key: "selection"
       }
     ]);
@@ -163,16 +228,33 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
       return;
     }
 
-    // Ensure check-in is 15:00 and check-out is 11:00 in UTC
-    const checkIn = new Date(dateRange[0].startDate);
-    checkIn.setUTCHours(14, 0, 0, 0); // Set to 15:00 UTC
+    const checkIn = new Date(
+      Date.UTC(
+        dateRange[0].startDate.getFullYear(),
+        dateRange[0].startDate.getMonth(),
+        dateRange[0].startDate.getDate(),
+        15,
+        0,
+        0,
+        0 // 15:00 UTC
+      )
+    );
 
-    const checkOut = new Date(dateRange[0].endDate);
-    checkOut.setUTCHours(10, 0, 0, 0); // Set to 11:00 UTC
+    const checkOut = new Date(
+      Date.UTC(
+        dateRange[0].endDate.getFullYear(),
+        dateRange[0].endDate.getMonth(),
+        dateRange[0].endDate.getDate(),
+        11,
+        0,
+        0,
+        0 // 11:00 UTC
+      )
+    );
 
     const newBooking = {
       venueName: venue.name,
-      dateFrom: checkIn.toISOString(), // Ensure the correct time is preserved
+      dateFrom: checkIn.toISOString(),
       dateTo: checkOut.toISOString(),
       guests,
       venueId: venue.id
