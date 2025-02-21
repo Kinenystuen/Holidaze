@@ -21,7 +21,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
                 <img
                   src={image.url}
                   loading="lazy"
-                  alt={image.alt || "Venue Image"}
+                  alt={image.alt || image.url}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
