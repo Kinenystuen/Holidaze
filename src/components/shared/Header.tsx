@@ -89,6 +89,7 @@ const Header: React.FC = () => {
 
                 <Button
                   buttonType="transparent"
+                  ariaLabel="Open Menu"
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="text-gray-800 dark:text-whiteFont-600 focus:outline-none border-0 flex items-center p-2 ms-3 md:p-0"
                 >
