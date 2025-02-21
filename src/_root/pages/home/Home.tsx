@@ -6,6 +6,17 @@ import PopularStayTypes from "./PopularStayTypes";
 import BecomeVenueManager from "./BecomeVenueManager";
 import HeroGradient from "../../../components/ui/HeroGradient";
 
+/**
+ * Home Component
+ * - Contains all components for the Home page.
+ * - Hero Section, Popular Destinations, Popular Stay Types, and Venue Manager Section.
+ *
+ * @component
+ * @category Pages
+ *
+ * @returns {JSX.Element} The Home component.
+ */
+
 const Home = () => {
   return (
     <div className="relative">
