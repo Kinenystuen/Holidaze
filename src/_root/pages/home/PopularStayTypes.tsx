@@ -41,7 +41,6 @@ const stayTypes = [
  * PopularStayTypes Component
  *
  * This component displays a list of popular stay types with images and name.
- * The stay types are displayed in a grid layout with 2 or 3 columns based on the screen size.
  * Each stay type is a link to the venues page with a search query for that stay type.
  *
  * @returns {JSX.Element} The rendered PopularStayTypes component
