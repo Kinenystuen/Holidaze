@@ -31,8 +31,8 @@ const Header: React.FC = () => {
   return (
     <header className="relative w-full">
       <div
-        className={`fixed z-30 w-full bg-customBg bg-opacity-0 dark:bg-customBgDark-600 transform duration-500 ${
-          isScrolled ? "bg-opacity-100 " : ""
+        className={`fixed z-30 w-full bg-customBg bg-opacity-0 dark:bg-opacity-0 dark:bg-customBgDark-600 transform duration-500 ${
+          isScrolled ? "bg-opacity-100 dark:bg-opacity-100 " : ""
         }`}
       >
         <div className="lg:max-w-7xl w-full mx-auto  ">
