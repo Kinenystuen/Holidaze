@@ -35,7 +35,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
                 <img
                   src={image.url}
                   loading="lazy"
-                  alt={image.alt || image.url}
+                  alt={image.alt || `Venue_Image_${index}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
@@ -46,7 +46,7 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
             <img
               loading="lazy"
               src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
-              alt="Default Placeholder"
+              alt={`Venue_Image_0`}
               className="w-full h-full object-cover"
             />
           </SwiperSlide>

@@ -51,7 +51,7 @@ const SelVenueSwiper = ({ venue }: { venue: Media[] }) => {
           <SwiperSlide key={id} className="cursor-pointer">
             <img
               src={image.url}
-              alt={image.alt || "Venue image"}
+              alt={image.alt || `Venue image ${id}`}
               className="w-full h-[30vh] md:h-[56vh] max-h-[30rem] object-cover rounded-md shadow-md"
               onClick={() => handleImageClick(id)}
             />
