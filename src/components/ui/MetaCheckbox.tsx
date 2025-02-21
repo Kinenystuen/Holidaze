@@ -56,10 +56,10 @@ const MetaCheckbox: React.FC<MetaCheckboxProps> = ({
       {/* Meta Icon */}
       <FontAwesomeIcon
         icon={icon}
-        className="text-lg text-gray-600 dark:text-gray-300"
+        className="w-5 h-5 text-gray-600 dark:text-gray-300"
       />
 
-      {/* Label */}
+      {/* Text */}
       <span className="text-sm font-medium capitalize">{label}</span>
     </label>
   );
