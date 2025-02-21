@@ -29,6 +29,14 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import EditVenue from "./EditVenue";
 
+/**
+ * VenueCard Component
+ * - Displays a single venue card with details.
+ * - Allows users to view, edit, and delete venues.
+ * - @component
+ * @returns {JSX.Element} The VenueCard component.
+ */
+
 const VenueCard = ({
   venue,
   refetchVenue

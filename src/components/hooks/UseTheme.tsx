@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 
+/**
+ * useTheme - Custom hook for managing dark mode theme.
+ * - Uses localStorage to persist theme preference.
+ * - Uses prefers-color-scheme media query to detect system theme.
+ * - @returns {Object} The darkMode state and toggleTheme function.
+ */
 export const useTheme = () => {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {

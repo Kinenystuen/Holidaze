@@ -2,6 +2,20 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./VenueSwiper.css";
 
+/**
+ * VenueSwiper Component
+ *
+ * The VenueSwiper component displays a Swiper component with images of a venue.
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <VenueSwiper media={media} />
+ *
+ * @param {Object} media - The media object containing the image URL and alt text
+ * @returns {JSX.Element} The rendered VenueSwiper component
+ */
+
 const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
   return (
     <div className="relative venue-swiper w-full h-full object-cover">
@@ -20,7 +34,8 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
               <div className="w-full h-full overflow-hidden">
                 <img
                   src={image.url}
-                  alt={image.alt || "Venue Image"}
+                  loading="lazy"
+                  alt={image.alt || `Venue_Image_${index}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
@@ -29,8 +44,9 @@ const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
         ) : (
           <SwiperSlide>
             <img
+              loading="lazy"
               src="https://archive.org/download/placeholder-image/placeholder-image.jpg"
-              alt="Default Placeholder"
+              alt={`Venue_Image_0`}
               className="w-full h-full object-cover"
             />
           </SwiperSlide>

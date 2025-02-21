@@ -3,6 +3,13 @@ import Button from "../../components/shared/Button/Button";
 import ErrorMessage from "../../components/shared/ErrorMessage";
 import Header from "../../components/shared/Header";
 
+/**
+ * PageNotFound Component
+ * - Displays a 404 error message.
+ * - @component
+ * @returns {JSX.Element} The PageNotFound component.
+ */
+
 const PageNotFound = () => {
   const navigate = useNavigate();
   const handleGoBack = () => {

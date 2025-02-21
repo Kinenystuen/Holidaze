@@ -15,6 +15,15 @@ import EditProfile from "./EditProfile";
 import Button from "../../../components/shared/Button/Button";
 import ProfileCard from "../../../components/ui/ProfileCard";
 
+/**
+ * PrivateProfile Component
+ * - Displays user profile information.
+ * - Allows users to edit their profile and settings.
+ * - Displays venue manager and booking information.
+ * - @component
+ * @returns {JSX.Element} The PrivateProfile component.
+ */
+
 const PrivateProfile = () => {
   const { user } = useUserContext();
 

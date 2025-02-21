@@ -37,6 +37,15 @@ const stayTypes = [
   }
 ];
 
+/**
+ * PopularStayTypes Component
+ *
+ * This component displays a list of popular stay types with images and name.
+ * Each stay type is a link to the venues page with a search query for that stay type.
+ *
+ * @returns {JSX.Element} The rendered PopularStayTypes component
+ */
+
 const PopularStayTypes = () => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -74,6 +83,7 @@ const PopularStayTypes = () => {
               className="group block"
             >
               <img
+                loading="lazy"
                 src={type.image}
                 alt={type.name}
                 className="w-full h-52 object-cover rounded-t-lg shadow-md group-hover:opacity-80 transition-opacity duration-300"

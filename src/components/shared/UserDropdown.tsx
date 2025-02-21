@@ -13,6 +13,29 @@ import {
 import P from "./Typography/P";
 import { useUserContext } from "../context/useUserContext";
 
+/**
+ * UserDropdown Component
+ *
+ * The UserDropdown component displays the user's name and avatar in a dropdown.
+ * It includes links to the user's profile, bookings, and venues.
+ *
+ * Features:
+ * - Avatar: Displays the user's avatar image
+ * - Dropdown: Displays user actions (profile, bookings, venues, logout)
+ *
+ * Dependencies:
+ * - `Button`: Component for clickable buttons
+ * - `P`: Component for paragraph text
+ * - `useUserContext`: Hook for accessing user context
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <UserDropdown />
+ *
+ * @returns {JSX.Element} The rendered UserDropdown component
+ */
+
 const UserDropdown: React.FC = () => {
   const { user, isAuthenticated, setIsAuthenticated } = useUserContext();
   const dropdownRef = useRef<HTMLDivElement>(null);

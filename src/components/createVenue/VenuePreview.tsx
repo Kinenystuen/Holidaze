@@ -28,6 +28,13 @@ const Feature = ({ icon, text }: { icon: IconDefinition; text: string }) => (
   </div>
 );
 
+/**
+ * VenuePreview Component
+ * - Displays a preview of the selected venue.
+ * - Uses `useVenue` and `useUserContext` to fetch venue and user data.
+ * - @component
+ * @returns {JSX.Element} The VenuePreview component.
+ */
 const VenuePreview = ({ onClose }: { onClose: () => void }) => {
   const { venue } = useVenue();
   const { user } = useUserContext();

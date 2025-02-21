@@ -1,5 +1,13 @@
 import { H1Props } from "../../library/types";
 
+/**
+ * H1 Component
+ * - Renders an H1 heading element.
+ * - @param {H1Props} props - The component props.
+ * @component
+ * @returns {JSX.Element} The H1 component.
+ */
+
 function H1({ className, children, style }: H1Props) {
   return (
     <h1

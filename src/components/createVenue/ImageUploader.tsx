@@ -17,6 +17,7 @@ import {
   FieldErrors,
   Path
 } from "react-hook-form";
+import P from "../shared/Typography/P";
 
 interface ImageUploaderProps<T extends FieldValues> {
   media: Media[];
@@ -24,6 +25,54 @@ interface ImageUploaderProps<T extends FieldValues> {
   errors: FieldErrors<T>;
   setMedia: (media: Media[]) => void;
 }
+
+const MAX_IMAGES = 8;
+
+/**
+ * ImageUploader Component
+ *
+ * A reusable component for uploading and managing images.
+ * This component allows users to add images by URL, set alt text,
+ * and drag-and-drop to reorder images.
+ *
+ * Features:
+ * - Add images by URL with alt text.
+ * - Drag-and-drop to reorder images.
+ * - Remove images from the list.
+ * - Display error messages for invalid input.
+ * - Loading state for adding images.
+ *
+ * @template T - The type of form data managed by `react-hook-form`.
+ *
+ * @param {ImageUploaderProps<T>} props - Props for the ImageUploader component.
+ * @param {Media[]} props.media - The list of images to manage.
+ * @param {UseFormRegister<T>} props.register - `register` function from `react-hook-form` to bind input.
+ * @param {FieldErrors<T>} props.errors - Errors object from `react-hook-form` for displaying validation messages.
+ * @param {(media: Media[]) => void} props.setMedia - Function to update the image list state.
+ *
+ * @returns {JSX.Element} The rendered ImageUploader component.
+ *
+ * @example
+ * ```tsx
+ * import { useForm } from "react-hook-form";
+ * import ImageUploader from "./ImageUploader";
+ *
+ * interface VenueForm {
+ *   images: Media[];
+ * }
+ *
+ * const VenueForm: React.FC = () => {
+ *   const { register, handleSubmit, setValue, formState: { errors } } = useForm<VenueForm>();
+ *   const [media, setMedia] = useState<Media[]>([]);
+ *
+ *   return (
+ *     <form onSubmit={handleSubmit(submitVenue)}>
+ *       <ImageUploader media={media} setMedia={setMedia} register={register} errors={errors} />
+ *     </form>
+ *   );
+ * };
+ * ```
+ */
 
 const ImageUploader = <T extends FieldValues>({
   media,
@@ -40,6 +89,11 @@ const ImageUploader = <T extends FieldValues>({
   const addImage = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (media.length === MAX_IMAGES) {
+      setError(`You can only upload up to ${MAX_IMAGES} images.`);
+      return;
+    }
+
     if (
       (!imageUrl.trim() && imageAlt.trim()) ||
       (imageUrl.trim() && !imageAlt.trim())
@@ -55,12 +109,10 @@ const ImageUploader = <T extends FieldValues>({
 
     setLoading(true);
 
-    // Adding new image
     const newImage = { url: imageUrl.trim(), alt: imageAlt.trim() };
 
     setTimeout(() => {
       setMedia([...media, newImage]);
-
       setImageUrl("");
       setImageAlt("");
       setError("");
@@ -116,7 +168,7 @@ const ImageUploader = <T extends FieldValues>({
           onChange={(e) => setImageAlt(e.target.value)}
         />
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <P className="text-red-500 text-sm mx-2">{error}</P>}
 
         <Button className="mx-auto" onClick={addImage} disabled={loading}>
           {loading ? <LoaderSmall /> : "Add Image"}

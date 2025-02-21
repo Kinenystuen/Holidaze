@@ -7,6 +7,14 @@ import { UserProfile } from "../library/types";
 import ErrorMessage from "../shared/ErrorMessage";
 import Loader from "../ui/Loader";
 
+/**
+ * FetchProfileData Component
+ * - Fetches the user's profile data and updates the global user state.
+ * - Uses `useApi` to fetch data.
+ * - @component
+ * @returns {JSX.Element} The FetchProfileData component.
+ */
+
 const FetchProfileData: React.FC<{
   children: (response: UserProfile | null) => React.ReactNode;
 }> = ({ children }) => {

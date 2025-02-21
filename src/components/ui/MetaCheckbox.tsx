@@ -9,6 +9,24 @@ interface MetaCheckboxProps {
   onChange: (checked: boolean) => void;
 }
 
+/**
+ * A custom checkbox component with a label and icon.
+ * @param {string} props.id - The unique id of the checkbox.
+ * @param {string} props.label - The text label for the checkbox.
+ * @param {IconDefinition} props.icon - The FontAwesome icon to display.
+ * @param {boolean} props.checked - The checked state of the checkbox.
+ * @param {(checked: boolean) => void} props.onChange - The change event handler for the checkbox.
+ * @returns {JSX.Element} A custom checkbox component.
+ * @example
+ * <MetaCheckbox
+ *  id="checkbox1"
+ *  label="Enable notifications"
+ *  icon={faBell}
+ *  checked={true}
+ *  onChange={(checked) => console.log(checked)}
+ * />
+ */
+
 const MetaCheckbox: React.FC<MetaCheckboxProps> = ({
   id,
   label,
@@ -56,10 +74,10 @@ const MetaCheckbox: React.FC<MetaCheckboxProps> = ({
       {/* Meta Icon */}
       <FontAwesomeIcon
         icon={icon}
-        className="text-lg text-gray-600 dark:text-gray-300"
+        className="w-5 h-5 text-gray-600 dark:text-gray-300"
       />
 
-      {/* Label */}
+      {/* Text */}
       <span className="text-sm font-medium capitalize">{label}</span>
     </label>
   );

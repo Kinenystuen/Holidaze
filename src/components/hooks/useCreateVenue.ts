@@ -3,6 +3,14 @@ import { useApi } from "./UseApi";
 import { apiHostUrl } from "../library/constants";
 import { VenueData } from "../context/VenueContext";
 
+/**
+ * A reusable hook for creating a new venue.
+ * - Sends a POST request to the API.
+ * - Handles loading, success, and error states.
+ *
+ * @returns {Object} Methods and state for creating a venue.
+ */
+
 const useCreateVenue = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);

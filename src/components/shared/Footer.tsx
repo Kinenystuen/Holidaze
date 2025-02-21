@@ -78,26 +78,30 @@ const Footer = () => {
             </H3>
             <div className="flex space-x-4">
               <Link
-                to="/"
+                to="#"
                 className="text-gray-400 hover:text-white transition"
+                aria-label="Facebook"
               >
                 <FontAwesomeIcon icon={faFacebookF} size="lg" />
               </Link>
               <Link
-                to="/"
+                to="#"
                 className="text-gray-400 hover:text-white transition"
+                aria-label="Twitter"
               >
                 <FontAwesomeIcon icon={faXTwitter} size="lg" />
               </Link>
               <Link
-                to="/"
+                to="#"
                 className="text-gray-400 hover:text-white transition"
+                aria-label="Instagram"
               >
                 <FontAwesomeIcon icon={faInstagram} size="lg" />
               </Link>
               <Link
-                to="/"
+                to="#"
                 className="text-gray-400 hover:text-white transition"
+                aria-label="LinkedIn"
               >
                 <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
               </Link>
@@ -130,6 +134,7 @@ const Footer = () => {
               <Button
                 type="submit"
                 buttonType="violet"
+                ariaLabel="Subscribe"
                 className="bg-color3-400"
               >
                 Subscribe

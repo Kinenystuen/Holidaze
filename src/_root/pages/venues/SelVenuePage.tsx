@@ -13,6 +13,14 @@ import SelVenue from "./SelVenue";
 import SimilarVenues from "./SimilarVenues";
 import { useEffect, useState } from "react";
 
+/**
+ * SelVenuePage Component
+ * - Fetches the selected venue and similar venues based on location, rating, and amenities.
+ * - Uses `useApi` to fetch data.
+ * - @component
+ * @returns {JSX.Element} The SelVenuePage component.
+ */
+
 const SelVenuePage = () => {
   const { id } = useParams<{ id: string }>();
   const [similarVenues, setSimilarVenues] = useState<Venue[]>([]);
@@ -48,7 +56,7 @@ const SelVenuePage = () => {
           );
         }
 
-        allData = [...allData, ...data.data]; // Merge new data
+        allData = [...allData, ...data.data];
         hasMore = data.meta?.nextPage ? true : false;
         currentPage++;
       }

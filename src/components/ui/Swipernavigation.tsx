@@ -15,6 +15,20 @@ const ArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
   </svg>
 );
 
+/**
+ * A navigation component for Swiper.js. Displays left and right buttons for navigating between slides.
+ *
+ * @component
+ * @param {boolean} isBeginning - A boolean value indicating if the first slide is currently displayed.
+ * @param {boolean} isEnd - A boolean value indicating if the last slide is currently displayed.
+ * @param {string} [btnPlacement=1] - The placement of the navigation buttons. Default is "1".
+ * @returns {JSX.Element} A "Previous Slide" and "Next Slide" button.
+ *
+ * @example
+ * // Example usage:
+ * <SwiperNavigation isBeginning={isBeginning} isEnd={isEnd} btnPlacement="1" />
+ */
+
 const SwiperNavigation = ({
   isBeginning,
   isEnd,

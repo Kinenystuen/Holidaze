@@ -9,6 +9,18 @@ interface BookingSummaryProps {
   guests: number;
 }
 
+/**
+ * BookingSummary Component
+ * - Displays a summary of the booking details.
+ * - Calculates the total price based on the price, dates, and guests.
+ * - @param {number} price - The price per night.
+ * - @param {Date} dateFrom - The start date of the booking.
+ * - @param {Date} dateTo - The end date of the booking.
+ * - @param {number} guests - The number of guests.
+ * @component
+ * @returns {JSX.Element} The BookingSummary component.
+ */
+
 const BookingSummary: React.FC<BookingSummaryProps> = ({
   price,
   dateFrom,

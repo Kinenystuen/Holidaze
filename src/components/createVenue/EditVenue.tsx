@@ -83,6 +83,19 @@ interface EditVenueProps {
 
 type VenueFormFields = keyof Venue | `location.${keyof VenueLocation}`;
 
+/**
+ * Edit Venue Component
+ * - Displays a form for editing venue details.
+ * - Uses react-hook-form for form handling.
+ * - Uses useApi hook for updating venue data.
+ * - @param {Venue} venue - The venue to edit.
+ * - @param {() => void} onClose - Callback to close the modal.
+ * - @param {() => void} onUpdate - Callback to update the venue list.
+ * @component
+ * @returns {JSX.Element} The EditVenue component.
+ *
+ */
+
 const EditVenue: React.FC<EditVenueProps> = ({ venue, onClose, onUpdate }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);

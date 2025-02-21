@@ -17,6 +17,15 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import H2 from "../../../components/shared/Typography/H2";
 
+/**
+ * MyBookings Component
+ * - Fetches bookings made by the logged-in user.
+ * - Displays a list of bookings with options to cancel booking.
+ * - Uses `useApi` to fetch data.
+ * - @component
+ * @returns {JSX.Element} The MyBookings component.
+ */
+
 const MyBookings = () => {
   const { user } = useUserContext();
   const [showPastBookings, setShowPastBookings] = useState(false);

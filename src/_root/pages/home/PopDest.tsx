@@ -3,6 +3,12 @@ import H2 from "../../../components/shared/Typography/H2";
 import TopRated from "./TopRated";
 import Button from "../../../components/shared/Button/Button";
 
+/**
+ * PopDest Component
+ *
+ * This component displays a list of guests' favorite destinations with images and name.
+ * @returns {JSX.Element} The rendered PopDest component
+ */
 const PopDest = () => {
   return (
     <div className="container max-w-screen-xl mx-auto my-20 ">

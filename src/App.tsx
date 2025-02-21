@@ -15,6 +15,14 @@ import PageNotFound from "./_root/pages/PageNotFound";
 import UserProfileData from "./_root/pages/profile/UserProfileData";
 import ProfilesPage from "./_root/pages/profiles/ProfilesPage";
 
+/**
+ * The main App component.
+ * - Contains all routes for the application.
+ *
+ * @component
+ * @returns {JSX.Element} The App component.
+ */
+
 function App() {
   return (
     <Routes>

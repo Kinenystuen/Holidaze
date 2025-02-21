@@ -36,6 +36,15 @@ export interface ApiResponse<T> {
   };
 }
 
+/**
+ * A reusable hook for fetching data from an API.
+ *
+ * @param {string} url - The API endpoint to fetch data from.
+ * @param {ApiOptions} options - The fetch options (e.g., method, body).
+ * @param {boolean} manual - Whether to fetch data manually.
+ * @returns {Object} The response data, loading state, error state, and fetch function.
+ */
+
 export function useApi<T>(
   url: string,
   options: ApiOptions = { method: "GET", body: null },

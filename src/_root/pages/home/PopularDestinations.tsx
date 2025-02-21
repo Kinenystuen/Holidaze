@@ -39,6 +39,19 @@ const popularDestinations = [
   }
 ];
 
+/**
+ * PopularDestinations Component
+ *
+ * This component displays a list of popular destinations with images and name.
+ * The destinations are displayed in a grid layout with 2 or 3 columns based on the screen size.
+ * Each destination is a link to the venues page with a search query for that destination.
+ *
+ * Features:
+ * - Displays a list of popular destinations with images and name
+ *
+ * @returns {JSX.Element} The rendered PopularDestinations component
+ */
+
 const PopularDestinations = () => {
   return (
     <div className="container max-w-screen-xl mx-auto my-20 px-10 ">
@@ -57,6 +70,7 @@ const PopularDestinations = () => {
               }`}
             >
               <img
+                loading="lazy"
                 src={destination.image}
                 alt={destination.name}
                 className="w-full h-52 object-cover rounded-lg shadow-md group-hover:opacity-80 transition-opacity duration-300"

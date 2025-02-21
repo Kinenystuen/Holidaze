@@ -37,6 +37,25 @@ interface SelVenueProps {
   refetchVenue: () => void;
 }
 
+/**
+ * SelVenue Component
+ * - Displays a single venue with booking details and owner information.
+ * - Allows venue owners to edit their venue.
+ * - Uses the `SelVenueSwiper` and `SelVenueBooking` components.
+ * - Uses the `EditVenue` component for editing.
+ * - Uses the `useUserContext` hook to check if the user is the venue owner.
+ * - Uses the `useState` hook to toggle the edit mode.
+ *
+ * @component
+ * @param {SelVenueProps} param0 - Venue and refetch function.
+ * @returns {JSX.Element} The SelVenue component.
+ * @example
+ * return <SelVenue venue={venue} refetchVenue={fetchData} />;
+ *
+ * @param param0
+ * @returns
+ */
+
 const SelVenue: React.FC<SelVenueProps> = ({
   venue,
   refetchVenue: fetchData

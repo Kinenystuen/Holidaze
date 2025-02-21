@@ -34,6 +34,18 @@ import H2 from "../shared/Typography/H2";
 import P from "../shared/Typography/P";
 import { Link } from "react-router-dom";
 
+/**
+ * VenueForm Component
+ * - Allows users to create a new venue.
+ * - Uses `useVenue` and `useCreateVenue` hooks.
+ * - Displays a form with input fields for venue details.
+ * - Includes a preview button to view the venue details.
+ * - Displays success and error messages.
+ *
+ * @component
+ * @returns {JSX.Element} The Venue Form UI.
+ */
+
 const VenueForm = () => {
   const { venue, setVenue, updateVenue } = useVenue();
   const [togglePreview, setTogglePreview] = useState(false);
@@ -120,8 +132,8 @@ const VenueForm = () => {
     if (rating >= 4.5) return "bg-green-600";
     if (rating >= 3) return "bg-yellow-500";
     if (rating >= 1.5) return "bg-orange-500";
-    if (rating > 0) return "bg-gray-500";
-    return "bg-gray-400";
+    if (rating > 0) return "bg-gray-600";
+    return "bg-gray-600";
   };
 
   const locationFields = [
@@ -160,9 +172,10 @@ const VenueForm = () => {
         <div className="relative w-full">
           <FontAwesomeIcon
             icon={faInfo}
-            className="absolute h-4 w-4 top-5 left-4 text-gray-400"
+            className="absolute h-4 w-4 top-5 left-4 text-gray-500"
           />
           <textarea
+            id="description"
             {...register("description", {
               required: "Description is required.",
               minLength: {
@@ -183,9 +196,10 @@ const VenueForm = () => {
           />
           {/* Input Label */}
           <label
-            htmlFor={"Description"}
+            htmlFor={"description"}
+            aria-label="Description"
             className={`absolute rounded-md left-6 top-[-8px] text-gray-500 dark:text-whiteFont-700 bg-white text-sm dark:bg-customBgDark-500 px-1 transition-all 
-          peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base 
+          peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-600 peer-placeholder-shown:text-base 
           peer-focus:top-[-8px] peer-focus:text-sm peer-focus:text-color4-800 dark:peer-focus:text-whiteFont-600
             peer-placeholder-shown:left-11 peer-focus:left-6
           }`}
@@ -196,7 +210,7 @@ const VenueForm = () => {
             errors={errors}
             name="description"
             render={({ message }) => (
-              <p className="text-red-500 text-sm mt-1">{message}</p>
+              <P className="text-red-500 text-sm mt-1">{message}</P>
             )}
           />
         </div>
@@ -209,6 +223,7 @@ const VenueForm = () => {
             icon={faMoneyCheckDollar}
             register={register}
             errors={errors}
+            max={10000}
             required
             pattern={{ value: /^[0-9]+$/, message: "Only numbers allowed." }}
             onChange={(e) => {
@@ -259,9 +274,9 @@ const VenueForm = () => {
           <div className="flex items-center gap-3">
             <FontAwesomeIcon
               icon={faStar}
-              className=" h-4 w-4 transform text-gray-400 peer-focus:text-color4-700 dark:text-gray-500 dark:peer-focus:text-color4-600"
+              className=" h-4 w-4 transform text-gray-500 peer-focus:text-color4-700 dark:text-gray-500 dark:peer-focus:text-color4-600"
             />
-            <span className="text-sm text-gray-400 font-medium">Rating:</span>
+            <span className="text-sm text-gray-500 font-medium">Rating:</span>
           </div>
 
           <div className="flex items-center gap-3">

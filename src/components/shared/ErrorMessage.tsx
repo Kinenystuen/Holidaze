@@ -13,6 +13,19 @@ interface ErrorMessageProps {
   icon?: boolean;
 }
 
+/**
+ * ErrorMessage Component
+ *
+ * This component displays an error message with an optional icon and a custom message.
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <ErrorMessage message="Failed to load data" />
+ *
+ * @returns {JSX.Element} The rendered ErrorMessage component.
+ */
+
 const ErrorMessage: React.FC<ErrorMessageProps> = ({
   message,
   children,

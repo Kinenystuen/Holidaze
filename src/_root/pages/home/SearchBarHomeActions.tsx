@@ -14,6 +14,17 @@ interface SearchBarHomeActionsProps {
   setShowResults: (show: boolean) => void;
 }
 
+/**
+ * SearchBarHomeActions Component
+ * - Displays search results for venues in a dropdown.
+ * - Fetches venues based on user input.
+ * - Navigates to the search results page on click.
+ * - @param {string} query - The search query.
+ * - @param {boolean} showResults - Whether to show the dropdown.
+ * - @param {(show: boolean) => void} setShowResults - Callback to show/hide dropdown.
+ * @component
+ * @returns {JSX.Element} The SearchBarHomeActions component.
+ */
 const SearchBarHomeActions: React.FC<SearchBarHomeActionsProps> = ({
   query,
   showResults,

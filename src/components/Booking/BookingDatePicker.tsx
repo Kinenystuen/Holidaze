@@ -11,6 +11,20 @@ interface BookingDatePickerProps {
   onDateChange: (rangesByKey: RangeKeyDict) => void;
 }
 
+/**
+ * BookingDatePicker Component
+ * - Displays a date picker for booking a venue.
+ * - Fetches venue bookings to disable unavailable dates.
+ * - Uses react-date-range for date selection.
+ * - @param {string} venueId - The ID of the venue to book.
+ * - @param {string} bookingId - The ID of the booking being edited.
+ * - @param {RangeKeyDict} selectedRange - The selected date range.
+ * - @param {(rangesByKey: RangeKeyDict) => void} onDateChange - Callback for date changes.
+ * @component
+ * @returns {JSX.Element} The BookingDatePicker component.
+ *
+ */
+
 const BookingDatePicker: React.FC<BookingDatePickerProps> = ({
   venueId,
   bookingId,
@@ -31,7 +45,6 @@ const BookingDatePicker: React.FC<BookingDatePickerProps> = ({
 
       response.data.bookings.forEach(
         (booking: { id: string; dateFrom: string; dateTo: string }) => {
-          // Exclude the dates of the current booking being edited
           if (booking.id === bookingId) return;
 
           const currentDate = new Date(booking.dateFrom);
