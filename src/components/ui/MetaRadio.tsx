@@ -10,6 +10,24 @@ interface MetaRadioProps {
   onChange: () => void;
 }
 
+/**
+ * A custom radio button component with a label and icon.
+ *
+ * @component
+ * @param {MetaRadioProps} props - The component props.
+ * @returns {JSX.Element} The MetaRadio component.
+ *
+ * @example
+ * // Example usage:
+ * <MetaRadio
+ *  id="radio1"
+ *  name="radioGroup"
+ *  label="Option 1"
+ *  icon={faCheckCircle}
+ *  checked={true}
+ *  onChange={() => console.log("Option 1 selected")}
+ * />
+ */
 const MetaRadio: React.FC<MetaRadioProps> = ({
   id,
   name,

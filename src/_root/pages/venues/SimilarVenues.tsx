@@ -13,6 +13,14 @@ interface SimilarVenuesProps {
   similarVenues: Venue[];
 }
 
+/**
+ * SimilarVenues Component
+ * - Displays a list of similar venues to the current venue.
+ * - Uses `Swiper` from 'swiper/react' for the slider.
+ * - @component
+ * @returns {JSX.Element} The SimilarVenues component.
+ */
+
 const SimilarVenues: React.FC<SimilarVenuesProps> = ({ similarVenues }) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);

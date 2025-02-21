@@ -2,6 +2,20 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./VenueSwiper.css";
 
+/**
+ * VenueSwiper Component
+ *
+ * The VenueSwiper component displays a Swiper component with images of a venue.
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <VenueSwiper media={media} />
+ *
+ * @param {Object} media - The media object containing the image URL and alt text
+ * @returns {JSX.Element} The rendered VenueSwiper component
+ */
+
 const VenueSwiper = ({ media }: { media: { url: string; alt: string }[] }) => {
   return (
     <div className="relative venue-swiper w-full h-full object-cover">

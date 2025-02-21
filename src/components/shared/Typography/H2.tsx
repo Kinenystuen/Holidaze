@@ -1,5 +1,13 @@
 import { H1Props } from "../../library/types";
 
+/**
+ * H2 Component
+ * - Renders an H2 heading element.
+ * - @param {H1Props} props - The component props.
+ * @component
+ * @returns {JSX.Element} The H2 component.
+ */
+
 function H2({ className, children }: H1Props) {
   return (
     <h2

@@ -10,6 +10,18 @@ interface ModalProps {
   className?: string;
 }
 
+/**
+ * DatePickerModal Component
+ * - Displays a modal for date picker selection.
+ * - @param {boolean} isOpen - Whether the modal is open.
+ * - @param {() => void} onClose - Callback to close the modal.
+ * - @param {React.ReactNode} children - The modal content.
+ * - @param {string} className - Additional classes for the modal.
+ * @component
+ * @returns {JSX.Element} The DatePickerModal component.
+ *
+ */
+
 const DatePickerModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,

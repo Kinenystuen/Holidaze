@@ -9,6 +9,14 @@ import "./VenuePage.css";
 import ScrollToTopBtn from "../../../components/ui/ScrollToTopBtn";
 import MetaTags from "../../../components/metaTags";
 
+/**
+ * VenuePage Component
+ * - Displays a list of venues.
+ * - Includes a search bar, sort menu, and filter menu.
+ * - @component
+ * @returns {JSX.Element} The VenuePage component.
+ */
+
 const VenuePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") || "";

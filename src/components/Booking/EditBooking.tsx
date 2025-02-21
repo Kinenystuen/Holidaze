@@ -26,6 +26,17 @@ interface EditBookingProps {
   venueId: string;
 }
 
+/**
+ * EditBooking Component
+ * - Allows users to edit a booking.
+ * - Uses `BookingDatePicker` for date selection.
+ * - Uses `GuestsSelector` for selecting number of guests.
+ * - Uses `useApi` to send a PUT request.
+ * - @component
+ * @param {EditBookingProps} props - The component props.
+ * @returns {JSX.Element} The EditBooking component.
+ */
+
 const EditBooking: React.FC<EditBookingProps> = ({
   booking,
   maxGuests,

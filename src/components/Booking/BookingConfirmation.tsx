@@ -23,6 +23,20 @@ interface BookingConfirmationProps {
   isConfirmationOpen: boolean;
 }
 
+/**
+ * BookingConfirmation Component
+ *
+ * This component displays a confirmation modal when a booking is successfully made.
+ * It includes the booking details, total price, and options to view bookings or make another booking.
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <BookingConfirmation />
+ *
+ * @returns {JSX.Element} The rendered booking confirmation component.
+ */
+
 const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
   booking,
   total,

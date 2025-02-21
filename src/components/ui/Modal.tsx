@@ -13,6 +13,21 @@ interface ModalProps {
   title?: string;
 }
 
+/**
+ * Modal - A modal component that displays content on top of the page content.
+ * - Uses Framer Motion for animations.
+ * - Prevents background scrolling when open.
+ * - Closes when pressing the Escape key or clicking outside the content.
+ *
+ * @component
+ * @param {ModalProps} props - Modal props
+ * @returns {JSX.Element} The Modal component
+ *
+ * @example
+ * // Example usage of Modal
+ * <Modal isOpen={true} onClose={closeModal} title="Modal Title">
+ */
+
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,

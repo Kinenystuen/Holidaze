@@ -16,6 +16,13 @@ interface SortMenuProps {
   onSortChange: (field: string, order: string) => void;
 }
 
+/**
+ * SortMenu Component
+ * - Dropdown menu for sorting venues by name, price, or rating.
+ * - Allows users to select the sort field and order.
+ * - @component
+ * @returns {JSX.Element} The SortMenu component.
+ */
 const SortMenu: React.FC<SortMenuProps> = ({
   sortField,
   sortOrder,

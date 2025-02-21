@@ -9,6 +9,30 @@ import Button from "./Button/Button";
 import UserDropParent from "./UserDropParent";
 import { useUserContext } from "../context/useUserContext";
 
+/**
+ * Header Component
+ *
+ * The Header component displays the site's navigation links, logo, and user actions.
+ * It includes a responsive design for mobile and desktop views.
+ *
+ * Features:
+ * - Navigation links: Displays links based on user authentication status
+ * - Theme Toggle: Allows users to switch between light and dark themes
+ * - UserDropParent: Displays user actions (login, register, logout) in a dropdown
+ * - Mobile Menu: Hamburger menu for mobile users
+ *
+ * Dependencies:
+ * - `ThemeToggle`: Component for toggling between light and dark themes
+ * - `UserDropParent`: Component for user actions dropdown
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <Header />
+ *
+ * @returns {JSX.Element} The rendered Header component
+ */
+
 const Header: React.FC = () => {
   const { isAuthenticated } = useUserContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

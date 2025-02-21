@@ -17,6 +17,16 @@ interface PaginationProps {
   paginationType?: string;
 }
 
+/**
+ * VenuePagination Component
+ * - Displays pagination buttons for venues.
+ * - Allows users to navigate between pages.
+ *
+ * @component
+ * @param {PaginationProps} props - The component props.
+ * @returns {JSX.Element} The VenuePagination component.
+ */
+
 const VenuePagination: React.FC<PaginationProps> = ({
   currentPage,
   pageCount,

@@ -1,6 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useUserContext } from "../context/useUserContext";
 
+/**
+ * A wrapper for protected routes that checks for authentication.
+ *
+ * @component
+ * @param {Object} children - The child components to render if authenticated.
+ * @returns {JSX.Element} The rendered ProtectedRoute component
+ */
+
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated, isPending } = useUserContext();
 

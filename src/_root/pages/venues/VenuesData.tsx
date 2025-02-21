@@ -32,6 +32,14 @@ interface VenuesDataProps {
   goToPreviousPage: () => void;
 }
 
+/**
+ * VenuesData Component
+ * - Displays a list of venues in a grid layout.
+ * - Uses `VenueSwiper` for the venue images.
+ * - @component
+ * @returns {JSX.Element} The VenuesData component.
+ */
+
 const VenuesData: React.FC<VenuesDataProps> = ({
   venues,
   meta,

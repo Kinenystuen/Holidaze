@@ -9,6 +9,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MetaCheckbox from "../../../components/ui/MetaCheckbox";
 
+/**
+ * FilterMenu Component
+ * - A dropdown filter menu for venues.
+ * - Allows users to filter venues by WiFi, Parking, Breakfast, and Pets.
+ * - @component
+ * @param {Object} filters - The current filter state.
+ * @param {Function} onFilterChange - The function to update the filter state.
+ * @returns {JSX.Element} The FilterMenu component.
+ */
+
 const FilterMenu = ({
   filters,
   onFilterChange

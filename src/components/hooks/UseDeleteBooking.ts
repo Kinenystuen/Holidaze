@@ -1,6 +1,14 @@
 import { useApi } from "./UseApi";
 import { apiHostUrl } from "../library/constants";
 
+/**
+ * A reusable hook for deleting a booking.
+ * - Sends a DELETE request to the API.
+ * - Handles loading, success, and error states.
+ *
+ * @param {string} bookingId - The ID of the booking to delete.
+ * @returns {Object} Methods and state for deleting a booking.
+ */
 export const useDeleteBooking = (bookingId: string) => {
   const { isLoading, isError, errorMessage, fetchData } = useApi(
     `${apiHostUrl}/holidaze/bookings/${bookingId}`,

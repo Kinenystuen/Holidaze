@@ -7,6 +7,26 @@ interface DropdownProps {
   items: { label: string; href?: string }[];
 }
 
+/**
+ * Dropdown Component
+ *
+ * The Dropdown component provides a dropdown menu for navigation links.
+ * It includes a button that toggles the dropdown menu to display the navigation links.
+ *
+ * Features:
+ * - Dropdown menu: Displays a list of navigation links
+ * - Button: Toggles the dropdown menu to show/hide the navigation links
+ * - Click outside detection: Closes the dropdown menu when clicking outside the component
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <Dropdown label="Dropdown" items={[{ label: "Item 1", href: "/item1" }, { label: "Item 2", href: "/item2" }]} />
+ *
+ * @param {string} label - The label for the dropdown button
+ * @param {Array<{ label: string, href?: string }>} items - The navigation links to display in the dropdown
+ * @returns {JSX.Element} The rendered dropdown component
+ */
 const Dropdown: React.FC<DropdownProps> = ({ label, items }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

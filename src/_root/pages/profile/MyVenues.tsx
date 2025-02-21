@@ -14,6 +14,15 @@ import { Venue } from "../../../components/library/types";
 import VenueCard from "../../../components/createVenue/VenueCard";
 import H1 from "../../../components/shared/Typography/H1";
 
+/**
+ * MyVenues Component
+ * - Fetches venues created by the logged-in user.
+ * - Displays a list of venues with options to edit or delete.
+ * - Uses `useApi` to fetch data.
+ * - @component
+ * @returns {JSX.Element} The MyVenues component.
+ */
+
 const MyVenues = () => {
   const { user } = useUserContext();
 

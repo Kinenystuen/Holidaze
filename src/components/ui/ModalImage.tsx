@@ -14,6 +14,28 @@ interface ModalProps {
   totalSlides?: number;
 }
 
+/**
+ * ModalImage Component
+ *
+ * This component provides a modal for displaying images. It includes
+ * navigation buttons for moving between images, and swipe gestures for mobile users.
+ *
+ * Features:
+ * - Navigation buttons: Displays buttons for moving between images
+ * - Swipe gestures: Allows users to swipe left and right to navigate images
+ * - Close button: Closes the modal when clicked
+ *
+ * Dependencies:
+ * - `Button`: Reusable button component
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <ModalImage />
+ *
+ * @returns {JSX.Element} The rendered ModalImage component
+ */
+
 const ModalImage: React.FC<ModalProps> = ({
   isOpen,
   onClose,

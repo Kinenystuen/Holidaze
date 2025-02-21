@@ -21,6 +21,14 @@ import LoaderSmall from "../ui/LoaderSmall";
 import { useEffect, useState } from "react";
 import EditBooking from "./EditBooking";
 
+/**
+ * BookingCard Component
+ * - Displays a card with booking information.
+ * - Allows users to edit or cancel their booking.
+ * - @component
+ * @returns {JSX.Element} The BookingCard component.
+ */
+
 const BookingCard = ({
   booking,
   refetchBookings

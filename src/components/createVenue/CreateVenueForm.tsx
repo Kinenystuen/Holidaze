@@ -34,6 +34,18 @@ import H2 from "../shared/Typography/H2";
 import P from "../shared/Typography/P";
 import { Link } from "react-router-dom";
 
+/**
+ * VenueForm Component
+ * - Allows users to create a new venue.
+ * - Uses `useVenue` and `useCreateVenue` hooks.
+ * - Displays a form with input fields for venue details.
+ * - Includes a preview button to view the venue details.
+ * - Displays success and error messages.
+ *
+ * @component
+ * @returns {JSX.Element} The Venue Form UI.
+ */
+
 const VenueForm = () => {
   const { venue, setVenue, updateVenue } = useVenue();
   const [togglePreview, setTogglePreview] = useState(false);

@@ -4,6 +4,14 @@ import Button from "./Button/Button";
 import { useTheme } from "../hooks/UseTheme";
 import Tooltip from "../ui/ToolTip";
 
+/**
+ * ThemeToggle - A button to toggle between light and dark themes.
+ * - Uses `useTheme` to access the current theme and toggle function.
+ *
+ * @component
+ * @returns {JSX.Element} The ThemeToggle component.
+ */
+
 const ThemeToggle = () => {
   const { darkMode, toggleTheme } = useTheme();
 

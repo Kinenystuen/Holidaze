@@ -28,6 +28,31 @@ interface AdminSidebarProps {
   setIsCollapsed: (collapsed: boolean) => void;
 }
 
+/**
+ * AdminSidebar Component
+ *
+ * The AdminSidebar component displays the navigation links for the admin user.
+ * It includes links to the user's profile, bookings, saved venues, and settings.
+ * The sidebar also includes links for venue managers to manage their venues.
+ *
+ * Features:
+ * - Navigation links: Displays links based on user authentication status
+ * - Sidebar collapse: Allows users to collapse the sidebar for more screen space
+ * - Mobile menu: Hamburger menu for mobile users
+ *
+ * Dependencies:
+ * - `Button`: Reusable button component
+ * - `Tooltip`: Component for displaying tooltips
+ * - `useUserContext`: Custom hook for accessing user context
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <AdminSidebar />
+ *
+ * @returns {JSX.Element} The rendered AdminSidebar component
+ */
+
 const AdminSidebar: React.FC<AdminSidebarProps> = ({
   user,
   isCollapsed,

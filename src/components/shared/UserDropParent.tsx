@@ -7,6 +7,24 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import UserDropdown from "./UserDropdown";
 import { useUserContext } from "../context/useUserContext";
 
+/**
+ * UserDropParent Component
+ *
+ * The UserDropParent component displays the user dropdown menu if the user is authenticated.
+ * If the user is not authenticated, it displays login and register links.
+ *
+ * Dependencies:
+ * - `UserDropdown`: Component for displaying user actions in a dropdown
+ * - `Loader`: Component for displaying a loading spinner
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <UserDropParent />
+ *
+ * @returns {JSX.Element} The rendered UserDropParent component
+ */
+
 const UserDropParent: React.FC = () => {
   const { isAuthenticated, isPending } = useUserContext();
 
