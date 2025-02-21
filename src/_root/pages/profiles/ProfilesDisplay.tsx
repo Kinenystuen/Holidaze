@@ -41,7 +41,7 @@ const ProfilesDisplay: React.FC<SelUserProps> = ({ profiles }) => {
                     <div className="absolute -top-[0.05rem] -right-5">
                       <FontAwesomeIcon
                         icon={faCertificate}
-                        className="w-4 h-4 p-0 m-0 text-color1"
+                        className="w-4 h-4 p-0 m-0 text-color1-800"
                       />
                       <span className="absolute top-[0.28rem] left-[0.32rem] text-[9px] font-medium text-white">
                         V
