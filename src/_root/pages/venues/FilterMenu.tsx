@@ -8,7 +8,6 @@ import {
   faWifi
 } from "@fortawesome/free-solid-svg-icons";
 import MetaCheckbox from "../../../components/ui/MetaCheckbox";
-import P from "../../../components/shared/Typography/P";
 
 const FilterMenu = ({
   filters,
@@ -62,7 +61,7 @@ const FilterMenu = ({
       const screenWidth = window.innerWidth;
 
       if (dropdownRect.right > screenWidth) {
-        setDropdownStyle("right-0 right-auto translate-x-[-10px]");
+        setDropdownStyle("right-0 left-auto translate-x-[-10px]");
       } else if (dropdownRect.left < 0) {
         setDropdownStyle("left-0 right-auto translate-x-[10px]");
       } else {
@@ -73,7 +72,7 @@ const FilterMenu = ({
 
   return (
     <div className="relative md:flex md:items-center">
-      {/* Button only shows on small screens */}
+      {/* Button (only visible on mobile screens) */}
       <button
         ref={buttonRef}
         onClick={toggleDropdown}
@@ -83,48 +82,49 @@ const FilterMenu = ({
         Filter
       </button>
 
-      {/* Dropdown menu for small screens, always visible on md+ screens */}
+      {/* Dropdown menu for mobile, visible on md+ screens */}
       <div
         ref={dropdownRef}
         className={`${
           isOpen ? "block" : "hidden"
         } absolute md:relative md:flex md:flex-col gap-1 top-full md:top-0 mt-2 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-500 dark:bg-transparent shadow-md md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownStyle}`}
       >
-        <P className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
-          Filter by:
-        </P>
-        <MetaCheckbox
-          key={"wifi"}
-          id={"wifi"}
-          label={"wifi"}
-          icon={faWifi}
-          checked={filters.wifi}
-          onChange={() => handleChange("wifi")}
-        />
-        <MetaCheckbox
-          key={"parking"}
-          id={"parking"}
-          label={"parking"}
-          icon={faCar}
-          checked={filters.parking}
-          onChange={() => handleChange("parking")}
-        />
-        <MetaCheckbox
-          key={"breakfast"}
-          id={"breakfast"}
-          label={"breakfast"}
-          icon={faUtensils}
-          checked={filters.breakfast}
-          onChange={() => handleChange("breakfast")}
-        />
-        <MetaCheckbox
-          key={"pets"}
-          id={"pets"}
-          label={"pets"}
-          icon={faPaw}
-          checked={filters.pets}
-          onChange={() => handleChange("pets")}
-        />
+        <fieldset className="border-none p-0 m-0">
+          <legend className="text-sm font-semibold text-gray-600 dark:text-gray-300 mb-2">
+            Filter by:
+          </legend>
+
+          <div className="flex flex-col space-y-2">
+            <MetaCheckbox
+              id="wifi"
+              label="WiFi"
+              icon={faWifi}
+              checked={filters.wifi}
+              onChange={() => handleChange("wifi")}
+            />
+            <MetaCheckbox
+              id="parking"
+              label="Parking"
+              icon={faCar}
+              checked={filters.parking}
+              onChange={() => handleChange("parking")}
+            />
+            <MetaCheckbox
+              id="breakfast"
+              label="Breakfast"
+              icon={faUtensils}
+              checked={filters.breakfast}
+              onChange={() => handleChange("breakfast")}
+            />
+            <MetaCheckbox
+              id="pets"
+              label="Pets Allowed"
+              icon={faPaw}
+              checked={filters.pets}
+              onChange={() => handleChange("pets")}
+            />
+          </div>
+        </fieldset>
       </div>
     </div>
   );
