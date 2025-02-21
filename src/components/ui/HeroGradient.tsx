@@ -7,7 +7,7 @@
 
 const HeroGradient = () => {
   return (
-    <div className="flex justify-center absolute inset-0 z-0 text-gray-300 dark:text-gray-600 dark:opacity-50">
+    <div className="flex justify-center absolute inset-0 z-0 text-gray-300 dark:text-gray-600 opacity-40 dark:opacity-50">
       <svg
         width="1278"
         height="829"
