@@ -32,6 +32,15 @@ const ArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
   </svg>
 );
 
+/**
+ * TopRated Component
+ * - Fetches top rated venues and displays them in a Swiper slider.
+ * - Uses `useApi` to fetch data.
+ * - Uses `Swiper` from 'swiper/react' for the slider.
+ * - @component
+ * @returns {JSX.Element} The TopRated component.
+ */
+
 const TopRated = () => {
   const { response, isLoading, isError, errorMessage } = useApi<Venue[]>(
     `${apiHostUrl}/holidaze/venues`
