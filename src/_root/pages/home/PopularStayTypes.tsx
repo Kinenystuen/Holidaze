@@ -74,6 +74,7 @@ const PopularStayTypes = () => {
               className="group block"
             >
               <img
+                loading="lazy"
                 src={type.image}
                 alt={type.name}
                 className="w-full h-52 object-cover rounded-t-lg shadow-md group-hover:opacity-80 transition-opacity duration-300"
