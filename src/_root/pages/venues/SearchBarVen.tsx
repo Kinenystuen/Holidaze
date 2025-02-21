@@ -67,6 +67,7 @@ const SearchBar = ({
         {searchInput && (
           <button
             type="button"
+            aria-label="Clear search"
             onClick={clearSearch}
             className="absolute rounded-3xl inset-y-0 right-0 flex items-center bg-transparent text-gray-500 hover:text-black dark:hover:text-whiteFont-100"
           >
