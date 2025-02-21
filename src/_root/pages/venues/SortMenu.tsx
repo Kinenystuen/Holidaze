@@ -23,7 +23,9 @@ const SortMenu: React.FC<SortMenuProps> = ({
   onSortChange
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownPosition, setDropdownPosition] = useState<string>("left-0");
+  const [dropdownStyle, setDropdownStyle] = useState<string>(
+    "left-1/2 -translate-x-1/2"
+  );
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -32,14 +34,14 @@ const SortMenu: React.FC<SortMenuProps> = ({
     setIsOpen((prev) => !prev);
   };
 
+  // Close dropdown if clicking outside
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      const target = event.target as Node;
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(target) &&
+        !dropdownRef.current.contains(event.target as Node) &&
         buttonRef.current &&
-        !buttonRef.current.contains(target)
+        !buttonRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }
@@ -55,15 +57,16 @@ const SortMenu: React.FC<SortMenuProps> = ({
       const screenWidth = window.innerWidth;
 
       if (dropdownRect.right > screenWidth) {
-        setDropdownPosition("right-0");
+        setDropdownStyle("right-0 right-auto translate-x-[-10px]");
       } else if (dropdownRect.left < 0) {
-        setDropdownPosition("left-0");
+        setDropdownStyle("left-0 right-auto translate-x-[10px]");
       } else {
-        setDropdownPosition("left-0");
+        setDropdownStyle("right-0");
       }
     }
   }, [isOpen]);
 
+  // Adjust dropdown position dynamically
   const handleSortChange = (field: string, order: string) => {
     onSortChange(field, order);
     setIsOpen(false);
@@ -75,7 +78,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
       <button
         ref={buttonRef}
         onClick={toggleDropdown}
-        className="inline-flex md:hidden flex-col text-sm md:flex-row justify-center content-center items-center px-4 py-1 sm:py-2 rounded-lg bg-transparent text-gray-600 hover:text-black hover:bg-transparent dark:hover:bg-transparent dark:text-whiteFont-500 dark:hover:text-white "
+        className="inline-flex md:hidden flex-col text-sm md:flex-row justify-center content-center items-center p-0 mx-2 py-1 sm:py-2 rounded-lg bg-transparent text-gray-600 hover:text-black hover:bg-transparent dark:hover:bg-transparent dark:text-whiteFont-500 dark:hover:text-white "
       >
         <FontAwesomeIcon icon={faSort} className="mr-0 md:mr-2" />
         Sort
@@ -86,7 +89,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
         ref={dropdownRef}
         className={`${
           isOpen ? "block" : "hidden"
-        } absolute md:relative md:flex top-full md:top-0 mt-2 w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-500 dark:bg-transparent shadow-md md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownPosition}`}
+        } absolute md:relative md:flex md:flex-col gap-1 top-full md:top-0 mt-2 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-500 dark:bg-transparent shadow-md md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownStyle}`}
       >
         <div className="p-4 md:p-0 w-full">
           <div className="mb-4">
