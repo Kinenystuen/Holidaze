@@ -29,9 +29,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
   onSortChange
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownStyle, setDropdownStyle] = useState<string>(
-    "left-1/2 -translate-x-1/2"
-  );
+  const [dropdownStyle, setDropdownStyle] = useState<string>("right-0");
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -95,7 +93,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
         ref={dropdownRef}
         className={`${
           isOpen ? "block" : "hidden"
-        } absolute md:relative md:flex md:flex-col gap-1 top-full md:top-0 mt-2 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-500 dark:bg-transparent shadow-md md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownStyle}`}
+        } absolute md:relative md:flex md:flex-col gap-1 top-full md:top-0 mt-2 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-600 md:dark:bg-transparent shadow-lg md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownStyle}`}
       >
         <fieldset className="p-4 md:p-0 w-full">
           <div className="mb-4">

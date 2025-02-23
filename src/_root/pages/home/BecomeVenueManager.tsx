@@ -127,10 +127,10 @@ const BecomeVenueManager = () => {
                         </span>
                         <P className="max-w-sm text-start">
                           Log in or sign up to get started.{" "}
-                          <Link to="/auth">
+                          <Link to="/auth" className="">
                             <Button
                               buttonType="violetSecondary"
-                              className="text-sm px-3 py-1"
+                              className="text-sm"
                             >
                               Login
                             </Button>
@@ -148,7 +148,7 @@ const BecomeVenueManager = () => {
                         Go to your profile and click on{" "}
                         <Link
                           to="/profile/settings"
-                          className="bg-[#bfbdeb] text-gray-200 bg-opacity-20 text-base p-[0.4rem] px-2 whitespace-nowrap rounded-md"
+                          className="bg-[#bfbdeb] text-black dark:text-gray-200 bg-opacity-20 text-base p-[0.4rem] px-2 whitespace-nowrap rounded-md"
                         >
                           <FontAwesomeIcon icon={faCog} className="w-4 me-2" />
                           Account Settings
@@ -175,7 +175,7 @@ const BecomeVenueManager = () => {
                         Then click{" "}
                         <Link
                           to="/profile/create-venue"
-                          className="bg-[#bfbdeb] text-gray-200 bg-opacity-20 text-base p-[0.4rem] px-2 rounded-md whitespace-nowrap"
+                          className="bg-[#bfbdeb] text-black dark:text-gray-200 bg-opacity-20 text-base p-[0.4rem] px-2 rounded-md whitespace-nowrap"
                         >
                           <FontAwesomeIcon icon={faPlus} className="w-4 me-2" />
                           Create Venue
