@@ -89,6 +89,7 @@ npm run preview
 
 ## Features
 
+
 - Browse a list of available venues
 - Search for specific venues
 - View detailed venue pages, including available booking dates
@@ -99,11 +100,13 @@ npm run preview
 - User profile management (Avatar update, booking history)
 - Responsive and modern UI
 
+
 ## Contact
 
 <a href="/" target="blank"><img align="center" src="https://download.logo.wine/logo/Outlook.com/Outlook.com-Logo.wine.png" alt="kinenystuen" height="30" width="40" />Kine_on@hotmail.com</a>
 
 <a href="https://www.linkedin.com/in/kine-odden-nystuen-208744223/" target="blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="kinenystuen" height="30" width="30" /> | Linkedin - Kine</a>
+
 
 ## GitHub Pages
 
