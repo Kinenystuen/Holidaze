@@ -16,20 +16,13 @@ interface SortMenuProps {
   onSortChange: (field: string, order: string) => void;
 }
 
-/**
- * SortMenu Component
- * - Dropdown menu for sorting venues by name, price, or rating.
- * - Allows users to select the sort field and order.
- * - @component
- * @returns {JSX.Element} The SortMenu component.
- */
 const SortMenu: React.FC<SortMenuProps> = ({
   sortField,
   sortOrder,
   onSortChange
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownStyle, setDropdownStyle] = useState<string>(
+  const [dropdownPosition, setDropdownPosition] = useState<string>(
     "left-1/2 -translate-x-1/2"
   );
 
@@ -61,18 +54,28 @@ const SortMenu: React.FC<SortMenuProps> = ({
     if (isOpen && dropdownRef.current && buttonRef.current) {
       const dropdownRect = dropdownRef.current.getBoundingClientRect();
       const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
 
+      let newPosition = "right-0 ";
+
+      // Prevent overflow on the right
       if (dropdownRect.right > screenWidth) {
-        setDropdownStyle("right-0 right-auto translate-x-[-10px]");
-      } else if (dropdownRect.left < 0) {
-        setDropdownStyle("left-0 right-auto translate-x-[10px]");
+        newPosition = "right-0 translate-x-[-10px]";
+      }
+      // Prevent overflow on the left
+      else if (dropdownRect.left < 0) {
+        newPosition = "left-0 translate-x-[10px]";
+      }
+
+      // Check if there's enough space below, otherwise open above
+      if (dropdownRect.bottom > screenHeight) {
+        setDropdownPosition(`${newPosition} bottom-full mb-2`);
       } else {
-        setDropdownStyle("right-0");
+        setDropdownPosition(`${newPosition} top-full mt-2`);
       }
     }
   }, [isOpen]);
 
-  // Adjust dropdown position dynamically
   const handleSortChange = (field: string, order: string) => {
     onSortChange(field, order);
     setIsOpen(false);
@@ -95,7 +98,7 @@ const SortMenu: React.FC<SortMenuProps> = ({
         ref={dropdownRef}
         className={`${
           isOpen ? "block" : "hidden"
-        } absolute md:relative md:flex md:flex-col gap-1 top-full md:top-0 mt-2 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-500 dark:bg-transparent shadow-md md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownStyle}`}
+        } absolute md:relative md:flex md:flex-col gap-1 max-w-[90vw] w-56 md:w-full bg-white md:bg-transparent dark:bg-customBgDark-600 md:dark:bg-transparent shadow-lg md:shadow-none rounded-lg p-4 md:p-0 z-50 ${dropdownPosition}`}
       >
         <fieldset className="p-4 md:p-0 w-full">
           <div className="mb-4">
