@@ -100,8 +100,8 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
 
         if (!isDateDisabled(nextDay)) {
           return {
-            startDate: setMinutes(setHours(searchDate, 15), 0), // Check-in at 3 PM
-            endDate: setMinutes(setHours(nextDay, 11), 0) // Check-out at 11 AM
+            startDate: setMinutes(setHours(searchDate, 15), 0),
+            endDate: setMinutes(setHours(nextDay, 11), 0)
           };
         }
       }
@@ -170,7 +170,8 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
     let checkInDate = selection.startDate || new Date();
     let checkOutDate = selection.endDate || addDays(checkInDate, 1);
 
-    // Normalize to start of the day in UTC
+    setErrorMessage(null);
+
     checkInDate = new Date(
       Date.UTC(
         checkInDate.getFullYear(),
@@ -179,7 +180,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
         15,
         0,
         0,
-        0 // Check-in time 15:00 UTC
+        0
       )
     );
 
@@ -191,14 +192,9 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
         11,
         0,
         0,
-        0 // Check-out time 11:00 UTC
+        0
       )
     );
-
-    while (isDateDisabled(checkInDate) || isDateDisabled(checkOutDate)) {
-      checkInDate = addDays(checkInDate, 1);
-      checkOutDate = addDays(checkInDate, 1);
-    }
 
     setDateRange([
       {
@@ -236,7 +232,7 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
         15,
         0,
         0,
-        0 // 15:00 UTC
+        0
       )
     );
 
@@ -248,11 +244,29 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
         11,
         0,
         0,
-        0 // 11:00 UTC
+        0
       )
     );
 
-    const newBooking = {
+    const booked = bookedDates();
+    let isInvalidBooking = false;
+
+    for (let date = checkIn; date < checkOut; date = addDays(date, 1)) {
+      if (
+        booked.some(({ start, end }) => isWithinInterval(date, { start, end }))
+      ) {
+        isInvalidBooking = true;
+        break;
+      }
+    }
+
+    if (isInvalidBooking) {
+      setErrorMessage("You cannot select dates that include booked periods.");
+      setIsBooking(false);
+      return;
+    }
+
+    const newBooking: BookingData = {
       venueName: venue.name,
       dateFrom: checkIn.toISOString(),
       dateTo: checkOut.toISOString(),
@@ -323,10 +337,15 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
                 dateTo={dateRange[0].endDate}
                 guests={guests}
               />
+              {errorMessage && (
+                <P className="mt-2 text-wrap text-red-500 text-sm">
+                  {errorMessage}
+                </P>
+              )}
               <Button
                 buttonType="violet"
                 onClick={handleBooking}
-                disabled={isBooking}
+                disabled={isBooking || errorMessage !== null}
                 className="w-full"
               >
                 {isBooking ? (
@@ -335,9 +354,6 @@ const SelVenueBooking: React.FC<SelVenueBookingProps> = ({
                   "Confirm Booking"
                 )}
               </Button>
-              {errorMessage && (
-                <P className="mt-2 text-red-500 text-sm">{errorMessage}</P>
-              )}
             </>
           )}
         </div>
